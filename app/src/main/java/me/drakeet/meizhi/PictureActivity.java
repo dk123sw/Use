@@ -159,7 +159,7 @@ public class PictureActivity extends ToolbarActivity {
                             }
                             msg = "图片已保存至 " + appDir.getAbsolutePath() + " 文件夹";
                         } else {
-                            msg = "图片保存失败，请再次尝试保持！";
+                            msg = "图片保存失败，请再次尝试保存！";
                         }
                         ToastUtils.showShort(msg);
                     }
