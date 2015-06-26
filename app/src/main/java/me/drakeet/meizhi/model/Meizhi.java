@@ -2,10 +2,12 @@ package me.drakeet.meizhi.model;
 
 import org.litepal.crud.DataSupport;
 
+import java.io.Serializable;
+
 /**
  * Created by drakeet on 6/20/15.
  */
-public class Meizhi extends DataSupport {
+public class Meizhi extends DataSupport implements Serializable {
 
     private String mid;
     private String url;

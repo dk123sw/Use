@@ -15,6 +15,7 @@ android {
         versionCode 13
         versionName "1.0.2"
     }
+
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
@@ -44,7 +45,7 @@ android {
 
     signingConfigs {
         app1 {
-            storeFile file("s.keystore")
+            storeFile file("android.jks")
             storePassword STOREPASS
             keyAlias KEYALIAS
             keyPassword KEYPASS
@@ -121,4 +122,5 @@ dependencies {
     compile 'com.android.support:design:22.2.0'
     compile 'com.github.chrisbanes.photoview:library:1.2.3'
     compile 'com.afollestad:material-dialogs:0.7.6.0'
+    compile 'com.daimajia.numberprogressbar:library:1.2@aar'
 }
