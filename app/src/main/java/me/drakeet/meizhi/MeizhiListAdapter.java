@@ -35,7 +35,7 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int i) {
         View v = LayoutInflater.from(parent.getContext())
-                               .inflate(R.layout.item_meizhi, parent, false);
+                .inflate(R.layout.item_meizhi, parent, false);
         return new ViewHolder(v);
     }
 
@@ -44,7 +44,7 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
         Meizhi meizhi = mList.get(position);
         viewHolder.meizhi = meizhi;
         viewHolder.titleView.setText(meizhi.getMid());
-
+        viewHolder.card.setTag(meizhi.getMid());
         ViewTreeObserver vto = viewHolder.meizhiView.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -82,19 +82,21 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
         Meizhi meizhi;
         ImageView meizhiView;
         TextView titleView;
+        View card;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            card = itemView;
             meizhiView = (ImageView) itemView.findViewById(R.id.iv_meizhi);
             titleView = (TextView) itemView.findViewById(R.id.tv_title);
             meizhiView.setOnClickListener(this);
+            card.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (meizhi == null)
                 return;
-
             if (v == meizhiView) {
                 Intent i = new Intent(mContext, PictureActivity.class);
                 i.putExtra(PictureActivity.EXTRA_IMAGE_URL, meizhi.getUrl());
@@ -108,6 +110,10 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
                 } else {
                     mContext.startActivity(i);
                 }
+            } else if (v == card) {
+                Intent intent = new Intent(mContext, WebViewActivity.class);
+                intent.putExtra("meizhi", meizhi);
+                mContext.startActivity(intent);
             }
         }
     }
