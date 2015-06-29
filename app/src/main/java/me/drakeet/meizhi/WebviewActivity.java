@@ -1,5 +1,7 @@
 package me.drakeet.meizhi;
 
+import com.daimajia.numberprogressbar.NumberProgressBar;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,9 +9,6 @@ import android.view.KeyEvent;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.Toast;
-
-import com.daimajia.numberprogressbar.NumberProgressBar;
-
 import me.drakeet.meizhi.model.Meizhi;
 
 public class WebViewActivity extends AppCompatActivity {
