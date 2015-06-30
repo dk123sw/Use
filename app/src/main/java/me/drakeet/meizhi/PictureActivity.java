@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
+import com.umeng.analytics.MobclickAgent;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -68,5 +69,15 @@ public class PictureActivity extends ToolbarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

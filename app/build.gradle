@@ -81,38 +81,11 @@ android {
         }
 
         productFlavors {
-            Xiaomi {
-                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "Xiaomi"]
-            }
-            _360 {
-                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "360"]
-            }
-            Baidu {
-                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "Baidu"]
-            }
-            Wandoujia {
-                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "Wandoujia"]
-            }
             fir {
                 manifestPlaceholders = [UMENG_CHANNEL_VALUE: "fir"]
             }
-            Umeng {
-                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "Umeng"]
-            }
             GooglePlay {
                 manifestPlaceholders = [UMENG_CHANNEL_VALUE: "GooglePlay"]
-            }
-            Meizu {
-                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "Meizu"]
-            }
-            Huawei {
-                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "Huawei"]
-            }
-            QQ {
-                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QQ"]
-            }
-            PP {
-                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "PP"]
             }
         }
     }
@@ -127,4 +100,5 @@ dependencies {
     compile 'com.android.support:design:22.2.0'
     compile 'com.github.chrisbanes.photoview:library:1.2.3'
     compile 'com.daimajia.numberprogressbar:library:1.2@aar'
+    compile 'com.umeng.analytics:analytics:latest.integration'
 }
