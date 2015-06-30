@@ -36,12 +36,12 @@ public class FABAutoHideBehavior extends CoordinatorLayout.Behavior
 			throw new IllegalStateException("must be anchored");
 		}
 		
-		Object tag = anchor.getTag(R.id.appbar);
+		Object tag = anchor.getTag(R.id.app_bar_layout);
 		
 		if (tag == null) tag = false;
 		
 		if (!Boolean.parseBoolean(tag.toString())) {
-			final View appbar = parent.findViewById(R.id.appbar);
+			final View appbar = parent.findViewById(R.id.app_bar_layout);
 			final View toolbar = parent.findViewById(R.id.toolbar);
 			
 			anchor.getViewTreeObserver().addOnDrawListener(new ViewTreeObserver.OnDrawListener() {
@@ -54,7 +54,7 @@ public class FABAutoHideBehavior extends CoordinatorLayout.Behavior
 				}
 			});
 			
-			anchor.setTag(R.id.appbar, true);
+			anchor.setTag(R.id.app_bar_layout, true);
 		}
 		
 		return super.onInterceptTouchEvent(parent, child, ev);
