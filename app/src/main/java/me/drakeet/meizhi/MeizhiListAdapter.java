@@ -63,7 +63,10 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
                 }
         );
 
-        Picasso.with(mContext).load(meizhi.getUrl()).into(viewHolder.meizhiView);
+        Picasso.with(mContext)
+               .load(meizhi.getUrl())
+               .resize(meizhi.getThumbWidth(), meizhi.getThumbHeight())
+               .into(viewHolder.meizhiView);
     }
 
     @Override

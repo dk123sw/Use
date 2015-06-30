@@ -4,7 +4,7 @@ def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
 
-def key = new File('s.keystore')
+def keyStore = file('meizhi.keystore')
 
 android {
     compileSdkVersion 22
@@ -16,11 +16,6 @@ android {
         targetSdkVersion 22
         versionCode 15
         versionName "1.0.5"
-    }
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
-        }
     }
 
     packagingOptions {
@@ -46,7 +41,7 @@ android {
 
     signingConfigs {
         app1 {
-            storeFile key
+            storeFile file('meizhi.keystore')
             storePassword project.hasProperty('STOREPASS') ? STOREPASS : ''
             keyAlias project.hasProperty('KEYALIAS') ? KEYALIAS : ''
             keyPassword project.hasProperty('KEYPASS') ? KEYPASS : ''
@@ -62,12 +57,13 @@ android {
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            if (key.exists()) {
+            if (keyStore.exists()) {
                 println "using drakeet's key"
                 signingConfig signingConfigs.app1
             } else {
-                println "no key, use default key"
+                println "----------------------------------------------------using default key----------------------------------------------------"
             }
+
             applicationVariants.all { variant ->
                 variant.outputs.each { output ->
                     def outputFile = output.outputFile
