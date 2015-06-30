@@ -13,7 +13,7 @@
     <application
         android:name="me.drakeet.meizhi.App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_meizhi_228"
+        android:icon="@mipmap/ic_meizhi_150602"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
