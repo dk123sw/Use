@@ -9,6 +9,7 @@ import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.daimajia.numberprogressbar.NumberProgressBar;
+import com.umeng.analytics.MobclickAgent;
 
 import me.drakeet.meizhi.model.Meizhi;
 
@@ -67,6 +68,7 @@ public class WebViewActivity extends AppCompatActivity {
         if (mWebView != null)
             mWebView.onPause();
         super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     @Override
@@ -74,6 +76,7 @@ public class WebViewActivity extends AppCompatActivity {
         super.onResume();
         if (mWebView != null)
             mWebView.onResume();
+        MobclickAgent.onResume(this);
     }
 
     private class WebChrome extends WebChromeClient {
@@ -88,4 +91,5 @@ public class WebViewActivity extends AppCompatActivity {
             super.onReceivedTitle(view, title);
         }
     }
+
 }

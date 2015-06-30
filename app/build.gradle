@@ -4,6 +4,8 @@ def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
 
+def keyStore = file('meizhi.keystore')
+
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
@@ -12,14 +14,8 @@ android {
         applicationId "me.drakeet.meizhi"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 13
-        versionName "1.0.2"
-    }
-
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
-        }
+        versionCode 16
+        versionName "1.0.6"
     }
 
     packagingOptions {
@@ -45,10 +41,10 @@ android {
 
     signingConfigs {
         app1 {
-            storeFile file("android.jks")
-            storePassword STOREPASS
-            keyAlias KEYALIAS
-            keyPassword KEYPASS
+            storeFile file('meizhi.keystore')
+            storePassword project.hasProperty('STOREPASS') ? STOREPASS : ''
+            keyAlias project.hasProperty('KEYALIAS') ? KEYALIAS : ''
+            keyPassword project.hasProperty('KEYPASS') ? KEYPASS : ''
         }
     }
 
@@ -61,13 +57,18 @@ android {
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.app1
+            if (keyStore.exists()) {
+                println "using drakeet's key"
+                signingConfig signingConfigs.app1
+            } else {
+                println "----------------------------------------------------using default key----------------------------------------------------"
+            }
 
             applicationVariants.all { variant ->
                 variant.outputs.each { output ->
                     def outputFile = output.outputFile
                     if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                        // 输出apk名称为boohee_v1.0_2015-01-15_wandoujia.apk
+                        // 输出apk名称为Meizhi_v1.0_2015-01-15_wandoujia.apk
                         def fileName = "Meizhi_v${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
                         output.outputFile = new File(outputFile.parent, fileName)
                     }
@@ -76,38 +77,11 @@ android {
         }
 
         productFlavors {
-            Xiaomi {
-                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "Xiaomi"]
-            }
-            _360 {
-                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "360"]
-            }
-            Baidu {
-                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "Baidu"]
-            }
-            Wandoujia {
-                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "Wandoujia"]
-            }
             fir {
                 manifestPlaceholders = [UMENG_CHANNEL_VALUE: "fir"]
             }
-            Umeng {
-                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "Umeng"]
-            }
             GooglePlay {
                 manifestPlaceholders = [UMENG_CHANNEL_VALUE: "GooglePlay"]
-            }
-            Meizu {
-                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "Meizu"]
-            }
-            Huawei {
-                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "Huawei"]
-            }
-            QQ {
-                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "QQ"]
-            }
-            PP {
-                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "PP"]
             }
         }
     }
@@ -123,4 +97,5 @@ dependencies {
     compile 'com.github.chrisbanes.photoview:library:1.2.3'
     compile 'com.afollestad:material-dialogs:0.7.6.0'
     compile 'com.daimajia.numberprogressbar:library:1.2@aar'
+    compile 'com.umeng.analytics:analytics:latest.integration'
 }

@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.umeng.analytics.MobclickAgent;
+
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
@@ -42,6 +44,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         mHandler = new Handler();
         mMeizhiList = new ArrayList<>();
         setUpRecyclerView();
+//        MobclickAgent.updateOnlineConfig(this);
     }
 
     @Override
@@ -213,6 +216,16 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 }

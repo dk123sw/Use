@@ -1,3 +1,5 @@
+<img src="/app/src/main/res/mipmap-hdpi/ic_meizhi_150602.png" width="128" height="128" /> <img src="/app/src/main/res/mipmap-hdpi/ic_meizhi_150619.png" width="128" height="128" />
+
 端午节回家的时候，无聊之中，做了一个专门欣赏妹纸的小应用，数据来自[代码家](https://github.com/daimajia)的干货网站：http://gank.io 我只抓取了妹纸图做了个新的开源小应用：
 
 直接下载：https://fir.im/mengmeizhi
