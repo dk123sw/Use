@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 import me.drakeet.meizhi.model.Meizhi;
+import me.drakeet.meizhi.util.AlarmManagerUtils;
 import me.drakeet.meizhi.util.DateUtils;
 import me.drakeet.meizhi.util.HttpUtils;
 import me.drakeet.meizhi.util.TaskUtils;
@@ -45,6 +46,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         mMeizhiList = new ArrayList<>();
         setUpRecyclerView();
         MobclickAgent.updateOnlineConfig(this);
+        AlarmManagerUtils.register(this);
     }
 
     @Override

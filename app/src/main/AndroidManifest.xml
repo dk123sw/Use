@@ -30,6 +30,12 @@
             android:label="@string/title_activity_picture" />
         <activity android:name=".WebViewActivity" />
 
+        <receiver android:name=".service.AlarmReceiver">
+            <intent-filter>
+                <action android:name="me.drakeet.meizhi.alarm" />
+            </intent-filter>
+        </receiver>
+
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="5592386367e58e593d00234c"/>
