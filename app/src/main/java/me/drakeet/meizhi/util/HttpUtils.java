@@ -31,7 +31,9 @@ public class HttpUtils {
             e.printStackTrace();
         } finally {
             try {
-                buffer.close();
+                if (buffer != null) {
+                    buffer.close();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

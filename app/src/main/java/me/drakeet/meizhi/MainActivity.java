@@ -17,6 +17,8 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.umeng.analytics.MobclickAgent;
 
+import com.umeng.analytics.MobclickAgent;
+
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
