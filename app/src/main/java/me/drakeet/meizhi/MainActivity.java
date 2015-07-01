@@ -1,14 +1,20 @@
 package me.drakeet.meizhi;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 import com.umeng.analytics.MobclickAgent;
 
 import org.litepal.crud.DataSupport;
@@ -28,6 +34,7 @@ import me.drakeet.meizhi.util.ToastUtils;
 public class MainActivity extends SwipeRefreshBaseActivity {
 
     RecyclerView mRecyclerView;
+    ImageView mHackImageView;
     Handler mHandler;
     MeizhiListAdapter mMeizhiListAdapter;
     List<Meizhi> mMeizhiList;
@@ -47,6 +54,8 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         setUpRecyclerView();
         MobclickAgent.updateOnlineConfig(this);
         AlarmManagerUtils.register(this);
+
+        mHackImageView = (ImageView) findViewById(R.id.hack_imageView);
     }
 
     @Override
@@ -84,6 +93,44 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                             } else {
                                 mIsFirstTimeTouchBottom = false;
                             }
+                        }
+                    }
+                }
+        );
+
+        mMeizhiListAdapter.setOnMeizhiTouchListener(
+                new OnMeizhiTouchListener() {
+                    @Override
+                    public void onTouch(View v, final View meizhiView, View card, final Meizhi meizhi) {
+                        if (meizhi == null)
+                            return;
+                        if (v == meizhiView) {
+                            Picasso.with(MainActivity.this).load(meizhi.getUrl()).into(
+                                    mHackImageView, new Callback() {
+                                        @Override
+                                        public void onSuccess() {
+                                            Intent i = new Intent(MainActivity.this, PictureActivity.class);
+                                            i.putExtra(PictureActivity.EXTRA_IMAGE_URL, meizhi.getUrl());
+                                            i.putExtra(PictureActivity.EXTRA_IMAGE_TITLE, meizhi.getMid());
+
+                                            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                                                    MainActivity.this, meizhiView, PictureActivity.TRANSIT_PIC
+                                            );
+                                            ActivityCompat.startActivity(
+                                                    MainActivity.this, i, optionsCompat.toBundle()
+                                            );
+                                        }
+
+                                        @Override
+                                        public void onError() {
+
+                                        }
+                                    }
+                            );
+                        } else if (v == card) {
+                            Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
+                            intent.putExtra("meizhi", meizhi);
+                            startActivity(intent);
                         }
                     }
                 }

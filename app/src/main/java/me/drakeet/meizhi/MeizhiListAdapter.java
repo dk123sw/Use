@@ -1,10 +1,6 @@
 package me.drakeet.meizhi;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +22,7 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
 
     private List<Meizhi> mList;
     private Context mContext;
+    private OnMeizhiTouchListener mOnMeizhiTouchListener;
 
     public MeizhiListAdapter(Context context, List<Meizhi> meizhiList) {
         mList = meizhiList;
@@ -80,6 +77,8 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
         return mList.size();
     }
 
+    public void setOnMeizhiTouchListener(OnMeizhiTouchListener onMeizhiTouchListener) {this.mOnMeizhiTouchListener = onMeizhiTouchListener;}
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         Meizhi meizhi;
@@ -98,26 +97,7 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
 
         @Override
         public void onClick(View v) {
-            if (meizhi == null)
-                return;
-            if (v == meizhiView) {
-                Intent i = new Intent(mContext, PictureActivity.class);
-                i.putExtra(PictureActivity.EXTRA_IMAGE_URL, meizhi.getUrl());
-                i.putExtra(PictureActivity.EXTRA_IMAGE_TITLE, meizhi.getMid());
-
-                if (mContext instanceof Activity) {
-                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                            (Activity) mContext, meizhiView, PictureActivity.TRANSIT_PIC
-                    );
-                    ActivityCompat.startActivity((Activity) mContext, i, optionsCompat.toBundle());
-                } else {
-                    mContext.startActivity(i);
-                }
-            } else if (v == card) {
-                Intent intent = new Intent(mContext, WebViewActivity.class);
-                intent.putExtra("meizhi", meizhi);
-                mContext.startActivity(intent);
-            }
+            mOnMeizhiTouchListener.onTouch(v, meizhiView, card, meizhi);
         }
     }
 }
