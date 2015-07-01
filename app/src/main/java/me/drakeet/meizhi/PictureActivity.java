@@ -10,12 +10,12 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.afollestad.materialdialogs.AlertDialogWrapper;
 import com.squareup.picasso.Picasso;
 import com.umeng.analytics.MobclickAgent;
 
@@ -78,7 +78,7 @@ public class PictureActivity extends ToolbarActivity {
                 new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
-                        new AlertDialogWrapper.Builder(PictureActivity.this)
+                        new AlertDialog.Builder(PictureActivity.this)
                                 .setMessage("Saving to phone?")
                                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                     @Override
