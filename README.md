@@ -23,3 +23,9 @@
 <img src="/screenshots/s1.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s4.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
 <img src="/screenshots/s3.png" alt="screenshot" title="screenshot" width="270" height="486" />  <img src="/screenshots/s2.png" alt="screenshot" title="screenshot" width="270" height="486" />
+
+Contributors
+
+[代码家](https://github.com/daimajia)：增加了首页妹纸卡片点击非图片区域（日期）打开干货页面（http://gank.io）；
+
+[iamwent](https://github.com/iamwent)：Adding feature: saving picture to phone (by long press meizhi image in meizhi detail image page/activity);
