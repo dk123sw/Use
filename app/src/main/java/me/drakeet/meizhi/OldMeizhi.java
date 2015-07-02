@@ -74,6 +74,11 @@ public class OldMeizhi {
         new Meizhi("2015/06/17", "http://ww1.sinaimg.cn/large/7a8aed7bgw1et6yio5s7rj20hs0qogop.jpg", 450, 675).save();
         new Meizhi("2015/06/18", "http://ww1.sinaimg.cn/large/7a8aed7bgw1et80fw2p80j20qo0hsdj1.jpg", 660, 440).save();
         new Meizhi("2015/06/19", "http://ww3.sinaimg.cn/large/7a8aed7bgw1et95oadpnjj20qo0hs0vk.jpg", 720, 480).save();
+        new Meizhi("2015/06/26", "http://ww2.sinaimg.cn/large/610dc034jw1ethd8ez8yaj20go0p0gpm.jpg", 600, 900).save();
+        new Meizhi("2015/06/29", "http://ww1.sinaimg.cn/large/7a8aed7bgw1etkpwkaxqej20gy0pfta8.jpg", 610, 915).save();
+        new Meizhi("2015/06/30", "http://ww1.sinaimg.cn/large/610dc034jw1etlvfi6vxkj20h20o476h.jpg", 614, 868).save();
+        new Meizhi("2015/07/01", "http://ww1.sinaimg.cn/large/7a8aed7bgw1etn2gzjoegj20gz0p9400.jpg", 455, 677).save();
+        new Meizhi("2015/07/02", "http://ww3.sinaimg.cn/large/7a8aed7bgw1etlw75so1hj20qo0hsgpk.jpg", 550, 367).save();
 
         return true;
     }

@@ -17,8 +17,6 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.umeng.analytics.MobclickAgent;
 
-import com.umeng.analytics.MobclickAgent;
-
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
@@ -151,7 +149,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                         HttpUtils httpUtils = new HttpUtils();
                         Calendar calendar = Calendar.getInstance();
                         Date today = new Date();
-                        calendar.set(2015, 5, 21);
+                        calendar.set(2015, 6, 2);
                         Date thatDay = calendar.getTime();
 
                         int oLength = mMeizhiList.size();
