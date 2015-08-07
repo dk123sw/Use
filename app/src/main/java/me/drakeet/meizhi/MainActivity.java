@@ -84,9 +84,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                 new RecyclerView.OnScrollListener() {
                     @Override
                     public void onScrolled(RecyclerView rv, int dx, int dy) {
-                        if (!mSwipeRefreshLayout.isRefreshing() && layoutManager.findLastCompletelyVisibleItemPositions(
-                                new int[2]
-                        )[1] >= mMeizhiListAdapter.getItemCount() - 2) {
+                        if (!mSwipeRefreshLayout.isRefreshing() && layoutManager.findLastCompletelyVisibleItemPositions(new int[2])[1] >= mMeizhiListAdapter.getItemCount() - 4) {
                             if (!mIsFirstTimeTouchBottom) {
                                 mSwipeRefreshLayout.setRefreshing(true);
                                 mOffset += 20;
