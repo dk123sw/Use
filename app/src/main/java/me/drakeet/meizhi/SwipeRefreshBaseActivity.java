@@ -45,7 +45,15 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
             return;
         }
         if (!refreshing) {
-            mSwipeRefreshLayout.setRefreshing(false);
+            // 防止刷新消失太快，让子弹飞一会儿
+            mSwipeRefreshLayout.postDelayed(
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            mSwipeRefreshLayout.setRefreshing(false);
+                        }
+                    }, 1000
+            );
         } else {
             mSwipeRefreshLayout.setRefreshing(true);
         }
