@@ -18,13 +18,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
+        <me.drakeet.meizhi.widget.RadioImageView
             android:id="@+id/iv_meizhi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            tools:src="@mipmap/ic_launcher"/>
+            android:scaleType="fitXY"/>
 
         <LinearLayout
             android:layout_width="match_parent"

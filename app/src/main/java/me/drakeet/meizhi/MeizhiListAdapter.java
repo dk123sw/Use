@@ -5,8 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -14,6 +12,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import me.drakeet.meizhi.model.Meizhi;
+import me.drakeet.meizhi.widget.RadioImageView;
 
 /**
  * Created by drakeet on 6/20/15.
@@ -42,23 +41,7 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
         viewHolder.meizhi = meizhi;
         viewHolder.titleView.setText(meizhi.getMid());
         viewHolder.card.setTag(meizhi.getMid());
-        ViewTreeObserver vto = viewHolder.meizhiView.getViewTreeObserver();
-        vto.addOnGlobalLayoutListener(
-                new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        int thumbWidth = viewHolder.meizhi.getThumbWidth();
-                        int thumbHeight = viewHolder.meizhi.getThumbHeight();
-                        if (thumbWidth > 0 && thumbHeight > 0) {
-                            int width = viewHolder.meizhiView.getMeasuredWidth();
-                            int height = Math.round(width * ((float) thumbHeight / thumbWidth));
-                            viewHolder.meizhiView.getLayoutParams().height = height;
-                            viewHolder.meizhiView.setMinimumHeight(height);
-                        }
-                        viewHolder.meizhiView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                    }
-                }
-        );
+        viewHolder.meizhiView.setOriginalSize(meizhi.getThumbWidth(), meizhi.getThumbHeight());
 
         Picasso.with(mContext)
                .load(meizhi.getUrl())
@@ -82,14 +65,14 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         Meizhi meizhi;
-        ImageView meizhiView;
+        RadioImageView meizhiView;
         TextView titleView;
         View card;
 
         public ViewHolder(View itemView) {
             super(itemView);
             card = itemView;
-            meizhiView = (ImageView) itemView.findViewById(R.id.iv_meizhi);
+            meizhiView = (RadioImageView) itemView.findViewById(R.id.iv_meizhi);
             titleView = (TextView) itemView.findViewById(R.id.tv_title);
             meizhiView.setOnClickListener(this);
             card.setOnClickListener(this);
