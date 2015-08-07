@@ -9,7 +9,7 @@ import me.drakeet.meizhi.model.Meizhi;
 /**
  * Created by drakeet on 6/21/15.
  */
-public class OldMeizhi {
+public class PresetMeizhi {
 
     public static boolean init() {
         List<Meizhi> qList = DataSupport.where("mid = ?", "2015/06/19").find(Meizhi.class);
@@ -17,7 +17,7 @@ public class OldMeizhi {
             return true;
         }
         // 以下内容乃自动化生成，大家不用替俺担心~~
-        new Meizhi("2015/03/26", "今天没有妹纸", 162, 174).save();
+        new Meizhi("2015/03/26", "今天没有妹纸").save();
         new Meizhi("2015/03/30", "http://ww2.sinaimg.cn/large/610dc034gw1eqnjfdn45qj20h30mk443.jpg", 450, 594).save();
         new Meizhi("2015/03/31", "http://ww2.sinaimg.cn/large/610dc034gw1eqoqwkyy8cj20h20h10wz.jpg", 401, 400).save();
         new Meizhi("2015/04/01", "http://ww4.sinaimg.cn/large/610dc034gw1eqpx7qtursj20go0go779.jpg", 300, 300).save();
@@ -50,7 +50,7 @@ public class OldMeizhi {
         new Meizhi("2015/05/14", "http://ww3.sinaimg.cn/large/610dc034jw1es3mty6nm2j20go0n60t9.jpg", 600, 834).save();
         new Meizhi("2015/05/15", "http://ww2.sinaimg.cn/large/610dc034gw1es4si7kzebj20m80eu0te.jpg", 450, 300).save();
         new Meizhi("2015/05/18", "http://ww3.sinaimg.cn/large/610dc034gw1es89uzch20j20pw0xcadb.jpg", 400, 515).save();
-        new Meizhi("2015/05/19", "今天没有妹纸", 640, 246).save();
+        new Meizhi("2015/05/19", "今天没有妹纸", 0, 0).save();
         new Meizhi("2015/05/20", "http://ww1.sinaimg.cn/large/7a8aed7bgw1esahpyv86sj20hs0qomzo.jpg", 400, 600).save();
         new Meizhi("2015/05/21", "http://ww2.sinaimg.cn/large/7a8aed7bgw1esbmanpn0tj20hr0qo0w8.jpg", 400, 601).save();
         new Meizhi("2015/05/22", "http://ww1.sinaimg.cn/large/7a8aed7bgw1escs1cl4f5j20qo0jsn3m.jpg", 450, 334).save();
@@ -79,6 +79,42 @@ public class OldMeizhi {
         new Meizhi("2015/06/30", "http://ww1.sinaimg.cn/large/610dc034jw1etlvfi6vxkj20h20o476h.jpg", 614, 868).save();
         new Meizhi("2015/07/01", "http://ww1.sinaimg.cn/large/7a8aed7bgw1etn2gzjoegj20gz0p9400.jpg", 455, 677).save();
         new Meizhi("2015/07/02", "http://ww3.sinaimg.cn/large/7a8aed7bgw1etlw75so1hj20qo0hsgpk.jpg", 550, 367).save();
+        new Meizhi("2015/07/03", "http://ww1.sinaimg.cn/large/7a8aed7bgw1etpfol394kj20qo0hsdiw.jpg", 650, 433).save();
+        new Meizhi("2015/07/04", "今天没有妹纸").save();
+        new Meizhi("2015/07/05", "今天没有妹纸").save();
+        new Meizhi("2015/07/06", "http://ww1.sinaimg.cn/large/7a8aed7bgw1etstfoej4mj20ey0migom.jpg", 538, 810).save();
+        new Meizhi("2015/07/07", "http://ww1.sinaimg.cn/large/7a8aed7bgw1ettzpowndgj216g0s4dkg.jpg", 650, 430).save();
+        new Meizhi("2015/07/08", "http://ww3.sinaimg.cn/large/7a8aed7bgw1etv4f9fro4j20hs0qowg6.jpg", 550, 825).save();
+        new Meizhi("2015/07/09", "http://ww2.sinaimg.cn/large/7a8aed7bgw1etwa7ayf35j20j60csmzb.jpg", 650, 433).save();
+        new Meizhi("2015/07/10", "http://ww1.sinaimg.cn/large/7a8aed7bgw1etxg3kjmelj20hs0qoq60.jpg", 550, 825).save();
+        new Meizhi("2015/07/11", "今天没有妹纸").save();
+        new Meizhi("2015/07/12", "今天没有妹纸").save();
+        new Meizhi("2015/07/13", "http://ww1.sinaimg.cn/large/7a8aed7bgw1eu0w2y0hfbj20hs0qoadi.jpg", 640, 960).save();
+        new Meizhi("2015/07/14", "http://ww4.sinaimg.cn/large/7a8aed7bgw1eu22nypk9hj20dw0kutc0.jpg", 500, 750).save();
+        new Meizhi("2015/07/15", "http://ww3.sinaimg.cn/large/610dc034gw1eu3bld296jj20df0kudhx.jpg", 483, 750).save();
+        new Meizhi("2015/07/16", "http://ww2.sinaimg.cn/large/7a8aed7bgw1eu4cwbv2a6j20zk0qo7dw.jpg", 650, 488).save();
+        new Meizhi("2015/07/17", "http://ww3.sinaimg.cn/large/7a8aed7bgw1eu5jpf3lamj20f00mitck.jpg", 540, 810).save();
+        new Meizhi("2015/07/18", "今天没有妹纸").save();
+        new Meizhi("2015/07/19", "今天没有妹纸").save();
+        new Meizhi("2015/07/20", "http://ww3.sinaimg.cn/large/7a8aed7bgw1eu8zauvndoj20go0gpdik.jpg", 450,451).save();
+        new Meizhi("2015/07/21", "http://ww1.sinaimg.cn/large/7a8aed7bgw1eua4mbsim0j20hs0qojuh.jpg", 480,720).save();
+        new Meizhi("2015/07/22", "http://ww2.sinaimg.cn/large/610dc034gw1eubet6h43qj20qo0hsadh.jpg", 850,567).save();
+        new Meizhi("2015/07/23", "http://ww2.sinaimg.cn/large/7a8aed7bjw1eucg4wdq8ij20m80m8q6s.jpg", 800,800).save();
+        new Meizhi("2015/07/24", "http://ww3.sinaimg.cn/large/7a8aed7bgw1eudm5ktieij20ey0midhq.jpg", 480,723).save();
+        new Meizhi("2015/07/25", "今天没有妹纸").save();
+        new Meizhi("2015/07/26", "今天没有妹纸").save();
+        new Meizhi("2015/07/27", "http://ww2.sinaimg.cn/large/7a8aed7bgw1euh2zyekn2j20hs0qodje.jpg", 480,720).save();
+        new Meizhi("2015/07/28", "http://ww3.sinaimg.cn/large/7a8aed7bgw1eui8h92qyaj20p111idmw.jpg", 480,719).save();
+        new Meizhi("2015/07/29", "http://ww3.sinaimg.cn/large/610dc034gw1eujhf1599jj20dt0kuwhi.jpg", 497,750).save();
+        new Meizhi("2015/07/30", "http://ww4.sinaimg.cn/large/7a8aed7bgw1eujhfwyj27j20qo0hs0vy.jpg", 880,587).save();
+        new Meizhi("2015/07/31", "http://ww2.sinaimg.cn/large/7a8aed7bgw1eukj6vosygj20gs0p0act.jpg", 604,900).save();
+        new Meizhi("2015/08/01", "今天没有妹纸").save();
+        new Meizhi("2015/08/02", "今天没有妹纸").save();
+        new Meizhi("2015/08/03", "http://ww3.sinaimg.cn/large/7a8aed7bgw1eup75gxp8qj20hr0qoae8.jpg", 600,901).save();
+        new Meizhi("2015/08/04", "http://ww1.sinaimg.cn/large/7a8aed7bgw1euqcfwjbkdj20hs0qo40w.jpg", 480,720).save();
+        new Meizhi("2015/08/05", "http://ww4.sinaimg.cn/large/7a8aed7bgw1eurhwfc5z7j20hs0qomzz.jpg", 640,960).save();
+        new Meizhi("2015/08/06", "http://ww4.sinaimg.cn/large/7a8aed7bgw1eusn3niy2bj20hs0qo0wb.jpg", 640,960).save();
+        new Meizhi("2015/08/07", "http://ww2.sinaimg.cn/large/7a8aed7bgw1eutsd0pgiwj20go0p0djn.jpg", 500,750).save();
 
         return true;
     }

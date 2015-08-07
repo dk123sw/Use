@@ -63,6 +63,6 @@ public class Meizhi extends DataSupport implements Serializable {
 
     @Override
     public String toString() {
-        return getMid() + "-->, \"" + getThumbWidth() + "\", " + "\"" + getThumbHeight() + "\"";
+        return "new Meizhi(\"" + getMid() + "\", \"" + getUrl() + "\", " + getThumbWidth() + "," +  getThumbHeight() + ").save();";
     }
 }

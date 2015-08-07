@@ -1,6 +1,7 @@
 package me.drakeet.meizhi;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -144,7 +145,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                     @Override
                     protected Boolean doInBackground(Object... params) {
                         if (!mIsDbInited) {
-                            mIsDbInited = OldMeizhi.init();
+                            mIsDbInited = PresetMeizhi.init();
                         }
                         HttpUtils httpUtils = new HttpUtils();
                         Calendar calendar = Calendar.getInstance();
@@ -203,6 +204,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                                 }
                             }
                         }
+
                         return mMeizhiList.size() > oLength;
                     }
 
@@ -260,7 +262,9 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about) {
+            Uri uri = Uri.parse("http://drakeet.me");
+            startActivity(new Intent(Intent.ACTION_VIEW, uri));
             return true;
         }
 
