@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import me.drakeet.meizhi.model.Meizhi;
-import me.drakeet.meizhi.widget.RadioImageView;
+import me.drakeet.meizhi.widget.RatioImageView;
 
 /**
  * Created by drakeet on 6/20/15.
@@ -65,14 +65,14 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         Meizhi meizhi;
-        RadioImageView meizhiView;
+        RatioImageView meizhiView;
         TextView titleView;
         View card;
 
         public ViewHolder(View itemView) {
             super(itemView);
             card = itemView;
-            meizhiView = (RadioImageView) itemView.findViewById(R.id.iv_meizhi);
+            meizhiView = (RatioImageView) itemView.findViewById(R.id.iv_meizhi);
             titleView = (TextView) itemView.findViewById(R.id.tv_title);
             meizhiView.setOnClickListener(this);
             card.setOnClickListener(this);

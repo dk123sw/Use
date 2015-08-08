@@ -13,7 +13,7 @@
     android:foreground="?attr/selectableItemBackground"
     android:orientation="vertical">
 
-    <me.drakeet.meizhi.widget.RadioImageView
+    <me.drakeet.meizhi.widget.RatioImageView
         android:id="@+id/iv_meizhi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

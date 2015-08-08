@@ -26,20 +26,20 @@ import android.widget.ImageView;
  *
  * @author XiNGRZ
  */
-public class RadioImageView extends ImageView {
+public class RatioImageView extends ImageView {
 
     private int originalWidth;
     private int originalHeight;
 
-    public RadioImageView(Context context) {
+    public RatioImageView(Context context) {
         super(context);
     }
 
-    public RadioImageView(Context context, AttributeSet attrs) {
+    public RatioImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public RadioImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RatioImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
