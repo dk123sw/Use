@@ -26,6 +26,7 @@ import me.drakeet.meizhi.api.OnMeizhiTouchListener;
 import me.drakeet.meizhi.model.Meizhi;
 import me.drakeet.meizhi.ui.base.SwipeRefreshBaseActivity;
 import me.drakeet.meizhi.util.AlarmManagerUtils;
+import rx.android.schedulers.AndroidSchedulers;
 
 public class MainActivity extends SwipeRefreshBaseActivity {
 
@@ -142,7 +143,11 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     private void getData(final boolean addFromDb) {
         setRefreshing(true);
-        // TODO Using Rajava and Retrofix to load data.
+        // TODO
+        sDrakeet.getMeizhiList(1)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(meizhiList -> System.out.println(meizhiList.results.size() + "") );
+
     }
 
     private void getData() {
