@@ -61,7 +61,7 @@ android {
                 println "using drakeet's key"
                 signingConfig signingConfigs.app1
             } else {
-                println "----------------------------------------------------using default key----------------------------------------------------"
+                println "---------------using default key---------------"
             }
 
             applicationVariants.all { variant ->
