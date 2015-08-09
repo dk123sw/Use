@@ -103,13 +103,22 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                                     mHackImageView, new Callback() {
                                         @Override
                                         public void onSuccess() {
-                                            Intent i = new Intent(MainActivity.this, PictureActivity.class);
-                                            i.putExtra(PictureActivity.EXTRA_IMAGE_URL, meizhi.url);
-                                            i.putExtra(PictureActivity.EXTRA_IMAGE_TITLE, meizhi.desc);
-
-                                            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                                                    MainActivity.this, meizhiView, PictureActivity.TRANSIT_PIC
+                                            Intent i = new Intent(
+                                                    MainActivity.this,
+                                                    PictureActivity.class
                                             );
+                                            i.putExtra(PictureActivity.EXTRA_IMAGE_URL, meizhi.url);
+                                            i.putExtra(
+                                                    PictureActivity.EXTRA_IMAGE_TITLE,
+                                                    meizhi.desc
+                                            );
+
+                                            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat
+                                                    .makeSceneTransitionAnimation(
+                                                            MainActivity.this,
+                                                            meizhiView,
+                                                            PictureActivity.TRANSIT_PIC
+                                                    );
                                             ActivityCompat.startActivity(
                                                     MainActivity.this, i, optionsCompat.toBundle()
                                             );
@@ -133,7 +142,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     private void getData(final boolean addFromDb) {
         setRefreshing(true);
-        // TODO
+        // TODO Using Rajava and Retrofix to load data.
     }
 
     private void getData() {
