@@ -1,4 +1,4 @@
-package me.drakeet.meizhi;
+package me.drakeet.meizhi.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +11,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import me.drakeet.meizhi.api.OnMeizhiTouchListener;
+import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.model.Meizhi;
 import me.drakeet.meizhi.widget.RatioImageView;
 

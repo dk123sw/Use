@@ -1,4 +1,4 @@
-package me.drakeet.meizhi;
+package me.drakeet.meizhi.api;
 
 import android.view.View;
 

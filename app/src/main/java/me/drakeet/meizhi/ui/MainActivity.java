@@ -1,4 +1,4 @@
-package me.drakeet.meizhi;
+package me.drakeet.meizhi.ui;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -25,7 +25,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import me.drakeet.meizhi.R;
+import me.drakeet.meizhi.ui.base.SwipeRefreshBaseActivity;
+import me.drakeet.meizhi.adapter.MeizhiListAdapter;
+import me.drakeet.meizhi.api.OnMeizhiTouchListener;
 import me.drakeet.meizhi.model.Meizhi;
+import me.drakeet.meizhi.model.PresetMeizhi;
 import me.drakeet.meizhi.util.AlarmManagerUtils;
 import me.drakeet.meizhi.util.DateUtils;
 import me.drakeet.meizhi.util.HttpUtils;

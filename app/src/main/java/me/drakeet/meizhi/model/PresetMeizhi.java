@@ -1,4 +1,4 @@
-package me.drakeet.meizhi;
+package me.drakeet.meizhi.model;
 
 import org.litepal.crud.DataSupport;
 

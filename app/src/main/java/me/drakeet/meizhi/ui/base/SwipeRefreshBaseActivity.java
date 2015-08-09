@@ -1,8 +1,9 @@
-package me.drakeet.meizhi;
+package me.drakeet.meizhi.ui.base;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 
+import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.widget.MultiSwipeRefreshLayout;
 
 
