@@ -29,3 +29,8 @@ Contributors
 [代码家](https://github.com/daimajia)：增加了首页妹纸卡片点击非图片区域（日期）打开干货页面（http://gank.io）；
 
 [iamwent](https://github.com/iamwent)：Adding feature: saving picture to phone (by long press meizhi image in meizhi detail image page/activity);
+
+###2.0
+
+https://github.com/drakeet/Meizhi/tree/version-2.0
+
