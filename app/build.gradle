@@ -97,4 +97,5 @@ dependencies {
     compile 'com.github.chrisbanes.photoview:library:1.2.3'
     compile 'com.daimajia.numberprogressbar:library:1.2@aar'
     compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
 }

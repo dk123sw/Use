@@ -41,13 +41,13 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         Meizhi meizhi = mList.get(position);
         viewHolder.meizhi = meizhi;
-        viewHolder.titleView.setText(meizhi.getMid());
-        viewHolder.card.setTag(meizhi.getMid());
-        viewHolder.meizhiView.setOriginalSize(meizhi.getThumbWidth(), meizhi.getThumbHeight());
+        viewHolder.titleView.setText(meizhi.desc);
+        viewHolder.card.setTag(meizhi.desc);
+        viewHolder.meizhiView.setOriginalSize(meizhi.imageWidth, meizhi.imageHeight);
 
         Picasso.with(mContext)
-               .load(meizhi.getUrl())
-               .resize(meizhi.getThumbWidth(), meizhi.getThumbHeight())
+               .load(meizhi.url)
+               .resize(meizhi.imageWidth, meizhi.imageHeight)
                .into(viewHolder.meizhiView);
     }
 

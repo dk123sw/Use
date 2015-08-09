@@ -1,18 +1,27 @@
 package me.drakeet.meizhi;
 
-import android.database.sqlite.SQLiteDatabase;
+import android.app.Application;
+import android.content.Context;
 
-import org.litepal.LitePalApplication;
-import org.litepal.tablemanager.Connector;
+import com.activeandroid.ActiveAndroid;
 
 /**
  * Created by drakeet on 6/21/15.
  */
-public class App extends LitePalApplication {
+public class App extends Application {
+
+    public static Context sContext;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        SQLiteDatabase db = Connector.getDatabase();//初始化数据库
+        sContext = this;
+        ActiveAndroid.initialize(this);
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        ActiveAndroid.dispose();
     }
 }

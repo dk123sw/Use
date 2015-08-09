@@ -1,68 +1,36 @@
 package me.drakeet.meizhi.model;
 
-import org.litepal.crud.DataSupport;
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 
 import java.io.Serializable;
 
 /**
  * Created by drakeet on 6/20/15.
  */
-public class Meizhi extends DataSupport implements Serializable {
+@Table(name = "Meizhis")
+public class Meizhi extends Model implements Serializable {
 
-    private String mid;
-    private String url;
-    private int thumbWidth;
-    private int thumbHeight;
+    @Column(name = "url")
+    public String url;
+    @Column(name = "type")
+    public String type;
+    @Column(name = "desc")
+    public String desc;
+    @Column(name = "who")
+    public String who;
+    @Column(name = "used")
+    public boolean used;
+    @Column(name = "objectId")
+    public String objectId;
+    @Column(name = "createdAt")
+    public String createdAt;
+    @Column(name = "updatedAt")
+    public String updatedAt;
+    @Column(name = "imageWidth")
+    public int imageWidth;
+    @Column(name = "imageHeight")
+    public int imageHeight;
 
-    public Meizhi(String id, String url) {
-        this.mid = id;
-        this.url = url;
-    }
-
-    public Meizhi(String mid, String url, int thumbWidth, int thumbHeight) {
-        this.mid = mid;
-        this.url = url;
-        this.thumbWidth = thumbWidth;
-        this.thumbHeight = thumbHeight;
-    }
-
-    public Meizhi() {
-    }
-
-    public int getThumbWidth() {
-        return thumbWidth;
-    }
-
-    public void setThumbWidth(int thumbWidth) {
-        this.thumbWidth = thumbWidth;
-    }
-
-    public int getThumbHeight() {
-        return thumbHeight;
-    }
-
-    public void setThumbHeight(int thumbHeight) {
-        this.thumbHeight = thumbHeight;
-    }
-
-    public String getMid() {
-        return mid;
-    }
-
-    public void setMid(String id) {
-        this.mid = id;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    @Override
-    public String toString() {
-        return "new Meizhi(\"" + getMid() + "\", \"" + getUrl() + "\", " + getThumbWidth() + "," +  getThumbHeight() + ").save();";
-    }
 }

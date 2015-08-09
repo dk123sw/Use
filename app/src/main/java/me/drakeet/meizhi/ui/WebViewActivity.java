@@ -37,7 +37,7 @@ public class WebViewActivity extends AppCompatActivity {
         mWebView.setWebChromeClient(new WebChrome());
         mWebView.getSettings().setLoadWithOverviewMode(true);
         mWebView.getSettings().setAppCacheEnabled(true);
-        mWebView.loadUrl("http://gank.io/" + meizhi.getMid());
+        mWebView.loadUrl("http://gank.io/"); // TODO
     }
 
     @Override
