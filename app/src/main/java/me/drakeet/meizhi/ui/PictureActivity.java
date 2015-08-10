@@ -1,4 +1,4 @@
-package me.drakeet.meizhi;
+package me.drakeet.meizhi.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,6 +24,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import me.drakeet.meizhi.R;
+import me.drakeet.meizhi.ui.base.ToolbarActivity;
 import me.drakeet.meizhi.util.TaskUtils;
 import me.drakeet.meizhi.util.ToastUtils;
 import uk.co.senab.photoview.PhotoViewAttacher;

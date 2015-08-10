@@ -1,4 +1,4 @@
-package me.drakeet.meizhi;
+package me.drakeet.meizhi.ui;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.daimajia.numberprogressbar.NumberProgressBar;
 import com.umeng.analytics.MobclickAgent;
 
+import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.model.Meizhi;
 
 public class WebViewActivity extends AppCompatActivity {
@@ -36,7 +37,7 @@ public class WebViewActivity extends AppCompatActivity {
         mWebView.setWebChromeClient(new WebChrome());
         mWebView.getSettings().setLoadWithOverviewMode(true);
         mWebView.getSettings().setAppCacheEnabled(true);
-        mWebView.loadUrl("http://gank.io/" + meizhi.getMid());
+        mWebView.loadUrl("http://gank.io/"); // TODO
     }
 
     @Override

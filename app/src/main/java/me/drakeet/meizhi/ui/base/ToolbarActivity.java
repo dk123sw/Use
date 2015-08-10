@@ -1,16 +1,17 @@
-package me.drakeet.meizhi;
+package me.drakeet.meizhi.ui.base;
 
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
-public abstract class ToolbarActivity extends AppCompatActivity {
+import me.drakeet.meizhi.R;
+
+public abstract class ToolbarActivity extends BaseActivity {
 
     abstract protected int getLayoutResource();
 

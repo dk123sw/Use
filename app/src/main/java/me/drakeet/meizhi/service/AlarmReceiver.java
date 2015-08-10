@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import me.drakeet.meizhi.MainActivity;
+import me.drakeet.meizhi.ui.MainActivity;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.util.HeadsUpUtils;
 

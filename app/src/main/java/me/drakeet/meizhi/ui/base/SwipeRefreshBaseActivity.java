@@ -1,8 +1,9 @@
-package me.drakeet.meizhi;
+package me.drakeet.meizhi.ui.base;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 
+import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.widget.MultiSwipeRefreshLayout;
 
 
@@ -11,7 +12,7 @@ import me.drakeet.meizhi.widget.MultiSwipeRefreshLayout;
  */
 public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
 
-    MultiSwipeRefreshLayout mSwipeRefreshLayout;
+    public MultiSwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

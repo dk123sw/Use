@@ -61,7 +61,7 @@ android {
                 println "using drakeet's key"
                 signingConfig signingConfigs.app1
             } else {
-                println "----------------------------------------------------using default key----------------------------------------------------"
+                println "---------------using default key---------------"
             }
 
             applicationVariants.all { variant ->
@@ -85,7 +85,14 @@ android {
             }
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -97,4 +104,14 @@ dependencies {
     compile 'com.github.chrisbanes.photoview:library:1.2.3'
     compile 'com.daimajia.numberprogressbar:library:1.2@aar'
     compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'io.reactivex:rxandroid:1.0.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
+    compile 'com.squareup.okhttp:okhttp:2.0.0'
 }
+
+apply plugin: 'me.tatarka.retrolambda'
+
+
+
