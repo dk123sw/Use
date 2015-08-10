@@ -2,10 +2,8 @@ package me.drakeet.meizhi;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.internal.bind.DateTypeAdapter;
 import com.squareup.okhttp.OkHttpClient;
 
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import retrofit.RestAdapter;
@@ -13,14 +11,15 @@ import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
 
 /**
+ * 2015-08-07T03:57:47.229Z
  * Created by drakeet on 8/9/15.
  */
 public class DrakeetRetrofit {
 
     final Drakeet service;
 
-    public static final Gson gson = new GsonBuilder()
-            .registerTypeAdapter(Date.class, new DateTypeAdapter())
+    final static Gson gson = new GsonBuilder()
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
             .create();
 
     DrakeetRetrofit() {

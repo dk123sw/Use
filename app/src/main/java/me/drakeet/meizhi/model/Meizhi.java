@@ -5,6 +5,7 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by drakeet on 6/20/15.
@@ -25,9 +26,9 @@ public class Meizhi extends Model implements Serializable {
     @Column(name = "objectId")
     public String objectId;
     @Column(name = "createdAt")
-    public String createdAt;
+    public Date createdAt;
     @Column(name = "updatedAt")
-    public String updatedAt;
+    public Date updatedAt;
     @Column(name = "imageWidth")
     public int imageWidth;
     @Column(name = "imageHeight")
