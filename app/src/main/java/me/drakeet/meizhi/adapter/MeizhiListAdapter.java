@@ -52,8 +52,8 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
         viewHolder.meizhi = meizhi;
         viewHolder.titleView.setText(meizhi.desc);
         viewHolder.card.setTag(meizhi.desc);
-        //viewHolder.meizhiView.setOriginalSize(meizhi.imageWidth, meizhi.imageHeight);
 
+        // TODO: Waiting for daimajia's new api...
         getBitmapObservable(meizhi.url)
                   .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
                   .subscribe(
@@ -85,7 +85,7 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
 
     public void setOnMeizhiTouchListener(OnMeizhiTouchListener onMeizhiTouchListener) {this.mOnMeizhiTouchListener = onMeizhiTouchListener;}
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         Meizhi meizhi;
         RatioImageView meizhiView;

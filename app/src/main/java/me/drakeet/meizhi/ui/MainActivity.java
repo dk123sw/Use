@@ -77,6 +77,22 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         mMeizhiListAdapter.setOnMeizhiTouchListener(getOnMeizhiTouchListener());
     }
 
+    private void getData(boolean addFromDb) {
+        setRefreshing(true);
+        sDrakeet.getMeizhiData(mPage)
+                .map(meizhiData -> meizhiData.results)
+                .flatMap(Observable::from)
+                .toSortedList((meizhi1, meizhi2) -> meizhi2.updatedAt.compareTo(meizhi1.updatedAt))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        meizhis -> {
+                            mMeizhiList.addAll(meizhis);
+                            mMeizhiListAdapter.notifyDataSetChanged();
+                            setRefreshing(false);
+                        }, Throwable::printStackTrace
+                );
+    }
+
     private RecyclerView.OnScrollListener getScrollToBottomListener(StaggeredGridLayoutManager layoutManager) {
         return new RecyclerView.OnScrollListener() {
             @Override
@@ -116,22 +132,6 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                 // TODO: start Ganhuo activity!!!
             }
         };
-    }
-
-    private void getData(boolean addFromDb) {
-        setRefreshing(true);
-        sDrakeet.getMeizhiData(mPage)
-                .map(meizhiData -> meizhiData.results)
-                .flatMap(Observable::from)
-                .toSortedList((meizhi1, meizhi2) -> meizhi2.updatedAt.compareTo(meizhi1.updatedAt))
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        meizhis -> {
-                            mMeizhiList.addAll(meizhis);
-                            mMeizhiListAdapter.notifyDataSetChanged();
-                            setRefreshing(false);
-                        }, Throwable::printStackTrace
-                );
     }
 
     private void getData() {

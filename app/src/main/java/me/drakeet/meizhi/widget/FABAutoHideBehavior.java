@@ -8,7 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewTreeObserver;
 
 import me.drakeet.meizhi.R;
 
@@ -41,18 +40,17 @@ public class FABAutoHideBehavior extends CoordinatorLayout.Behavior
 		if (tag == null) tag = false;
 		
 		if (!Boolean.parseBoolean(tag.toString())) {
-			final View appbar = parent.findViewById(R.id.app_bar_layout);
+			final View appBar = parent.findViewById(R.id.app_bar_layout);
 			final View toolbar = parent.findViewById(R.id.toolbar);
 			
-			anchor.getViewTreeObserver().addOnDrawListener(new ViewTreeObserver.OnDrawListener() {
-				@Override
-				public void onDraw() {
-					int childHeight = child.getMeasuredHeight() + (parent.getMeasuredHeight() - child.getBottom());
-					int toolbarHeight = toolbar.getMeasuredHeight();
-					float translationY = appbar.getTranslationY();
-					child.setTranslationY(- translationY / (float) toolbarHeight * childHeight);
-				}
-			});
+			anchor.getViewTreeObserver().addOnDrawListener(
+					() -> {
+                        int childHeight = child.getMeasuredHeight() + (parent.getMeasuredHeight() - child.getBottom());
+                        int toolbarHeight = toolbar.getMeasuredHeight();
+                        float translationY = appBar.getTranslationY();
+                        child.setTranslationY(- translationY / (float) toolbarHeight * childHeight);
+                    }
+			);
 			
 			anchor.setTag(R.id.app_bar_layout, true);
 		}
