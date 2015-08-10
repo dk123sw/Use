@@ -93,7 +93,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                 );
     }
 
-    private RecyclerView.OnScrollListener getScrollToBottomListener(StaggeredGridLayoutManager layoutManager) {
+    RecyclerView.OnScrollListener getScrollToBottomListener(StaggeredGridLayoutManager layoutManager) {
         return new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView rv, int dx, int dy) {
