@@ -9,5 +9,5 @@ import me.drakeet.meizhi.DrakeetFactory;
  * Created by drakeet on 8/9/15.
  */
 public class BaseActivity extends AppCompatActivity {
-    public static final Drakeet sDrakeet = DrakeetFactory.GetSingleton();
+    public static final Drakeet sDrakeet = DrakeetFactory.getSingleton();
 }

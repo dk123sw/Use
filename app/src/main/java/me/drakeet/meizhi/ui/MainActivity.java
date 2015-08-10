@@ -60,12 +60,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mHandler.postDelayed(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        getData();
-                    }
-                }, 358
+                () -> getData(), 358
         );
     }
 
@@ -81,10 +76,12 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                 new RecyclerView.OnScrollListener() {
                     @Override
                     public void onScrolled(RecyclerView rv, int dx, int dy) {
-                        if (!mSwipeRefreshLayout.isRefreshing() && layoutManager.findLastCompletelyVisibleItemPositions(new int[2])[1] >= mMeizhiListAdapter.getItemCount() - 4) {
+                        if (!mSwipeRefreshLayout.isRefreshing() && layoutManager.findLastCompletelyVisibleItemPositions(
+                                new int[2]
+                        )[1] >= mMeizhiListAdapter.getItemCount() - 4) {
                             if (!mIsFirstTimeTouchBottom) {
                                 mSwipeRefreshLayout.setRefreshing(true);
-                                mPage += 20;
+                                mPage += 1;
                                 getData();
                             } else {
                                 mIsFirstTimeTouchBottom = false;
@@ -97,7 +94,8 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         mMeizhiListAdapter.setOnMeizhiTouchListener(
                 new OnMeizhiTouchListener() {
                     @Override
-                    public void onTouch(View v, final View meizhiView, View card, final Meizhi meizhi) {
+                    public void onTouch(View v, final View meizhiView, View card,
+                                        final Meizhi meizhi) {
                         if (meizhi == null)
                             return;
                         if (v == meizhiView) {
@@ -106,13 +104,11 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                                         @Override
                                         public void onSuccess() {
                                             Intent i = new Intent(
-                                                    MainActivity.this,
-                                                    PictureActivity.class
+                                                    MainActivity.this, PictureActivity.class
                                             );
                                             i.putExtra(PictureActivity.EXTRA_IMAGE_URL, meizhi.url);
                                             i.putExtra(
-                                                    PictureActivity.EXTRA_IMAGE_TITLE,
-                                                    meizhi.desc
+                                                    PictureActivity.EXTRA_IMAGE_TITLE, meizhi.desc
                                             );
 
                                             ActivityOptionsCompat optionsCompat = ActivityOptionsCompat
@@ -145,15 +141,18 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     private void getData(boolean addFromDb) {
         setRefreshing(true);
         sDrakeet.getMeizhiData(mPage)
-                .observeOn(AndroidSchedulers.mainThread())
                 .map(meizhiData -> meizhiData.results)
                 .flatMap(Observable::from)
                 .toSortedList((meizhi1, meizhi2) -> meizhi2.updatedAt.compareTo(meizhi1.updatedAt))
-                .subscribe(meizhis -> {
-                               mMeizhiList.addAll(meizhis);
-                               mMeizhiListAdapter.notifyDataSetChanged();
-                               setRefreshing(false);
-                           });
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        meizhis -> {
+                            mMeizhiList.addAll(meizhis);
+                            mMeizhiListAdapter.notifyDataSetChanged();
+                            setRefreshing(false);
+                        },
+                        Throwable::printStackTrace
+                );
     }
 
     private void getData() {

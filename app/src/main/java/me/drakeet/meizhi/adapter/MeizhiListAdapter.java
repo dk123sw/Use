@@ -1,7 +1,9 @@
 package me.drakeet.meizhi.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +11,16 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.List;
 
-import me.drakeet.meizhi.api.OnMeizhiTouchListener;
 import me.drakeet.meizhi.R;
+import me.drakeet.meizhi.api.OnMeizhiTouchListener;
 import me.drakeet.meizhi.model.Meizhi;
 import me.drakeet.meizhi.widget.RatioImageView;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by drakeet on 6/20/15.
@@ -45,9 +51,21 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
         viewHolder.card.setTag(meizhi.desc);
         //viewHolder.meizhiView.setOriginalSize(meizhi.imageWidth, meizhi.imageHeight);
 
-        Picasso.with(mContext)
-               .load(meizhi.url)
-               .into(viewHolder.meizhiView);
+        getBitmapObservable(meizhi.url)
+                  .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                  .subscribe(
+                          bitmap -> {
+                              viewHolder.meizhiView.setOriginalSize(
+                                      bitmap.getWidth(), bitmap.getHeight()
+                              );
+                              viewHolder.meizhiView.setImageBitmap(bitmap);
+                          }, throwable -> Log.e("-->", throwable.getMessage())
+                  );
+
+
+//        Picasso.with(mContext)
+//               .load(meizhi.url)
+//               .into(viewHolder.meizhiView);
     }
 
     @Override
@@ -84,4 +102,18 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
             mOnMeizhiTouchListener.onTouch(v, meizhiView, card, meizhi);
         }
     }
+
+    Observable<Bitmap> getBitmapObservable(String url) {
+        return Observable.defer(
+                () -> {
+                    try {
+                        return Observable.just(Picasso.with(mContext).load(url).get());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return null;
+                    }
+                }
+        );
+    }
+
 }

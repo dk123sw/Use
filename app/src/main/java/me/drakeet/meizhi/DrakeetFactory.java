@@ -9,7 +9,7 @@ public class DrakeetFactory {
     static Drakeet sSingleton = null;
     public static final int pageSize = 20;
 
-    public static Drakeet GetSingleton() {
+    public static Drakeet getSingleton() {
         synchronized (monitor) {
             if(sSingleton == null) {
                 sSingleton = new DrakeetRetrofit().getService();
