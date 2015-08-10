@@ -1,6 +1,6 @@
 package me.drakeet.meizhi;
 
-import me.drakeet.meizhi.data.MeizhiList;
+import me.drakeet.meizhi.data.MeizhiData;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import rx.Observable;
@@ -11,5 +11,5 @@ import rx.Observable;
 public interface Drakeet {
 
     @GET("/data/福利/" + DrakeetFactory.pageSize + "/{page}")
-    Observable<MeizhiList> getMeizhiList(@Path("page") int page);
+    Observable<MeizhiData> getMeizhiData(@Path("page") int page);
 }

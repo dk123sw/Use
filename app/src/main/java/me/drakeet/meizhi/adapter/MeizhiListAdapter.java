@@ -43,11 +43,10 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
         viewHolder.meizhi = meizhi;
         viewHolder.titleView.setText(meizhi.desc);
         viewHolder.card.setTag(meizhi.desc);
-        viewHolder.meizhiView.setOriginalSize(meizhi.imageWidth, meizhi.imageHeight);
+        //viewHolder.meizhiView.setOriginalSize(meizhi.imageWidth, meizhi.imageHeight);
 
         Picasso.with(mContext)
                .load(meizhi.url)
-               .resize(meizhi.imageWidth, meizhi.imageHeight)
                .into(viewHolder.meizhiView);
     }
 

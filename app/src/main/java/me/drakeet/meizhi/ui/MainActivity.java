@@ -26,6 +26,7 @@ import me.drakeet.meizhi.api.OnMeizhiTouchListener;
 import me.drakeet.meizhi.model.Meizhi;
 import me.drakeet.meizhi.ui.base.SwipeRefreshBaseActivity;
 import me.drakeet.meizhi.util.AlarmManagerUtils;
+import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 
 public class MainActivity extends SwipeRefreshBaseActivity {
@@ -36,7 +37,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     MeizhiListAdapter mMeizhiListAdapter;
     List<Meizhi> mMeizhiList;
     boolean mIsDbInited, mIsFirstTimeTouchBottom = true;
-    int mOffset = 0;
+    int mPage = 1;
 
     @Override
     protected int getLayoutResource() {
@@ -83,7 +84,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                         if (!mSwipeRefreshLayout.isRefreshing() && layoutManager.findLastCompletelyVisibleItemPositions(new int[2])[1] >= mMeizhiListAdapter.getItemCount() - 4) {
                             if (!mIsFirstTimeTouchBottom) {
                                 mSwipeRefreshLayout.setRefreshing(true);
-                                mOffset += 20;
+                                mPage += 20;
                                 getData();
                             } else {
                                 mIsFirstTimeTouchBottom = false;
@@ -141,13 +142,18 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         );
     }
 
-    private void getData(final boolean addFromDb) {
+    private void getData(boolean addFromDb) {
         setRefreshing(true);
-        // TODO
-        sDrakeet.getMeizhiList(1)
+        sDrakeet.getMeizhiData(mPage)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(meizhiList -> System.out.println(meizhiList.results.size() + "") );
-
+                .map(meizhiData -> meizhiData.results)
+                .flatMap(Observable::from)
+                .toSortedList((meizhi1, meizhi2) -> meizhi2.updatedAt.compareTo(meizhi1.updatedAt))
+                .subscribe(meizhis -> {
+                               mMeizhiList.addAll(meizhis);
+                               mMeizhiListAdapter.notifyDataSetChanged();
+                               setRefreshing(false);
+                           });
     }
 
     private void getData() {
