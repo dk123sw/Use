@@ -89,6 +89,7 @@ public class PictureActivity extends ToolbarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_picture, menu);
+        // TODO: 把图片的一些信息，比如 who，加载到 Overflow 当中
         return true;
     }
 
