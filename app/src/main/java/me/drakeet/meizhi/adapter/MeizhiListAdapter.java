@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 import me.drakeet.meizhi.R;
-import me.drakeet.meizhi.api.OnMeizhiTouchListener;
+import me.drakeet.meizhi.listener.OnMeizhiTouchListener;
 import me.drakeet.meizhi.model.Meizhi;
 import me.drakeet.meizhi.widget.RatioImageView;
 import rx.Observable;

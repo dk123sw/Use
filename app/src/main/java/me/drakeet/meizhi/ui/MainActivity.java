@@ -22,7 +22,7 @@ import java.util.List;
 
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.adapter.MeizhiListAdapter;
-import me.drakeet.meizhi.api.OnMeizhiTouchListener;
+import me.drakeet.meizhi.listener.OnMeizhiTouchListener;
 import me.drakeet.meizhi.model.Meizhi;
 import me.drakeet.meizhi.ui.base.SwipeRefreshBaseActivity;
 import me.drakeet.meizhi.util.AlarmManagerUtils;
@@ -60,7 +60,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mHandler.postDelayed(
-                () -> getData(), 358
+                this::getData, 358
         );
     }
 
@@ -72,70 +72,50 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         mRecyclerView.setLayoutManager(layoutManager);
         mMeizhiListAdapter = new MeizhiListAdapter(this, mMeizhiList);
         mRecyclerView.setAdapter(mMeizhiListAdapter);
-        mRecyclerView.addOnScrollListener(
-                new RecyclerView.OnScrollListener() {
-                    @Override
-                    public void onScrolled(RecyclerView rv, int dx, int dy) {
-                        if (!mSwipeRefreshLayout.isRefreshing() && layoutManager.findLastCompletelyVisibleItemPositions(
-                                new int[2]
-                        )[1] >= mMeizhiListAdapter.getItemCount() - 4) {
-                            if (!mIsFirstTimeTouchBottom) {
-                                mSwipeRefreshLayout.setRefreshing(true);
-                                mPage += 1;
-                                getData();
-                            } else {
-                                mIsFirstTimeTouchBottom = false;
+
+        mRecyclerView.addOnScrollListener(getScrollToBottomListener(layoutManager));
+        mMeizhiListAdapter.setOnMeizhiTouchListener(getOnMeizhiTouchListener());
+    }
+
+    private RecyclerView.OnScrollListener getScrollToBottomListener(StaggeredGridLayoutManager layoutManager) {
+        return new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView rv, int dx, int dy) {
+                boolean isBottom = layoutManager.findLastCompletelyVisibleItemPositions(new int[2])[1]
+                        >= mMeizhiListAdapter.getItemCount() - 4;
+                if (!mSwipeRefreshLayout.isRefreshing() && isBottom){
+                    if (!mIsFirstTimeTouchBottom) {
+                        mSwipeRefreshLayout.setRefreshing(true);
+                        mPage += 1;
+                        getData();
+                    } else {
+                        mIsFirstTimeTouchBottom = false;
+                    }
+                }
+            }
+        };
+    }
+
+    private OnMeizhiTouchListener getOnMeizhiTouchListener() {
+        return (v, meizhiView, card, meizhi) -> {
+            if (meizhi == null)
+                return;
+            if (v == meizhiView) {
+                Picasso.with(MainActivity.this).load(meizhi.url).into(
+                        mHackImageView, new Callback() {
+                            @Override
+                            public void onSuccess() {
+                                startPictureActivity(meizhi, meizhiView);
                             }
+
+                            @Override
+                            public void onError() {}
                         }
-                    }
-                }
-        );
-
-        mMeizhiListAdapter.setOnMeizhiTouchListener(
-                new OnMeizhiTouchListener() {
-                    @Override
-                    public void onTouch(View v, final View meizhiView, View card,
-                                        final Meizhi meizhi) {
-                        if (meizhi == null)
-                            return;
-                        if (v == meizhiView) {
-                            Picasso.with(MainActivity.this).load(meizhi.url).into(
-                                    mHackImageView, new Callback() {
-                                        @Override
-                                        public void onSuccess() {
-                                            Intent i = new Intent(
-                                                    MainActivity.this, PictureActivity.class
-                                            );
-                                            i.putExtra(PictureActivity.EXTRA_IMAGE_URL, meizhi.url);
-                                            i.putExtra(
-                                                    PictureActivity.EXTRA_IMAGE_TITLE, meizhi.desc
-                                            );
-
-                                            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat
-                                                    .makeSceneTransitionAnimation(
-                                                            MainActivity.this,
-                                                            meizhiView,
-                                                            PictureActivity.TRANSIT_PIC
-                                                    );
-                                            ActivityCompat.startActivity(
-                                                    MainActivity.this, i, optionsCompat.toBundle()
-                                            );
-                                        }
-
-                                        @Override
-                                        public void onError() {
-
-                                        }
-                                    }
-                            );
-                        } else if (v == card) {
-                            Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
-                            intent.putExtra("meizhi", meizhi);
-                            startActivity(intent);
-                        }
-                    }
-                }
-        );
+                );
+            } else if (v == card) {
+                // TODO: start Ganhuo activity!!!
+            }
+        };
     }
 
     private void getData(boolean addFromDb) {
@@ -150,8 +130,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                             mMeizhiList.addAll(meizhis);
                             mMeizhiListAdapter.notifyDataSetChanged();
                             setRefreshing(false);
-                        },
-                        Throwable::printStackTrace
+                        }, Throwable::printStackTrace
                 );
     }
 
@@ -159,9 +138,25 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         getData(true);
     }
 
+    private void startPictureActivity(Meizhi meizhi, View transitView) {
+        Intent i = new Intent(
+                MainActivity.this, PictureActivity.class
+        );
+        i.putExtra(PictureActivity.EXTRA_IMAGE_URL, meizhi.url);
+        i.putExtra(PictureActivity.EXTRA_IMAGE_TITLE, meizhi.desc);
+
+        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                MainActivity.this,
+                transitView,
+                PictureActivity.TRANSIT_PIC
+        );
+        ActivityCompat.startActivity(
+                MainActivity.this, i, optionsCompat.toBundle()
+        );
+    }
+
     @Override
     public void onToolbarClick() {
-                super.onToolbarClick();
         mRecyclerView.smoothScrollToPosition(0);
     }
 
@@ -178,33 +173,28 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
-            Uri uri = Uri.parse("http://drakeet.me");
+            Uri uri = Uri.parse(getString(R.string.blog_drakeet));
             startActivity(new Intent(Intent.ACTION_VIEW, uri));
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
     public void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
     }
 
+    @Override
     public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
