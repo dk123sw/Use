@@ -27,6 +27,8 @@ import rx.schedulers.Schedulers;
  */
 public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.ViewHolder> {
 
+    public static final String TAG = "MeizhiListAdapter";
+
     private List<Meizhi> mList;
     private Context mContext;
     private OnMeizhiTouchListener mOnMeizhiTouchListener;
@@ -45,6 +47,7 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
 
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
+        viewHolder.card.setVisibility(View.GONE);
         Meizhi meizhi = mList.get(position);
         viewHolder.meizhi = meizhi;
         viewHolder.titleView.setText(meizhi.desc);
@@ -58,20 +61,21 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
                               viewHolder.meizhiView.setOriginalSize(
                                       bitmap.getWidth(), bitmap.getHeight()
                               );
-                              viewHolder.meizhiView.setImageBitmap(bitmap);
-                          }, throwable -> Log.e("-->", throwable.getMessage())
+                              //viewHolder.meizhiView.setImageBitmap(bitmap);
+                              Picasso.with(mContext)
+                                     .load(meizhi.url)
+                                     .resize(bitmap.getWidth()/3, bitmap.getHeight()/3)
+                                     .into(viewHolder.meizhiView);
+                              viewHolder.card.setVisibility(View.VISIBLE);
+                          }, throwable -> Log.e(TAG, throwable.getMessage())
                   );
 
-
-//        Picasso.with(mContext)
-//               .load(meizhi.url)
-//               .into(viewHolder.meizhiView);
     }
 
     @Override
     public void onViewRecycled(ViewHolder holder) {
         super.onViewRecycled(holder);
-        if (holder.meizhiView != null) holder.meizhiView.setImageBitmap(null);
+        //if (holder.meizhiView != null) holder.meizhiView.setImageBitmap(null);
     }
 
     @Override
