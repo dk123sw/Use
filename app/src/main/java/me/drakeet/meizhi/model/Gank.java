@@ -1,13 +1,16 @@
 package me.drakeet.meizhi.model;
 
+import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 
 import java.util.Date;
 
 /**
  * Created by drakeet on 8/11/15.
  */
-public class GankModel {
+@Table(name = "Ganks")
+public class Gank extends Model {
 
     @Column(name = "url")
     public String url;

@@ -42,7 +42,7 @@ public class GankFragment extends Fragment {
     }
 
     private void initRecyclerView(View rootView) {
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_ganhuo);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_gank);
 
     }
 

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import me.drakeet.meizhi.model.GankModel;
+import me.drakeet.meizhi.model.Gank;
 
 /**
  * Created by drakeet on 8/11/15.
@@ -16,17 +16,17 @@ public class GankData extends BaseData {
 
     public class Result {
         @SerializedName("Android")
-        public List<GankModel> androidList;
+        public List<Gank> androidList;
         @SerializedName("休息视频")
-        public List<GankModel> 休息视频List;
+        public List<Gank> 休息视频List;
         @SerializedName("iOS")
-        public List<GankModel> iOSList;
+        public List<Gank> iOSList;
         @SerializedName("福利")
-        public List<GankModel> 福利List;
+        public List<Gank> 妹纸List;
         @SerializedName("拓展资源")
-        public List<GankModel> 拓展资源List;
+        public List<Gank> 拓展资源List;
         @SerializedName("瞎推荐")
-        public List<GankModel> 瞎推荐List;
+        public List<Gank> 瞎推荐List;
     }
 
 }
