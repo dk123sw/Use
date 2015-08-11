@@ -20,11 +20,9 @@
             app:expandedTitleTextAppearance="@style/CollapsingToolbarTitleStyle"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
                 app:layout_collapseMode="parallax">
 
                 <ImageView
@@ -32,8 +30,13 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@mipmap/ic_meizhi_150619"/>
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@mipmap/ic_play"/>
 
-            </LinearLayout>
+            </FrameLayout>
 
         </android.support.design.widget.CollapsingToolbarLayout>
 

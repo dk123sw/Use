@@ -33,7 +33,7 @@ public class GankListAdapter extends RecyclerView.Adapter<GankListAdapter.ViewHo
         if (position == 0) {
             showCategory(holder);
         } else {
-            boolean doesLastAndThis = mGankList.get(position-1).equals(mGankList.get(position));
+            boolean doesLastAndThis = mGankList.get(position-1).type.equals(mGankList.get(position).type);
             if (!doesLastAndThis) showCategory(holder);
             else if (holder.category.isShown()) holder.category.setVisibility(View.GONE);
         }

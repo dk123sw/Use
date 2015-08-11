@@ -22,7 +22,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding_gank_item"
+        android:paddingLeft="@dimen/padding_gank_item"
+        android:paddingRight="@dimen/padding_gank_item"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
         tools:background="@color/md_amber_100">
 
         <TextView

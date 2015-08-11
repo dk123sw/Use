@@ -8,9 +8,9 @@ import android.view.MenuItem;
 
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.adapter.GankPagerAdapter;
-import me.drakeet.meizhi.ui.base.ToolbarActivity;
+import me.drakeet.meizhi.ui.base.SwipeRefreshBaseActivity;
 
-public class GankActivity extends ToolbarActivity {
+public class GankActivity extends SwipeRefreshBaseActivity {
 
     GankPagerAdapter mPagerAdapter;
     ViewPager mViewPager;
