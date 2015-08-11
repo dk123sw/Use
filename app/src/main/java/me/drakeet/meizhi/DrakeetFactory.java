@@ -7,7 +7,7 @@ public class DrakeetFactory {
 
     protected static final Object monitor = new Object();
     static Drakeet sSingleton = null;
-    public static final int pageSize = 20;
+    public static final int pageSize = 10;
 
     public static Drakeet getSingleton() {
         synchronized (monitor) {
