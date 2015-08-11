@@ -12,10 +12,7 @@ import me.drakeet.meizhi.R;
  * Created by drakeet on 8/11/15.
  */
 public class GankFragment extends Fragment {
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
+
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     /**

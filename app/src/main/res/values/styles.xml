@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/md_red_400</item>
     </style>
 
+    <style name="CollapsingToolbarTitleStyle" parent="Widget.Design.CollapsingToolbar">
+        <item name="android:textColor">@android:color/transparent</item>
+    </style>
+
 </resources>

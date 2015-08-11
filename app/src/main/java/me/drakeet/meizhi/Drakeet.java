@@ -10,6 +10,6 @@ import rx.Observable;
  */
 public interface Drakeet {
 
-    @GET("/data/福利/" + DrakeetFactory.pageSize + "/{page}")
+    @GET("/data/福利/" + DrakeetFactory.meizhiSize + "/{page}")
     Observable<MeizhiData> getMeizhiData(@Path("page") int page);
 }

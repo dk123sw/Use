@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import me.drakeet.meizhi.DrakeetFactory;
 import me.drakeet.meizhi.ui.GankFragment;
 
 /**
@@ -17,15 +18,12 @@ public class GankPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
         return GankFragment.newInstance(position + 1);
     }
 
     @Override
     public int getCount() {
-        // Show 3 total pages.
-        return 3;
+        return DrakeetFactory.gankSize;
     }
 
 }
