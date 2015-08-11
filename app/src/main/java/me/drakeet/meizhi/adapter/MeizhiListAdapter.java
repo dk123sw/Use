@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 import me.drakeet.meizhi.R;
+import me.drakeet.meizhi.listener.MeizhiCardCallback;
 import me.drakeet.meizhi.listener.OnMeizhiTouchListener;
 import me.drakeet.meizhi.model.Meizhi;
 import me.drakeet.meizhi.widget.RatioImageView;
@@ -47,7 +48,6 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
 
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
-        viewHolder.card.setVisibility(View.GONE);
         Meizhi meizhi = mList.get(position);
         viewHolder.meizhi = meizhi;
         viewHolder.titleView.setText(meizhi.desc);
@@ -65,8 +65,8 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
                               Picasso.with(mContext)
                                      .load(meizhi.url)
                                      .resize(bitmap.getWidth()/3, bitmap.getHeight()/3)
-                                     .into(viewHolder.meizhiView);
-                              viewHolder.card.setVisibility(View.VISIBLE);
+                                     .into(viewHolder.meizhiView,
+                                           new MeizhiCardCallback(viewHolder.card));
                           }, throwable -> Log.e(TAG, throwable.getMessage())
                   );
 

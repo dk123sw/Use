@@ -15,5 +15,10 @@
     <string name="picture_save_fail">图片保存失败，请再次尝试保存！</string>
     <string name="picture_has_save_to">图片已保存至 %s 文件夹</string>
     <string name="action_about">by drakeet</string>
+    <string name="title_activity_gank">GankActivity</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
 
 </resources>

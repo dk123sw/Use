@@ -130,6 +130,8 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                 );
             } else if (v == card) {
                 // TODO: start Ganhuo activity!!!
+                Intent intent = new Intent(this, GankActivity.class);
+                startActivity(intent);
             }
         };
     }
