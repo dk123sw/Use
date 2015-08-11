@@ -24,8 +24,8 @@
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/padding_gank_item"
         android:paddingRight="@dimen/padding_gank_item"
-        android:paddingTop="6dp"
-        android:paddingBottom="6dp"
+        android:paddingTop="@dimen/padding_vertical_gank_item"
+        android:paddingBottom="@dimen/padding_vertical_gank_item"
         tools:background="@color/md_amber_100">
 
         <TextView

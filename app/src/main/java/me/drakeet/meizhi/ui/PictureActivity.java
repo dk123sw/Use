@@ -51,9 +51,9 @@ public class PictureActivity extends ToolbarActivity {
         setAppBarAlpha(0.7f);
         setTitle(mImageTitle);
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
+        if (actionBar != null)
             actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+
 
         setUpPhotoAttacher();
     }
