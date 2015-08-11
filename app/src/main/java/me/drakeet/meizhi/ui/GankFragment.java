@@ -1,7 +1,6 @@
 package me.drakeet.meizhi.ui;
 
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +16,7 @@ import me.drakeet.meizhi.data.GankData;
 import me.drakeet.meizhi.model.Gank;
 import me.drakeet.meizhi.ui.base.BaseActivity;
 import me.drakeet.meizhi.ui.base.SwipeRefreshFragment;
+import me.drakeet.meizhi.widget.GoodAppBarLayout;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 
@@ -30,7 +30,7 @@ public class GankFragment extends SwipeRefreshFragment {
     RecyclerView mRecyclerView;
     List<Gank> mGankList;
     GankListAdapter mAdapter;
-    CollapsingToolbarLayout mCollapsingToolbarLayout;
+    GoodAppBarLayout mAppBarLayout;
     float mRvY;
 
     /**
@@ -59,7 +59,7 @@ public class GankFragment extends SwipeRefreshFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_gank, container, false);
-        mCollapsingToolbarLayout = (CollapsingToolbarLayout) rootView.findViewById(R.id.collapsing_toolbar);
+        mAppBarLayout = (GoodAppBarLayout) rootView.findViewById(R.id.header_appbar);
         initRecyclerView(rootView);
         return rootView;
     }
@@ -69,7 +69,7 @@ public class GankFragment extends SwipeRefreshFragment {
         super.onViewCreated(view, savedInstanceState);
         view.postDelayed(() -> setRefreshing(true), 300);
         getData();
-        mSwipeRefreshLayout.setCanChildScrollUpCallback(() -> mRecyclerView.getY() == mRvY);
+        mSwipeRefreshLayout.setCanChildScrollUpCallback(() -> mAppBarLayout.offset != 0);
     }
 
     private void initRecyclerView(View rootView) {
