@@ -69,6 +69,7 @@ public class GankFragment extends SwipeRefreshFragment {
         super.onViewCreated(view, savedInstanceState);
         view.postDelayed(() -> setRefreshing(true), 300);
         getData();
+        mAppBarLayout.notifyAddOffsetListener();
         mSwipeRefreshLayout.setCanChildScrollUpCallback(() -> mAppBarLayout.offset != 0);
     }
 

@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 public class GoodAppBarLayout extends AppBarLayout {
 
     public int offset;
+    OnOffsetChangedListener mOnOffsetChangedListener;
 
     public GoodAppBarLayout(Context context) {
         this(context, null);
@@ -18,7 +19,15 @@ public class GoodAppBarLayout extends AppBarLayout {
 
     public GoodAppBarLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.addOnOffsetChangedListener((appBarLayout, i) -> GoodAppBarLayout.this.offset = i);
+        mOnOffsetChangedListener = (appBarLayout, i) -> GoodAppBarLayout.this.offset = i;
+    }
+
+    public void notifyRemoveOffsetListener() {
+        this.removeOnOffsetChangedListener(mOnOffsetChangedListener);
+    }
+
+    public void notifyAddOffsetListener() {
+        this.addOnOffsetChangedListener(mOnOffsetChangedListener);
     }
 
 }
