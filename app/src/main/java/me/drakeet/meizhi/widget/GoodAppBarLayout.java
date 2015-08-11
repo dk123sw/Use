@@ -5,6 +5,7 @@ import android.support.design.widget.AppBarLayout;
 import android.util.AttributeSet;
 
 /**
+ * A good boy! AppBarLayout is bad boy!
  * Created by drakeet on 8/11/15.
  */
 public class GoodAppBarLayout extends AppBarLayout {
