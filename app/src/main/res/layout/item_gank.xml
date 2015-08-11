@@ -40,11 +40,11 @@
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:textSize="@dimen/text_size_gank_title"
-            tools:text="title"/>
+            android:textColor="@color/md_grey_900"
+            tools:text="title ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"/>
     </LinearLayout>
 
 </LinearLayout>

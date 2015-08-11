@@ -1,6 +1,7 @@
 package me.drakeet.meizhi.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.model.Gank;
+import me.drakeet.meizhi.util.StringStyleUtils;
 
 /**
  * Created by drakeet on 8/11/15.
@@ -38,7 +40,17 @@ public class GankListAdapter extends RecyclerView.Adapter<GankListAdapter.ViewHo
             else if (holder.category.isShown()) holder.category.setVisibility(View.GONE);
         }
         holder.category.setText(gank.type);
-        holder.gank.setText(gank.desc + "(" + gank.who + ")");
+        if (holder.gank.getTag() == null) {
+            SpannableStringBuilder builder = new SpannableStringBuilder(gank.desc).append(
+                    StringStyleUtils.format(
+                            holder.gank.getContext(), " (via. " + gank.who + ")", R.style.ViaTextAppearance
+                    )
+            );
+            CharSequence gankText = builder.subSequence(0, builder.length());
+            holder.gank.setTag(gankText);
+        }
+        CharSequence text = (CharSequence) holder.gank.getTag();
+        holder.gank.setText(text);
     }
 
     @Override
