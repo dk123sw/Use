@@ -1,16 +1,13 @@
 package me.drakeet.meizhi.model;
 
-import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
-import com.activeandroid.annotation.Table;
 
 import java.util.Date;
 
 /**
- * Created by drakeet on 6/20/15.
+ * Created by drakeet on 8/11/15.
  */
-@Table(name = "Meizhis")
-public class Meizhi extends Model {
+public class GankModel {
 
     @Column(name = "url")
     public String url;
@@ -28,9 +25,5 @@ public class Meizhi extends Model {
     public Date createdAt;
     @Column(name = "updatedAt")
     public Date updatedAt;
-    @Column(name = "imageWidth")
-    public int imageWidth;
-    @Column(name = "imageHeight")
-    public int imageHeight;
 
 }
