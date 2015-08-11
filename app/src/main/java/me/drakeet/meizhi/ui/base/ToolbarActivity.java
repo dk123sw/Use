@@ -3,10 +3,8 @@ package me.drakeet.meizhi.ui.base;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.TabLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
 import me.drakeet.meizhi.R;
@@ -19,7 +17,6 @@ public abstract class ToolbarActivity extends BaseActivity {
 
     protected AppBarLayout mAppBar;
     protected Toolbar mToolbar;
-    protected TabLayout mTabLayout;
     protected boolean isHidden = false;
 
     @Override
@@ -35,12 +32,7 @@ public abstract class ToolbarActivity extends BaseActivity {
         }
 
         mToolbar.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        onToolbarClick();
-                    }
-                }
+                v -> onToolbarClick()
         );
 
         setSupportActionBar(mToolbar);
