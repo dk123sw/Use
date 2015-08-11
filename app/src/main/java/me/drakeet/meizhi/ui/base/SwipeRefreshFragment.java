@@ -1,26 +1,27 @@
 package me.drakeet.meizhi.ui.base;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.View;
 
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.widget.MultiSwipeRefreshLayout;
 
-
 /**
- * Created by drakeet on 1/3/15.
+ * Created by drakeet on 8/11/15.
  */
-public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
+public class SwipeRefreshFragment extends Fragment {
 
     public MultiSwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        trySetupSwipeRefresh();
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        trySetupSwipeRefresh(view);
     }
 
-    void trySetupSwipeRefresh() {
-        mSwipeRefreshLayout = (MultiSwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+    void trySetupSwipeRefresh(View root) {
+        mSwipeRefreshLayout = (MultiSwipeRefreshLayout) root.findViewById(R.id.swipe_refresh_layout);
         if (mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout.setColorSchemeResources(
                     R.color.refresh_progress_3,

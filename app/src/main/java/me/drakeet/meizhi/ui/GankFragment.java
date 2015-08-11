@@ -1,7 +1,7 @@
 package me.drakeet.meizhi.ui;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,20 +16,22 @@ import me.drakeet.meizhi.adapter.GankListAdapter;
 import me.drakeet.meizhi.data.GankData;
 import me.drakeet.meizhi.model.Gank;
 import me.drakeet.meizhi.ui.base.BaseActivity;
-import me.drakeet.meizhi.ui.base.SwipeRefreshBaseActivity;
+import me.drakeet.meizhi.ui.base.SwipeRefreshFragment;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by drakeet on 8/11/15.
  */
-public class GankFragment extends Fragment {
+public class GankFragment extends SwipeRefreshFragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     RecyclerView mRecyclerView;
     List<Gank> mGankList;
     GankListAdapter mAdapter;
+    CollapsingToolbarLayout mCollapsingToolbarLayout;
+    float mRvY;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -57,6 +59,7 @@ public class GankFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_gank, container, false);
+        mCollapsingToolbarLayout = (CollapsingToolbarLayout) rootView.findViewById(R.id.collapsing_toolbar);
         initRecyclerView(rootView);
         return rootView;
     }
@@ -64,7 +67,9 @@ public class GankFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        view.postDelayed(() -> setRefreshing(true), 300);
         getData();
+        mSwipeRefreshLayout.setCanChildScrollUpCallback(() -> mRecyclerView.getY() == mRvY);
     }
 
     private void initRecyclerView(View rootView) {
@@ -72,14 +77,10 @@ public class GankFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
-    }
-
-    SwipeRefreshBaseActivity getSRActivity() {
-        return (SwipeRefreshBaseActivity) getActivity();
+        mRvY = mRecyclerView.getY();
     }
 
     private void getData() {
-        getSRActivity().setRefreshing(true);
         BaseActivity.sDrakeet.getGankData(2015, 8, 11)
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(data -> data.results)
@@ -87,10 +88,16 @@ public class GankFragment extends Fragment {
                 .subscribe(
                         list -> {
                             mAdapter.notifyDataSetChanged();
-                            getSRActivity().setRefreshing(false);
+                            setRefreshing(false);
                         }, Throwable::printStackTrace
 
                 );
+    }
+
+    @Override
+    public void requestDataRefresh() {
+        super.requestDataRefresh();
+        setRefreshing(false);
     }
 
     private Observable<List<Gank>> addAllResults(GankData.Result results) {
