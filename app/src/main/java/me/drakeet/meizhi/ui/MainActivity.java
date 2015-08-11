@@ -11,7 +11,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -32,7 +31,6 @@ import rx.android.schedulers.AndroidSchedulers;
 public class MainActivity extends SwipeRefreshBaseActivity {
 
     RecyclerView mRecyclerView;
-    ImageView mHackImageView;
     Handler mHandler;
     MeizhiListAdapter mMeizhiListAdapter;
     List<Meizhi> mMeizhiList;
@@ -52,8 +50,6 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         setUpRecyclerView();
         MobclickAgent.updateOnlineConfig(this);
         AlarmManagerUtils.register(this);
-
-        mHackImageView = (ImageView) findViewById(R.id.hack_imageView);
     }
 
     @Override
@@ -117,17 +113,18 @@ public class MainActivity extends SwipeRefreshBaseActivity {
             if (meizhi == null)
                 return;
             if (v == meizhiView) {
-                Picasso.with(MainActivity.this).load(meizhi.url).into(
-                        mHackImageView, new Callback() {
-                            @Override
-                            public void onSuccess() {
-                                startPictureActivity(meizhi, meizhiView);
-                            }
+                Picasso.with(this)
+                       .load(meizhi.url)
+                       .fetch(new Callback() {
+                                   @Override
+                                   public void onSuccess() {
+                                       startPictureActivity(meizhi, meizhiView);
+                                   }
 
-                            @Override
-                            public void onError() {}
-                        }
-                );
+                                   @Override
+                                   public void onError() {}
+                               }
+                       );
             } else if (v == card) {
                 // TODO: start Ganhuo activity!!!
                 Intent intent = new Intent(this, GankActivity.class);
@@ -163,8 +160,8 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     }
 
     public void onFab(View v) {
-        mRecyclerView.smoothScrollToPosition(0);
         requestDataRefresh();
+        mRecyclerView.smoothScrollToPosition(0);
     }
 
     @Override

@@ -75,7 +75,8 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
     @Override
     public void onViewRecycled(ViewHolder holder) {
         super.onViewRecycled(holder);
-        //if (holder.meizhiView != null) holder.meizhiView.setImageBitmap(null);
+        Log.e(TAG, holder.getAdapterPosition() + " l: " + holder.getLayoutPosition());
+        if (holder.meizhiView != null) holder.meizhiView.setImageBitmap(null);
     }
 
     @Override
