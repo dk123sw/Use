@@ -36,7 +36,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     Handler mHandler;
     MeizhiListAdapter mMeizhiListAdapter;
     List<Meizhi> mMeizhiList;
-    boolean mIsDbInited, mIsFirstTimeTouchBottom = true;
+    boolean mIsFirstTimeTouchBottom = true;
     int mPage = 1;
 
     @Override
@@ -170,6 +170,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     @Override
     public void requestDataRefresh() {
         super.requestDataRefresh();
+        mMeizhiList.clear();
         getData(/* add from db */ false);
     }
 
