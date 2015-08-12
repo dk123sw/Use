@@ -6,12 +6,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import java.util.Date;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.adapter.GankPagerAdapter;
 import me.drakeet.meizhi.ui.base.ToolbarActivity;
 
 public class GankActivity extends ToolbarActivity {
+
+    public static final String EXTRA_GANK_DATE = "gank_date";
 
     GankPagerAdapter mPagerAdapter;
     ViewPager mViewPager;
@@ -23,7 +25,8 @@ public class GankActivity extends ToolbarActivity {
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPagerAdapter = new GankPagerAdapter(getSupportFragmentManager());
+        Date gankDate = (Date) getIntent().getSerializableExtra(EXTRA_GANK_DATE);
+        mPagerAdapter = new GankPagerAdapter(getSupportFragmentManager(), gankDate);
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mPagerAdapter);
 

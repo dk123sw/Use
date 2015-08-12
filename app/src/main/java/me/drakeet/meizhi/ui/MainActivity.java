@@ -83,6 +83,10 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         addSubscription(s);
     }
 
+    private void getData() {
+        getData(/* addFromDb */true);
+    }
+
     RecyclerView.OnScrollListener getScrollToBottomListener(
         StaggeredGridLayoutManager layoutManager) {
         return new RecyclerView.OnScrollListener() {
@@ -108,24 +112,19 @@ public class MainActivity extends SwipeRefreshBaseActivity {
             if (meizhi == null) return;
             if (v == meizhiView) {
                 Picasso.with(this).load(meizhi.url).fetch(new Callback() {
-                                                              @Override public void onSuccess() {
-                                                                  startPictureActivity(meizhi,
-                                                                      meizhiView);
-                                                              }
+                    @Override public void onSuccess() {
+                        startPictureActivity(meizhi, meizhiView);
+                    }
 
-                                                              @Override public void onError() {
-                                                              }
-                                                          });
+                    @Override public void onError() {
+                    }
+                });
             } else if (v == card) {
-                // TODO: start Ganhuo activity!!!
                 Intent intent = new Intent(this, GankActivity.class);
+                intent.putExtra(GankActivity.EXTRA_GANK_DATE, meizhi.updatedAt);
                 startActivity(intent);
             }
         };
-    }
-
-    private void getData() {
-        getData(true);
     }
 
     private void startPictureActivity(Meizhi meizhi, View transitView) {

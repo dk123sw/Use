@@ -15,9 +15,8 @@ public class BaseActivity extends AppCompatActivity {
 
     private CompositeSubscription mCompositeSubscription;
 
-
     public CompositeSubscription getCompositeSubscription() {
-        if(this.mCompositeSubscription == null) {
+        if (this.mCompositeSubscription == null) {
             this.mCompositeSubscription = new CompositeSubscription();
         }
 
@@ -25,22 +24,17 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void addSubscription(Subscription s) {
-        if(this.mCompositeSubscription == null) {
+        if (this.mCompositeSubscription == null) {
             this.mCompositeSubscription = new CompositeSubscription();
         }
 
         this.mCompositeSubscription.add(s);
     }
 
-    @Override
-    protected void onDestroy() {
+    @Override protected void onDestroy() {
         super.onDestroy();
-        if(this.mCompositeSubscription != null) {
+        if (this.mCompositeSubscription != null) {
             this.mCompositeSubscription.unsubscribe();
         }
-
     }
-
-
-
 }
