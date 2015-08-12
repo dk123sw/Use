@@ -39,51 +39,43 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
         mContext = context;
     }
 
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int i) {
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_meizhi, parent, false);
+    @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int i) {
+        View v =
+            LayoutInflater.from(parent.getContext()).inflate(R.layout.item_meizhi, parent, false);
         return new ViewHolder(v);
     }
 
-    @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
+    @Override public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         Meizhi meizhi = mList.get(position);
         viewHolder.meizhi = meizhi;
         viewHolder.titleView.setText(meizhi.desc);
         viewHolder.card.setTag(meizhi.desc);
 
         // TODO: Waiting for daimajia's new api...
-        getBitmapObservable(meizhi.url)
-                  .subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-                  .subscribe(
-                          bitmap -> {
-                              viewHolder.meizhiView.setOriginalSize(
-                                      bitmap.getWidth(), bitmap.getHeight()
-                              );
-                              //viewHolder.meizhiView.setImageBitmap(bitmap);
-                              Picasso.with(mContext)
-                                     .load(meizhi.url)
-                                     .resize(bitmap.getWidth()/3, bitmap.getHeight()/3)
-                                     .into(viewHolder.meizhiView,
-                                           new MeizhiCardCallback(viewHolder.card));
-                          }, throwable -> Log.e(TAG, throwable.getMessage())
-                  );
-
+        getBitmapObservable(meizhi.url).subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(bitmap -> {
+                viewHolder.meizhiView.setOriginalSize(bitmap.getWidth(), bitmap.getHeight());
+                //viewHolder.meizhiView.setImageBitmap(bitmap);
+                Picasso.with(mContext)
+                    .load(meizhi.url)
+                    .resize(bitmap.getWidth() / 3, bitmap.getHeight() / 3)
+                    .into(viewHolder.meizhiView, new MeizhiCardCallback(viewHolder.card));
+            }, throwable -> Log.e(TAG, throwable.getMessage()));
     }
 
-    @Override
-    public void onViewRecycled(ViewHolder holder) {
+    @Override public void onViewRecycled(ViewHolder holder) {
         super.onViewRecycled(holder);
         if (holder.meizhiView != null) holder.meizhiView.setImageBitmap(null);
     }
 
-    @Override
-    public int getItemCount() {
+    @Override public int getItemCount() {
         return mList.size();
     }
 
-    public void setOnMeizhiTouchListener(OnMeizhiTouchListener onMeizhiTouchListener) {this.mOnMeizhiTouchListener = onMeizhiTouchListener;}
+    public void setOnMeizhiTouchListener(OnMeizhiTouchListener onMeizhiTouchListener) {
+        this.mOnMeizhiTouchListener = onMeizhiTouchListener;
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -101,23 +93,19 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
             card.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View v) {
+        @Override public void onClick(View v) {
             mOnMeizhiTouchListener.onTouch(v, meizhiView, card, meizhi);
         }
     }
 
     Observable<Bitmap> getBitmapObservable(String url) {
-        return Observable.defer(
-                () -> {
-                    try {
-                        return Observable.just(Picasso.with(mContext).load(url).get());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return null;
-                    }
-                }
-        );
+        return Observable.defer(() -> {
+            try {
+                return Observable.just(Picasso.with(mContext).load(url).get());
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        });
     }
-
 }

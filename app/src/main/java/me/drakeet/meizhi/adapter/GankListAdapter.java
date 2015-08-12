@@ -20,32 +20,32 @@ public class GankListAdapter extends RecyclerView.Adapter<GankListAdapter.ViewHo
 
     private List<Gank> mGankList;
 
-    public GankListAdapter(List<Gank> gankList) {mGankList = gankList;}
+    public GankListAdapter(List<Gank> gankList) {
+        mGankList = gankList;
+    }
 
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
-                               .inflate(R.layout.item_gank, parent, false);
+    @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v =
+            LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gank, parent, false);
         return new ViewHolder(v);
     }
 
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    @Override public void onBindViewHolder(ViewHolder holder, int position) {
         Gank gank = mGankList.get(position);
         if (position == 0) {
             showCategory(holder);
         } else {
-            boolean doesLastAndThis = mGankList.get(position-1).type.equals(mGankList.get(position).type);
-            if (!doesLastAndThis) showCategory(holder);
-            else if (holder.category.isShown()) holder.category.setVisibility(View.GONE);
+            boolean doesLastAndThis =
+                mGankList.get(position - 1).type.equals(mGankList.get(position).type);
+            if (!doesLastAndThis) {
+                showCategory(holder);
+            } else if (holder.category.isShown()) holder.category.setVisibility(View.GONE);
         }
         holder.category.setText(gank.type);
         if (holder.gank.getTag() == null) {
             SpannableStringBuilder builder = new SpannableStringBuilder(gank.desc).append(
-                    StringStyleUtils.format(
-                            holder.gank.getContext(), " (via. " + gank.who + ")", R.style.ViaTextAppearance
-                    )
-            );
+                StringStyleUtils.format(holder.gank.getContext(), " (via. " + gank.who + ")",
+                    R.style.ViaTextAppearance));
             CharSequence gankText = builder.subSequence(0, builder.length());
             holder.gank.setTag(gankText);
         }
@@ -53,14 +53,12 @@ public class GankListAdapter extends RecyclerView.Adapter<GankListAdapter.ViewHo
         holder.gank.setText(text);
     }
 
-    @Override
-    public int getItemCount() {
+    @Override public int getItemCount() {
         return mGankList.size();
     }
 
     private void showCategory(ViewHolder holder) {
-        if (!holder.category.isShown())
-            holder.category.setVisibility(View.VISIBLE);
+        if (!holder.category.isShown()) holder.category.setVisibility(View.VISIBLE);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

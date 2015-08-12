@@ -12,15 +12,13 @@ public class App extends Application {
 
     public static Context sContext;
 
-    @Override
-    public void onCreate() {
+    @Override public void onCreate() {
         super.onCreate();
         sContext = this;
         ActiveAndroid.initialize(this);
     }
 
-    @Override
-    public void onTerminate() {
+    @Override public void onTerminate() {
         super.onTerminate();
         ActiveAndroid.dispose();
     }

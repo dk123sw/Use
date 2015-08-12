@@ -37,13 +37,11 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     boolean mIsFirstTimeTouchBottom = true;
     int mPage = 1;
 
-    @Override
-    protected int getLayoutResource() {
+    @Override protected int getLayoutResource() {
         return R.layout.activity_main;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mHandler = new Handler();
         mMeizhiList = new ArrayList<>();
@@ -52,19 +50,15 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         AlarmManagerUtils.register(this);
     }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
+    @Override protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        mHandler.postDelayed(
-                this::getData, 358
-        );
+        mHandler.postDelayed(this::getData, 358);
     }
 
     private void setUpRecyclerView() {
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_meizhi);
-        final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(
-                2, StaggeredGridLayoutManager.VERTICAL
-        );
+        final StaggeredGridLayoutManager layoutManager =
+            new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
         mMeizhiListAdapter = new MeizhiListAdapter(this, mMeizhiList);
         mRecyclerView.setAdapter(mMeizhiListAdapter);
@@ -76,26 +70,25 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     private void getData(boolean addFromDb) {
         setRefreshing(true);
         sDrakeet.getMeizhiData(mPage)
-                .map(meizhiData -> meizhiData.results)
-                .flatMap(Observable::from)
-                .toSortedList((meizhi1, meizhi2) -> meizhi2.updatedAt.compareTo(meizhi1.updatedAt))
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        meizhis -> {
-                            mMeizhiList.addAll(meizhis);
-                            mMeizhiListAdapter.notifyDataSetChanged();
-                            setRefreshing(false);
-                        }, Throwable::printStackTrace
-                );
+            .map(meizhiData -> meizhiData.results)
+            .flatMap(Observable::from)
+            .toSortedList((meizhi1, meizhi2) -> meizhi2.updatedAt.compareTo(meizhi1.updatedAt))
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(meizhis -> {
+                    mMeizhiList.addAll(meizhis);
+                    mMeizhiListAdapter.notifyDataSetChanged();
+                    setRefreshing(false);
+                }, Throwable::printStackTrace);
     }
 
-    RecyclerView.OnScrollListener getScrollToBottomListener(StaggeredGridLayoutManager layoutManager) {
+    RecyclerView.OnScrollListener getScrollToBottomListener(
+        StaggeredGridLayoutManager layoutManager) {
         return new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView rv, int dx, int dy) {
-                boolean isBottom = layoutManager.findLastCompletelyVisibleItemPositions(new int[2])[1]
+            @Override public void onScrolled(RecyclerView rv, int dx, int dy) {
+                boolean isBottom =
+                    layoutManager.findLastCompletelyVisibleItemPositions(new int[2])[1]
                         >= mMeizhiListAdapter.getItemCount() - 4;
-                if (!mSwipeRefreshLayout.isRefreshing() && isBottom){
+                if (!mSwipeRefreshLayout.isRefreshing() && isBottom) {
                     if (!mIsFirstTimeTouchBottom) {
                         mSwipeRefreshLayout.setRefreshing(true);
                         mPage += 1;
@@ -110,21 +103,17 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     private OnMeizhiTouchListener getOnMeizhiTouchListener() {
         return (v, meizhiView, card, meizhi) -> {
-            if (meizhi == null)
-                return;
+            if (meizhi == null) return;
             if (v == meizhiView) {
-                Picasso.with(this)
-                       .load(meizhi.url)
-                       .fetch(new Callback() {
-                                   @Override
-                                   public void onSuccess() {
-                                       startPictureActivity(meizhi, meizhiView);
-                                   }
+                Picasso.with(this).load(meizhi.url).fetch(new Callback() {
+                                                              @Override public void onSuccess() {
+                                                                  startPictureActivity(meizhi,
+                                                                      meizhiView);
+                                                              }
 
-                                   @Override
-                                   public void onError() {}
-                               }
-                       );
+                                                              @Override public void onError() {
+                                                              }
+                                                          });
             } else if (v == card) {
                 // TODO: start Ganhuo activity!!!
                 Intent intent = new Intent(this, GankActivity.class);
@@ -138,24 +127,17 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     }
 
     private void startPictureActivity(Meizhi meizhi, View transitView) {
-        Intent i = new Intent(
-                MainActivity.this, PictureActivity.class
-        );
+        Intent i = new Intent(MainActivity.this, PictureActivity.class);
         i.putExtra(PictureActivity.EXTRA_IMAGE_URL, meizhi.url);
         i.putExtra(PictureActivity.EXTRA_IMAGE_TITLE, meizhi.desc);
 
-        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                MainActivity.this,
-                transitView,
-                PictureActivity.TRANSIT_PIC
-        );
-        ActivityCompat.startActivity(
-                MainActivity.this, i, optionsCompat.toBundle()
-        );
+        ActivityOptionsCompat optionsCompat =
+            ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, transitView,
+                PictureActivity.TRANSIT_PIC);
+        ActivityCompat.startActivity(MainActivity.this, i, optionsCompat.toBundle());
     }
 
-    @Override
-    public void onToolbarClick() {
+    @Override public void onToolbarClick() {
         mRecyclerView.smoothScrollToPosition(0);
     }
 
@@ -164,21 +146,18 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         mRecyclerView.smoothScrollToPosition(0);
     }
 
-    @Override
-    public void requestDataRefresh() {
+    @Override public void requestDataRefresh() {
         super.requestDataRefresh();
         mMeizhiList.clear();
         getData(/* add from db */ false);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_about) {
             Uri uri = Uri.parse(getString(R.string.blog_drakeet));
@@ -188,16 +167,13 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onResume() {
+    @Override public void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
     }
 
-    @Override
-    public void onPause() {
+    @Override public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
     }
-
 }

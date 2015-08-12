@@ -5,7 +5,6 @@ import android.os.Bundle;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.widget.MultiSwipeRefreshLayout;
 
-
 /**
  * Created by drakeet on 1/3/15.
  */
@@ -13,8 +12,7 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
 
     public MultiSwipeRefreshLayout mSwipeRefreshLayout;
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
+    @Override protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         trySetupSwipeRefresh();
     }
@@ -22,18 +20,14 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
     void trySetupSwipeRefresh() {
         mSwipeRefreshLayout = (MultiSwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         if (mSwipeRefreshLayout != null) {
-            mSwipeRefreshLayout.setColorSchemeResources(
-                    R.color.refresh_progress_3,
-                    R.color.refresh_progress_2,
-                    R.color.refresh_progress_1
-            );
-            mSwipeRefreshLayout.setOnRefreshListener(
-                    () -> requestDataRefresh()
-            );
+            mSwipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_3,
+                R.color.refresh_progress_2, R.color.refresh_progress_1);
+            mSwipeRefreshLayout.setOnRefreshListener(() -> requestDataRefresh());
         }
     }
 
-    public void requestDataRefresh() {}
+    public void requestDataRefresh() {
+    }
 
     public void setRefreshing(boolean refreshing) {
         if (mSwipeRefreshLayout == null) {
@@ -41,9 +35,7 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
         }
         if (!refreshing) {
             // 防止刷新消失太快，让子弹飞一会儿
-            mSwipeRefreshLayout.postDelayed(
-                    () -> mSwipeRefreshLayout.setRefreshing(false), 1000
-            );
+            mSwipeRefreshLayout.postDelayed(() -> mSwipeRefreshLayout.setRefreshing(false), 1000);
         } else {
             mSwipeRefreshLayout.setRefreshing(true);
         }
@@ -54,9 +46,7 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
     }
 
     public void setSwipeableChildren(
-            MultiSwipeRefreshLayout.CanChildScrollUpCallback canChildScrollUpCallback) {
-        mSwipeRefreshLayout.setCanChildScrollUpCallback(
-                canChildScrollUpCallback
-        );
+        MultiSwipeRefreshLayout.CanChildScrollUpCallback canChildScrollUpCallback) {
+        mSwipeRefreshLayout.setCanChildScrollUpCallback(canChildScrollUpCallback);
     }
 }

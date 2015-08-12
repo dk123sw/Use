@@ -15,13 +15,11 @@ public class MeizhiCardCallback implements Callback {
         mView = view;
     }
 
-    @Override
-    public void onSuccess() {
+    @Override public void onSuccess() {
         if (!mView.isShown()) mView.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public void onError() {
+    @Override public void onError() {
 
     }
 }

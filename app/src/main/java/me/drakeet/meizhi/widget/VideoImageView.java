@@ -33,14 +33,13 @@ public class VideoImageView extends ImageView implements Animator.AnimatorListen
     private void nextAnimation() {
         // TODO: remove 9 old android.
         AnimatorSet anim = new AnimatorSet();
-        if (scale)
-            anim.playTogether(
-                    ObjectAnimator.ofFloat(this, "scaleX", 1.5f, 1f),
-                    ObjectAnimator.ofFloat(this, "scaleY", 1.5f, 1f));
-        else
-            anim.playTogether(
-                    ObjectAnimator.ofFloat(this, "scaleX", 1, 1.5f),
-                    ObjectAnimator.ofFloat(this, "scaleY", 1, 1.5f));
+        if (scale) {
+            anim.playTogether(ObjectAnimator.ofFloat(this, "scaleX", 1.5f, 1f),
+                ObjectAnimator.ofFloat(this, "scaleY", 1.5f, 1f));
+        } else {
+            anim.playTogether(ObjectAnimator.ofFloat(this, "scaleX", 1, 1.5f),
+                ObjectAnimator.ofFloat(this, "scaleY", 1, 1.5f));
+        }
 
         anim.setDuration(7890);
         anim.addListener(this);
@@ -48,20 +47,16 @@ public class VideoImageView extends ImageView implements Animator.AnimatorListen
         scale = !scale;
     }
 
-    @Override
-    public void onAnimationCancel(Animator arg0) {
+    @Override public void onAnimationCancel(Animator arg0) {
     }
 
-    @Override
-    public void onAnimationEnd(Animator animator) {
+    @Override public void onAnimationEnd(Animator animator) {
         nextAnimation();
     }
 
-    @Override
-    public void onAnimationRepeat(Animator arg0) {
+    @Override public void onAnimationRepeat(Animator arg0) {
     }
 
-    @Override
-    public void onAnimationStart(Animator arg0) {
+    @Override public void onAnimationStart(Animator arg0) {
     }
 }

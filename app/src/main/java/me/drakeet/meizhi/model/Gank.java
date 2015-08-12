@@ -9,24 +9,14 @@ import java.util.Date;
 /**
  * Created by drakeet on 8/11/15.
  */
-@Table(name = "Ganks")
-public class Gank extends Model {
+@Table(name = "Ganks") public class Gank extends Model {
 
-    @Column(name = "url")
-    public String url;
-    @Column(name = "type")
-    public String type;
-    @Column(name = "desc")
-    public String desc;
-    @Column(name = "who")
-    public String who;
-    @Column(name = "used")
-    public boolean used;
-    @Column(name = "objectId")
-    public String objectId;
-    @Column(name = "createdAt")
-    public Date createdAt;
-    @Column(name = "updatedAt")
-    public Date updatedAt;
-
+    @Column(name = "url") public String url;
+    @Column(name = "type") public String type;
+    @Column(name = "desc") public String desc;
+    @Column(name = "who") public String who;
+    @Column(name = "used") public boolean used;
+    @Column(name = "objectId") public String objectId;
+    @Column(name = "createdAt") public Date createdAt;
+    @Column(name = "updatedAt") public Date updatedAt;
 }

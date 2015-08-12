@@ -13,14 +13,14 @@ public abstract class ToolbarActivity extends BaseActivity {
 
     abstract protected int getLayoutResource();
 
-    public void onToolbarClick() {}
+    public void onToolbarClick() {
+    }
 
     protected AppBarLayout mAppBar;
     protected Toolbar mToolbar;
     protected boolean isHidden = false;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
 
@@ -31,20 +31,16 @@ public abstract class ToolbarActivity extends BaseActivity {
             throw new IllegalStateException("no toolbar");
         }
 
-        mToolbar.setOnClickListener(
-                v -> onToolbarClick()
-        );
+        mToolbar.setOnClickListener(v -> onToolbarClick());
 
         setSupportActionBar(mToolbar);
 
         if (Build.VERSION.SDK_INT >= 21) {
             mAppBar.setElevation(10.6f);
         }
-
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
             return true;
@@ -59,9 +55,9 @@ public abstract class ToolbarActivity extends BaseActivity {
 
     protected void hideOrShowToolbar() {
         mAppBar.animate()
-               .translationY(isHidden ? 0 : -mAppBar.getHeight())
-               .setInterpolator(new DecelerateInterpolator(2))
-               .start();
+            .translationY(isHidden ? 0 : -mAppBar.getHeight())
+            .setInterpolator(new DecelerateInterpolator(2))
+            .start();
 
         isHidden = !isHidden;
     }

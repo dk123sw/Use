@@ -21,8 +21,7 @@ public class WebViewActivity extends AppCompatActivity {
     private WebView mWebView;
     private Meizhi meizhi;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
         meizhi = (Meizhi) getIntent().getSerializableExtra("meizhi");
@@ -40,8 +39,7 @@ public class WebViewActivity extends AppCompatActivity {
         mWebView.loadUrl("http://gank.io/"); // TODO
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             switch (keyCode) {
                 case KeyEvent.KEYCODE_BACK:
@@ -52,45 +50,35 @@ public class WebViewActivity extends AppCompatActivity {
                     }
                     return true;
             }
-
         }
         return super.onKeyDown(keyCode, event);
     }
 
-    @Override
-    protected void onDestroy() {
+    @Override protected void onDestroy() {
         super.onDestroy();
-        if (mWebView != null)
-            mWebView.destroy();
+        if (mWebView != null) mWebView.destroy();
     }
 
-    @Override
-    protected void onPause() {
-        if (mWebView != null)
-            mWebView.onPause();
+    @Override protected void onPause() {
+        if (mWebView != null) mWebView.onPause();
         super.onPause();
         MobclickAgent.onPause(this);
     }
 
-    @Override
-    protected void onResume() {
+    @Override protected void onResume() {
         super.onResume();
-        if (mWebView != null)
-            mWebView.onResume();
+        if (mWebView != null) mWebView.onResume();
         MobclickAgent.onResume(this);
     }
 
     private class WebChrome extends WebChromeClient {
-        @Override
-        public void onProgressChanged(WebView view, int newProgress) {
+        @Override public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
             mProgressbar.setProgress(newProgress);
         }
 
-        @Override
-        public void onReceivedTitle(WebView view, String title) {
+        @Override public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
         }
     }
-
 }

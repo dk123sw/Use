@@ -5,7 +5,6 @@ import android.widget.Toast;
 
 import me.drakeet.meizhi.App;
 
-
 /**
  * Created by drakeet on 9/27/14.
  */
@@ -39,5 +38,4 @@ public class ToastUtils {
     public static void showLong(String message) {
         Toast.makeText(App.sContext, message, Toast.LENGTH_LONG).show();
     }
-
 }

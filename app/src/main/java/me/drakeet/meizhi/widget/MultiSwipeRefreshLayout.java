@@ -24,7 +24,6 @@ import android.util.AttributeSet;
 
 import me.drakeet.meizhi.R;
 
-
 /**
  * Pick from Google io 2014
  * Created by drakeet on 1/3/15.
@@ -32,7 +31,6 @@ import me.drakeet.meizhi.R;
 public class MultiSwipeRefreshLayout extends SwipeRefreshLayout {
 
     private CanChildScrollUpCallback mCanChildScrollUpCallback;
-
     private Drawable mForegroundDrawable;
 
     public MultiSwipeRefreshLayout(Context context) {
@@ -41,8 +39,8 @@ public class MultiSwipeRefreshLayout extends SwipeRefreshLayout {
 
     public MultiSwipeRefreshLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        final TypedArray a = context.obtainStyledAttributes(attrs,
-                R.styleable.MultiSwipeRefreshLayout, 0, 0);
+        final TypedArray a =
+            context.obtainStyledAttributes(attrs, R.styleable.MultiSwipeRefreshLayout, 0, 0);
 
         mForegroundDrawable = a.getDrawable(R.styleable.MultiSwipeRefreshLayout_foreground);
         if (mForegroundDrawable != null) {
@@ -52,8 +50,7 @@ public class MultiSwipeRefreshLayout extends SwipeRefreshLayout {
         a.recycle();
     }
 
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    @Override protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         if (mForegroundDrawable != null) {
             mForegroundDrawable.setBounds(0, 0, w, h);
@@ -68,8 +65,7 @@ public class MultiSwipeRefreshLayout extends SwipeRefreshLayout {
         boolean canSwipeRefreshChildScrollUp();
     }
 
-    @Override
-    public boolean canChildScrollUp() {
+    @Override public boolean canChildScrollUp() {
         if (mCanChildScrollUpCallback != null) {
             return mCanChildScrollUpCallback.canSwipeRefreshChildScrollUp();
         }

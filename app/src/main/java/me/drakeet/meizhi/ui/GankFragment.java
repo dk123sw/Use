@@ -31,7 +31,6 @@ public class GankFragment extends SwipeRefreshFragment {
     List<Gank> mGankList;
     GankListAdapter mAdapter;
     GoodAppBarLayout mAppBarLayout;
-    float mRvY;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -48,24 +47,21 @@ public class GankFragment extends SwipeRefreshFragment {
     public GankFragment() {
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+    @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mGankList = new ArrayList<>();
         mAdapter = new GankListAdapter(mGankList);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
+        Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_gank, container, false);
         mAppBarLayout = (GoodAppBarLayout) rootView.findViewById(R.id.header_appbar);
         initRecyclerView(rootView);
         return rootView;
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.postDelayed(() -> setRefreshing(true), 300);
         getData();
@@ -78,25 +74,20 @@ public class GankFragment extends SwipeRefreshFragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
-        mRvY = mRecyclerView.getY();
     }
 
     private void getData() {
         BaseActivity.sDrakeet.getGankData(2015, 8, 11)
-                .observeOn(AndroidSchedulers.mainThread())
-                .map(data -> data.results)
-                .map(this::addAllResults)
-                .subscribe(
-                        list -> {
-                            mAdapter.notifyDataSetChanged();
-                            setRefreshing(false);
-                        }, Throwable::printStackTrace
-
-                );
+            .observeOn(AndroidSchedulers.mainThread())
+            .map(data -> data.results)
+            .map(this::addAllResults)
+            .subscribe(list -> {
+                mAdapter.notifyDataSetChanged();
+                setRefreshing(false);
+            }, Throwable::printStackTrace);
     }
 
-    @Override
-    public void requestDataRefresh() {
+    @Override public void requestDataRefresh() {
         super.requestDataRefresh();
         setRefreshing(false);
     }
@@ -105,8 +96,7 @@ public class GankFragment extends SwipeRefreshFragment {
         mGankList.addAll(results.androidList);
         mGankList.addAll(results.iOSList);
         mGankList.addAll(results.拓展资源List);
-        if (results.瞎推荐List != null)mGankList.addAll(results.瞎推荐List);
+        if (results.瞎推荐List != null) mGankList.addAll(results.瞎推荐List);
         return Observable.just(mGankList);
     }
-
 }

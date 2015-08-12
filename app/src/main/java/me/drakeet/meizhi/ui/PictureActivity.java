@@ -27,8 +27,7 @@ public class PictureActivity extends ToolbarActivity {
 
     private String mImageUrl, mImageTitle;
 
-    @Override
-    protected int getLayoutResource() {
+    @Override protected int getLayoutResource() {
         return R.layout.activity_picture;
     }
 
@@ -37,8 +36,7 @@ public class PictureActivity extends ToolbarActivity {
         mImageTitle = getIntent().getStringExtra(EXTRA_IMAGE_TITLE);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         parseIntent();
 
@@ -51,50 +49,40 @@ public class PictureActivity extends ToolbarActivity {
         setAppBarAlpha(0.7f);
         setTitle(mImageTitle);
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null)
-            actionBar.setDisplayHomeAsUpEnabled(true);
-
+        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
 
         setUpPhotoAttacher();
     }
 
     private void setUpPhotoAttacher() {
         mPhotoViewAttacher = new PhotoViewAttacher(mImageView);
-        mPhotoViewAttacher.setOnViewTapListener(
-                (view, v, v1) -> hideOrShowToolbar()
-        );
-        mPhotoViewAttacher.setOnLongClickListener(
-                v -> {
-                    new AlertDialog.Builder(PictureActivity.this)
-                            .setMessage(getString(R.string.ask_saving_picture))
-                            .setNegativeButton(
-                                    android.R.string.cancel, (dialog, which) -> {
-                                        dialog.dismiss();
-                                    }
-                            ).setPositiveButton(
-                            android.R.string.ok, (dialog, which) -> {
-                                saveImageToGallery();
-                                dialog.dismiss();
-                            }
-                    ).show();
-                    return true;
-                }
-        );
+        mPhotoViewAttacher.setOnViewTapListener((view, v, v1) -> hideOrShowToolbar());
+        mPhotoViewAttacher.setOnLongClickListener(v -> {
+                new AlertDialog.Builder(PictureActivity.this).setMessage(
+                    getString(R.string.ask_saving_picture))
+                    .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                            dialog.dismiss();
+                        })
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                            saveImageToGallery();
+                            dialog.dismiss();
+                        })
+                    .show();
+                return true;
+            });
     }
 
     private void saveImageToGallery() {
         MeizhiImageUtils.saveImageToSdCard(this, mImageUrl, mImageTitle);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_picture, menu);
         // TODO: 把图片的一些信息，比如 who，加载到 Overflow 当中
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_about) {
             return true;
@@ -102,14 +90,12 @@ public class PictureActivity extends ToolbarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onResume() {
+    @Override public void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
     }
 
-    @Override
-    public void onPause() {
+    @Override public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
     }

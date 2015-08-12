@@ -16,14 +16,11 @@ public class GankPagerAdapter extends FragmentPagerAdapter {
         super(fm);
     }
 
-    @Override
-    public Fragment getItem(int position) {
+    @Override public Fragment getItem(int position) {
         return GankFragment.newInstance(position + 1);
     }
 
-    @Override
-    public int getCount() {
+    @Override public int getCount() {
         return DrakeetFactory.gankSize;
     }
-
 }

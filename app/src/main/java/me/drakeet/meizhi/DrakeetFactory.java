@@ -12,7 +12,7 @@ public class DrakeetFactory {
 
     public static Drakeet getSingleton() {
         synchronized (monitor) {
-            if(sSingleton == null) {
+            if (sSingleton == null) {
                 sSingleton = new DrakeetRetrofit().getService();
             }
             return sSingleton;
