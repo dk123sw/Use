@@ -26,6 +26,7 @@ import me.drakeet.meizhi.R;
 
 
 /**
+ * Pick from Google io 2014
  * Created by drakeet on 1/3/15.
  */
 public class MultiSwipeRefreshLayout extends SwipeRefreshLayout {
