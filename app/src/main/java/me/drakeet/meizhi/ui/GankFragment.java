@@ -18,6 +18,7 @@ import me.drakeet.meizhi.ui.base.BaseActivity;
 import me.drakeet.meizhi.ui.base.SwipeRefreshFragment;
 import me.drakeet.meizhi.widget.GoodAppBarLayout;
 import rx.Observable;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 
 /**
@@ -31,6 +32,7 @@ public class GankFragment extends SwipeRefreshFragment {
     List<Gank> mGankList;
     GankListAdapter mAdapter;
     GoodAppBarLayout mAppBarLayout;
+    Subscription mSubscription;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -77,7 +79,7 @@ public class GankFragment extends SwipeRefreshFragment {
     }
 
     private void getData() {
-        BaseActivity.sDrakeet.getGankData(2015, 8, 11)
+        mSubscription = BaseActivity.sDrakeet.getGankData(2015, 8, 11)
             .observeOn(AndroidSchedulers.mainThread())
             .map(data -> data.results)
             .map(this::addAllResults)
@@ -98,5 +100,13 @@ public class GankFragment extends SwipeRefreshFragment {
         mGankList.addAll(results.拓展资源List);
         if (results.瞎推荐List != null) mGankList.addAll(results.瞎推荐List);
         return Observable.just(mGankList);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mSubscription != null){
+            mSubscription.unsubscribe();
+        }
     }
 }

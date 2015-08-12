@@ -26,6 +26,7 @@ import me.drakeet.meizhi.model.Meizhi;
 import me.drakeet.meizhi.ui.base.SwipeRefreshBaseActivity;
 import me.drakeet.meizhi.util.AlarmManagerUtils;
 import rx.Observable;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 
 public class MainActivity extends SwipeRefreshBaseActivity {
@@ -69,16 +70,17 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     private void getData(boolean addFromDb) {
         setRefreshing(true);
-        sDrakeet.getMeizhiData(mPage)
+        Subscription s = sDrakeet.getMeizhiData(mPage)
             .map(meizhiData -> meizhiData.results)
             .flatMap(Observable::from)
             .toSortedList((meizhi1, meizhi2) -> meizhi2.updatedAt.compareTo(meizhi1.updatedAt))
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(meizhis -> {
-                    mMeizhiList.addAll(meizhis);
-                    mMeizhiListAdapter.notifyDataSetChanged();
-                    setRefreshing(false);
-                }, Throwable::printStackTrace);
+                mMeizhiList.addAll(meizhis);
+                mMeizhiListAdapter.notifyDataSetChanged();
+                setRefreshing(false);
+            }, Throwable::printStackTrace);
+        addSubscription(s);
     }
 
     RecyclerView.OnScrollListener getScrollToBottomListener(
