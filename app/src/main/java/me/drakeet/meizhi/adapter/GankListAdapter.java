@@ -16,11 +16,12 @@ import me.drakeet.meizhi.util.StringStyleUtils;
 /**
  * Created by drakeet on 8/11/15.
  */
-public class GankListAdapter extends RecyclerView.Adapter<GankListAdapter.ViewHolder> {
+public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.ViewHolder> {
 
     private List<Gank> mGankList;
 
     public GankListAdapter(List<Gank> gankList) {
+        super(mIsFirstLoad);
         mGankList = gankList;
     }
 
@@ -51,6 +52,7 @@ public class GankListAdapter extends RecyclerView.Adapter<GankListAdapter.ViewHo
         }
         CharSequence text = (CharSequence) holder.gank.getTag();
         holder.gank.setText(text);
+        showItemAnim(holder.gank, position);
     }
 
     @Override public int getItemCount() {

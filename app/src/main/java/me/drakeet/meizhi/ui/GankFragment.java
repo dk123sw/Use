@@ -2,7 +2,6 @@ package me.drakeet.meizhi.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -84,7 +83,6 @@ public class GankFragment extends Fragment {
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_gank);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -93,7 +91,7 @@ public class GankFragment extends Fragment {
             .observeOn(AndroidSchedulers.mainThread())
             .map(data -> data.results)
             .map(this::addAllResults)
-            .subscribe(list -> mAdapter.notifyItemRangeInserted(0, list.size()), Throwable::printStackTrace);
+            .subscribe(list -> mAdapter.notifyDataSetChanged(), Throwable::printStackTrace);
     }
 
     private List<Gank> addAllResults(GankData.Result results) {
