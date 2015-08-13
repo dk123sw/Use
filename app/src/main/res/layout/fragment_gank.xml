@@ -41,16 +41,19 @@
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </me.drakeet.meizhi.widget.GoodAppBarLayout>
-    <FrameLayout
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_gank"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_gank"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
-    </FrameLayout>
+    <ViewStub
+        android:id="@+id/stub_empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/gank_header_height"
+        android:layout="@layout/view_empty"
+        android:inflatedId="@+id/gank_empty_view"/>
 
 </android.support.design.widget.CoordinatorLayout>
