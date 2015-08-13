@@ -13,7 +13,7 @@ import me.drakeet.meizhi.widget.MultiSwipeRefreshLayout;
  */
 public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
 
-    @Bind(R.id.swipe_refresh_layout)public MultiSwipeRefreshLayout mSwipeRefreshLayout;
+    @Bind(R.id.swipe_refresh_layout) public MultiSwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
@@ -33,8 +33,7 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
         }
     }
 
-    public void requestDataRefresh() {
-    }
+    public void requestDataRefresh() {}
 
     public void setRefreshing(boolean refreshing) {
         if (mSwipeRefreshLayout == null) {
@@ -43,7 +42,8 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
         if (!refreshing) {
             // 防止刷新消失太快，让子弹飞一会儿
             mSwipeRefreshLayout.postDelayed(() -> mSwipeRefreshLayout.setRefreshing(false), 1000);
-        } else {
+        }
+        else {
             mSwipeRefreshLayout.setRefreshing(true);
         }
     }

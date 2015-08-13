@@ -13,11 +13,14 @@ import android.view.ViewGroup;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.squareup.otto.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.adapter.GankListAdapter;
 import me.drakeet.meizhi.data.GankData;
+import me.drakeet.meizhi.event.LoveBus;
+import me.drakeet.meizhi.event.OnKeyBackClickEvent;
 import me.drakeet.meizhi.model.Gank;
 import me.drakeet.meizhi.ui.base.BaseActivity;
 import me.drakeet.meizhi.widget.GoodAppBarLayout;
@@ -43,7 +46,7 @@ public class GankFragment extends Fragment {
     GankListAdapter mAdapter;
     Subscription mSubscription;
     int mYear, mMonth, mDay;
-    private CoordinatorLayout.LayoutParams mAppBarLayoutParams;
+    CoordinatorLayout.LayoutParams mAppBarLayoutParams;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -82,6 +85,7 @@ public class GankFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_gank, container, false);
         ButterKnife.bind(this, rootView);
         initRecyclerView();
+        setVideoViewPosition(getResources().getConfiguration());
         return rootView;
     }
 
@@ -147,6 +151,21 @@ public class GankFragment extends Fragment {
     @Override public void onConfigurationChanged(Configuration newConfig) {
         setVideoViewPosition(newConfig);
         super.onConfigurationChanged(newConfig);
+    }
+
+    @Subscribe public void onKeyBackPress(OnKeyBackClickEvent event) {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    @Override public void onResume() {
+        super.onResume();
+        LoveBus.getLovelySeat().register(this);
+    }
+
+    @Override public void onPause() {
+        super.onPause();
+        LoveBus.getLovelySeat().unregister(this);
     }
 
     @Override public void onDestroyView() {
