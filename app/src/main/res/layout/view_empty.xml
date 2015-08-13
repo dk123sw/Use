@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:background="@color/white">
 
     <ImageView
+        android:id="@+id/iv_monkey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/emoji_see_no_evil"
-        />
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/tv_daimajia_gone"
+        android:src="@mipmap/emoji_see_no_evil"/>
+
     <TextView
+        android:id="@+id/tv_daimajia_gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:paddingBottom="32dp"
+        android:layout_centerInParent="true"
         android:text="@string/daimajia_has_gone"/>
 
-</LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/heheh"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

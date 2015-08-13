@@ -28,6 +28,7 @@ public class GankFragment extends Fragment {
     private static final String ARG_DAY = "day";
 
     RecyclerView mRecyclerView;
+    View mEmptyViewStub;
     List<Gank> mGankList;
     GankListAdapter mAdapter;
     GoodAppBarLayout mAppBarLayout;
@@ -69,6 +70,7 @@ public class GankFragment extends Fragment {
         Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_gank, container, false);
         mAppBarLayout = (GoodAppBarLayout) rootView.findViewById(R.id.header_appbar);
+        mEmptyViewStub = rootView.findViewById(R.id.stub_empty_view);
         initRecyclerView(rootView);
         return rootView;
     }
@@ -99,7 +101,7 @@ public class GankFragment extends Fragment {
     }
 
     private void showEmptyView() {
-
+        mEmptyViewStub.setVisibility(View.VISIBLE);
     }
 
     private List<Gank> addAllResults(GankData.Result results) {
