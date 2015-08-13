@@ -109,6 +109,7 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.0.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
     compile 'com.squareup.okhttp:okhttp:2.0.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
 }
 
 apply plugin: 'me.tatarka.retrolambda'

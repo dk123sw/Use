@@ -7,10 +7,10 @@ import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import com.squareup.picasso.Picasso;
 import com.umeng.analytics.MobclickAgent;
-
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.ui.base.ToolbarActivity;
 import me.drakeet.meizhi.util.MeizhiImageUtils;
@@ -22,10 +22,10 @@ public class PictureActivity extends ToolbarActivity {
     public static final String EXTRA_IMAGE_TITLE = "image_title";
     public static final String TRANSIT_PIC = "picture";
 
-    private ImageView mImageView;
-    private PhotoViewAttacher mPhotoViewAttacher;
+    @Bind(R.id.picture) ImageView mImageView;
 
-    private String mImageUrl, mImageTitle;
+    PhotoViewAttacher mPhotoViewAttacher;
+    String mImageUrl, mImageTitle;
 
     @Override protected int getLayoutResource() {
         return R.layout.activity_picture;
@@ -38,10 +38,10 @@ public class PictureActivity extends ToolbarActivity {
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
         parseIntent();
 
         // init image view
-        mImageView = (ImageView) findViewById(R.id.picture);
         ViewCompat.setTransitionName(mImageView, TRANSIT_PIC);
         Picasso.with(this).load(mImageUrl).into(mImageView);
 
@@ -58,18 +58,18 @@ public class PictureActivity extends ToolbarActivity {
         mPhotoViewAttacher = new PhotoViewAttacher(mImageView);
         mPhotoViewAttacher.setOnViewTapListener((view, v, v1) -> hideOrShowToolbar());
         mPhotoViewAttacher.setOnLongClickListener(v -> {
-                new AlertDialog.Builder(PictureActivity.this).setMessage(
-                    getString(R.string.ask_saving_picture))
-                    .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
-                            dialog.dismiss();
-                        })
-                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                            saveImageToGallery();
-                            dialog.dismiss();
-                        })
-                    .show();
-                return true;
-            });
+            new AlertDialog.Builder(PictureActivity.this).setMessage(
+                getString(R.string.ask_saving_picture))
+                .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                    dialog.dismiss();
+                })
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    saveImageToGallery();
+                    dialog.dismiss();
+                })
+                .show();
+            return true;
+        });
     }
 
     private void saveImageToGallery() {
@@ -98,5 +98,10 @@ public class PictureActivity extends ToolbarActivity {
     @Override public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+
+    @Override protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
     }
 }

@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import java.util.List;
 
 import me.drakeet.meizhi.R;
@@ -64,13 +66,12 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView category;
-        TextView gank;
+        @Bind(R.id.tv_category) TextView category;
+        @Bind(R.id.tv_title) TextView gank;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            category = (TextView) itemView.findViewById(R.id.tv_category);
-            gank = (TextView) itemView.findViewById(R.id.tv_title);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

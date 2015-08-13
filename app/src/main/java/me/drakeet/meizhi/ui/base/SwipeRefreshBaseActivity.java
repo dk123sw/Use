@@ -2,6 +2,9 @@ package me.drakeet.meizhi.ui.base;
 
 import android.os.Bundle;
 
+import android.os.PersistableBundle;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.widget.MultiSwipeRefreshLayout;
 
@@ -10,7 +13,12 @@ import me.drakeet.meizhi.widget.MultiSwipeRefreshLayout;
  */
 public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
 
-    public MultiSwipeRefreshLayout mSwipeRefreshLayout;
+    @Bind(R.id.swipe_refresh_layout)public MultiSwipeRefreshLayout mSwipeRefreshLayout;
+
+    @Override public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
+        ButterKnife.bind(this);
+    }
 
     @Override protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -18,11 +26,10 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
     }
 
     void trySetupSwipeRefresh() {
-        mSwipeRefreshLayout = (MultiSwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         if (mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_3,
                 R.color.refresh_progress_2, R.color.refresh_progress_1);
-            mSwipeRefreshLayout.setOnRefreshListener(() -> requestDataRefresh());
+            mSwipeRefreshLayout.setOnRefreshListener(this::requestDataRefresh);
         }
     }
 

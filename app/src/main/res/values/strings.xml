@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">妹纸.gank.io</string>
-    <string name="title_activity_picture">PictureActivity</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_picture">PictureActivity</string>
+    <string name="title_activity_gank">GankActivity</string>
+
     <string name="action_settings">Settings</string>
+    <string name="action_about">by drakeet</string>
+
     <string name="loading">正在加载更多...</string>
     <string name="no_data_the_day">今天没有妹纸</string>
     <string name="api">http://gank.io/</string>
@@ -11,15 +14,9 @@
     <string name="headsup_title">妹纸.gank.io</string>
     <string name="headsup_content">今天的妹纸已经准备好了，快来享用吧~</string>
     <string name="blog_drakeet">http://drakeet.me</string>
-    <string name="ask_saving_picture">Saving to phone?</string>
+    <string name="ask_saving_picture">保存到手机?</string>
     <string name="picture_save_fail">图片保存失败，请再次尝试保存！</string>
     <string name="picture_has_save_to">图片已保存至 %s 文件夹</string>
-    <string name="action_about">by drakeet</string>
-    <string name="title_activity_gank">GankActivity</string>
-
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
     <string name="daimajia_has_gone">今日は肥皂家がない、干物の供給がない...</string>
 
 </resources>

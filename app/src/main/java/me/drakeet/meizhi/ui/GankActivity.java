@@ -6,6 +6,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import java.util.Date;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.adapter.GankPagerAdapter;
@@ -15,9 +17,10 @@ public class GankActivity extends ToolbarActivity {
 
     public static final String EXTRA_GANK_DATE = "gank_date";
 
+    @Bind(R.id.pager) ViewPager mViewPager;
+    @Bind(R.id.tabLayout) TabLayout mTabLayout;
+
     GankPagerAdapter mPagerAdapter;
-    ViewPager mViewPager;
-    TabLayout mTabLayout;
 
     @Override protected int getLayoutResource() {
         return R.layout.activity_gank;
@@ -25,9 +28,9 @@ public class GankActivity extends ToolbarActivity {
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
         Date gankDate = (Date) getIntent().getSerializableExtra(EXTRA_GANK_DATE);
         mPagerAdapter = new GankPagerAdapter(getSupportFragmentManager(), gankDate);
-        mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mPagerAdapter);
 
         ActionBar actionBar = getSupportActionBar();
@@ -37,7 +40,6 @@ public class GankActivity extends ToolbarActivity {
     }
 
     private void initTabLayout() {
-        mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         for (int i = 0; i < mPagerAdapter.getCount(); i++) {
             mTabLayout.addTab(mTabLayout.newTab());
         }
@@ -55,5 +57,10 @@ public class GankActivity extends ToolbarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
     }
 }

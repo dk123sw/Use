@@ -8,6 +8,8 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.Toast;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import com.daimajia.numberprogressbar.NumberProgressBar;
 import com.umeng.analytics.MobclickAgent;
 
@@ -16,13 +18,15 @@ import me.drakeet.meizhi.model.Meizhi;
 
 public class WebViewActivity extends AppCompatActivity {
 
-    private NumberProgressBar mProgressbar;
+    @Bind(R.id.progressbar) NumberProgressBar mProgressbar;
+    @Bind(R.id.webview) WebView mWebView;
+
     private Context mContext;
-    private WebView mWebView;
     private Meizhi meizhi;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
         mContext = this;
         meizhi = (Meizhi) getIntent().getSerializableExtra("meizhi");
         if (meizhi == null) {
@@ -30,8 +34,6 @@ public class WebViewActivity extends AppCompatActivity {
             finish();
         }
         setContentView(R.layout.activity_webview);
-        mWebView = (WebView) findViewById(R.id.webview);
-        mProgressbar = (NumberProgressBar) findViewById(R.id.progressbar);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setWebChromeClient(new WebChrome());
         mWebView.getSettings().setLoadWithOverviewMode(true);
@@ -57,6 +59,7 @@ public class WebViewActivity extends AppCompatActivity {
     @Override protected void onDestroy() {
         super.onDestroy();
         if (mWebView != null) mWebView.destroy();
+        ButterKnife.unbind(this);
     }
 
     @Override protected void onPause() {

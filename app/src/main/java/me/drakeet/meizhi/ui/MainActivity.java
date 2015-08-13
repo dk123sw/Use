@@ -12,6 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.umeng.analytics.MobclickAgent;
@@ -31,8 +34,8 @@ import rx.android.schedulers.AndroidSchedulers;
 
 public class MainActivity extends SwipeRefreshBaseActivity {
 
-    RecyclerView mRecyclerView;
-    Handler mHandler;
+    @Bind(R.id.rv_meizhi) RecyclerView mRecyclerView;
+
     MeizhiListAdapter mMeizhiListAdapter;
     List<Meizhi> mMeizhiList;
     boolean mIsFirstTimeTouchBottom = true;
@@ -44,7 +47,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mHandler = new Handler();
+        ButterKnife.bind(this);
         mMeizhiList = new ArrayList<>();
         setUpRecyclerView();
         MobclickAgent.updateOnlineConfig(this);
@@ -53,11 +56,11 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     @Override protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        mHandler.postDelayed(this::getData, 358);
+        new Handler().postDelayed(() -> setRefreshing(true), 358);
+        getData();
     }
 
     private void setUpRecyclerView() {
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_meizhi);
         final StaggeredGridLayoutManager layoutManager =
             new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -69,7 +72,6 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     }
 
     private void getData(boolean addFromDb) {
-        setRefreshing(true);
         Subscription s = sDrakeet.getMeizhiData(mPage)
             .map(meizhiData -> meizhiData.results)
             .flatMap(Observable::from)
@@ -99,7 +101,8 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                         mSwipeRefreshLayout.setRefreshing(true);
                         mPage += 1;
                         getData();
-                    } else {
+                    }
+                    else {
                         mIsFirstTimeTouchBottom = false;
                     }
                 }
@@ -119,7 +122,8 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                     @Override public void onError() {
                     }
                 });
-            } else if (v == card) {
+            }
+            else if (v == card) {
                 Intent intent = new Intent(this, GankActivity.class);
                 intent.putExtra(GankActivity.EXTRA_GANK_DATE, meizhi.updatedAt);
                 startActivity(intent);
@@ -142,7 +146,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         mRecyclerView.smoothScrollToPosition(0);
     }
 
-    public void onFab(View v) {
+    @OnClick(R.id.main_fab) public void onFab(View v) {
         requestDataRefresh();
         mRecyclerView.smoothScrollToPosition(0);
     }
@@ -176,5 +180,10 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     @Override public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+
+    @Override protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
     }
 }

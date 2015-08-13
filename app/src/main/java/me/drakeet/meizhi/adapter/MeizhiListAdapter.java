@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -79,16 +81,15 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        Meizhi meizhi;
-        RatioImageView meizhiView;
-        TextView titleView;
+        @Bind(R.id.iv_meizhi) RatioImageView meizhiView;
+        @Bind(R.id.tv_title) TextView titleView;
         View card;
+        Meizhi meizhi;
 
         public ViewHolder(View itemView) {
             super(itemView);
             card = itemView;
-            meizhiView = (RatioImageView) itemView.findViewById(R.id.iv_meizhi);
-            titleView = (TextView) itemView.findViewById(R.id.tv_title);
+            ButterKnife.bind(this, itemView);
             meizhiView.setOnClickListener(this);
             card.setOnClickListener(this);
         }
