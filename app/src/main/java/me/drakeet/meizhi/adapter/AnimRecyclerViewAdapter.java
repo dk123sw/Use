@@ -21,13 +21,9 @@ public class AnimRecyclerViewAdapter<T extends RecyclerView.ViewHolder>
         return null;
     }
 
-    @Override public void onBindViewHolder(T holder, int position) {
+    @Override public void onBindViewHolder(T holder, int position) {}
 
-    }
-
-    @Override public int getItemCount() {
-        return 0;
-    }
+    @Override public int getItemCount() {return 0;}
 
     public void showItemAnim(final View view, final int position) {
         Context context = view.getContext();

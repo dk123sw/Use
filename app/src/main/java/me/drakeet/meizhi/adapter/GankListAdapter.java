@@ -21,7 +21,6 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
     private List<Gank> mGankList;
 
     public GankListAdapter(List<Gank> gankList) {
-        super(mIsFirstLoad);
         mGankList = gankList;
     }
 

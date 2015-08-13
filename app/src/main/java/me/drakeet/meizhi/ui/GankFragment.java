@@ -77,6 +77,7 @@ public class GankFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getData();
         mAppBarLayout.notifyAddOffsetListener();
+        getActivity().setTitle(String.format("%s/%s/%s", mYear, mMonth, mDay));
     }
 
     private void initRecyclerView(View rootView) {
@@ -91,7 +92,14 @@ public class GankFragment extends Fragment {
             .observeOn(AndroidSchedulers.mainThread())
             .map(data -> data.results)
             .map(this::addAllResults)
-            .subscribe(list -> mAdapter.notifyDataSetChanged(), Throwable::printStackTrace);
+            .subscribe(list -> {
+                if (list.isEmpty()) { showEmptyView(); }
+                else { mAdapter.notifyDataSetChanged(); }
+            }, Throwable::printStackTrace);
+    }
+
+    private void showEmptyView() {
+
     }
 
     private List<Gank> addAllResults(GankData.Result results) {
