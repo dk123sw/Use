@@ -57,11 +57,12 @@ public class GankFragment extends Fragment {
     @Bind(R.id.cl_content) CoordinatorLayout mLayout;
     LoveVideoView mVideoView;
 
-    List<Gank> mGankList;
-    GankListAdapter mAdapter;
-    Subscription mSubscription;
     int mYear, mMonth, mDay;
+    List<Gank> mGankList;
+    String mVideoPreviewUrl;
     boolean mIsVideoViewInflated = false;
+    Subscription mSubscription;
+    GankListAdapter mAdapter;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -109,6 +110,11 @@ public class GankFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle(String.format("%s/%s/%s", mYear, mMonth, mDay));
         if (mGankList.size() == 0) getData();
+        if (mVideoPreviewUrl != null) {
+            Picasso.with(view.getContext())
+                .load(mVideoPreviewUrl)
+                .into(mVideoImageView);
+        }
     }
 
     private void initRecyclerView() {
@@ -140,10 +146,10 @@ public class GankFragment extends Fragment {
 
             @Override public void onResponse(Response response) throws IOException {
                 String body = response.body().string();
-                String url = LoveStringUtils.getVideoPreviewImageUrl(body);
-                if (url != null) {
+                mVideoPreviewUrl = LoveStringUtils.getVideoPreviewImageUrl(body);
+                if (mVideoPreviewUrl != null) {
                     mVideoImageView.post(() -> Picasso.with(mVideoImageView.getContext())
-                        .load(url)
+                        .load(mVideoPreviewUrl)
                         .into(mVideoImageView));
                 }
             }
