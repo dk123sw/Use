@@ -1,11 +1,11 @@
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/cl_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bg_gank"
@@ -33,8 +33,7 @@
                         android:id="@+id/iv_video"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@mipmap/ic_meizhi_150619"/>
+                        android:scaleType="centerCrop"/>
                     <ImageView
                         android:layout_width="36dp"
                         android:layout_height="36dp"
@@ -61,5 +60,12 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/gank_header_height"
         android:layout="@layout/view_empty"/>
+
+    <ViewStub
+        android:id="@+id/stub_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout="@layout/view_video"
+        android:inflatedId="@+id/inflate_video_view"/>
 
 </FrameLayout>

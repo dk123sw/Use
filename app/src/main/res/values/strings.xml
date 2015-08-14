@@ -18,5 +18,6 @@
     <string name="picture_save_fail">图片保存失败，请再次尝试保存！</string>
     <string name="picture_has_save_to">图片已保存至 %s 文件夹</string>
     <string name="daimajia_has_gone">今日は肥皂家がない、干物の供給がない...</string>
+    <string name="no_video_found">No video found.</string>
 
 </resources>

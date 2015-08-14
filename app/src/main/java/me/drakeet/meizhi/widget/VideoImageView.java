@@ -14,7 +14,7 @@ import com.nineoldandroids.animation.ObjectAnimator;
  */
 public class VideoImageView extends ImageView implements Animator.AnimatorListener {
 
-    private boolean scale = true;
+    private boolean scale = false;
     private static final int ANIM_COUNT = 4;
 
     public VideoImageView(Context context) {

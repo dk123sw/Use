@@ -7,13 +7,21 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 import com.squareup.otto.Subscribe;
+import com.squareup.picasso.Picasso;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import me.drakeet.meizhi.R;
@@ -23,7 +31,10 @@ import me.drakeet.meizhi.event.LoveBus;
 import me.drakeet.meizhi.event.OnKeyBackClickEvent;
 import me.drakeet.meizhi.model.Gank;
 import me.drakeet.meizhi.ui.base.BaseActivity;
+import me.drakeet.meizhi.util.LoveStringUtils;
+import me.drakeet.meizhi.util.ToastUtils;
 import me.drakeet.meizhi.widget.GoodAppBarLayout;
+import me.drakeet.meizhi.widget.LoveVideoView;
 import me.drakeet.meizhi.widget.VideoImageView;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -33,20 +44,24 @@ import rx.android.schedulers.AndroidSchedulers;
  */
 public class GankFragment extends Fragment {
 
+    private final String TAG = "GankFragment";
     private static final String ARG_YEAR = "year";
     private static final String ARG_MONTH = "month";
     private static final String ARG_DAY = "day";
 
     @Bind(R.id.rv_gank) RecyclerView mRecyclerView;
-    @Bind(R.id.stub_empty_view) View mEmptyViewStub;
+    @Bind(R.id.stub_empty_view) ViewStub mEmptyViewStub;
+    @Bind(R.id.stub_video_view) ViewStub mVideoViewStub;
     @Bind(R.id.iv_video) VideoImageView mVideoImageView;
     @Bind(R.id.header_appbar) GoodAppBarLayout mAppBarLayout;
+    @Bind(R.id.cl_content) CoordinatorLayout mLayout;
+    LoveVideoView mVideoView;
 
     List<Gank> mGankList;
     GankListAdapter mAdapter;
     Subscription mSubscription;
     int mYear, mMonth, mDay;
-    CoordinatorLayout.LayoutParams mAppBarLayoutParams;
+    boolean mIsVideoViewInflated = false;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -71,6 +86,7 @@ public class GankFragment extends Fragment {
         mAdapter = new GankListAdapter(mGankList);
         parseArguments();
         setRetainInstance(true);
+        Log.d(TAG, mDay + "onCreate");
     }
 
     private void parseArguments() {
@@ -92,7 +108,7 @@ public class GankFragment extends Fragment {
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle(String.format("%s/%s/%s", mYear, mMonth, mDay));
-        getData();
+        if (mGankList.size() == 0) getData();
     }
 
     private void initRecyclerView() {
@@ -102,23 +118,46 @@ public class GankFragment extends Fragment {
     }
 
     private void getData() {
+        getAndParseVideoPreview();
         mSubscription = BaseActivity.sDrakeet.getGankData(mYear, mMonth, mDay)
             .observeOn(AndroidSchedulers.mainThread())
             .map(data -> data.results)
             .map(this::addAllResults)
             .subscribe(list -> {
                 if (list.isEmpty()) { showEmptyView(); }
-                else { mAdapter.notifyDataSetChanged(); }
+                else {mAdapter.notifyDataSetChanged();}
             }, Throwable::printStackTrace);
     }
 
-    private void showEmptyView() {mEmptyViewStub.setVisibility(View.VISIBLE);}
+    private void getAndParseVideoPreview() {
+        OkHttpClient client = new OkHttpClient();
+        String url = "http://gank.io/" + String.format("%s/%s/%s", mYear, mMonth, mDay);
+        Request request = new Request.Builder().url(url).build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override public void onFailure(Request request, IOException e) {
+                ToastUtils.showShort(e.getMessage());
+            }
+
+            @Override public void onResponse(Response response) throws IOException {
+                String body = response.body().string();
+                String url = LoveStringUtils.getVideoPreviewImageUrl(body);
+                if (url != null) {
+                    mVideoImageView.post(() -> Picasso.with(mVideoImageView.getContext())
+                        .load(url)
+                        .into(mVideoImageView));
+                }
+            }
+        });
+    }
+
+    private void showEmptyView() {mEmptyViewStub.inflate();}
 
     private List<Gank> addAllResults(GankData.Result results) {
         if (results.androidList != null) mGankList.addAll(results.androidList);
         if (results.iOSList != null) mGankList.addAll(results.iOSList);
         if (results.拓展资源List != null) mGankList.addAll(results.拓展资源List);
         if (results.瞎推荐List != null) mGankList.addAll(results.瞎推荐List);
+        if (results.休息视频List != null) mGankList.addAll(0, results.休息视频List);
         return mGankList;
     }
 
@@ -129,20 +168,22 @@ public class GankFragment extends Fragment {
     private void setVideoViewPosition(Configuration newConfig) {
         switch (newConfig.orientation) {
             case Configuration.ORIENTATION_LANDSCAPE: {
-                mRecyclerView.setVisibility(View.GONE);
-                mAppBarLayoutParams =
-                    (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
-                CoordinatorLayout.LayoutParams params =
-                    new CoordinatorLayout.LayoutParams(CoordinatorLayout.LayoutParams.MATCH_PARENT,
-                        CoordinatorLayout.LayoutParams.MATCH_PARENT);
-                mAppBarLayout.setLayoutParams(params);
+                if (mIsVideoViewInflated) {
+                    mVideoViewStub.setVisibility(View.VISIBLE);
+                }
+                else {
+                    mVideoView = (LoveVideoView) mVideoViewStub.inflate();
+                    mIsVideoViewInflated = true;
+                }
+                if (mGankList.size() > 0 && mGankList.get(0).type.equals("休息视频")) {
+                    mVideoView.loadUrl(mGankList.get(0).url);
+                }
                 break;
             }
-            case Configuration.ORIENTATION_UNDEFINED:
             case Configuration.ORIENTATION_PORTRAIT:
+            case Configuration.ORIENTATION_UNDEFINED:
             default: {
-                mRecyclerView.setVisibility(View.VISIBLE);
-                if (mAppBarLayoutParams != null) mAppBarLayout.setLayoutParams(mAppBarLayoutParams);
+                mVideoViewStub.setVisibility(View.GONE);
                 break;
             }
         }
@@ -153,19 +194,22 @@ public class GankFragment extends Fragment {
         super.onConfigurationChanged(newConfig);
     }
 
-    @Subscribe public void onKeyBackPress(OnKeyBackClickEvent event) {
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+    @Subscribe public void onKeyBackClick(OnKeyBackClickEvent event) {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
     }
 
     @Override public void onResume() {
         super.onResume();
         LoveBus.getLovelySeat().register(this);
+        if (mVideoView != null) mVideoView.resumeTimers();
     }
 
     @Override public void onPause() {
         super.onPause();
         LoveBus.getLovelySeat().unregister(this);
+        if (mVideoView != null) mVideoView.pauseTimers();
     }
 
     @Override public void onDestroyView() {
@@ -175,8 +219,7 @@ public class GankFragment extends Fragment {
 
     @Override public void onDestroy() {
         super.onDestroy();
-        if (mSubscription != null) {
-            mSubscription.unsubscribe();
-        }
+        if (mSubscription != null) mSubscription.unsubscribe();
+        if (mVideoView != null) mVideoView.destroy();
     }
 }

@@ -23,7 +23,7 @@ public class DrakeetRetrofit {
 
     DrakeetRetrofit() {
         OkHttpClient client = new OkHttpClient();
-        client.setReadTimeout(30, TimeUnit.SECONDS);
+        client.setReadTimeout(12, TimeUnit.SECONDS);
 
         RestAdapter restAdapter = new RestAdapter.Builder().setClient(new OkClient(client))
             .setEndpoint("http://gank.avosapps.com/api")

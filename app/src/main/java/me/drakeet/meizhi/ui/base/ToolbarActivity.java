@@ -18,7 +18,7 @@ public abstract class ToolbarActivity extends BaseActivity {
 
     protected AppBarLayout mAppBar;
     protected Toolbar mToolbar;
-    protected boolean isHidden = false;
+    protected boolean mIsHidden = false;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +55,10 @@ public abstract class ToolbarActivity extends BaseActivity {
 
     protected void hideOrShowToolbar() {
         mAppBar.animate()
-            .translationY(isHidden ? 0 : -mAppBar.getHeight())
+            .translationY(mIsHidden ? 0 : -mAppBar.getHeight())
             .setInterpolator(new DecelerateInterpolator(2))
             .start();
 
-        isHidden = !isHidden;
+        mIsHidden = !mIsHidden;
     }
 }
