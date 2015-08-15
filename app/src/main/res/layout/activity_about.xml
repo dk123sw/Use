@@ -195,96 +195,13 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/tv_otto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="otto - Square"
-                    android:textColor="@color/md_grey_800"
-                    tools:ignore="HardcodedText"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_otto"
-                    android:text="https://github.com/square/otto\nApache Software License 2.0"
+                    android:text="@string/open_source_libraries_list"
                     android:textColor="@color/md_grey_600"
                     android:textSize="@dimen/open_source_lis_text_size"
                     tools:ignore="HardcodedText"/>
-            </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/bg_card_nopic"
-                android:padding="16dp">
-
-                <TextView
-                    android:id="@+id/tv_butterknife"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ButterKnife - Jake Wharton"
-                    android:textColor="@color/md_grey_800"
-                    tools:ignore="HardcodedText"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_butterknife"
-                    android:text="http://jakewharton.github.io/butterknife\nApache Software License 2.0"
-                    android:textColor="@color/md_grey_600"
-                    android:textSize="@dimen/open_source_lis_text_size"
-                    tools:ignore="HardcodedText"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                style="@style/LisPaddingStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/bg_card_nopic">
-
-                <TextView
-                    android:id="@+id/tv_numberprogressbar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="NumberProgressbar - 代码家"
-                    android:textColor="@color/md_grey_800"
-                    tools:ignore="HardcodedText"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_numberprogressbar"
-                    android:text="https://github.com/daimajia/NumberProgressBar\nMIT License"
-                    android:textColor="@color/md_grey_600"
-                    android:textSize="@dimen/open_source_lis_text_size"
-                    tools:ignore="HardcodedText"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                style="@style/LisPaddingStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/bg_card_nopic">
-
-                <TextView
-                    android:id="@+id/tv_litepal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="LitePal - Tony Green"
-                    android:textColor="@color/md_grey_800"
-                    tools:ignore="HardcodedText"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_litepal"
-                    android:text="https://github.com/LitePalFramework/LitePal\nApache Software License 2.0"
-                    android:textColor="@color/md_grey_600"
-                    android:textSize="@dimen/open_source_lis_text_size"
-                    tools:ignore="HardcodedText"/>
             </RelativeLayout>
 
         </LinearLayout>
