@@ -54,8 +54,8 @@ android {
             buildConfigField "boolean", "LOG_DEBUG", "false"
 
             debuggable false
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             if (keyStore.exists()) {
                 println "using drakeet's key"
