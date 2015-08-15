@@ -11,19 +11,18 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.umeng.analytics.MobclickAgent;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.adapter.MeizhiListAdapter;
+import me.drakeet.meizhi.data.MeizhiData;
+import me.drakeet.meizhi.data.休息视频Data;
 import me.drakeet.meizhi.listener.OnMeizhiTouchListener;
 import me.drakeet.meizhi.model.Meizhi;
 import me.drakeet.meizhi.ui.base.SwipeRefreshBaseActivity;
@@ -72,7 +71,9 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     }
 
     private void getData(boolean addFromDb) {
-        Subscription s = sDrakeet.getMeizhiData(mPage)
+        Subscription s = Observable.zip(
+            sDrakeet.getMeizhiData(mPage), sDrakeet.get休息视频Data(mPage),
+            (meizhi, love) -> createMeizhiDataWith休息视频Desc(meizhi, love))
             .map(meizhiData -> meizhiData.results)
             .flatMap(Observable::from)
             .toSortedList((meizhi1, meizhi2) -> meizhi2.updatedAt.compareTo(meizhi1.updatedAt))
@@ -83,6 +84,14 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                 setRefreshing(false);
             }, Throwable::printStackTrace);
         addSubscription(s);
+    }
+
+    private MeizhiData createMeizhiDataWith休息视频Desc(MeizhiData mzData, 休息视频Data love) {
+        for (int i = 0; i < mzData.results.size(); i++) {
+            Meizhi m = mzData.results.get(i);
+            m.desc = m.desc + " " + love.results.get(i).desc;
+        }
+        return mzData;
     }
 
     private void getData() {
@@ -147,14 +156,17 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     }
 
     @OnClick(R.id.main_fab) public void onFab(View v) {
-        requestDataRefresh();
+        setRefreshing(true);
         mRecyclerView.smoothScrollToPosition(0);
+        requestDataRefresh();
     }
 
     @Override public void requestDataRefresh() {
         super.requestDataRefresh();
-        mMeizhiList.clear();
-        getData(/* add from db */ false);
+        //mMeizhiList.clear();
+        //mPage = 1;
+        //getData(/* add from db */ false);
+        setRefreshing(false);
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {

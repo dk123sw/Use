@@ -15,7 +15,6 @@ import com.nineoldandroids.animation.ObjectAnimator;
 public class VideoImageView extends ImageView implements Animator.AnimatorListener {
 
     private boolean scale = false;
-    private static final int ANIM_COUNT = 4;
 
     public VideoImageView(Context context) {
         this(context, null);
@@ -41,7 +40,7 @@ public class VideoImageView extends ImageView implements Animator.AnimatorListen
                 ObjectAnimator.ofFloat(this, "scaleY", 1, 1.5f));
         }
 
-        anim.setDuration(7890);
+        anim.setDuration(10987);
         anim.addListener(this);
         anim.start();
         scale = !scale;

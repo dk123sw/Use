@@ -3,27 +3,21 @@ package me.drakeet.meizhi.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
-
 import java.io.IOException;
 import java.util.List;
-
 import me.drakeet.meizhi.R;
-import me.drakeet.meizhi.listener.MeizhiCardCallback;
 import me.drakeet.meizhi.listener.OnMeizhiTouchListener;
 import me.drakeet.meizhi.model.Meizhi;
 import me.drakeet.meizhi.widget.RatioImageView;
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by drakeet on 6/20/15.
@@ -54,21 +48,19 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
         viewHolder.card.setTag(meizhi.desc);
 
         // TODO: Waiting for daimajia's new api...
-        getBitmapObservable(meizhi.url).subscribeOn(Schedulers.newThread())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(bitmap -> {
-                viewHolder.meizhiView.setOriginalSize(bitmap.getWidth(), bitmap.getHeight());
-                //viewHolder.meizhiView.setImageBitmap(bitmap);
-                Picasso.with(mContext)
-                    .load(meizhi.url)
-                    .resize(bitmap.getWidth() / 3, bitmap.getHeight() / 3)
-                    .into(viewHolder.meizhiView, new MeizhiCardCallback(viewHolder.card));
-            }, throwable -> Log.e(TAG, throwable.getMessage()));
+        viewHolder.meizhiView.setOriginalSize((int) (50), 50);
+
+        Glide.with(mContext)
+            .load(meizhi.url)
+            .centerCrop()
+            .into(viewHolder.meizhiView)
+            .getSize((width, height) -> {
+                if (!viewHolder.card.isShown()) viewHolder.card.setVisibility(View.VISIBLE);
+            });
     }
 
     @Override public void onViewRecycled(ViewHolder holder) {
         super.onViewRecycled(holder);
-        if (holder.meizhiView != null) holder.meizhiView.setImageBitmap(null);
     }
 
     @Override public int getItemCount() {

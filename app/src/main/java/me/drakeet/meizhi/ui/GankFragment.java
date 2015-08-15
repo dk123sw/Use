@@ -7,7 +7,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +14,12 @@ import android.view.ViewStub;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.bumptech.glide.Glide;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.squareup.otto.Subscribe;
-import com.squareup.picasso.Picasso;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +86,6 @@ public class GankFragment extends Fragment {
         mAdapter = new GankListAdapter(mGankList);
         parseArguments();
         setRetainInstance(true);
-        Log.d(TAG, mDay + "onCreate");
     }
 
     private void parseArguments() {
@@ -111,7 +109,7 @@ public class GankFragment extends Fragment {
         getActivity().setTitle(String.format("%s/%s/%s", mYear, mMonth, mDay));
         if (mGankList.size() == 0) getData();
         if (mVideoPreviewUrl != null) {
-            Picasso.with(view.getContext())
+            Glide.with(this)
                 .load(mVideoPreviewUrl)
                 .into(mVideoImageView);
         }
@@ -148,7 +146,8 @@ public class GankFragment extends Fragment {
                 String body = response.body().string();
                 mVideoPreviewUrl = LoveStringUtils.getVideoPreviewImageUrl(body);
                 if (mVideoPreviewUrl != null) {
-                    mVideoImageView.post(() -> Picasso.with(mVideoImageView.getContext())
+                    mVideoImageView.post(() ->
+                        Glide.with(mVideoImageView.getContext())
                         .load(mVideoPreviewUrl)
                         .into(mVideoImageView));
                 }
