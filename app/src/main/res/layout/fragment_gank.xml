@@ -33,6 +33,7 @@
                         android:id="@+id/iv_video"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@color/theme_primary_darker"
                         android:scaleType="centerCrop"/>
                     <ImageView
                         android:layout_width="36dp"

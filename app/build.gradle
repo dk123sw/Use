@@ -14,8 +14,8 @@ android {
         applicationId "me.drakeet.meizhi"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 20
-        versionName "1.2.0"
+        versionCode 121
+        versionName "1.9.9"
     }
 
     packagingOptions {

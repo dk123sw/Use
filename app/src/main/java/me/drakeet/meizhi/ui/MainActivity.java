@@ -1,7 +1,6 @@
 package me.drakeet.meizhi.ui;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
@@ -71,12 +70,11 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     }
 
     private void getData(boolean addFromDb) {
-        Subscription s = Observable.zip(
-            sDrakeet.getMeizhiData(mPage), sDrakeet.get休息视频Data(mPage),
+        Subscription s = Observable.zip(sDrakeet.getMeizhiData(mPage), sDrakeet.get休息视频Data(mPage),
             (meizhi, love) -> createMeizhiDataWith休息视频Desc(meizhi, love))
             .map(meizhiData -> meizhiData.results)
             .flatMap(Observable::from)
-            .toSortedList((meizhi1, meizhi2) -> meizhi2.updatedAt.compareTo(meizhi1.updatedAt))
+            .toSortedList((meizhi1, meizhi2) -> meizhi2.publishedAt.compareTo(meizhi1.publishedAt))
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(meizhis -> {
                 mMeizhiList.addAll(meizhis);
@@ -134,7 +132,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
             }
             else if (v == card) {
                 Intent intent = new Intent(this, GankActivity.class);
-                intent.putExtra(GankActivity.EXTRA_GANK_DATE, meizhi.updatedAt);
+                intent.putExtra(GankActivity.EXTRA_GANK_DATE, meizhi.publishedAt);
                 startActivity(intent);
             }
         };
@@ -177,8 +175,9 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_about) {
-            Uri uri = Uri.parse(getString(R.string.blog_drakeet));
-            startActivity(new Intent(Intent.ACTION_VIEW, uri));
+            //Uri uri = Uri.parse(getString(R.string.blog_drakeet));
+            //startActivity(new Intent(Intent.ACTION_VIEW, uri));
+            startActivity(new Intent(this, AboutActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

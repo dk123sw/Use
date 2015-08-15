@@ -19,6 +19,7 @@ import java.util.Date;
     @Column(name = "objectId") public String objectId;
     @Column(name = "createdAt") public Date createdAt;
     @Column(name = "updatedAt") public Date updatedAt;
+    @Column(name = "publishedAt") public Date publishedAt;
     @Column(name = "imageWidth") public int imageWidth;
     @Column(name = "imageHeight") public int imageHeight;
 }

@@ -145,7 +145,7 @@ public class GankFragment extends Fragment {
             @Override public void onResponse(Response response) throws IOException {
                 String body = response.body().string();
                 mVideoPreviewUrl = LoveStringUtils.getVideoPreviewImageUrl(body);
-                if (mVideoPreviewUrl != null) {
+                if (mVideoPreviewUrl != null && mVideoImageView != null) {
                     mVideoImageView.post(() ->
                         Glide.with(mVideoImageView.getContext())
                         .load(mVideoPreviewUrl)
