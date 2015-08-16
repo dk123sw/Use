@@ -28,16 +28,16 @@
             android:id="@+id/main_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/fab_margin_bottom"
+            android:layout_marginRight="@dimen/fab_margin_right"
             android:layout_gravity="right|bottom"
-            android:layout_marginBottom="18dp"
-            android:layout_marginRight="16dp"
             android:clickable="true"
             android:src="@mipmap/ic_refresh_white_24dp"
             app:layout_anchor="@id/swipe_refresh_layout"
             app:borderWidth="0dp"
             app:elevation="4dp"
             app:layout_anchorGravity="right|bottom"
-            app:layout_behavior="me.drakeet.meizhi.widget.FABAutoHideBehavior"/>
+            app:layout_behavior="me.drakeet.meizhi.widget.ScrollAwareFABBehavior"/>
 
     </android.support.design.widget.CoordinatorLayout>
 
