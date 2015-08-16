@@ -181,7 +181,7 @@ public class GankFragment extends Fragment implements OnShare {
                     mVideoView = (LoveVideoView) mVideoViewStub.inflate();
                     mIsVideoViewInflated = true;
                     String tip = getString(R.string.tip_video_play);
-                    new Once(mVideoView.getContext()).show(tip, () -> ToastUtils.showLong(tip));
+                    new Once(mVideoView.getContext()).show(tip, () -> ToastUtils.showLongLong(tip));
                 }
                 if (mGankList.size() > 0 && mGankList.get(0).type.equals("休息视频")) {
                     mVideoView.loadUrl(mGankList.get(0).url);

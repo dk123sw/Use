@@ -38,4 +38,9 @@ public class ToastUtils {
     public static void showLong(String message) {
         Toast.makeText(App.sContext, message, Toast.LENGTH_LONG).show();
     }
+
+    public static void showLongLong(String message) {
+        showLong(message);
+        showLong(message);
+    }
 }
