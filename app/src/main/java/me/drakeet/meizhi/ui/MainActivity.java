@@ -122,12 +122,9 @@ public class MainActivity extends SwipeRefreshBaseActivity {
             if (meizhi == null) return;
             if (v == meizhiView) {
                 Picasso.with(this).load(meizhi.url).fetch(new Callback() {
-                    @Override public void onSuccess() {
-                        startPictureActivity(meizhi, meizhiView);
-                    }
+                    @Override public void onSuccess() {startPictureActivity(meizhi, meizhiView);}
 
-                    @Override public void onError() {
-                    }
+                    @Override public void onError() {}
                 });
             }
             else if (v == card) {
@@ -149,9 +146,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         ActivityCompat.startActivity(MainActivity.this, i, optionsCompat.toBundle());
     }
 
-    @Override public void onToolbarClick() {
-        mRecyclerView.smoothScrollToPosition(0);
-    }
+    @Override public void onToolbarClick() {mRecyclerView.smoothScrollToPosition(0);}
 
     @OnClick(R.id.main_fab) public void onFab(View v) {
         setRefreshing(true);
