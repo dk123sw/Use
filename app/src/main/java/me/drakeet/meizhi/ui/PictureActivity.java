@@ -12,11 +12,12 @@ import butterknife.ButterKnife;
 import com.squareup.picasso.Picasso;
 import com.umeng.analytics.MobclickAgent;
 import me.drakeet.meizhi.R;
+import me.drakeet.meizhi.face.OnShare;
 import me.drakeet.meizhi.ui.base.ToolbarActivity;
 import me.drakeet.meizhi.util.MeizhiImageUtils;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
-public class PictureActivity extends ToolbarActivity {
+public class PictureActivity extends ToolbarActivity implements OnShare {
 
     public static final String EXTRA_IMAGE_URL = "image_url";
     public static final String EXTRA_IMAGE_TITLE = "image_title";
@@ -84,9 +85,12 @@ public class PictureActivity extends ToolbarActivity {
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_about) {
-            return true;
+        switch (id) {
+            case R.id.action_share:
+                onClickShare(this);
+                return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 

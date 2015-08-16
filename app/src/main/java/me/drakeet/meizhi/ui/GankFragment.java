@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
@@ -28,6 +29,7 @@ import me.drakeet.meizhi.adapter.GankListAdapter;
 import me.drakeet.meizhi.data.GankData;
 import me.drakeet.meizhi.event.LoveBus;
 import me.drakeet.meizhi.event.OnKeyBackClickEvent;
+import me.drakeet.meizhi.face.OnShare;
 import me.drakeet.meizhi.model.Gank;
 import me.drakeet.meizhi.ui.base.BaseActivity;
 import me.drakeet.meizhi.util.LoveStringUtils;
@@ -42,7 +44,7 @@ import rx.android.schedulers.AndroidSchedulers;
 /**
  * Created by drakeet on 8/11/15.
  */
-public class GankFragment extends Fragment {
+public class GankFragment extends Fragment implements OnShare {
 
     private final String TAG = "GankFragment";
     private static final String ARG_YEAR = "year";
@@ -87,6 +89,7 @@ public class GankFragment extends Fragment {
         mAdapter = new GankListAdapter(mGankList);
         parseArguments();
         setRetainInstance(true);
+        setHasOptionsMenu(true);
     }
 
     private void parseArguments() {
@@ -211,6 +214,16 @@ public class GankFragment extends Fragment {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_share:
+                onClickShare(getActivity(),
+                    mGankList.get(0).desc + getString(R.string.share_from));
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override public void onResume() {

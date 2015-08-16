@@ -34,5 +34,6 @@
     <string name="open_source_libraries_list">headsupcompat\ncom.android.support:appcompat-v7:22.2.1\ncom.android.support:recyclerview-v7:22.2.1\ncom.squareup.picasso:picasso:2.5.2\ncom.android.support:design:22.2.1\ncom.github.chrisbanes.photoview:library:1.2.3\ncom.daimajia.numberprogressbar:library:1.2@aar\ncom.umeng.analytics:analytics:latest.integration\ncom.michaelpardo:activeandroid:3.1.0-SNAPSHOT\ncom.squareup.retrofit:retrofit:1.9.0\nio.reactivex:rxandroid:1.0.0\ncom.squareup.okhttp:okhttp-urlconnection:2.0.0\ncom.squareup.okhttp:okhttp:2.0.0\ncom.jakewharton:butterknife:7.0.1\ncom.squareup:otto:1.3.8\ncom.github.bumptech.glide:glide:3.6.1"</string>
     <string name="tip_video_play">加载中...（这其实不是一个视频播放器，而是一个网页浏览器，需要你手动点击页面中的视频进行播放）</string>
     <string name="action_share">分享</string>
+    <string name="share_from"><![CDATA[" - from 「妹纸&gank.io」(http://fir.im/mengmeizhi)"]]></string>
 
 </resources>

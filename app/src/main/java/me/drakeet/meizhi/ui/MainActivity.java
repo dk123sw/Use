@@ -22,7 +22,7 @@ import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.adapter.MeizhiListAdapter;
 import me.drakeet.meizhi.data.MeizhiData;
 import me.drakeet.meizhi.data.休息视频Data;
-import me.drakeet.meizhi.listener.OnMeizhiTouchListener;
+import me.drakeet.meizhi.face.OnMeizhiTouchListener;
 import me.drakeet.meizhi.model.Meizhi;
 import me.drakeet.meizhi.ui.base.SwipeRefreshBaseActivity;
 import me.drakeet.meizhi.util.AlarmManagerUtils;
@@ -175,8 +175,6 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_about) {
-            //Uri uri = Uri.parse(getString(R.string.blog_drakeet));
-            //startActivity(new Intent(Intent.ACTION_VIEW, uri));
             startActivity(new Intent(this, AboutActivity.class));
             return true;
         }

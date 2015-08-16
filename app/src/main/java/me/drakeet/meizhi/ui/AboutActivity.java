@@ -1,9 +1,7 @@
 package me.drakeet.meizhi.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,11 +11,13 @@ import butterknife.ButterKnife;
 import com.umeng.analytics.MobclickAgent;
 import me.drakeet.meizhi.BuildConfig;
 import me.drakeet.meizhi.R;
+import me.drakeet.meizhi.face.OnShare;
+import me.drakeet.meizhi.ui.base.BaseActivity;
 
 /**
  * Created by drakeet on 15/8/15.
  */
-public class AboutActivity extends AppCompatActivity {
+public class AboutActivity extends BaseActivity implements OnShare {
 
     @Bind(R.id.toolbar) Toolbar mToolbar;
     @Bind(R.id.tv_version) TextView mVersionTextView;
@@ -52,22 +52,10 @@ public class AboutActivity extends AppCompatActivity {
                 this.finish();
                 return true;
             case R.id.menu_share:
-                onClickShare();
+                onClickShare(this);
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * on share item click
-     */
-    public void onClickShare() {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_SUBJECT, "分享");
-        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text));
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(Intent.createChooser(intent, getTitle()));
     }
 
     public void onResume() {

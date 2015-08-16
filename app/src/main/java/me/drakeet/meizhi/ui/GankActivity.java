@@ -1,5 +1,6 @@
 package me.drakeet.meizhi.ui;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -99,8 +100,10 @@ public class GankActivity extends ToolbarActivity {
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_about) {
-            return true;
+        switch (id) {
+            case R.id.action_about:
+                startActivity(new Intent(this, AboutActivity.class));
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
