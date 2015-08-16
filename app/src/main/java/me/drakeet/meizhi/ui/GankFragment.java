@@ -113,9 +113,7 @@ public class GankFragment extends Fragment implements OnShare {
         getActivity().setTitle(String.format("%s/%s/%s", mYear, mMonth, mDay));
         if (mGankList.size() == 0) getData();
         if (mVideoPreviewUrl != null) {
-            Glide.with(this)
-                .load(mVideoPreviewUrl)
-                .into(mVideoImageView);
+            Glide.with(this).load(mVideoPreviewUrl).into(mVideoImageView);
         }
     }
 
@@ -150,8 +148,7 @@ public class GankFragment extends Fragment implements OnShare {
                 String body = response.body().string();
                 mVideoPreviewUrl = LoveStringUtils.getVideoPreviewImageUrl(body);
                 if (mVideoPreviewUrl != null && mVideoImageView != null) {
-                    mVideoImageView.post(() ->
-                        Glide.with(mVideoImageView.getContext())
+                    mVideoImageView.post(() -> Glide.with(mVideoImageView.getContext())
                         .load(mVideoPreviewUrl)
                         .into(mVideoImageView));
                 }
@@ -220,8 +217,15 @@ public class GankFragment extends Fragment implements OnShare {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_share:
-                onClickShare(getActivity(),
-                    mGankList.get(0).desc + getString(R.string.share_from));
+                if (mGankList.size() != 0) {
+                    Gank gank = mGankList.get(0);
+                    String shareText = gank.desc + gank.url + getString(R.string.share_from);
+                    onClickShare(getActivity(), shareText);
+                }
+                else {
+                    onClickShare(getActivity());
+                }
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
