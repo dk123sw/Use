@@ -31,6 +31,7 @@ import me.drakeet.meizhi.event.OnKeyBackClickEvent;
 import me.drakeet.meizhi.model.Gank;
 import me.drakeet.meizhi.ui.base.BaseActivity;
 import me.drakeet.meizhi.util.LoveStringUtils;
+import me.drakeet.meizhi.util.Once;
 import me.drakeet.meizhi.util.ToastUtils;
 import me.drakeet.meizhi.widget.GoodAppBarLayout;
 import me.drakeet.meizhi.widget.LoveVideoView;
@@ -179,6 +180,8 @@ public class GankFragment extends Fragment {
                 else {
                     mVideoView = (LoveVideoView) mVideoViewStub.inflate();
                     mIsVideoViewInflated = true;
+                    String tip = getString(R.string.tip_video_play);
+                    new Once(mVideoView.getContext()).show(tip, () -> ToastUtils.showLong(tip));
                 }
                 if (mGankList.size() > 0 && mGankList.get(0).type.equals("休息视频")) {
                     mVideoView.loadUrl(mGankList.get(0).url);
@@ -192,6 +195,11 @@ public class GankFragment extends Fragment {
                 break;
             }
         }
+    }
+
+    void closePlayer() {
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        ToastUtils.showShort(getString(R.string.daimajia_has_gone));
     }
 
     @Override public void onConfigurationChanged(Configuration newConfig) {
