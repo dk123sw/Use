@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -44,7 +43,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_gank_title"
             android:textColor="@color/md_grey_900"
-            tools:text="title ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"/>
+            tools:text="叔叔、叔叔，西湖怎么走？"/>
     </LinearLayout>
 
 </LinearLayout>

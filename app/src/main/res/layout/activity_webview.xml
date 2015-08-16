@@ -12,10 +12,10 @@
         app:progress_reached_bar_height="2dp"
         app:progress_text_size="0sp"
         app:progress_text_visibility="invisible"
-        app:progress_unreached_bar_height="2dp" />
+        app:progress_unreached_bar_height="2dp"/>
 
     <WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 </LinearLayout>
