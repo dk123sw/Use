@@ -12,7 +12,7 @@ import com.umeng.analytics.MobclickAgent;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.ui.base.ToolbarActivity;
 
-public class WebViewActivity extends ToolbarActivity {
+public class WebActivity extends ToolbarActivity {
 
     public static final String EXTRA_URL = "extra_url";
     public static final String EXTRA_TITLE = "extra_title";

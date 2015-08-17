@@ -15,7 +15,7 @@ import java.util.List;
 
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.model.Gank;
-import me.drakeet.meizhi.ui.WebViewActivity;
+import me.drakeet.meizhi.ui.WebActivity;
 import me.drakeet.meizhi.util.StringStyleUtils;
 
 /**
@@ -79,11 +79,11 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
             ButterKnife.bind(this, itemView);
         }
 
-        @OnClick(R.id.tv_title) void onGank(View v) {
+        @OnClick(R.id.ll_gank_parent) void onGank(View v) {
             Gank gank = mGankList.get(getLayoutPosition());
-            Intent intent = new Intent(v.getContext(), WebViewActivity.class);
-            intent.putExtra(WebViewActivity.EXTRA_TITLE, gank.desc);
-            intent.putExtra(WebViewActivity.EXTRA_URL, gank.url);
+            Intent intent = new Intent(v.getContext(), WebActivity.class);
+            intent.putExtra(WebActivity.EXTRA_TITLE, gank.desc);
+            intent.putExtra(WebActivity.EXTRA_URL, gank.url);
             v.getContext().startActivity(intent);
         }
     }

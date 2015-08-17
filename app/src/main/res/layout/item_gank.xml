@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
     android:orientation="vertical">
 
     <TextView
@@ -20,12 +19,14 @@
         tools:text="Category"/>
 
     <LinearLayout
+        android:id="@+id/ll_gank_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/padding_gank_item"
         android:paddingRight="@dimen/padding_gank_item"
         android:paddingTop="@dimen/padding_vertical_gank_item"
         android:paddingBottom="@dimen/padding_vertical_gank_item"
+        android:background="?attr/selectableItemBackground"
         tools:background="@color/md_amber_100">
 
         <TextView
@@ -40,7 +41,7 @@
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_gank_title"
             android:textColor="@color/md_grey_900"

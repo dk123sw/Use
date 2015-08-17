@@ -33,7 +33,7 @@
             android:name=".ui.PictureActivity"
             android:label="@string/title_activity_picture"/>
 
-        <activity android:name=".ui.WebViewActivity"/>
+        <activity android:name=".ui.WebActivity"/>
 
         <activity
             android:name=".ui.GankActivity"
