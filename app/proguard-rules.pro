@@ -136,3 +136,5 @@
 }
 
 -keep class sun.misc.Unsafe { *; }
+
+-dontwarn java.lang.invoke.*
