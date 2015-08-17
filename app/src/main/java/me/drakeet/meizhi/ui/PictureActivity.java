@@ -2,7 +2,6 @@ package me.drakeet.meizhi.ui;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,6 +31,10 @@ public class PictureActivity extends ToolbarActivity {
         return R.layout.activity_picture;
     }
 
+    @Override public boolean canBack() {
+        return true;
+    }
+
     private void parseIntent() {
         mImageUrl = getIntent().getStringExtra(EXTRA_IMAGE_URL);
         mImageTitle = getIntent().getStringExtra(EXTRA_IMAGE_TITLE);
@@ -49,8 +52,6 @@ public class PictureActivity extends ToolbarActivity {
         // set up app bar
         setAppBarAlpha(0.7f);
         setTitle(mImageTitle);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
 
         setUpPhotoAttacher();
     }

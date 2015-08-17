@@ -1,5 +1,6 @@
 package me.drakeet.meizhi.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
@@ -9,10 +10,12 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import java.util.List;
 
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.model.Gank;
+import me.drakeet.meizhi.ui.WebViewActivity;
 import me.drakeet.meizhi.util.StringStyleUtils;
 
 /**
@@ -36,12 +39,14 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
         Gank gank = mGankList.get(position);
         if (position == 0) {
             showCategory(holder);
-        } else {
+        }
+        else {
             boolean doesLastAndThis =
                 mGankList.get(position - 1).type.equals(mGankList.get(position).type);
             if (!doesLastAndThis) {
                 showCategory(holder);
-            } else if (holder.category.isShown()) holder.category.setVisibility(View.GONE);
+            }
+            else if (holder.category.isShown()) holder.category.setVisibility(View.GONE);
         }
         holder.category.setText(gank.type);
         if (holder.gank.getTag() == null) {
@@ -72,6 +77,14 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+        }
+
+        @OnClick(R.id.tv_title) void onGank(View v) {
+            Gank gank = mGankList.get(getLayoutPosition());
+            Intent intent = new Intent(v.getContext(), WebViewActivity.class);
+            intent.putExtra(WebViewActivity.EXTRA_TITLE, gank.desc);
+            intent.putExtra(WebViewActivity.EXTRA_URL, gank.url);
+            v.getContext().startActivity(intent);
         }
     }
 }
