@@ -60,7 +60,7 @@ public class WebActivity extends ToolbarActivity {
             textView.setTextAppearance(this, R.style.WebTitle);
             textView.setSingleLine(true);
             textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-            textView.postDelayed(() -> textView.setSelected(true), 1380);
+            textView.postDelayed(() -> textView.setSelected(true), 1738);
             return textView;
         });
         mTextSwitcher.setInAnimation(this, android.R.anim.fade_in);
