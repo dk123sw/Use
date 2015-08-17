@@ -13,7 +13,7 @@
     </style>
 
     <style name="CollapsingToolbarTitleStyle"
-        parent="Widget.Design.CollapsingToolbar">
+        parent="@android:style/TextAppearance">
         <item name="android:textColor">@android:color/transparent</item>
     </style>
 
