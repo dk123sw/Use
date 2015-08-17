@@ -90,6 +90,7 @@ public class WebActivity extends ToolbarActivity {
     }
 
     private class ChromeClient extends WebChromeClient {
+
         @Override public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
             mProgressbar.setProgress(newProgress);
@@ -102,6 +103,7 @@ public class WebActivity extends ToolbarActivity {
     }
 
     private class LoveClient extends WebViewClient {
+
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if (url != null) view.loadUrl(url);
             return true;
