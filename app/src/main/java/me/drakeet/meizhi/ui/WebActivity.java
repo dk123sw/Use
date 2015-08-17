@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import butterknife.Bind;
@@ -39,14 +40,19 @@ public class WebActivity extends ToolbarActivity {
         mUrl = getIntent().getStringExtra(EXTRA_URL);
         mTitle = getIntent().getStringExtra(EXTRA_TITLE);
 
-        mWebView.getSettings().setJavaScriptEnabled(true);
+        WebSettings settings = mWebView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setAppCacheEnabled(true);
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        settings.setSupportZoom(true);
         mWebView.setWebChromeClient(new ChromeClient());
         mWebView.setWebViewClient(new LoveClient());
-        mWebView.getSettings().setLoadWithOverviewMode(true);
-        mWebView.getSettings().setAppCacheEnabled(true);
+
         mWebView.loadUrl(mUrl);
 
-        setTitle(mTitle);
+        if (mTitle != null) setTitle(mTitle);
+        mToolbar.setTitleTextAppearance(this, R.style.WebTitle);
     }
 
     @Override public boolean onKeyDown(int keyCode, KeyEvent event) {

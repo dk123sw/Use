@@ -1,5 +1,6 @@
 package me.drakeet.meizhi.ui;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -137,7 +138,7 @@ public class GankFragment extends Fragment {
 
     private void getAndParseVideoPreview() {
         OkHttpClient client = new OkHttpClient();
-        String url = "http://gank.io/" + String.format("%s/%s/%s", mYear, mMonth, mDay);
+        String url = getString(R.string.url_gank_io) + String.format("%s/%s/%s", mYear, mMonth, mDay);
         Request request = new Request.Builder().url(url).build();
         client.newCall(request).enqueue(new Callback() {
             @Override public void onFailure(Request request, IOException e) {
@@ -226,8 +227,18 @@ public class GankFragment extends Fragment {
                     ShareUtils.share(getActivity());
                 }
                 return true;
+            case R.id.action_subject:
+                openTodaySubject();
+                return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openTodaySubject() {
+        String url = getString(R.string.url_gank_io) + String.format("%s/%s/%s", mYear, mMonth, mDay);
+        Intent intent = new Intent(getActivity(), WebActivity.class);
+        intent.putExtra(WebActivity.EXTRA_URL, url);
+        startActivity(intent);
     }
 
     @Override public void onResume() {
