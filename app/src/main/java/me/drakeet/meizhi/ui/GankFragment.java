@@ -29,11 +29,11 @@ import me.drakeet.meizhi.adapter.GankListAdapter;
 import me.drakeet.meizhi.data.GankData;
 import me.drakeet.meizhi.event.LoveBus;
 import me.drakeet.meizhi.event.OnKeyBackClickEvent;
-import me.drakeet.meizhi.face.OnShare;
 import me.drakeet.meizhi.model.Gank;
 import me.drakeet.meizhi.ui.base.BaseActivity;
 import me.drakeet.meizhi.util.LoveStringUtils;
 import me.drakeet.meizhi.util.Once;
+import me.drakeet.meizhi.util.ShareUtils;
 import me.drakeet.meizhi.util.ToastUtils;
 import me.drakeet.meizhi.widget.GoodAppBarLayout;
 import me.drakeet.meizhi.widget.LoveVideoView;
@@ -44,7 +44,7 @@ import rx.android.schedulers.AndroidSchedulers;
 /**
  * Created by drakeet on 8/11/15.
  */
-public class GankFragment extends Fragment implements OnShare {
+public class GankFragment extends Fragment {
 
     private final String TAG = "GankFragment";
     private static final String ARG_YEAR = "year";
@@ -220,10 +220,10 @@ public class GankFragment extends Fragment implements OnShare {
                 if (mGankList.size() != 0) {
                     Gank gank = mGankList.get(0);
                     String shareText = gank.desc + gank.url + getString(R.string.share_from);
-                    onClickShare(getActivity(), shareText);
+                    ShareUtils.share(getActivity(), shareText);
                 }
                 else {
-                    onClickShare(getActivity());
+                    ShareUtils.share(getActivity());
                 }
                 return true;
         }

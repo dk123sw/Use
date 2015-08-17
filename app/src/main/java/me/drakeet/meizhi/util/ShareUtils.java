@@ -1,20 +1,19 @@
-package me.drakeet.meizhi.face;
+package me.drakeet.meizhi.util;
 
 import android.content.Context;
 import android.content.Intent;
 import me.drakeet.meizhi.R;
 
 /**
- * lol
- * Created by drakeet on 8/16/15.
+ * Created by drakeet on 8/17/15.
  */
-public interface OnShare {
+public class ShareUtils {
 
-    default void onClickShare(Context context) {
-        onClickShare(context, context.getString(R.string.share_text));
+    public static void share(Context context) {
+        share(context, context.getString(R.string.share_text));
     }
 
-    default void onClickShare(Context context, String extraText) {
+    public static void share(Context context, String extraText) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.action_share));

@@ -11,13 +11,13 @@ import butterknife.ButterKnife;
 import com.umeng.analytics.MobclickAgent;
 import me.drakeet.meizhi.BuildConfig;
 import me.drakeet.meizhi.R;
-import me.drakeet.meizhi.face.OnShare;
 import me.drakeet.meizhi.ui.base.BaseActivity;
+import me.drakeet.meizhi.util.ShareUtils;
 
 /**
  * Created by drakeet on 15/8/15.
  */
-public class AboutActivity extends BaseActivity implements OnShare {
+public class AboutActivity extends BaseActivity {
 
     @Bind(R.id.toolbar) Toolbar mToolbar;
     @Bind(R.id.tv_version) TextView mVersionTextView;
@@ -52,7 +52,7 @@ public class AboutActivity extends BaseActivity implements OnShare {
                 this.finish();
                 return true;
             case R.id.menu_share:
-                onClickShare(this);
+                ShareUtils.share(this);
                 return true;
         }
         return super.onOptionsItemSelected(item);
