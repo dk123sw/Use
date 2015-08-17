@@ -77,11 +77,16 @@ public class MainActivity extends SwipeRefreshBaseActivity {
             .toSortedList((meizhi1, meizhi2) -> meizhi2.publishedAt.compareTo(meizhi1.publishedAt))
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(meizhis -> {
+                saveMeizhis(meizhis);
                 mMeizhiList.addAll(meizhis);
                 mMeizhiListAdapter.notifyDataSetChanged();
                 setRefreshing(false);
             }, Throwable::printStackTrace);
         addSubscription(s);
+    }
+
+    private void saveMeizhis(List<Meizhi> meizhis) {
+
     }
 
     private MeizhiData createMeizhiDataWith休息视频Desc(MeizhiData mzData, 休息视频Data love) {

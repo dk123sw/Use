@@ -1,11 +1,11 @@
 package me.drakeet.meizhi;
 
+import com.activeandroid.Model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.okhttp.OkHttpClient;
-
 import java.util.concurrent.TimeUnit;
-
+import me.drakeet.meizhi.other.ActiveAndroidStrategy;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
@@ -18,8 +18,10 @@ public class DrakeetRetrofit {
 
     final Drakeet service;
 
-    final static Gson gson =
-        new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
+    final static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+        .setExclusionStrategies(new ActiveAndroidStrategy(null, Model.class))
+        .serializeNulls()
+        .create();
 
     DrakeetRetrofit() {
         OkHttpClient client = new OkHttpClient();
