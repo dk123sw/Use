@@ -238,6 +238,7 @@ public class GankFragment extends Fragment {
         String url = getString(R.string.url_gank_io) + String.format("%s/%s/%s", mYear, mMonth, mDay);
         Intent intent = new Intent(getActivity(), WebActivity.class);
         intent.putExtra(WebActivity.EXTRA_URL, url);
+        intent.putExtra(WebActivity.EXTRA_TITLE, getString(R.string.action_subject));
         startActivity(intent);
     }
 

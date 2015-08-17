@@ -7,6 +7,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.daimajia.numberprogressbar.NumberProgressBar;
@@ -21,12 +22,13 @@ public class WebActivity extends ToolbarActivity {
 
     @Bind(R.id.progressbar) NumberProgressBar mProgressbar;
     @Bind(R.id.webView) WebView mWebView;
+    @Bind(R.id.tv_title) TextView mTitleView;
 
     Context mContext;
     String mUrl, mTitle;
 
     @Override protected int provideContentViewId() {
-        return R.layout.activity_webview;
+        return R.layout.activity_web;
     }
 
     @Override public boolean canBack() {
@@ -39,6 +41,7 @@ public class WebActivity extends ToolbarActivity {
         mContext = this;
         mUrl = getIntent().getStringExtra(EXTRA_URL);
         mTitle = getIntent().getStringExtra(EXTRA_TITLE);
+        if (mTitle != null) setTitle(mTitle);
 
         WebSettings settings = mWebView.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -51,8 +54,17 @@ public class WebActivity extends ToolbarActivity {
 
         mWebView.loadUrl(mUrl);
 
-        if (mTitle != null) setTitle(mTitle);
-        mToolbar.setTitleTextAppearance(this, R.style.WebTitle);
+        mTitleView.postDelayed(() -> mTitleView.setSelected(true), 1380);
+    }
+
+    @Override public void setTitle(CharSequence title) {
+        super.setTitle(title);
+        mTitleView.setText(title);
+    }
+
+    @Override public void setTitle(int titleId) {
+        super.setTitle(titleId);
+        mTitleView.setText(titleId);
     }
 
     @Override public boolean onKeyDown(int keyCode, KeyEvent event) {

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/view_toolbar"/>
+    <include layout="@layout/view_toolbar_with_title_view"/>
 
     <com.daimajia.numberprogressbar.NumberProgressBar
         android:id="@+id/progressbar"
