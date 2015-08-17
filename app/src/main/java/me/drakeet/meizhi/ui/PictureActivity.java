@@ -27,7 +27,7 @@ public class PictureActivity extends ToolbarActivity {
     PhotoViewAttacher mPhotoViewAttacher;
     String mImageUrl, mImageTitle;
 
-    @Override protected int getLayoutResource() {
+    @Override protected int provideContentViewId() {
         return R.layout.activity_picture;
     }
 

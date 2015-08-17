@@ -29,7 +29,7 @@ public class GankActivity extends ToolbarActivity {
 
     GankPagerAdapter mPagerAdapter;
 
-    @Override protected int getLayoutResource() {
+    @Override protected int provideContentViewId() {
         return R.layout.activity_gank;
     }
 

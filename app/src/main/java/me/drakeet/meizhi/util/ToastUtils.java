@@ -43,4 +43,9 @@ public class ToastUtils {
         showLong(message);
         showLong(message);
     }
+
+    public static void showLongLong(int resId) {
+        showLong(resId);
+        showLong(resId);
+    }
 }

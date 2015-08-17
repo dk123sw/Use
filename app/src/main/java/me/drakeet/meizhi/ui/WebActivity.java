@@ -24,7 +24,7 @@ public class WebActivity extends ToolbarActivity {
     Context mContext;
     String mUrl, mTitle;
 
-    @Override protected int getLayoutResource() {
+    @Override protected int provideContentViewId() {
         return R.layout.activity_webview;
     }
 

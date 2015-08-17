@@ -39,7 +39,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     boolean mIsFirstTimeTouchBottom = true;
     int mPage = 1;
 
-    @Override protected int getLayoutResource() {
+    @Override protected int provideContentViewId() {
         return R.layout.activity_main;
     }
 

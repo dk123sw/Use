@@ -12,10 +12,9 @@ import me.drakeet.meizhi.R;
 
 public abstract class ToolbarActivity extends BaseActivity {
 
-    abstract protected int getLayoutResource();
+    abstract protected int provideContentViewId();
 
-    public void onToolbarClick() {
-    }
+    public void onToolbarClick() {}
 
     protected AppBarLayout mAppBar;
     protected Toolbar mToolbar;
@@ -23,13 +22,13 @@ public abstract class ToolbarActivity extends BaseActivity {
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutResource());
+        setContentView(provideContentViewId());
 
         mAppBar = (AppBarLayout) findViewById(R.id.app_bar_layout);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         if (mToolbar == null || mAppBar == null) {
-            throw new IllegalStateException("no toolbar");
+            throw new IllegalStateException("No toolbar");
         }
 
         mToolbar.setOnClickListener(v -> onToolbarClick());
@@ -54,7 +53,8 @@ public abstract class ToolbarActivity extends BaseActivity {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
             return true;
-        } else {
+        }
+        else {
             return super.onOptionsItemSelected(item);
         }
     }
