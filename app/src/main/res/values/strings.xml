@@ -37,5 +37,8 @@
     <string name="share_from"><![CDATA[" - from「妹纸&gank.io」http://fir.im/mengmeizhi"]]></string>
     <string name="action_subject">今日肥皂家话题</string>
     <string name="url_gank_io">http://gank.io/</string>
+    <string name="action_login_github">登录 GitHub 帐号</string>
+    <string name="tip_login_github">妹纸 App 并无帐号系统，这个菜单只是提前登录保留 cookies，以便于之后进 GitHub 页面 star 项目</string>
+    <string name="url_login_github">https://github.com/login</string>
 
 </resources>

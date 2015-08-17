@@ -3,6 +3,7 @@ package me.drakeet.meizhi.ui.base;
 import android.os.Bundle;
 
 import android.os.PersistableBundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.drakeet.meizhi.R;
@@ -29,7 +30,12 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
         if (mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_3,
                 R.color.refresh_progress_2, R.color.refresh_progress_1);
-            mSwipeRefreshLayout.setOnRefreshListener(this::requestDataRefresh);
+            // do not use lambda!!
+            mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override public void onRefresh() {
+                        requestDataRefresh();
+                    }
+                });
         }
     }
 

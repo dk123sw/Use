@@ -8,10 +8,12 @@ import android.content.SharedPreferences;
  */
 public class Once {
 
-    private SharedPreferences mSharedPreferences;
+    SharedPreferences mSharedPreferences;
+    Context mContext;
 
     public Once(Context context) {
         mSharedPreferences = context.getSharedPreferences("once", Context.MODE_PRIVATE);
+        mContext = context;
     }
 
     public void show(String tagKey, OnceCallback callback) {
@@ -22,6 +24,10 @@ public class Once {
             editor.putBoolean(tagKey, true);
             editor.apply();
         }
+    }
+
+    public void show(int tagKeyResId, OnceCallback callback) {
+        show(mContext.getString(tagKeyResId), callback);
     }
 
     public interface OnceCallback {

@@ -105,6 +105,9 @@ public class GankActivity extends ToolbarActivity {
             case R.id.action_about:
                 startActivity(new Intent(this, AboutActivity.class));
                 return true;
+            case R.id.action_login:
+                loginGitHub();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

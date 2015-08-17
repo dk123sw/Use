@@ -10,9 +10,15 @@
         android:icon="@mipmap/ic_share_white_24dp"/>
 
     <item
+        android:id="@+id/action_login"
+        android:title="@string/action_login_github"
+        android:orderInCategory="99"
+        app:showAsAction="never"/>
+
+    <item
         android:id="@+id/action_about"
         android:title="@string/action_about"
-        android:orderInCategory="100"
+        android:orderInCategory="98"
         app:showAsAction="never"/>
 
     <item
