@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.daimajia.numberprogressbar.NumberProgressBar;
@@ -35,11 +36,12 @@ public class WebActivity extends ToolbarActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         mContext = this;
-        mUrl =  getIntent().getStringExtra(EXTRA_URL);
-        mTitle =  getIntent().getStringExtra(EXTRA_TITLE);
+        mUrl = getIntent().getStringExtra(EXTRA_URL);
+        mTitle = getIntent().getStringExtra(EXTRA_TITLE);
 
         mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.setWebChromeClient(new WebChrome());
+        mWebView.setWebChromeClient(new ChromeClient());
+        mWebView.setWebViewClient(new LoveClient());
         mWebView.getSettings().setLoadWithOverviewMode(true);
         mWebView.getSettings().setAppCacheEnabled(true);
         mWebView.loadUrl(mUrl);
@@ -53,7 +55,8 @@ public class WebActivity extends ToolbarActivity {
                 case KeyEvent.KEYCODE_BACK:
                     if (mWebView.canGoBack()) {
                         mWebView.goBack();
-                    } else {
+                    }
+                    else {
                         finish();
                     }
                     return true;
@@ -80,7 +83,7 @@ public class WebActivity extends ToolbarActivity {
         MobclickAgent.onResume(this);
     }
 
-    private class WebChrome extends WebChromeClient {
+    private class ChromeClient extends WebChromeClient {
         @Override public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
             mProgressbar.setProgress(newProgress);
@@ -88,6 +91,14 @@ public class WebActivity extends ToolbarActivity {
 
         @Override public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
+            setTitle(title);
+        }
+    }
+
+    private class LoveClient extends WebViewClient {
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            if (url != null) view.loadUrl(url);
+            return true;
         }
     }
 }
