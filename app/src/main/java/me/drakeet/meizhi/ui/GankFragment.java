@@ -181,7 +181,7 @@ public class GankFragment extends Fragment {
                     mVideoView = (LoveVideoView) mVideoViewStub.inflate();
                     mIsVideoViewInflated = true;
                     String tip = getString(R.string.tip_video_play);
-                    new Once(mVideoView.getContext()).show(tip, () -> ToastUtils.showLongLong(tip));
+                    new Once(mVideoView.getContext()).show(tip, () -> ToastUtils.showLongLongLong(tip));
                 }
                 if (mGankList.size() > 0 && mGankList.get(0).type.equals("休息视频")) {
                     mVideoView.loadUrl(mGankList.get(0).url);
