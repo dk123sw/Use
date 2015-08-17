@@ -8,7 +8,7 @@
     <string name="action_about">可爱的「关于」页面</string>
 
     <string name="about">关于</string>
-    <string name="introduce">每天一张精选妹纸图、一个精选小视频（视频源地址播放），一篇程序猿精选干货。\n\n数据内容来源于代码家的 http://gank.io ，drakeet 完成 Android 端的开发和设计，并且也非常感谢 echodjb、iamwent、junyuecao 参与贡献了代码。\n\n相较 1.0 版本，代码几乎全部重构，RxJava &amp; Retrofit 框架等等，极力地追求优雅和低耗资源。\n\n完全开源，也不会有任何广告，如果你觉得不错，可以帮忙分享给你更多的朋友，这是我们最大的动力和支持，或者请我喝一杯咖啡（所谓的捐赠或打赏QAQ），非常感谢！\n\n支付宝：drakeet@qq.com （长按可选中复制）</string>
+    <string name="introduce">每天一张精选妹纸图、一个精选小视频（视频源地址播放），一篇程序猿精选干货。(主页中点击妹纸打开妹纸大图，点击文字打开干货页面)\n\n数据内容来源于代码家的 http://gank.io ，drakeet 完成 Android 端的开发和设计，并且也非常感谢 echodjb、iamwent、junyuecao 参与贡献了代码。\n\n相较 1.0 版本，代码几乎全部重构，RxJava &amp; Retrofit 框架等等，极力地追求优雅和低耗资源。\n\n完全开源，也不会有任何广告，如果你觉得不错，可以帮忙分享给你更多的朋友，这是我们最大的动力和支持，或者请我喝一杯咖啡（所谓的捐赠或打赏QAQ），非常感谢！\n\n支付宝：drakeet@qq.com （长按可选中复制）</string>
     <string name="share">分享给朋友（谢谢QAQ）</string>
     <string name="share_text">发现了一款非常美观的App「妹纸&amp;gank.io」，每天一张精选妹纸图、一个精选小视频（视频源地址播放），一篇程序猿干货，完全开源无广告不收费，太赞了! 推荐~：http://fir.im/mengmeizhi </string>
     <string name="app_name_with_introduce">妹纸&amp;gank.io - 程序猿的骄傲和喜悦</string>
