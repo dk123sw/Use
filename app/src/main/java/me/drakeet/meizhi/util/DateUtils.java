@@ -15,6 +15,13 @@ public class DateUtils {
         return dateFormat.format(date);
     }
 
+    public static String toDate(Date date, int add) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, add);
+        return toDate(calendar.getTime());
+    }
+
     public static Date getLastdayDate(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);

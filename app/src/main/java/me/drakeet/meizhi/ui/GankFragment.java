@@ -111,7 +111,6 @@ public class GankFragment extends Fragment {
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle(String.format("%s/%s/%s", mYear, mMonth, mDay));
         if (mGankList.size() == 0) getData();
         if (mVideoPreviewUrl != null) {
             Glide.with(this).load(mVideoPreviewUrl).into(mVideoImageView);

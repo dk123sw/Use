@@ -19,8 +19,9 @@ import me.drakeet.meizhi.adapter.GankPagerAdapter;
 import me.drakeet.meizhi.event.LoveBus;
 import me.drakeet.meizhi.event.OnKeyBackClickEvent;
 import me.drakeet.meizhi.ui.base.ToolbarActivity;
+import me.drakeet.meizhi.util.DateUtils;
 
-public class GankActivity extends ToolbarActivity {
+public class GankActivity extends ToolbarActivity implements ViewPager.OnPageChangeListener {
 
     public static final String EXTRA_GANK_DATE = "gank_date";
 
@@ -28,6 +29,7 @@ public class GankActivity extends ToolbarActivity {
     @Bind(R.id.tabLayout) TabLayout mTabLayout;
 
     GankPagerAdapter mPagerAdapter;
+    Date mGankDate;
 
     @Override protected int provideContentViewId() {
         return R.layout.activity_gank;
@@ -40,16 +42,18 @@ public class GankActivity extends ToolbarActivity {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+        mGankDate = (Date) getIntent().getSerializableExtra(EXTRA_GANK_DATE);
+        setTitle(DateUtils.toDate(mGankDate));
 
         initViewPager();
         initTabLayout();
     }
 
     private void initViewPager() {
-        Date gankDate = (Date) getIntent().getSerializableExtra(EXTRA_GANK_DATE);
-        mPagerAdapter = new GankPagerAdapter(getSupportFragmentManager(), gankDate);
+        mPagerAdapter = new GankPagerAdapter(getSupportFragmentManager(), mGankDate);
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.setOffscreenPageLimit(1);
+        mViewPager.addOnPageChangeListener(this);
     }
 
     private void initTabLayout() {
@@ -125,7 +129,21 @@ public class GankActivity extends ToolbarActivity {
     }
 
     @Override protected void onDestroy() {
+        mViewPager.removeOnPageChangeListener(this);
         super.onDestroy();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override public void onPageSelected(int position) {
+        setTitle(DateUtils.toDate(mGankDate, -position));
+    }
+
+    @Override public void onPageScrollStateChanged(int state) {
+
     }
 }
