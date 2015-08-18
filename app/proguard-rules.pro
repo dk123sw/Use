@@ -138,3 +138,15 @@
 -keep class sun.misc.Unsafe { *; }
 
 -dontwarn java.lang.invoke.*
+
+# 使用注解
+-keepattributes *Annotation*,Signature
+
+# 保持混淆时类的实名及行号(——————— 调试时打开 ———————)
+-keepattributes SourceFile,LineNumberTable
+
+# 枚举需要keep see http://proguard.sourceforge.net/manual/examples.html#enumerations
+-keepclassmembers enum * {
+    **[] $VALUES;
+    public *;
+}
