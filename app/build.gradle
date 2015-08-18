@@ -14,7 +14,7 @@ android {
         applicationId "me.drakeet.meizhi"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 128
+        versionCode 129
         versionName "1.9.9.3.2.28"
     }
 
@@ -104,7 +104,6 @@ dependencies {
     compile 'com.github.chrisbanes.photoview:library:1.2.3'
     compile 'com.daimajia.numberprogressbar:library:1.2@aar'
     compile 'com.umeng.analytics:analytics:latest.integration'
-    compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'io.reactivex:rxandroid:1.0.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'

@@ -13,11 +13,13 @@ import android.view.View;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.litesuits.orm.db.model.ConflictAlgorithm;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.umeng.analytics.MobclickAgent;
 import java.util.ArrayList;
 import java.util.List;
+import me.drakeet.meizhi.App;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.adapter.MeizhiListAdapter;
 import me.drakeet.meizhi.data.MeizhiData;
@@ -86,7 +88,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     }
 
     private void saveMeizhis(List<Meizhi> meizhis) {
-
+        App.sDb.insert(meizhis, ConflictAlgorithm.Ignore);
     }
 
     private MeizhiData createMeizhiDataWith休息视频Desc(MeizhiData mzData, 休息视频Data love) {
