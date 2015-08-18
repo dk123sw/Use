@@ -29,6 +29,8 @@ import me.drakeet.meizhi.face.OnMeizhiTouchListener;
 import me.drakeet.meizhi.model.Meizhi;
 import me.drakeet.meizhi.ui.base.SwipeRefreshBaseActivity;
 import me.drakeet.meizhi.util.AlarmManagerUtils;
+import me.drakeet.meizhi.util.Once;
+import me.drakeet.meizhi.util.ToastUtils;
 import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -70,6 +72,9 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         mRecyclerView.setLayoutManager(layoutManager);
         mMeizhiListAdapter = new MeizhiListAdapter(this, mMeizhiList);
         mRecyclerView.setAdapter(mMeizhiListAdapter);
+        new Once(this).show("tip_guide", () -> {
+            ToastUtils.showLongLong(getString(R.string.tip_guide));
+        });
 
         mRecyclerView.addOnScrollListener(getScrollToBottomListener(layoutManager));
         mMeizhiListAdapter.setOnMeizhiTouchListener(getOnMeizhiTouchListener());

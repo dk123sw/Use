@@ -87,7 +87,7 @@ public class LoveVideoView extends WebView {
                     "var parent = document.getElementsByTagName('head').item(0);" +
                     "var style = document.createElement('style');" +
                     "style.type = 'text/css';" +
-                    //                     Tell the browser to BASE64-decode the string into your script !!!
+                    // Tell the browser to BASE64-decode the string into your script !!!
                     "style.innerHTML = window.atob('" + encoded + "');" +
                     "parent.appendChild(style)" +
                     "})()");
