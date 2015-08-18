@@ -1,16 +1,23 @@
 package me.drakeet.meizhi.widget;
 
+import java.io.InputStream;
+
 import android.content.Context;
+import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Base64;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import me.drakeet.meizhi.BuildConfig;
 
 /**
  * It's a lovely adult video view.
  * Created by drakeet on 8/14/15.
  */
 public class LoveVideoView extends WebView {
+
+    private final Context mContext;
 
     public LoveVideoView(Context context) {
         this(context, null);
@@ -22,6 +29,7 @@ public class LoveVideoView extends WebView {
 
     public LoveVideoView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mContext = context;
         init();
     }
 
@@ -37,6 +45,12 @@ public class LoveVideoView extends WebView {
         webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
         webSettings.setLoadWithOverviewMode(false);
         webSettings.setUseWideViewPort(true);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if (BuildConfig.DEBUG) {
+                WebView.setWebContentsDebuggingEnabled(true);
+            }
+        }
     }
 
     private class LoveClient extends WebViewClient {
@@ -45,5 +59,41 @@ public class LoveVideoView extends WebView {
             view.loadUrl(url);
             return true;
         }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            // 这些视频需要hack CSS才能达到全屏播放的效果
+            if (url.contains("www.vmovier.com")) {
+                injectCSS("vmovier.css");
+            } else if (url.contains("video.weibo.com")) {
+                injectCSS("weibo.css");
+            } else if (url.contains("m.miaopai.com")) {
+                injectCSS("miaopai.css");
+            }
+        }
     }
+
+    // Inject CSS method: read style.css from assets folder
+    // Append stylesheet to document head
+    private void injectCSS(String filename) {
+        try {
+            InputStream inputStream = mContext.getAssets().open(filename);
+            byte[] buffer = new byte[inputStream.available()];
+            inputStream.read(buffer);
+            inputStream.close();
+            String encoded = Base64.encodeToString(buffer, Base64.NO_WRAP);
+            loadUrl("javascript:(function() {" +
+                    "var parent = document.getElementsByTagName('head').item(0);" +
+                    "var style = document.createElement('style');" +
+                    "style.type = 'text/css';" +
+                    //                     Tell the browser to BASE64-decode the string into your script !!!
+                    "style.innerHTML = window.atob('" + encoded + "');" +
+                    "parent.appendChild(style)" +
+                    "})()");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
