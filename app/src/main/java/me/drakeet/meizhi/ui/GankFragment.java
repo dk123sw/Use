@@ -1,5 +1,16 @@
 package me.drakeet.meizhi.ui;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.bumptech.glide.Glide;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+import com.squareup.otto.Subscribe;
+
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -16,15 +27,6 @@ import android.view.ViewStub;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.bumptech.glide.Glide;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-import com.squareup.otto.Subscribe;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.adapter.GankListAdapter;
 import me.drakeet.meizhi.data.GankData;
@@ -244,13 +246,19 @@ public class GankFragment extends Fragment {
     @Override public void onResume() {
         super.onResume();
         LoveBus.getLovelySeat().register(this);
-        if (mVideoView != null) mVideoView.resumeTimers();
+        if (mVideoView != null) {
+            mVideoView.resumeTimers();
+            mVideoView.onResume();
+        }
     }
 
     @Override public void onPause() {
         super.onPause();
         LoveBus.getLovelySeat().unregister(this);
-        if (mVideoView != null) mVideoView.pauseTimers();
+        if (mVideoView != null) {
+            mVideoView.onPause();
+            mVideoView.pauseTimers();
+        }
     }
 
     @Override public void onDestroyView() {
