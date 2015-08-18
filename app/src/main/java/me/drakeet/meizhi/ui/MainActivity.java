@@ -13,6 +13,7 @@ import android.view.View;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.litesuits.orm.db.assit.QueryBuilder;
 import com.litesuits.orm.db.model.ConflictAlgorithm;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -49,6 +50,9 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         mMeizhiList = new ArrayList<>();
+        QueryBuilder qb = new QueryBuilder(Meizhi.class);
+        qb.limit(1, 10);
+        App.sDb.query(qb);
         setUpRecyclerView();
         MobclickAgent.updateOnlineConfig(this);
         AlarmManagerUtils.register(this);
@@ -57,7 +61,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     @Override protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         new Handler().postDelayed(() -> setRefreshing(true), 358);
-        getData();
+        getData(true);
     }
 
     private void setUpRecyclerView() {
@@ -71,7 +75,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         mMeizhiListAdapter.setOnMeizhiTouchListener(getOnMeizhiTouchListener());
     }
 
-    private void getData(boolean addFromDb) {
+    private void getData(boolean clean) {
         Subscription s = Observable.zip(sDrakeet.getMeizhiData(mPage), sDrakeet.get休息视频Data(mPage),
             (meizhi, love) -> createMeizhiDataWith休息视频Desc(meizhi, love))
             .map(meizhiData -> meizhiData.results)
@@ -79,6 +83,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
             .toSortedList((meizhi1, meizhi2) -> meizhi2.publishedAt.compareTo(meizhi1.publishedAt))
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(meizhis -> {
+                if (clean) mMeizhiList.clear();
                 saveMeizhis(meizhis);
                 mMeizhiList.addAll(meizhis);
                 mMeizhiListAdapter.notifyDataSetChanged();
@@ -100,7 +105,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     }
 
     private void getData() {
-        getData(/* addFromDb */true);
+        getData(/* clean */false);
     }
 
     RecyclerView.OnScrollListener getScrollToBottomListener(

@@ -10,7 +10,7 @@ import com.litesuits.orm.LiteOrm;
  */
 public class App extends Application {
 
-    private static final String DB_NAME = "test5.db";
+    private static final String DB_NAME = "gank.db";
     public static Context sContext;
     public static LiteOrm sDb;
 

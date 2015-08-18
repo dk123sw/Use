@@ -62,4 +62,5 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
         MultiSwipeRefreshLayout.CanChildScrollUpCallback canChildScrollUpCallback) {
         mSwipeRefreshLayout.setCanChildScrollUpCallback(canChildScrollUpCallback);
     }
+
 }
