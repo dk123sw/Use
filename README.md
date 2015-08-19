@@ -6,19 +6,20 @@ Google Play: https://play.google.com/store/apps/details?id=me.drakeet.meizhi
 
 直接下载：https://fir.im/mengmeizhi (请尽量 Google Play 下载，如果喜欢，去给个五星好评，非常感谢！)
 
+v2.0(1.82MB)
 
-
-通过这个项目，你可能可以学习到的内容有：
-
-* 多渠道打包
-* 使用 ORM 快速操作数据库
-* 访问网络，简单解析 HTML
-* RecyclerView 瀑布流的使用
-* RecyclerView 底部加载更多的简单实现
-* Material Design 的下拉刷新
-* 使用最新的 Design 兼容库
-* 使用 5.0 的 Share 组件或元素动画
-* 使用 Toolbar 完全替代 ActionBar
+* 新增 自动收缩浮动刷新按钮；
+* 新增 点击主页卡片的文字打开干货页面；
+* 新增 干货视频自动横屏播放；
+* 新增 打开 Android 等干货条目页面；
+* 新增 web 页面标题跑马灯、渐变切换动画效果；
+* 新增 登录和缓存 GitHub 帐号功能；
+* 特别 照顾魅族用户没有返回键退出视频播放的尴尬状况；
+* 优化 视频播放体验；
+* 新增 初次使用指引；
+* 大幅优化 主页流畅度和稳定性；
+* 大量重构 开源代码，更加优雅和规整；
+* 未来：增加 收藏、搜索功能；
 
 <img src="/screenshots/s0.png" alt="screenshot" title="screenshot" width="270" height="486" />   <img src="/screenshots/s6.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
@@ -35,18 +36,3 @@ Contributors
 ###2.0
 
 9号开始重构，开发2.0，至今可谓完成了个完整的干货客户端，不仅仅是看妹纸了，开源又好用，绝对是程序猿必备良心项目… 做得匆忙，但代码自认为还是写得很不错的，用了很多注解和 lambda 表达式，用了 RxJava & Retrofit。UI 交互上，细节和动画效果也不少，为了许多小效果有时连发好几个测试版…
-
-v2.0(1.82MB)
-
-* 新增 自动收缩浮动刷新按钮；
-* 新增 点击主页卡片的文字打开干货页面；
-* 新增 干货视频自动横屏播放；
-* 新增 打开 Android 等干货条目页面；
-* 新增 web 页面标题跑马灯、渐变切换动画效果；
-* 新增 登录和缓存 GitHub 帐号功能；
-* 特别 照顾魅族用户没有返回键退出视频播放的尴尬状况；
-* 优化 视频播放体验；
-* 新增 初次使用指引；
-* 大幅优化 主页流畅度和稳定性；
-* 大量重构 开源代码，更加优雅和规整；
-* 未来：增加 收藏、搜索功能；
