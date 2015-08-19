@@ -41,6 +41,7 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
             showCategory(holder);
         }
         else {
+            // 上一个与这一个的目录是否一样
             boolean doesLastAndThis =
                 mGankList.get(position - 1).type.equals(mGankList.get(position).type);
             if (!doesLastAndThis) {
