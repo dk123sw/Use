@@ -32,7 +32,7 @@
     <string name="daimajia_has_gone">今日は肥皂家がない、干物の供給がない...</string>
     <string name="no_video_found">No video found.</string>
     <string name="open_source_libraries_list">LiteOrm\nheadsupcompat\ncom.android.support:appcompat-v7:22.2.1\ncom.android.support:recyclerview-v7:22.2.1\ncom.squareup.picasso:picasso:2.5.2\ncom.android.support:design:22.2.1\ncom.github.chrisbanes.photoview:library:1.2.3\ncom.daimajia.numberprogressbar:library:1.2@aar\ncom.umeng.analytics:analytics:latest.integration\ncom.squareup.retrofit:retrofit:1.9.0\nio.reactivex:rxandroid:1.0.0\ncom.squareup.okhttp:okhttp-urlconnection:2.0.0\ncom.squareup.okhttp:okhttp:2.0.0\ncom.jakewharton:butterknife:7.0.1\ncom.squareup:otto:1.3.8\ncom.github.bumptech.glide:glide:3.6.1"</string>
-    <string name="tip_video_play">加载中...（这其实不是一个直接的视频播放器，而是个网页浏览器，需要你手动点击页面中的视频进行播放，另外，特别照顾魅族用户，可以按 下音量键 来返回竖屏页面）</string>
+    <string name="tip_video_play">加载中...（这其实不是一个直接的视频播放器，而是个网页浏览器，需要你手动点击页面中的视频进行播放，另外，特别照顾魅族用户，可以按 下音量键 来返回竖屏页面，所以如果要调小音量，请出了这个页面调整）</string>
     <string name="action_share">分享</string>
     <string name="share_from"><![CDATA[" - from「妹纸&gank.io」http://fir.im/mengmeizhi"]]></string>
     <string name="action_subject">今日肥皂家话题</string>
@@ -40,6 +40,7 @@
     <string name="action_login_github">登录 GitHub 帐号</string>
     <string name="tip_login_github">妹纸 App 并无帐号系统，这个菜单只是提前登录保留 cookies，以便于之后进 GitHub 页面 star 项目</string>
     <string name="url_login_github">https://github.com/login</string>
-    <string name="tip_guide">初次指引: 点击卡片的妹纸图打开妹纸详情大图，点击卡片的标题文字，打开小视频、干货推荐页面，感谢您的使用:)</string>
+    <string name="tip_guide">初次指引: 点击妹纸图打开妹纸详情。点击卡片的标题文字，打开干货页面 :)</string>
+    <string name="i_know">知道了</string>
 
 </resources>

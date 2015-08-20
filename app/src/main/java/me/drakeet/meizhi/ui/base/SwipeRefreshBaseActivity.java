@@ -32,10 +32,10 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
                 R.color.refresh_progress_2, R.color.refresh_progress_1);
             // do not use lambda!!
             mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                    @Override public void onRefresh() {
-                        requestDataRefresh();
-                    }
-                });
+                @Override public void onRefresh() {
+                    requestDataRefresh();
+                }
+            });
         }
     }
 
@@ -46,8 +46,12 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
             return;
         }
         if (!refreshing) {
-            // 防止刷新消失太快，让子弹飞一会儿
-            mSwipeRefreshLayout.postDelayed(() -> mSwipeRefreshLayout.setRefreshing(false), 1000);
+            // 防止刷新消失太快，让子弹飞一会儿. do not use lambda!!
+            mSwipeRefreshLayout.postDelayed(new Runnable() {
+                @Override public void run() {
+                    mSwipeRefreshLayout.setRefreshing(false);
+                }
+            }, 1000);
         }
         else {
             mSwipeRefreshLayout.setRefreshing(true);
@@ -62,5 +66,4 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
         MultiSwipeRefreshLayout.CanChildScrollUpCallback canChildScrollUpCallback) {
         mSwipeRefreshLayout.setCanChildScrollUpCallback(canChildScrollUpCallback);
     }
-
 }

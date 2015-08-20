@@ -3,6 +3,7 @@ package me.drakeet.meizhi.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
@@ -30,7 +31,6 @@ import me.drakeet.meizhi.model.Meizhi;
 import me.drakeet.meizhi.ui.base.SwipeRefreshBaseActivity;
 import me.drakeet.meizhi.util.AlarmManagerUtils;
 import me.drakeet.meizhi.util.Once;
-import me.drakeet.meizhi.util.ToastUtils;
 import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -72,8 +72,10 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         mRecyclerView.setLayoutManager(layoutManager);
         mMeizhiListAdapter = new MeizhiListAdapter(this, mMeizhiList);
         mRecyclerView.setAdapter(mMeizhiListAdapter);
-        new Once(this).show("tip_guide", () -> {
-            ToastUtils.showLongLong(getString(R.string.tip_guide));
+        new Once(this).show("tip_guide_6", () -> {
+            Snackbar.make(mRecyclerView, getString(R.string.tip_guide), Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.i_know, v -> {})
+                .show();
         });
 
         mRecyclerView.addOnScrollListener(getScrollToBottomListener(layoutManager));

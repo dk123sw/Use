@@ -1,5 +1,6 @@
 package me.drakeet.meizhi.ui;
 
+import android.support.design.widget.Snackbar;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -139,7 +140,8 @@ public class GankFragment extends Fragment {
 
     private void getAndParseVideoPreview() {
         OkHttpClient client = new OkHttpClient();
-        String url = getString(R.string.url_gank_io) + String.format("%s/%s/%s", mYear, mMonth, mDay);
+        String url =
+            getString(R.string.url_gank_io) + String.format("%s/%s/%s", mYear, mMonth, mDay);
         Request request = new Request.Builder().url(url).build();
         client.newCall(request).enqueue(new Callback() {
             @Override public void onFailure(Request request, IOException e) {
@@ -183,7 +185,10 @@ public class GankFragment extends Fragment {
                     mVideoView = (LoveVideoView) mVideoViewStub.inflate();
                     mIsVideoViewInflated = true;
                     String tip = getString(R.string.tip_video_play);
-                    new Once(mVideoView.getContext()).show(tip, () -> ToastUtils.showLongLongLong(tip));
+                    new Once(mVideoView.getContext()).show(tip,
+                        () -> Snackbar.make(mVideoView, tip, Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.i_know, v -> {})
+                            .show());
                 }
                 if (mGankList.size() > 0 && mGankList.get(0).type.equals("休息视频")) {
                     mVideoView.loadUrl(mGankList.get(0).url);
@@ -236,7 +241,8 @@ public class GankFragment extends Fragment {
     }
 
     private void openTodaySubject() {
-        String url = getString(R.string.url_gank_io) + String.format("%s/%s/%s", mYear, mMonth, mDay);
+        String url =
+            getString(R.string.url_gank_io) + String.format("%s/%s/%s", mYear, mMonth, mDay);
         Intent intent = new Intent(getActivity(), WebActivity.class);
         intent.putExtra(WebActivity.EXTRA_URL, url);
         intent.putExtra(WebActivity.EXTRA_TITLE, getString(R.string.action_subject));
