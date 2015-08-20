@@ -1,22 +1,10 @@
 package me.drakeet.meizhi.ui;
 
-import android.support.design.widget.Snackbar;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.bumptech.glide.Glide;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-import com.squareup.otto.Subscribe;
-
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,6 +16,15 @@ import android.view.ViewStub;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.bumptech.glide.Glide;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+import com.squareup.otto.Subscribe;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.adapter.GankListAdapter;
 import me.drakeet.meizhi.data.GankData;
@@ -39,7 +36,6 @@ import me.drakeet.meizhi.util.LoveStringUtils;
 import me.drakeet.meizhi.util.Once;
 import me.drakeet.meizhi.util.ShareUtils;
 import me.drakeet.meizhi.util.ToastUtils;
-import me.drakeet.meizhi.widget.GoodAppBarLayout;
 import me.drakeet.meizhi.widget.LoveVideoView;
 import me.drakeet.meizhi.widget.VideoImageView;
 import rx.Subscription;
@@ -59,8 +55,6 @@ public class GankFragment extends Fragment {
     @Bind(R.id.stub_empty_view) ViewStub mEmptyViewStub;
     @Bind(R.id.stub_video_view) ViewStub mVideoViewStub;
     @Bind(R.id.iv_video) VideoImageView mVideoImageView;
-    @Bind(R.id.header_appbar) GoodAppBarLayout mAppBarLayout;
-    @Bind(R.id.cl_content) CoordinatorLayout mLayout;
     LoveVideoView mVideoView;
 
     int mYear, mMonth, mDay;
@@ -172,7 +166,13 @@ public class GankFragment extends Fragment {
     }
 
     @OnClick(R.id.header_appbar) void onPlayVideo() {
+        resumeVideoView();
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        if (mGankList.size() > 0 && mGankList.get(0).type.equals("休息视频")) {
+            ToastUtils.showLongLong(R.string.loading);
+        } else {
+            closePlayer();
+        }
     }
 
     private void setVideoViewPosition(Configuration newConfig) {
@@ -218,6 +218,7 @@ public class GankFragment extends Fragment {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
+        clearVideoView();
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
@@ -252,19 +253,14 @@ public class GankFragment extends Fragment {
     @Override public void onResume() {
         super.onResume();
         LoveBus.getLovelySeat().register(this);
-        if (mVideoView != null) {
-            mVideoView.resumeTimers();
-            mVideoView.onResume();
-        }
+        resumeVideoView();
     }
 
     @Override public void onPause() {
         super.onPause();
         LoveBus.getLovelySeat().unregister(this);
-        if (mVideoView != null) {
-            mVideoView.onPause();
-            mVideoView.pauseTimers();
-        }
+        pauseVideoView();
+        clearVideoView();
     }
 
     @Override public void onDestroyView() {
@@ -275,6 +271,32 @@ public class GankFragment extends Fragment {
     @Override public void onDestroy() {
         super.onDestroy();
         if (mSubscription != null) mSubscription.unsubscribe();
-        if (mVideoView != null) mVideoView.destroy();
+        resumeVideoView();
+    }
+
+    private void pauseVideoView() {
+        // oh, my egg
+        if (mVideoView != null) {
+            mVideoView.onPause();
+            mVideoView.pauseTimers();
+        }
+    }
+
+    private void resumeVideoView() {
+        // egg pain
+        if (mVideoView != null) {
+            mVideoView.resumeTimers();
+            mVideoView.onResume();
+        }
+    }
+
+    private void clearVideoView() {
+        if(mVideoView != null) {
+            mVideoView.clearHistory();
+            mVideoView.clearCache(true);
+            mVideoView.loadUrl("about:blank");
+            mVideoView.pauseTimers();
+        }
+
     }
 }

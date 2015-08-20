@@ -1,14 +1,15 @@
 package me.drakeet.meizhi.widget;
 
-import java.io.InputStream;
-
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Base64;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import java.io.InputStream;
 import me.drakeet.meizhi.BuildConfig;
 
 /**
@@ -35,6 +36,7 @@ public class LoveVideoView extends WebView {
 
     void init() {
         setWebViewClient(new LoveClient());
+        setWebChromeClient(new Chrome());
         WebSettings webSettings = getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setAllowFileAccess(true);
@@ -93,6 +95,19 @@ public class LoveVideoView extends WebView {
                     "})()");
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private class Chrome extends WebChromeClient implements MediaPlayer.OnCompletionListener {
+
+        @Override public void onCompletion(MediaPlayer mp) {
+            if(mp!=null) {
+                if(mp.isPlaying())
+                    mp.stop();
+                mp.reset();
+                mp.release();
+                mp=null;
+            }
         }
     }
 
