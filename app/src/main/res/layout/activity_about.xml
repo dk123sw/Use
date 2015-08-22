@@ -55,6 +55,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
                 app:layout_collapseMode="pin"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -96,7 +97,7 @@
 
             </RelativeLayout>
 
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginTop="12dp"
@@ -172,7 +173,7 @@
 
             </RelativeLayout>
 
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginTop="12dp"
