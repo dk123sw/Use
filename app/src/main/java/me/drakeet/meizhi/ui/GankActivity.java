@@ -16,7 +16,7 @@ import com.umeng.analytics.MobclickAgent;
 import java.util.Date;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.adapter.GankPagerAdapter;
-import me.drakeet.meizhi.event.LoveBus;
+import me.drakeet.meizhi.LoveBus;
 import me.drakeet.meizhi.event.OnKeyBackClickEvent;
 import me.drakeet.meizhi.ui.base.ToolbarActivity;
 import me.drakeet.meizhi.util.DateUtils;

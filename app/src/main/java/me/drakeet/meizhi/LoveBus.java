@@ -1,4 +1,4 @@
-package me.drakeet.meizhi.event;
+package me.drakeet.meizhi;
 
 import com.squareup.otto.Bus;
 

@@ -28,7 +28,7 @@ import java.util.List;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.adapter.GankListAdapter;
 import me.drakeet.meizhi.data.GankData;
-import me.drakeet.meizhi.event.LoveBus;
+import me.drakeet.meizhi.LoveBus;
 import me.drakeet.meizhi.event.OnKeyBackClickEvent;
 import me.drakeet.meizhi.model.Gank;
 import me.drakeet.meizhi.ui.base.BaseActivity;
