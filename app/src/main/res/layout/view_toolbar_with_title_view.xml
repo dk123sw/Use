@@ -4,7 +4,7 @@
     android:id="@+id/app_bar_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:elevation="3dp">
+    app:elevation="4dp">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

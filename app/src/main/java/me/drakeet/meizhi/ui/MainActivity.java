@@ -181,6 +181,15 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         setRefreshing(false);
     }
 
+    private void openGitHubTrending() {
+        String url = getString(R.string.url_github_trending);
+        String title = getString(R.string.action_github_trending);
+        Intent intent = new Intent(this, WebActivity.class);
+        intent.putExtra(WebActivity.EXTRA_URL, url);
+        intent.putExtra(WebActivity.EXTRA_TITLE, title);
+        startActivity(intent);
+    }
+
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
@@ -194,6 +203,9 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                 return true;
             case R.id.action_login:
                 loginGitHub();
+                return true;
+            case R.id.action_trending:
+                openGitHubTrending();
                 return true;
         }
         return super.onOptionsItemSelected(item);

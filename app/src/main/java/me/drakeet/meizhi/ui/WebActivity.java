@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -112,6 +113,8 @@ public class WebActivity extends ToolbarActivity {
         @Override public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
             mProgressbar.setProgress(newProgress);
+            if (newProgress == 100) mProgressbar.setVisibility(View.GONE);
+            else mProgressbar.setVisibility(View.INVISIBLE);
         }
 
         @Override public void onReceivedTitle(WebView view, String title) {
