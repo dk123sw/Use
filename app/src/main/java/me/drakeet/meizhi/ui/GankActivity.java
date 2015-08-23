@@ -87,7 +87,6 @@ public class GankActivity extends ToolbarActivity implements ViewPager.OnPageCha
 
     @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
-            case KeyEvent.KEYCODE_VOLUME_DOWN:
             case KeyEvent.KEYCODE_BACK:
                 if (getResources().getConfiguration().orientation
                     == Configuration.ORIENTATION_LANDSCAPE) {
