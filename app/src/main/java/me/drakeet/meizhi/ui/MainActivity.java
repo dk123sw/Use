@@ -98,8 +98,16 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                 mMeizhiList.addAll(meizhis);
                 mMeizhiListAdapter.notifyDataSetChanged();
                 setRefreshing(false);
-            }, Throwable::printStackTrace);
+            }, throwable -> loadError(throwable));
         addSubscription(s);
+    }
+
+    private void loadError(Throwable throwable) {
+        throwable.printStackTrace();
+        setRefreshing(false);
+        Snackbar.make(mRecyclerView, R.string.snap_load_fail, Snackbar.LENGTH_LONG)
+            .setAction(R.string.retry, v -> {requestDataRefresh();})
+            .show();
     }
 
     private void saveMeizhis(List<Meizhi> meizhis) {
