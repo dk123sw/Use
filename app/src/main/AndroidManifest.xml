@@ -43,6 +43,15 @@
             android:screenOrientation="portrait"
             android:theme="@style/NoReDrawWindowsBackground"/>
 
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+
         <receiver android:name=".service.AlarmReceiver">
             <intent-filter>
                 <action android:name="me.drakeet.meizhi.alarm"/>

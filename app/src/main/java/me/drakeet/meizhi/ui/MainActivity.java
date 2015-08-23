@@ -19,6 +19,7 @@ import com.litesuits.orm.db.model.ConflictAlgorithm;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.update.UmengUpdateAgent;
 import java.util.ArrayList;
 import java.util.List;
 import me.drakeet.meizhi.App;
@@ -59,7 +60,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         mMeizhiList.addAll(App.sDb.query(query));
 
         setUpRecyclerView();
-        MobclickAgent.updateOnlineConfig(this);
+        setUpUmeng();
         AlarmManagerUtils.register(this);
     }
 
@@ -67,6 +68,14 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         super.onPostCreate(savedInstanceState);
         new Handler().postDelayed(() -> setRefreshing(true), 358);
         getData(true);
+    }
+
+    private void setUpUmeng() {
+        MobclickAgent.updateOnlineConfig(this);
+        // MobclickAgent.setDebugMode(true);
+        UmengUpdateAgent.update(this);
+        UmengUpdateAgent.setDeltaUpdate(false);
+        UmengUpdateAgent.setUpdateOnlyWifi(false);
     }
 
     private void setUpRecyclerView() {
