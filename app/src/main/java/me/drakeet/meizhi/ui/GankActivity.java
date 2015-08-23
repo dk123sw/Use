@@ -1,6 +1,5 @@
 package me.drakeet.meizhi.ui;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -14,9 +13,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.umeng.analytics.MobclickAgent;
 import java.util.Date;
+import me.drakeet.meizhi.LoveBus;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.adapter.GankPagerAdapter;
-import me.drakeet.meizhi.LoveBus;
 import me.drakeet.meizhi.event.OnKeyBackClickEvent;
 import me.drakeet.meizhi.ui.base.ToolbarActivity;
 import me.drakeet.meizhi.util.DateUtils;
@@ -105,15 +104,6 @@ public class GankActivity extends ToolbarActivity implements ViewPager.OnPageCha
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.action_about:
-                startActivity(new Intent(this, AboutActivity.class));
-                return true;
-            case R.id.action_login:
-                loginGitHub();
-                return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 

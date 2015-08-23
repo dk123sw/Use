@@ -44,5 +44,8 @@
     <string name="i_know">知道了</string>
     <string name="action_github_trending">GitHub trending</string>
     <string name="url_github_trending">https://github.com/trending</string>
+    <string name="action_refresh">刷新</string>
+    <string name="action_copy_url">复制链接</string>
+    <string name="toast_copy_done">复制成功</string>
 
 </resources>

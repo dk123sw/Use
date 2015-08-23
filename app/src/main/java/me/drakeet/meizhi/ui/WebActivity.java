@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -17,6 +19,7 @@ import com.daimajia.numberprogressbar.NumberProgressBar;
 import com.umeng.analytics.MobclickAgent;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.ui.base.ToolbarActivity;
+import me.drakeet.meizhi.util.AndroidUtils;
 
 public class WebActivity extends ToolbarActivity {
 
@@ -74,6 +77,10 @@ public class WebActivity extends ToolbarActivity {
         mTextSwitcher.setText(title);
     }
 
+    private void refresh() {
+        mWebView.reload();
+    }
+
     @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             switch (keyCode) {
@@ -88,6 +95,25 @@ public class WebActivity extends ToolbarActivity {
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_web, menu);
+        return true;
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_refresh:
+                refresh();
+                return true;
+            case R.id.action_copy_url:
+                String copyDone = getString(R.string.toast_copy_done);
+                AndroidUtils.copyToClipBoard(this, mWebView.getUrl(), copyDone);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override protected void onDestroy() {
@@ -113,8 +139,8 @@ public class WebActivity extends ToolbarActivity {
         @Override public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
             mProgressbar.setProgress(newProgress);
-            if (newProgress == 100) mProgressbar.setVisibility(View.GONE);
-            else mProgressbar.setVisibility(View.INVISIBLE);
+            if (newProgress == 100) { mProgressbar.setVisibility(View.GONE); }
+            else { mProgressbar.setVisibility(View.VISIBLE); }
         }
 
         @Override public void onReceivedTitle(WebView view, String title) {

@@ -198,12 +198,6 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.action_about:
-                startActivity(new Intent(this, AboutActivity.class));
-                return true;
-            case R.id.action_login:
-                loginGitHub();
-                return true;
             case R.id.action_trending:
                 openGitHubTrending();
                 return true;

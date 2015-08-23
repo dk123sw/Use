@@ -2,9 +2,11 @@ package me.drakeet.meizhi.ui.base;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import me.drakeet.meizhi.Drakeet;
 import me.drakeet.meizhi.DrakeetFactory;
 import me.drakeet.meizhi.R;
+import me.drakeet.meizhi.ui.AboutActivity;
 import me.drakeet.meizhi.ui.WebActivity;
 import me.drakeet.meizhi.util.Once;
 import me.drakeet.meizhi.util.ToastUtils;
@@ -34,6 +36,19 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         this.mCompositeSubscription.add(s);
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_about:
+                startActivity(new Intent(this, AboutActivity.class));
+                return true;
+            case R.id.action_login:
+                loginGitHub();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     protected void loginGitHub() {
