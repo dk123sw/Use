@@ -43,12 +43,12 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
 
     @Override public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         Meizhi meizhi = mList.get(position);
+        int limit = 48;
+        String text =
+            meizhi.desc.length() > limit ? meizhi.desc.substring(0, limit) + "..." : meizhi.desc;
         viewHolder.meizhi = meizhi;
-        viewHolder.titleView.setText(meizhi.desc);
+        viewHolder.titleView.setText(text);
         viewHolder.card.setTag(meizhi.desc);
-
-        // TODO: Waiting for daimajia's new api...
-        viewHolder.meizhiView.setOriginalSize((int) (50), 50);
 
         Glide.with(mContext)
             .load(meizhi.url)
@@ -84,6 +84,7 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
             ButterKnife.bind(this, itemView);
             meizhiView.setOnClickListener(this);
             card.setOnClickListener(this);
+            meizhiView.setOriginalSize(50, 50);
         }
 
         @Override public void onClick(View v) {

@@ -37,6 +37,8 @@ import rx.android.schedulers.AndroidSchedulers;
 
 public class MainActivity extends SwipeRefreshBaseActivity {
 
+    private static final int PRELOAD_SIZE = 6;
+
     @Bind(R.id.rv_meizhi) RecyclerView mRecyclerView;
 
     MeizhiListAdapter mMeizhiListAdapter;
@@ -122,7 +124,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
             @Override public void onScrolled(RecyclerView rv, int dx, int dy) {
                 boolean isBottom =
                     layoutManager.findLastCompletelyVisibleItemPositions(new int[2])[1]
-                        >= mMeizhiListAdapter.getItemCount() - 4;
+                        >= mMeizhiListAdapter.getItemCount() - PRELOAD_SIZE;
                 if (!mSwipeRefreshLayout.isRefreshing() && isBottom) {
                     if (!mIsFirstTimeTouchBottom) {
                         mSwipeRefreshLayout.setRefreshing(true);
