@@ -52,9 +52,10 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         mMeizhiList = new ArrayList<>();
-        QueryBuilder qb = new QueryBuilder(Meizhi.class);
-        qb.limit(1, 10);
-        App.sDb.query(qb);
+        QueryBuilder query = new QueryBuilder(Meizhi.class);
+        query.limit(1, 10);
+        mMeizhiList.addAll(App.sDb.query(query));
+
         setUpRecyclerView();
         MobclickAgent.updateOnlineConfig(this);
         AlarmManagerUtils.register(this);
