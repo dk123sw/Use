@@ -37,7 +37,7 @@ v2.1(1.82MB)
 
 <img src="/screenshots/s8.png" alt="screenshot" title="screenshot" width="270" height="486" />   <img src="/screenshots/s9.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
-Contributors
+###Contributors
 
 [drakeet](https://github.com/drakeet)
 
@@ -51,7 +51,7 @@ Contributors
 
 [linroid](https://github.com/linroid)
 
-特别鸣谢
+###特别鸣谢
 
 [XiNGRZ](https://github.com/xingrz)
 
