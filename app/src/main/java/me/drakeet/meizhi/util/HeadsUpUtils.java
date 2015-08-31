@@ -53,7 +53,8 @@ public class HeadsUpUtils {
         if (Build.VERSION.SDK_INT >= 21) {
             builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), largeIcon))
                 .setSmallIcon(smallIcon);
-        } else {
+        }
+        else {
             builder.setSmallIcon(largeIcon);
         }
 

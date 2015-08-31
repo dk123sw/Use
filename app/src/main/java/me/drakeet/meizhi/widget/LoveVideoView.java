@@ -81,15 +81,16 @@ public class LoveVideoView extends WebView {
             return true;
         }
 
-        @Override
-        public void onPageFinished(WebView view, String url) {
+        @Override public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
             // 这些视频需要hack CSS才能达到全屏播放的效果
             if (url.contains("www.vmovier.com")) {
                 injectCSS("vmovier.css");
-            } else if (url.contains("video.weibo.com")) {
+            }
+            else if (url.contains("video.weibo.com")) {
                 injectCSS("weibo.css");
-            } else if (url.contains("m.miaopai.com")) {
+            }
+            else if (url.contains("m.miaopai.com")) {
                 injectCSS("miaopai.css");
             }
         }
@@ -105,13 +106,13 @@ public class LoveVideoView extends WebView {
             inputStream.close();
             String encoded = Base64.encodeToString(buffer, Base64.NO_WRAP);
             loadUrl("javascript:(function() {" +
-                    "var parent = document.getElementsByTagName('head').item(0);" +
-                    "var style = document.createElement('style');" +
-                    "style.type = 'text/css';" +
-                    // Tell the browser to BASE64-decode the string into your script !!!
-                    "style.innerHTML = window.atob('" + encoded + "');" +
-                    "parent.appendChild(style)" +
-                    "})()");
+                "var parent = document.getElementsByTagName('head').item(0);" +
+                "var style = document.createElement('style');" +
+                "style.type = 'text/css';" +
+                // Tell the browser to BASE64-decode the string into your script !!!
+                "style.innerHTML = window.atob('" + encoded + "');" +
+                "parent.appendChild(style)" +
+                "})()");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -120,14 +121,12 @@ public class LoveVideoView extends WebView {
     private class Chrome extends WebChromeClient implements MediaPlayer.OnCompletionListener {
 
         @Override public void onCompletion(MediaPlayer mp) {
-            if(mp!=null) {
-                if(mp.isPlaying())
-                    mp.stop();
+            if (mp != null) {
+                if (mp.isPlaying()) mp.stop();
                 mp.reset();
                 mp.release();
-                mp=null;
+                mp = null;
             }
         }
     }
-
 }

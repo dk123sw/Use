@@ -18,6 +18,7 @@
  */
 
 package me.drakeet.meizhi.model;
+
 import com.litesuits.orm.db.annotation.Column;
 import com.litesuits.orm.db.annotation.Table;
 import java.util.Date;

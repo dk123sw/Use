@@ -189,7 +189,8 @@ public class GankFragment extends Fragment {
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         if (mGankList.size() > 0 && mGankList.get(0).type.equals("休息视频")) {
             ToastUtils.showLongLong(R.string.loading);
-        } else {
+        }
+        else {
             closePlayer();
         }
     }
@@ -310,12 +311,11 @@ public class GankFragment extends Fragment {
     }
 
     private void clearVideoView() {
-        if(mVideoView != null) {
+        if (mVideoView != null) {
             mVideoView.clearHistory();
             mVideoView.clearCache(true);
             mVideoView.loadUrl("about:blank");
             mVideoView.pauseTimers();
         }
-
     }
 }

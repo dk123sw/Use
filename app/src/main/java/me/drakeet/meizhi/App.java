@@ -24,7 +24,6 @@ import android.content.Context;
 import com.litesuits.orm.LiteOrm;
 
 /**
- *
  * Created by drakeet on 6/21/15.
  */
 public class App extends Application {

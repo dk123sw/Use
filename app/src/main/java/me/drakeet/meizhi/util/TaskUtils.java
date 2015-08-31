@@ -31,7 +31,8 @@ public class TaskUtils {
         AsyncTask<Params, Progress, Result> task, Params... params) {
         if (Build.VERSION.SDK_INT >= 11) {
             task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
-        } else {
+        }
+        else {
             task.execute(params);
         }
     }

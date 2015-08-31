@@ -35,9 +35,8 @@ public class DrakeetRetrofit {
 
     final Drakeet service;
 
-    final static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-        .serializeNulls()
-        .create();
+    final static Gson gson =
+        new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").serializeNulls().create();
 
     DrakeetRetrofit() {
         OkHttpClient client = new OkHttpClient();

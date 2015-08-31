@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2015 Drakeet <drakeet.me@gmail.com>
   ~
   ~ This file is part of Meizhi
@@ -19,6 +18,8 @@
   -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/tb_munion_item_force" android:state_pressed="true" />
-    <item android:drawable="@color/tb_munion_item_force" android:state_focused="true" />
+    <item android:drawable="@color/tb_munion_item_force"
+        android:state_pressed="true"/>
+    <item android:drawable="@color/tb_munion_item_force"
+        android:state_focused="true"/>
 </selector>
