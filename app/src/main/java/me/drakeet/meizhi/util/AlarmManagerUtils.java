@@ -1,6 +1,6 @@
 
 /*
- * Copyright (C) 2015 Drakeet
+ * Copyright (C) 2015 Drakeet <drakeet.me@gmail.com>
  *
  * This file is part of Meizhi
  *
