@@ -39,9 +39,22 @@ v2.1(1.82MB)
 
 Contributors
 
-[代码家](https://github.com/daimajia)：增加了首页妹纸卡片点击非图片区域（日期）打开干货页面（http://gank.io）；
+[drakeet](https://github.com/drakeet)
 
-[iamwent](https://github.com/iamwent)：Adding feature: saving picture to phone (by long press meizhi image in meizhi detail image page/activity);
+[junyuecao](https://github.com/junyuecao)
+
+[echodjb](https://github.com/echodjb)
+
+[iamwent](https://github.com/iamwent)
+
+[代码家](https://github.com/daimajia)
+
+[linroid](https://github.com/linroid)
+
+特别鸣谢
+
+[XiNGRZ](https://github.com/xingrz)
+[fython](https://github.com/fython)
 
 ###2.0
 

@@ -16,6 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package me.drakeet.meizhi.widget;
 
 import android.content.Context;
