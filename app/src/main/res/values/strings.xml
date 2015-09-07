@@ -65,6 +65,8 @@
     <string name="url_github_trending">https://github.com/trending</string>
     <string name="action_refresh">刷新</string>
     <string name="action_copy_url">复制链接</string>
+    <string name="action_open_url">打开链接</string>
+    <string name="toast_open_fail">打开失败，没有找到可以打开该链接的其它应用 :(</string>
     <string name="toast_copy_done">复制成功</string>
     <string name="snap_load_fail">加载失败，请重试</string>
     <string name="retry">重试</string>

@@ -20,6 +20,8 @@
 package me.drakeet.meizhi.ui;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -32,13 +34,16 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
-import butterknife.Bind;
-import butterknife.ButterKnife;
+
 import com.daimajia.numberprogressbar.NumberProgressBar;
 import com.umeng.analytics.MobclickAgent;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.ui.base.ToolbarActivity;
 import me.drakeet.meizhi.util.AndroidUtils;
+import me.drakeet.meizhi.util.ToastUtils;
 
 public class WebActivity extends ToolbarActivity {
 
@@ -131,6 +136,18 @@ public class WebActivity extends ToolbarActivity {
                 String copyDone = getString(R.string.toast_copy_done);
                 AndroidUtils.copyToClipBoard(this, mWebView.getUrl(), copyDone);
                 return true;
+            case R.id.action_open_url:
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                Uri uri = Uri.parse(mUrl);
+                intent.setData(uri);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                } else {
+                    ToastUtils.showLong(R.string.toast_open_fail);
+                }
+                return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
