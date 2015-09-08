@@ -51,6 +51,8 @@ v2.1(1.82MB)
 
 [linroid](https://github.com/linroid)
 
+[SharerMax](https://github.com/SharerMax)
+
 ###特别鸣谢
 
 [XiNGRZ](https://github.com/xingrz)
