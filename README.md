@@ -8,7 +8,7 @@
 
 <img src="/app/src/main/res/mipmap-hdpi/ic_meizhi_150602.png" width="128" height="128" /> <img src="/app/src/main/res/mipmap-hdpi/ic_meizhi_150619.png" width="128" height="128" />
 
-**每天自动更新一张精选妹纸图、一个小视频、一系列精选程序猿干货，周末不更新。数据来自代码家的干货网站：http://gank.io**
+**每天自动更新一张精选妹纸图、一个小视频、一系列精选程序猿干货（周末不更新）。数据来自代码家的干货网站：http://gank.io**
 
 8月9号开始重构，开发2.0，18号完成，至今可谓完成了个完整的干货客户端，不仅仅是看妹纸了，开源又好用，绝对是程序猿必备良心项目… 做得匆忙，但代码自认为还是写得很不错的，用了很多注解和 lambda 表达式，用了 RxJava & Retrofit。UI 交互上，细节和动画效果也不少，为了许多小效果有时连发好几个测试版…
 
