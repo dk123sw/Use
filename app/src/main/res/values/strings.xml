@@ -59,7 +59,7 @@
     <string name="action_github_login">登录 GitHub 帐号</string>
     <string name="tip_login_github">妹纸 App 并无帐号系统，这个菜单只是提前登录保留 cookies，以便于之后进 GitHub 页面 star 项目</string>
     <string name="url_login_github">https://github.com/login</string>
-    <string name="tip_guide">初次指引: 点击妹纸图打开妹纸详情。点击卡片的标题文字，打开干货页面 :)</string>
+    <string name="tip_guide">指引: 点击卡片的标题文字，可以打开干货页面 :)</string>
     <string name="i_know">知道了</string>
     <string name="action_github_trending">GitHub trending</string>
     <string name="url_github_trending">https://github.com/trending</string>
