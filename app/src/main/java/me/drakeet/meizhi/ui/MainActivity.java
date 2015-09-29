@@ -40,6 +40,7 @@ import com.squareup.picasso.Picasso;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import me.drakeet.meizhi.App;
 import me.drakeet.meizhi.R;
@@ -200,11 +201,16 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                 });
             }
             else if (v == card) {
-                Intent intent = new Intent(this, GankActivity.class);
-                intent.putExtra(GankActivity.EXTRA_GANK_DATE, meizhi.publishedAt);
-                startActivity(intent);
+                startGankActivity(meizhi.publishedAt);
             }
         };
+    }
+
+
+    private void startGankActivity(Date publishedAt) {
+        Intent intent = new Intent(this, GankActivity.class);
+        intent.putExtra(GankActivity.EXTRA_GANK_DATE, publishedAt);
+        startActivity(intent);
     }
 
 
@@ -224,9 +230,9 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
 
     @OnClick(R.id.main_fab) public void onFab(View v) {
-        setRefreshing(true);
-        mRecyclerView.smoothScrollToPosition(0);
-        requestDataRefresh();
+        if (mMeizhiList != null && mMeizhiList.size() > 0) {
+            startGankActivity(mMeizhiList.get(0).publishedAt);
+        }
     }
 
 
