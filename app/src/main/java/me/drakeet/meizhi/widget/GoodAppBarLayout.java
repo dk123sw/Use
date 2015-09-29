@@ -32,17 +32,21 @@ public class GoodAppBarLayout extends AppBarLayout {
     public int offset;
     OnOffsetChangedListener mOnOffsetChangedListener;
 
+
     public GoodAppBarLayout(Context context) {
         this(context, null);
     }
+
 
     public GoodAppBarLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
+
     public void notifyRemoveOffsetListener() {
         this.removeOnOffsetChangedListener(mOnOffsetChangedListener);
     }
+
 
     public void notifyAddOffsetListener() {
         this.addOnOffsetChangedListener(mOnOffsetChangedListener);

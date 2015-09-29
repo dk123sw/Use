@@ -31,17 +31,20 @@ public class ActiveAndroidStrategy implements ExclusionStrategy {
     private Class<?> excludedThisClass;
     private Class<?> excludedThisClassFields;
 
+
     public ActiveAndroidStrategy(Class<?> excludedThisClass, Class<?> excludedThisClassFields) {
         this.excludedThisClass = excludedThisClass;
         this.excludedThisClassFields = excludedThisClassFields;
     }
 
+
     @Override public boolean shouldSkipField(FieldAttributes attributes) {
         return attributes.getDeclaringClass().equals(excludedThisClassFields);
     }
 
+
     @Override public boolean shouldSkipClass(Class<?> clazz) {
         return clazz != null && (clazz.equals(excludedThisClass) || shouldSkipClass(
-            clazz.getSuperclass()));
+                clazz.getSuperclass()));
     }
 }

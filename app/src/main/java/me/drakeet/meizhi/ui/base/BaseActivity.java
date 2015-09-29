@@ -41,6 +41,7 @@ public class BaseActivity extends AppCompatActivity {
 
     private CompositeSubscription mCompositeSubscription;
 
+
     public CompositeSubscription getCompositeSubscription() {
         if (this.mCompositeSubscription == null) {
             this.mCompositeSubscription = new CompositeSubscription();
@@ -49,6 +50,7 @@ public class BaseActivity extends AppCompatActivity {
         return this.mCompositeSubscription;
     }
 
+
     public void addSubscription(Subscription s) {
         if (this.mCompositeSubscription == null) {
             this.mCompositeSubscription = new CompositeSubscription();
@@ -56,6 +58,7 @@ public class BaseActivity extends AppCompatActivity {
 
         this.mCompositeSubscription.add(s);
     }
+
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -70,6 +73,7 @@ public class BaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     protected void loginGitHub() {
         new Once(this).show(R.string.action_github_login, () -> {
             ToastUtils.showLongLong(getString(R.string.tip_login_github));
@@ -80,6 +84,7 @@ public class BaseActivity extends AppCompatActivity {
         intent.putExtra(WebActivity.EXTRA_TITLE, getString(R.string.action_github_login));
         startActivity(intent);
     }
+
 
     @Override protected void onDestroy() {
         super.onDestroy();

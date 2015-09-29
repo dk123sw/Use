@@ -35,20 +35,23 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
 
     @Bind(R.id.swipe_refresh_layout) public MultiSwipeRefreshLayout mSwipeRefreshLayout;
 
+
     @Override public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         ButterKnife.bind(this);
     }
+
 
     @Override protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         trySetupSwipeRefresh();
     }
 
+
     void trySetupSwipeRefresh() {
         if (mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_3,
-                R.color.refresh_progress_2, R.color.refresh_progress_1);
+                    R.color.refresh_progress_2, R.color.refresh_progress_1);
             // do not use lambda!!
             mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override public void onRefresh() {
@@ -58,7 +61,9 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
         }
     }
 
+
     public void requestDataRefresh() {}
+
 
     public void setRefreshing(boolean refreshing) {
         if (mSwipeRefreshLayout == null) {
@@ -77,12 +82,14 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
         }
     }
 
+
     public void setProgressViewOffset(boolean scale, int start, int end) {
         mSwipeRefreshLayout.setProgressViewOffset(scale, start, end);
     }
 
+
     public void setSwipeableChildren(
-        MultiSwipeRefreshLayout.CanChildScrollUpCallback canChildScrollUpCallback) {
+            MultiSwipeRefreshLayout.CanChildScrollUpCallback canChildScrollUpCallback) {
         mSwipeRefreshLayout.setCanChildScrollUpCallback(canChildScrollUpCallback);
     }
 }

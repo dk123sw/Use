@@ -44,15 +44,18 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
 
     private List<Gank> mGankList;
 
+
     public GankListAdapter(List<Gank> gankList) {
         mGankList = gankList;
     }
 
+
     @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v =
-            LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gank, parent, false);
+                LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gank, parent, false);
         return new ViewHolder(v);
     }
+
 
     @Override public void onBindViewHolder(ViewHolder holder, int position) {
         Gank gank = mGankList.get(position);
@@ -62,7 +65,7 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
         else {
             // 上一个与这一个的目录是否一样
             boolean doesLastAndThis =
-                mGankList.get(position - 1).type.equals(mGankList.get(position).type);
+                    mGankList.get(position - 1).type.equals(mGankList.get(position).type);
             if (!doesLastAndThis) {
                 showCategory(holder);
             }
@@ -71,8 +74,8 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
         holder.category.setText(gank.type);
         if (holder.gank.getTag() == null) {
             SpannableStringBuilder builder = new SpannableStringBuilder(gank.desc).append(
-                StringStyleUtils.format(holder.gank.getContext(), " (via. " + gank.who + ")",
-                    R.style.ViaTextAppearance));
+                    StringStyleUtils.format(holder.gank.getContext(), " (via. " + gank.who + ")",
+                            R.style.ViaTextAppearance));
             CharSequence gankText = builder.subSequence(0, builder.length());
             holder.gank.setTag(gankText);
         }
@@ -81,23 +84,28 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
         showItemAnim(holder.gank, position);
     }
 
+
     @Override public int getItemCount() {
         return mGankList.size();
     }
 
+
     private void showCategory(ViewHolder holder) {
         if (!holder.category.isShown()) holder.category.setVisibility(View.VISIBLE);
     }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
         @Bind(R.id.tv_category) TextView category;
         @Bind(R.id.tv_title) TextView gank;
 
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+
 
         @OnClick(R.id.ll_gank_parent) void onGank(View v) {
             Gank gank = mGankList.get(getLayoutPosition());

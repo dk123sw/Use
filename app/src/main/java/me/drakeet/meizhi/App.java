@@ -32,6 +32,7 @@ public class App extends Application {
     public static Context sContext;
     public static LiteOrm sDb;
 
+
     @Override public void onCreate() {
         super.onCreate();
         sContext = this;
@@ -40,6 +41,7 @@ public class App extends Application {
             sDb.setDebugged(true);
         }
     }
+
 
     @Override public void onTerminate() {
         super.onTerminate();

@@ -33,23 +33,27 @@ public class SwipeRefreshFragment extends Fragment {
 
     public MultiSwipeRefreshLayout mSwipeRefreshLayout;
 
+
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         trySetupSwipeRefresh(view);
     }
 
+
     void trySetupSwipeRefresh(View root) {
         mSwipeRefreshLayout =
-            (MultiSwipeRefreshLayout) root.findViewById(R.id.swipe_refresh_layout);
+                (MultiSwipeRefreshLayout) root.findViewById(R.id.swipe_refresh_layout);
         if (mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_3,
-                R.color.refresh_progress_2, R.color.refresh_progress_1);
+                    R.color.refresh_progress_2, R.color.refresh_progress_1);
             mSwipeRefreshLayout.setOnRefreshListener(() -> requestDataRefresh());
         }
     }
 
+
     public void requestDataRefresh() {
     }
+
 
     public void setRefreshing(boolean refreshing) {
         if (mSwipeRefreshLayout == null) {
@@ -64,12 +68,14 @@ public class SwipeRefreshFragment extends Fragment {
         }
     }
 
+
     public void setProgressViewOffset(boolean scale, int start, int end) {
         mSwipeRefreshLayout.setProgressViewOffset(scale, start, end);
     }
 
+
     public void setSwipeableChildren(
-        MultiSwipeRefreshLayout.CanChildScrollUpCallback canChildScrollUpCallback) {
+            MultiSwipeRefreshLayout.CanChildScrollUpCallback canChildScrollUpCallback) {
         mSwipeRefreshLayout.setCanChildScrollUpCallback(canChildScrollUpCallback);
     }
 }

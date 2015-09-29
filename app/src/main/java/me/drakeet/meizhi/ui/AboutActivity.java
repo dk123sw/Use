@@ -42,6 +42,7 @@ public class AboutActivity extends BaseActivity {
     @Bind(R.id.tv_version) TextView mVersionTextView;
     @Bind(R.id.collapsing_toolbar) CollapsingToolbarLayout mCollapsingToolbarLayout;
 
+
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
@@ -56,14 +57,17 @@ public class AboutActivity extends BaseActivity {
         mToolbar.setNavigationOnClickListener(v -> AboutActivity.this.onBackPressed());
     }
 
+
     private void setUpVersionName() {
         mVersionTextView.setText("Version " + BuildConfig.VERSION_NAME);
     }
+
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_about, menu);
         return true;
     }
+
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -77,10 +81,12 @@ public class AboutActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     public void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
     }
+
 
     public void onPause() {
         super.onPause();
