@@ -43,7 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 import me.drakeet.meizhi.App;
 import me.drakeet.meizhi.R;
-import me.drakeet.meizhi.adapter.MeizhiListAdapter;
+import me.drakeet.meizhi.ui.adapter.MeizhiListAdapter;
 import me.drakeet.meizhi.data.MeizhiData;
 import me.drakeet.meizhi.data.休息视频Data;
 import me.drakeet.meizhi.event.OnMeizhiTouchListener;

@@ -17,7 +17,7 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.drakeet.meizhi.adapter;
+package me.drakeet.meizhi.ui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
