@@ -20,6 +20,7 @@
 package me.drakeet.meizhi.ui;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
@@ -29,10 +30,13 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.squareup.picasso.Picasso;
 import com.umeng.analytics.MobclickAgent;
+import java.io.File;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.ui.base.ToolbarActivity;
-import me.drakeet.meizhi.util.MeizhiImageUtils;
+import me.drakeet.meizhi.util.RxMeizhi;
 import me.drakeet.meizhi.util.ShareUtils;
+import me.drakeet.meizhi.util.ToastUtils;
+import rx.android.schedulers.AndroidSchedulers;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class PictureActivity extends ToolbarActivity {
@@ -46,18 +50,22 @@ public class PictureActivity extends ToolbarActivity {
     PhotoViewAttacher mPhotoViewAttacher;
     String mImageUrl, mImageTitle;
 
+
     @Override protected int provideContentViewId() {
         return R.layout.activity_picture;
     }
+
 
     @Override public boolean canBack() {
         return true;
     }
 
+
     private void parseIntent() {
         mImageUrl = getIntent().getStringExtra(EXTRA_IMAGE_URL);
         mImageTitle = getIntent().getStringExtra(EXTRA_IMAGE_TITLE);
     }
+
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,30 +80,40 @@ public class PictureActivity extends ToolbarActivity {
         setAppBarAlpha(0.7f);
         setTitle(mImageTitle);
 
-        setUpPhotoAttacher();
+        setupPhotoAttacher();
     }
 
-    private void setUpPhotoAttacher() {
+
+    private void setupPhotoAttacher() {
         mPhotoViewAttacher = new PhotoViewAttacher(mImageView);
         mPhotoViewAttacher.setOnViewTapListener((view, v, v1) -> hideOrShowToolbar());
         mPhotoViewAttacher.setOnLongClickListener(v -> {
             new AlertDialog.Builder(PictureActivity.this).setMessage(
-                getString(R.string.ask_saving_picture))
-                .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
-                    dialog.dismiss();
-                })
-                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                    saveImageToGallery();
-                    dialog.dismiss();
-                })
-                .show();
+                    getString(R.string.ask_saving_picture))
+                    .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                        dialog.dismiss();
+                    })
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                        saveImageToGallery();
+                        dialog.dismiss();
+                    })
+                    .show();
             return true;
         });
     }
 
+
     private void saveImageToGallery() {
-        MeizhiImageUtils.saveImageToSdCard(this, mImageUrl, mImageTitle);
+        RxMeizhi.saveImageAndGetPathObservable(this, mImageUrl, mImageTitle)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(uri -> {
+                    File appDir = new File(Environment.getExternalStorageDirectory(), "Meizhi");
+                    String msg = String.format(getString(R.string.picture_has_save_to),
+                            appDir.getAbsolutePath());
+                    ToastUtils.showShort(msg);
+                }, error -> ToastUtils.showLong(error.getMessage() + "\n再试试..."));
     }
+
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_picture, menu);
@@ -103,26 +121,36 @@ public class PictureActivity extends ToolbarActivity {
         return true;
     }
 
+
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_share:
-                ShareUtils.share(this);
+                RxMeizhi.saveImageAndGetPathObservable(this, mImageUrl, mImageTitle)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(uri -> ShareUtils.shareImage(this, uri, "分享妹纸到..."),
+                                error -> ToastUtils.showLong(error.getMessage()));
+                return true;
+            case R.id.action_save:
+                saveImageToGallery();
                 return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override public void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
     }
 
+
     @Override public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
     }
+
 
     @Override protected void onDestroy() {
         super.onDestroy();

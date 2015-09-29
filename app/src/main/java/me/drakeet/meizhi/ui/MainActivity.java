@@ -115,7 +115,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     private void getData(boolean clean) {
         Subscription s = Observable.zip(sDrakeet.getMeizhiData(mPage), sDrakeet.get休息视频Data(mPage),
-            (meizhi, love) -> createMeizhiDataWith休息视频Desc(meizhi, love))
+                this::createMeizhiDataWith休息视频Desc)
             .map(meizhiData -> meizhiData.results)
             .flatMap(Observable::from)
             .toSortedList((meizhi1, meizhi2) -> meizhi2.publishedAt.compareTo(meizhi1.publishedAt))
