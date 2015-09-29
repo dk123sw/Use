@@ -1,1 +1,1 @@
-include ':app', ':headsupcompat'
+include ':app', ':libraries:headsupcompat'

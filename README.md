@@ -20,6 +20,7 @@ Google Play: https://play.google.com/store/apps/details?id=me.drakeet.meizhi
 直接下载：https://fir.im/mengmeizhi (请尽量 Google Play 下载，如果喜欢，去给个五星好评，非常感谢！)
 
 v2.2.8
+
 * 新增 妹纸图页面直接分享图片功能；
 * 新增 妹纸图页面直接保存图片菜单按钮；
 * 更改 主页浮动按钮的图标为 GitHub 小猫；
