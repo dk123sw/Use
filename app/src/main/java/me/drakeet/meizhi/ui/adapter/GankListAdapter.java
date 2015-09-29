@@ -57,6 +57,12 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
     }
 
 
+    @Override public int getItemViewType(int position) {
+        String text = mGankList.get(position).desc;
+        return text.length() / 10;
+    }
+
+
     @Override public void onBindViewHolder(ViewHolder holder, int position) {
         Gank gank = mGankList.get(position);
         if (position == 0) {
