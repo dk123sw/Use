@@ -27,7 +27,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,6 +45,7 @@ import com.squareup.otto.Subscribe;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import me.drakeet.meizhi.ApiKey;
 import me.drakeet.meizhi.LoveBus;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.data.DGankData;
@@ -170,8 +170,8 @@ public class GankFragment extends Fragment {
                 "https://leancloud.cn:443/1.1/classes/Gank?where=%7B%22tag%22%3A%22" + mYear + "-"
                         + mMonth + "-" + mDay + "%22%7D";
         Request request = new Request.Builder().url(url)
-                .addHeader("X-LC-Id", "0azfScvBLCC9tAGRAwIhcC40")
-                .addHeader("X-LC-Key", "gAuE93qAusvP8gk1VW8DtOUb")
+                .addHeader("X-LC-Id", ApiKey.X_LC_Id)
+                .addHeader("X-LC-Key", ApiKey.X_LC_Key)
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override public void onFailure(Request request, IOException e) {
@@ -181,7 +181,6 @@ public class GankFragment extends Fragment {
 
             @Override public void onResponse(Response response) throws IOException {
                 String body = response.body().string();
-                Log.d("==>", body);
                 DGankData data = new Gson().fromJson(body, DGankData.class);
                 if (data.results.size() == 0) {
                     getOldVideoPreview(client);
