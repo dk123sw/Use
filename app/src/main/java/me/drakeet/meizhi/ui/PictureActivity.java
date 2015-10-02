@@ -156,6 +156,7 @@ public class PictureActivity extends ToolbarActivity {
 
     @Override protected void onDestroy() {
         super.onDestroy();
+        mPhotoViewAttacher.cleanup();
         ButterKnife.unbind(this);
     }
 }
