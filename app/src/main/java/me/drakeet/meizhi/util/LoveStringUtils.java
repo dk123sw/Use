@@ -33,6 +33,11 @@ public class LoveStringUtils {
         if (s2 == -1) return null;
         int e2 = resp.indexOf(".jpg", s2) + ".jpg".length();
         if (e2 == -1) return null;
-        return resp.substring(s2, e2);
+        try {
+            return resp.substring(s2, e2);
+        } catch (StringIndexOutOfBoundsException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
