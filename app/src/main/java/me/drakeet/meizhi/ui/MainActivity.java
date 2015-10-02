@@ -222,7 +222,12 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         ActivityOptionsCompat optionsCompat =
                 ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, transitView,
                         PictureActivity.TRANSIT_PIC);
-        ActivityCompat.startActivity(MainActivity.this, i, optionsCompat.toBundle());
+        try {
+            ActivityCompat.startActivity(MainActivity.this, i, optionsCompat.toBundle());
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            startActivity(i);
+        }
     }
 
 
