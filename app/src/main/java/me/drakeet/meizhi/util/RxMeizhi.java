@@ -40,8 +40,8 @@ public class RxMeizhi {
 
     public static Observable<Uri> saveImageAndGetPathObservable(Context context, String url,
             String title) {
-        return Observable.create(new Observable.OnSubscribe<Uri>() {
-            @Override public void call(Subscriber<? super Uri> subscriber) {
+        return Observable.create(new Observable.OnSubscribe<Bitmap>() {
+            @Override public void call(Subscriber<? super Bitmap> subscriber) {
                 Bitmap bitmap = null;
                 try {
                     bitmap = Picasso.with(context).load(url).get();
@@ -51,30 +51,31 @@ public class RxMeizhi {
                 if (bitmap == null) {
                     subscriber.onError(new Exception("无法下载到图片"));
                 }
-
-                File appDir = new File(Environment.getExternalStorageDirectory(), "Meizhi");
-                if (!appDir.exists()) {
-                    appDir.mkdir();
-                }
-                String fileName = title.replace('/', '-') + ".jpg";
-                File file = new File(appDir, fileName);
-                try {
-                    FileOutputStream fos = new FileOutputStream(file);
-                    assert bitmap != null;
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                    fos.flush();
-                    fos.close();
-                } catch (IOException e) {
-                    subscriber.onError(e);
-                }
-
-                Uri uri = Uri.fromFile(file);
-                // 通知图库更新
-                Intent scannerIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri);
-                context.sendBroadcast(scannerIntent);
-                subscriber.onNext(uri);
+                subscriber.onNext(bitmap);
                 subscriber.onCompleted();
             }
+        }).flatMap(bitmap -> {
+            File appDir = new File(Environment.getExternalStorageDirectory(), "Meizhi");
+            if (!appDir.exists()) {
+                appDir.mkdir();
+            }
+            String fileName = title.replace('/', '-') + ".jpg";
+            File file = new File(appDir, fileName);
+            try {
+                FileOutputStream fos = new FileOutputStream(file);
+                assert bitmap != null;
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                fos.flush();
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Uri uri = Uri.fromFile(file);
+            // 通知图库更新
+            Intent scannerIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri);
+            context.sendBroadcast(scannerIntent);
+            return Observable.just(uri);
         }).subscribeOn(Schedulers.io());
     }
 }

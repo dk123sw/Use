@@ -36,6 +36,7 @@ import me.drakeet.meizhi.ui.base.ToolbarActivity;
 import me.drakeet.meizhi.util.RxMeizhi;
 import me.drakeet.meizhi.util.ShareUtils;
 import me.drakeet.meizhi.util.ToastUtils;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -104,7 +105,7 @@ public class PictureActivity extends ToolbarActivity {
 
 
     private void saveImageToGallery() {
-        RxMeizhi.saveImageAndGetPathObservable(this, mImageUrl, mImageTitle)
+        Subscription s = RxMeizhi.saveImageAndGetPathObservable(this, mImageUrl, mImageTitle)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(uri -> {
                     File appDir = new File(Environment.getExternalStorageDirectory(), "Meizhi");
@@ -112,6 +113,7 @@ public class PictureActivity extends ToolbarActivity {
                             appDir.getAbsolutePath());
                     ToastUtils.showShort(msg);
                 }, error -> ToastUtils.showLong(error.getMessage() + "\n再试试..."));
+        addSubscription(s);
     }
 
 
