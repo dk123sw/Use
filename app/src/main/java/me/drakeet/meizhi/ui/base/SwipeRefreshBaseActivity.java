@@ -70,10 +70,12 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
             return;
         }
         if (!refreshing) {
-            // 防止刷新消失太快，让子弹飞一会儿. do not use lambda!!
+            // 防止刷新消失太快，让子弹飞一会儿.
             mSwipeRefreshLayout.postDelayed(new Runnable() {
                 @Override public void run() {
-                    mSwipeRefreshLayout.setRefreshing(false);
+                    if (mSwipeRefreshLayout != null) {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
                 }
             }, 1000);
         }
