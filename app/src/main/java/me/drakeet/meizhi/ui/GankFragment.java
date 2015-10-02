@@ -195,7 +195,7 @@ public class GankFragment extends Fragment {
 
     private void getOldVideoPreview(OkHttpClient client) {
         String url =
-                getString(R.string.url_gank_io) + String.format("%s/%s/%s", mYear, mMonth, mDay);
+                "http://gank.io/" + String.format("%s/%s/%s", mYear, mMonth, mDay);
         Request request = new Request.Builder().url(url).build();
         client.newCall(request).enqueue(new Callback() {
             @Override public void onFailure(Request request, IOException e) {
