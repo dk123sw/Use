@@ -48,7 +48,7 @@
     <string name="ask_saving_picture">保存到手机?</string>
     <string name="picture_save_fail">图片保存失败，请再次尝试保存！</string>
     <string name="picture_has_save_to">图片已保存至 %s 文件夹</string>
-    <string name="daimajia_has_gone">今日は肥皂家がない、干物の供給がない...</string>
+    <string name="daimajia_has_gone">今日は肥皂家がない、干物の供給がない...\n如果想在此处展示您的优秀作品，请联系 drakeet.</string>
     <string name="no_video_found">No video found.</string>
     <string name="open_source_libraries_list">LiteOrm\nheadsupcompat\ncom.android.support:appcompat-v7:22.2.1\ncom.android.support:recyclerview-v7:22.2.1\ncom.squareup.picasso:picasso:2.5.2\ncom.android.support:design:22.2.1\ncom.github.chrisbanes.photoview:library:1.2.3\ncom.daimajia.numberprogressbar:library:1.2@aar\ncom.umeng.analytics:analytics:latest.integration\ncom.squareup.retrofit:retrofit:1.9.0\nio.reactivex:rxandroid:1.0.0\ncom.squareup.okhttp:okhttp-urlconnection:2.0.0\ncom.squareup.okhttp:okhttp:2.0.0\ncom.jakewharton:butterknife:7.0.1\ncom.squareup:otto:1.3.8\ncom.github.bumptech.glide:glide:3.6.1"</string>
     <string name="tip_video_play">这其实是个网页浏览器，需要你手动点击页面中的视频进行播放。魅族用户可以上滑 home 键来返回竖屏页面</string>
@@ -70,5 +70,6 @@
     <string name="toast_copy_done">复制成功</string>
     <string name="snap_load_fail">加载失败，请重试</string>
     <string name="retry">重试</string>
+    <string name="tip_for_no_gank">今天编辑们休息哦，没有干货提供！\n如果想在此处展示您的作品，请联系 drakeet.</string>
 
 </resources>

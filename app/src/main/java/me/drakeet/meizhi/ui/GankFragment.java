@@ -279,7 +279,7 @@ public class GankFragment extends Fragment {
 
     void closePlayer() {
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        ToastUtils.showShort(getString(R.string.daimajia_has_gone));
+        ToastUtils.showShort(getString(R.string.tip_for_no_gank));
     }
 
 
