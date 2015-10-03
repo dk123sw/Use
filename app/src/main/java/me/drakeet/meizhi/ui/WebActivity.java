@@ -141,7 +141,7 @@ public class WebActivity extends ToolbarActivity {
                 refresh();
                 return true;
             case R.id.action_copy_url:
-                String copyDone = getString(R.string.toast_copy_done);
+                String copyDone = getString(R.string.tip_copy_done);
                 AndroidUtils.copyToClipBoard(this, mWebView.getUrl(), copyDone);
                 return true;
             case R.id.action_open_url:
@@ -153,7 +153,7 @@ public class WebActivity extends ToolbarActivity {
                     startActivity(intent);
                 }
                 else {
-                    ToastUtils.showLong(R.string.toast_open_fail);
+                    ToastUtils.showLong(R.string.tip_open_fail);
                 }
                 return true;
         }
