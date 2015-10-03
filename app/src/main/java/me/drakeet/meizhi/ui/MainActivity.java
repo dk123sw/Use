@@ -67,6 +67,8 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     boolean mIsFirstTimeTouchBottom = true;
     int mPage = 1;
 
+    private boolean mMeizhiBeTouched;
+
 
     @Override protected int provideContentViewId() {
         return R.layout.activity_main;
@@ -192,13 +194,19 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     private OnMeizhiTouchListener getOnMeizhiTouchListener() {
         return (v, meizhiView, card, meizhi) -> {
             if (meizhi == null) return;
-            if (v == meizhiView) {
+            if (v == meizhiView&&!mMeizhiBeTouched) {
+                mMeizhiBeTouched=true;
+
                 Picasso.with(this).load(meizhi.url).fetch(new Callback() {
-                    @Override public void onSuccess() {startPictureActivity(meizhi, meizhiView);}
 
+                    @Override public void onSuccess() {
+                        mMeizhiBeTouched=false;
+                        startPictureActivity(meizhi, meizhiView);
+                    }
 
-                    @Override public void onError() {}
+                    @Override public void onError() {mMeizhiBeTouched=false;}
                 });
+
             }
             else if (v == card) {
                 startGankActivity(meizhi.publishedAt);
