@@ -194,19 +194,18 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     private OnMeizhiTouchListener getOnMeizhiTouchListener() {
         return (v, meizhiView, card, meizhi) -> {
             if (meizhi == null) return;
-            if (v == meizhiView&&!mMeizhiBeTouched) {
-                mMeizhiBeTouched=true;
-
+            if (v == meizhiView && !mMeizhiBeTouched) {
+                mMeizhiBeTouched = true;
                 Picasso.with(this).load(meizhi.url).fetch(new Callback() {
 
                     @Override public void onSuccess() {
-                        mMeizhiBeTouched=false;
+                        mMeizhiBeTouched = false;
                         startPictureActivity(meizhi, meizhiView);
                     }
 
-                    @Override public void onError() {mMeizhiBeTouched=false;}
-                });
 
+                    @Override public void onError() {mMeizhiBeTouched = false;}
+                });
             }
             else if (v == card) {
                 startGankActivity(meizhi.publishedAt);
