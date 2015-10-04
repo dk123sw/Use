@@ -34,9 +34,6 @@ import com.mingle.headsUp.HeadsUpManager;
  */
 public class HeadsUpUtils {
 
-    /**
-     * 悬浮通知
-     */
     public static void show(Context context, Class<?> targetActivity, String title, String content,
             int largeIcon, int smallIcon, int code) {
         PendingIntent pendingIntent =
@@ -48,6 +45,7 @@ public class HeadsUpUtils {
                 .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_LIGHTS)
                 .setContentIntent(pendingIntent)
                 .setFullScreenIntent(pendingIntent, false)
+                .setAutoCancel(true)
                 .setContentText(content);
 
         if (Build.VERSION.SDK_INT >= 21) {
