@@ -154,9 +154,9 @@ public class GankFragment extends Fragment {
     private void getData() {
         getAndSetVideoPreview();
         mSubscription = BaseActivity.sDrakeet.getGankData(mYear, mMonth, mDay)
-                .observeOn(AndroidSchedulers.mainThread())
                 .map(data -> data.results)
                 .map(this::addAllResults)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(list -> {
                     if (list.isEmpty()) { showEmptyView(); }
                     else {mAdapter.notifyDataSetChanged();}
