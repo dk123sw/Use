@@ -71,7 +71,7 @@
     <string name="picture_has_save_to">图片已保存至 %s 文件夹</string>
 
     <string name="no_video_found">No video found.</string>
-    <string name="open_source_libraries_list">LiteOrm\nheadsupcompat\ncom.android.support:appcompat-v7:22.2.1\ncom.android.support:recyclerview-v7:22.2.1\ncom.squareup.picasso:picasso:2.5.2\ncom.android.support:design:22.2.1\ncom.github.chrisbanes.photoview:library:1.2.3\ncom.daimajia.numberprogressbar:library:1.2@aar\ncom.umeng.analytics:analytics:latest.integration\ncom.squareup.retrofit:retrofit:1.9.0\nio.reactivex:rxandroid:1.0.0\ncom.squareup.okhttp:okhttp-urlconnection:2.0.0\ncom.squareup.okhttp:okhttp:2.0.0\ncom.jakewharton:butterknife:7.0.1\ncom.squareup:otto:1.3.8\ncom.github.bumptech.glide:glide:3.6.1"</string>
+    <string name="open_source_libraries_list">LiteOrm\nheadsupcompat\nsmooth-app-bar-layout\ncom.android.support:appcompat-v7:22.2.1\ncom.android.support:recyclerview-v7:22.2.1\ncom.squareup.picasso:picasso:2.5.2\ncom.android.support:design:22.2.1\ncom.github.chrisbanes.photoview:library:1.2.3\ncom.daimajia.numberprogressbar:library:1.2@aar\ncom.umeng.analytics:analytics:latest.integration\ncom.squareup.retrofit:retrofit:1.9.0\nio.reactivex:rxandroid:1.0.0\ncom.squareup.okhttp:okhttp-urlconnection:2.0.0\ncom.squareup.okhttp:okhttp:2.0.0\ncom.jakewharton:butterknife:7.0.1\ncom.squareup:otto:1.3.8\ncom.github.bumptech.glide:glide:3.6.1"</string>
     <string name="share_from"><![CDATA[" - from「妹纸&gank.io」http://fir.im/mengmeizhi"]]></string>
 
     <string name="loading">加载中...</string>
