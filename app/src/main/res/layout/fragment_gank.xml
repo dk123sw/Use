@@ -21,16 +21,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="me.drakeet.meizhi.ui.GankFragment">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/cl_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_gank"
-        tools:context="me.drakeet.meizhi.ui.GankActivity.GankFragment">
+        android:background="@color/bg_gank">
 
-        <me.drakeet.meizhi.widget.GoodAppBarLayout
+        <me.henrytao.smoothappbarlayout.SmoothAppBarLayout
             android:id="@+id/header_appbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/gank_header_height">
@@ -65,13 +65,14 @@
 
             </android.support.design.widget.CollapsingToolbarLayout>
 
-        </me.drakeet.meizhi.widget.GoodAppBarLayout>
+        </me.henrytao.smoothappbarlayout.SmoothAppBarLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_gank"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            android:paddingTop="@dimen/gank_header_height"
+            android:clipToPadding="false"/>
 
     </android.support.design.widget.CoordinatorLayout>
 
