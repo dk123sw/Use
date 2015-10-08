@@ -24,11 +24,9 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -198,7 +196,7 @@ public class SmoothAppBarLayout extends AppBarLayout {
   public static class Behavior extends BaseBehavior {
 
     private static void log(String s, Object... args) {
-      Log.i("info", String.format("SmoothAppBarLayout.Behavior %s", String.format(s, args)));
+      //Log.i("info", String.format("SmoothAppBarLayout.Behavior %s", String.format(s, args)));
     }
 
     protected int mCurrentScrollOffset;
