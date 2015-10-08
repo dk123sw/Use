@@ -72,6 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="@dimen/gank_header_height"
+            android:paddingBottom="@dimen/gank_footer_padding"
             android:clipToPadding="false"/>
 
     </android.support.design.widget.CoordinatorLayout>
