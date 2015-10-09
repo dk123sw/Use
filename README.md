@@ -8,13 +8,25 @@
 
 <img src="/app/src/main/res/mipmap-hdpi/ic_meizhi_150602.png" width="128" height="128" /> <img src="/app/src/main/res/mipmap-hdpi/ic_meizhi_150619.png" width="128" height="128" />
 
-端午节回家的时候，无聊之中，做了一个专门欣赏妹纸的小应用，数据来自[代码家](https://github.com/daimajia)的干货网站：http://gank.io 我只抓取了妹纸图做了个新的开源小应用：
+**每天自动更新一张精选妹纸图、一个小视频、一系列精选程序猿干货（周末不更新）。数据来自代码家的干货网站：http://gank.io**
+
+8月9号开始重构，开发2.0，18号完成，至今可谓完成了个完整的干货客户端，不仅仅是看妹纸了，开源又好用，绝对是程序猿必备良心项目… 做得匆忙，但代码自认为还是写得很不错的，用了很多注解和 
+lambda 表达式，用了 RxJava & Retrofit。UI 交互上，细节和动画效果也不少... 如果喜欢，请帮忙给个 Google Play 好评或者分享给朋友们~谢谢~~
+
+相关文章：http://drakeet.me/2015-08-20
 
 Google Play: https://play.google.com/store/apps/details?id=me.drakeet.meizhi
 
 直接下载：https://fir.im/mengmeizhi (请尽量 Google Play 下载，如果喜欢，去给个五星好评，非常感谢！)
 
-v2.1(1.82MB)
+v2.2.8
+
+* 新增 妹纸图页面直接分享图片功能；
+* 新增 妹纸图页面直接保存图片菜单按钮；
+* 更改 主页浮动按钮的图标为 GitHub 小猫；
+* 新增 主页浮动按钮打开最新的干货页面；
+
+v2.1(1.82MB 极力追求精减安装包大小)
 
 * 修复 视频播放切换问题；
 * 优化 视频播放体验；
@@ -67,6 +79,3 @@ In addition, my blog: http://drakeet.me
 
 If you like my open source projects, you can follow me: https://github.com/drakeet
 
-###2.0
-
-9号开始重构，开发2.0，至今可谓完成了个完整的干货客户端，不仅仅是看妹纸了，开源又好用，绝对是程序猿必备良心项目… 做得匆忙，但代码自认为还是写得很不错的，用了很多注解和 lambda 表达式，用了 RxJava & Retrofit。UI 交互上，细节和动画效果也不少，为了许多小效果有时连发好几个测试版…

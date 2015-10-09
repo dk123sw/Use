@@ -39,19 +39,23 @@ public class LoveVideoView extends WebView {
 
     private final Context mContext;
 
+
     public LoveVideoView(Context context) {
         this(context, null);
     }
 
+
     public LoveVideoView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
+
 
     public LoveVideoView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
         init();
     }
+
 
     void init() {
         setWebViewClient(new LoveClient());
@@ -74,12 +78,14 @@ public class LoveVideoView extends WebView {
         }
     }
 
+
     private class LoveClient extends WebViewClient {
 
         @Override public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
             return true;
         }
+
 
         @Override public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
@@ -96,6 +102,7 @@ public class LoveVideoView extends WebView {
         }
     }
 
+
     // Inject CSS method: read style.css from assets folder
     // Append stylesheet to document head
     private void injectCSS(String filename) {
@@ -106,17 +113,18 @@ public class LoveVideoView extends WebView {
             inputStream.close();
             String encoded = Base64.encodeToString(buffer, Base64.NO_WRAP);
             loadUrl("javascript:(function() {" +
-                "var parent = document.getElementsByTagName('head').item(0);" +
-                "var style = document.createElement('style');" +
-                "style.type = 'text/css';" +
-                // Tell the browser to BASE64-decode the string into your script !!!
-                "style.innerHTML = window.atob('" + encoded + "');" +
-                "parent.appendChild(style)" +
-                "})()");
+                    "var parent = document.getElementsByTagName('head').item(0);" +
+                    "var style = document.createElement('style');" +
+                    "style.type = 'text/css';" +
+                    // Tell the browser to BASE64-decode the string into your script !!!
+                    "style.innerHTML = window.atob('" + encoded + "');" +
+                    "parent.appendChild(style)" +
+                    "})()");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     private class Chrome extends WebChromeClient implements MediaPlayer.OnCompletionListener {
 

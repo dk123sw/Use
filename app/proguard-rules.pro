@@ -150,3 +150,5 @@
     **[] $VALUES;
     public *;
 }
+
+-keep class me.henrytao.smoothappbarlayout.** { *; }

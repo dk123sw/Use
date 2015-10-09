@@ -17,7 +17,7 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.drakeet.meizhi.adapter;
+package me.drakeet.meizhi.ui.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -33,7 +33,7 @@ import com.squareup.picasso.Picasso;
 import java.io.IOException;
 import java.util.List;
 import me.drakeet.meizhi.R;
-import me.drakeet.meizhi.face.OnMeizhiTouchListener;
+import me.drakeet.meizhi.event.OnMeizhiTouchListener;
 import me.drakeet.meizhi.model.Meizhi;
 import me.drakeet.meizhi.widget.RatioImageView;
 import rx.Observable;
@@ -49,46 +49,53 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
     private Context mContext;
     private OnMeizhiTouchListener mOnMeizhiTouchListener;
 
+
     public MeizhiListAdapter(Context context, List<Meizhi> meizhiList) {
         mList = meizhiList;
         mContext = context;
     }
 
+
     @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int i) {
-        View v =
-            LayoutInflater.from(parent.getContext()).inflate(R.layout.item_meizhi, parent, false);
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_meizhi, parent, false);
         return new ViewHolder(v);
     }
+
 
     @Override public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         Meizhi meizhi = mList.get(position);
         int limit = 48;
-        String text =
-            meizhi.desc.length() > limit ? meizhi.desc.substring(0, limit) + "..." : meizhi.desc;
+        String text = meizhi.desc.length() > limit ? meizhi.desc.substring(0, limit) + "..."
+                : meizhi.desc;
         viewHolder.meizhi = meizhi;
         viewHolder.titleView.setText(text);
         viewHolder.card.setTag(meizhi.desc);
 
         Glide.with(mContext)
-            .load(meizhi.url)
-            .centerCrop()
-            .into(viewHolder.meizhiView)
-            .getSize((width, height) -> {
-                if (!viewHolder.card.isShown()) viewHolder.card.setVisibility(View.VISIBLE);
-            });
+                .load(meizhi.url)
+                .centerCrop()
+                .into(viewHolder.meizhiView)
+                .getSize((width, height) -> {
+                    if (!viewHolder.card.isShown()) viewHolder.card.setVisibility(View.VISIBLE);
+                });
     }
+
 
     @Override public void onViewRecycled(ViewHolder holder) {
         super.onViewRecycled(holder);
     }
 
+
     @Override public int getItemCount() {
         return mList.size();
     }
 
+
     public void setOnMeizhiTouchListener(OnMeizhiTouchListener onMeizhiTouchListener) {
         this.mOnMeizhiTouchListener = onMeizhiTouchListener;
     }
+
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -96,6 +103,7 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
         @Bind(R.id.tv_title) TextView titleView;
         View card;
         Meizhi meizhi;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -106,10 +114,12 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
             meizhiView.setOriginalSize(50, 50);
         }
 
+
         @Override public void onClick(View v) {
             mOnMeizhiTouchListener.onTouch(v, meizhiView, card, meizhi);
         }
     }
+
 
     Observable<Bitmap> getBitmapObservable(String url) {
         return Observable.defer(() -> {

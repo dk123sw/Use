@@ -17,16 +17,18 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.drakeet.meizhi.face;
+package me.drakeet.meizhi.model;
 
-import android.view.View;
-
-import me.drakeet.meizhi.model.Meizhi;
+import com.google.gson.annotations.Expose;
 
 /**
- * 邪恶的 class 名。。。。
- * Created by drakeet on 7/1/15.
+ * Created by drakeet(http://drakeet.me)
+ * Date: 9/9/15 11:00
  */
-public interface OnMeizhiTouchListener {
-    void onTouch(View v, View meizhiView, View card, Meizhi meizhi);
+public class DGank {
+    @Expose public String preview;
+    @Expose public String tag;
+    @Expose public String createdAt;
+    @Expose public String updatedAt;
+    @Expose public String objectId;
 }

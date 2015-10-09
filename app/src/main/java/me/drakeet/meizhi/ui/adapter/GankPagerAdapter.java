@@ -17,7 +17,7 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.drakeet.meizhi.adapter;
+package me.drakeet.meizhi.ui.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -34,18 +34,21 @@ public class GankPagerAdapter extends FragmentPagerAdapter {
 
     Date mDate;
 
+
     public GankPagerAdapter(FragmentManager fm, Date date) {
         super(fm);
         mDate = date;
     }
+
 
     @Override public Fragment getItem(int position) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(mDate);
         calendar.add(Calendar.DATE, -position);
         return GankFragment.newInstance(calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH));
+                calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH));
     }
+
 
     @Override public int getCount() {
         return DrakeetFactory.gankSize;

@@ -57,13 +57,16 @@ public class WebActivity extends ToolbarActivity {
     Context mContext;
     String mUrl, mTitle;
 
+
     @Override protected int provideContentViewId() {
         return R.layout.activity_web;
     }
 
+
     @Override public boolean canBack() {
         return true;
     }
+
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,14 +99,17 @@ public class WebActivity extends ToolbarActivity {
         if (mTitle != null) setTitle(mTitle);
     }
 
+
     @Override public void setTitle(CharSequence title) {
         super.setTitle(title);
         mTextSwitcher.setText(title);
     }
 
+
     private void refresh() {
         mWebView.reload();
     }
+
 
     @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -121,10 +127,12 @@ public class WebActivity extends ToolbarActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_web, menu);
         return true;
     }
+
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -133,7 +141,7 @@ public class WebActivity extends ToolbarActivity {
                 refresh();
                 return true;
             case R.id.action_copy_url:
-                String copyDone = getString(R.string.toast_copy_done);
+                String copyDone = getString(R.string.tip_copy_done);
                 AndroidUtils.copyToClipBoard(this, mWebView.getUrl(), copyDone);
                 return true;
             case R.id.action_open_url:
@@ -143,14 +151,15 @@ public class WebActivity extends ToolbarActivity {
                 intent.setData(uri);
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
-                } else {
-                    ToastUtils.showLong(R.string.toast_open_fail);
+                }
+                else {
+                    ToastUtils.showLong(R.string.tip_open_fail);
                 }
                 return true;
-
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override protected void onDestroy() {
         super.onDestroy();
@@ -158,17 +167,20 @@ public class WebActivity extends ToolbarActivity {
         ButterKnife.unbind(this);
     }
 
+
     @Override protected void onPause() {
         if (mWebView != null) mWebView.onPause();
         super.onPause();
         MobclickAgent.onPause(this);
     }
 
+
     @Override protected void onResume() {
         super.onResume();
         if (mWebView != null) mWebView.onResume();
         MobclickAgent.onResume(this);
     }
+
 
     private class ChromeClient extends WebChromeClient {
 
@@ -178,6 +190,7 @@ public class WebActivity extends ToolbarActivity {
             if (newProgress == 100) { mProgressbar.setVisibility(View.GONE); }
             else { mProgressbar.setVisibility(View.VISIBLE); }
         }
+
 
         @Override public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);

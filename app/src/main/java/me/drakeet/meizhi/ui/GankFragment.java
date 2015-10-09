@@ -36,6 +36,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -44,12 +45,15 @@ import com.squareup.otto.Subscribe;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import me.drakeet.meizhi.R;
-import me.drakeet.meizhi.adapter.GankListAdapter;
-import me.drakeet.meizhi.data.GankData;
+import me.drakeet.meizhi.ApiKey;
 import me.drakeet.meizhi.LoveBus;
+import me.drakeet.meizhi.R;
+import me.drakeet.meizhi.data.DGankData;
+import me.drakeet.meizhi.data.GankData;
 import me.drakeet.meizhi.event.OnKeyBackClickEvent;
+import me.drakeet.meizhi.model.DGank;
 import me.drakeet.meizhi.model.Gank;
+import me.drakeet.meizhi.ui.adapter.GankListAdapter;
 import me.drakeet.meizhi.ui.base.BaseActivity;
 import me.drakeet.meizhi.util.LoveStringUtils;
 import me.drakeet.meizhi.util.Once;
@@ -83,6 +87,7 @@ public class GankFragment extends Fragment {
     Subscription mSubscription;
     GankListAdapter mAdapter;
 
+
     /**
      * Returns a new instance of this fragment for the given section
      * number.
@@ -97,8 +102,10 @@ public class GankFragment extends Fragment {
         return fragment;
     }
 
+
     public GankFragment() {
     }
+
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +116,7 @@ public class GankFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
+
     private void parseArguments() {
         Bundle bundle = getArguments();
         mYear = bundle.getInt(ARG_YEAR);
@@ -116,14 +124,16 @@ public class GankFragment extends Fragment {
         mDay = bundle.getInt(ARG_DAY);
     }
 
+
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
-        Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_gank, container, false);
         ButterKnife.bind(this, rootView);
         initRecyclerView();
         setVideoViewPosition(getResources().getConfiguration());
         return rootView;
     }
+
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -133,47 +143,87 @@ public class GankFragment extends Fragment {
         }
     }
 
+
     private void initRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
     }
 
+
     private void getData() {
-        getAndParseVideoPreview();
+        getAndSetVideoPreview();
         mSubscription = BaseActivity.sDrakeet.getGankData(mYear, mMonth, mDay)
-            .observeOn(AndroidSchedulers.mainThread())
-            .map(data -> data.results)
-            .map(this::addAllResults)
-            .subscribe(list -> {
-                if (list.isEmpty()) { showEmptyView(); }
-                else {mAdapter.notifyDataSetChanged();}
-            }, Throwable::printStackTrace);
+                .map(data -> data.results)
+                .map(this::addAllResults)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(list -> {
+                    if (list.isEmpty()) { showEmptyView(); }
+                    else {mAdapter.notifyDataSetChanged();}
+                }, Throwable::printStackTrace);
     }
 
-    private void getAndParseVideoPreview() {
+
+    private void getAndSetVideoPreview() {
         OkHttpClient client = new OkHttpClient();
         String url =
-            getString(R.string.url_gank_io) + String.format("%s/%s/%s", mYear, mMonth, mDay);
+                "https://leancloud.cn:443/1.1/classes/Gank?where=%7B%22tag%22%3A%22" + mYear + "-"
+                        + mMonth + "-" + mDay + "%22%7D";
+        Request request = new Request.Builder().url(url)
+                .addHeader("X-LC-Id", ApiKey.X_LC_Id)
+                .addHeader("X-LC-Key", ApiKey.X_LC_Key)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override public void onFailure(Request request, IOException e) {
+                e.printStackTrace();
+            }
+
+
+            @Override public void onResponse(Response response) throws IOException {
+                String body = response.body().string();
+                DGankData data = new Gson().fromJson(body, DGankData.class);
+                if (data.results.size() == 0) {
+                    getOldVideoPreview(client);
+                    return;
+                }
+                DGank gank = data.results.get(0);
+                startPreview(gank.preview);
+            }
+        });
+    }
+
+
+    private void getOldVideoPreview(OkHttpClient client) {
+        String url =
+                "http://gank.io/" + String.format("%s/%s/%s", mYear, mMonth, mDay);
         Request request = new Request.Builder().url(url).build();
         client.newCall(request).enqueue(new Callback() {
             @Override public void onFailure(Request request, IOException e) {
                 ToastUtils.showShort(e.getMessage());
             }
 
+
             @Override public void onResponse(Response response) throws IOException {
                 String body = response.body().string();
                 mVideoPreviewUrl = LoveStringUtils.getVideoPreviewImageUrl(body);
-                if (mVideoPreviewUrl != null && mVideoImageView != null) {
-                    mVideoImageView.post(() -> Glide.with(mVideoImageView.getContext())
-                        .load(mVideoPreviewUrl)
-                        .into(mVideoImageView));
-                }
+                startPreview(mVideoPreviewUrl);
             }
         });
     }
 
+
+    private void startPreview(String preview) {
+        mVideoPreviewUrl = preview;
+        if (preview != null && mVideoImageView != null) {
+            mVideoImageView.post(() -> Glide.with(mVideoImageView.getContext())
+                    .load(preview)
+                    .into(mVideoImageView));
+        }
+    }
+
+
     private void showEmptyView() {mEmptyViewStub.inflate();}
+
 
     private List<Gank> addAllResults(GankData.Result results) {
         if (results.androidList != null) mGankList.addAll(results.androidList);
@@ -183,6 +233,7 @@ public class GankFragment extends Fragment {
         if (results.休息视频List != null) mGankList.addAll(0, results.休息视频List);
         return mGankList;
     }
+
 
     @OnClick(R.id.header_appbar) void onPlayVideo() {
         resumeVideoView();
@@ -195,6 +246,7 @@ public class GankFragment extends Fragment {
         }
     }
 
+
     private void setVideoViewPosition(Configuration newConfig) {
         switch (newConfig.orientation) {
             case Configuration.ORIENTATION_LANDSCAPE: {
@@ -206,9 +258,9 @@ public class GankFragment extends Fragment {
                     mIsVideoViewInflated = true;
                     String tip = getString(R.string.tip_video_play);
                     new Once(mVideoView.getContext()).show(tip,
-                        () -> Snackbar.make(mVideoView, tip, Snackbar.LENGTH_INDEFINITE)
-                            .setAction(R.string.i_know, v -> {})
-                            .show());
+                            () -> Snackbar.make(mVideoView, tip, Snackbar.LENGTH_INDEFINITE)
+                                    .setAction(R.string.i_know, v -> {})
+                                    .show());
                 }
                 if (mGankList.size() > 0 && mGankList.get(0).type.equals("休息视频")) {
                     mVideoView.loadUrl(mGankList.get(0).url);
@@ -224,15 +276,18 @@ public class GankFragment extends Fragment {
         }
     }
 
+
     void closePlayer() {
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        ToastUtils.showShort(getString(R.string.daimajia_has_gone));
+        ToastUtils.showShort(getString(R.string.tip_for_no_gank));
     }
+
 
     @Override public void onConfigurationChanged(Configuration newConfig) {
         setVideoViewPosition(newConfig);
         super.onConfigurationChanged(newConfig);
     }
+
 
     @Subscribe public void onKeyBackClick(OnKeyBackClickEvent event) {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -240,6 +295,7 @@ public class GankFragment extends Fragment {
         }
         clearVideoView();
     }
+
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -261,20 +317,23 @@ public class GankFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+
     private void openTodaySubject() {
         String url =
-            getString(R.string.url_gank_io) + String.format("%s/%s/%s", mYear, mMonth, mDay);
+                getString(R.string.url_gank_io) + String.format("%s/%s/%s", mYear, mMonth, mDay);
         Intent intent = new Intent(getActivity(), WebActivity.class);
         intent.putExtra(WebActivity.EXTRA_URL, url);
         intent.putExtra(WebActivity.EXTRA_TITLE, getString(R.string.action_subject));
         startActivity(intent);
     }
 
+
     @Override public void onResume() {
         super.onResume();
         LoveBus.getLovelySeat().register(this);
         resumeVideoView();
     }
+
 
     @Override public void onPause() {
         super.onPause();
@@ -283,16 +342,19 @@ public class GankFragment extends Fragment {
         clearVideoView();
     }
 
+
     @Override public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
+
 
     @Override public void onDestroy() {
         super.onDestroy();
         if (mSubscription != null) mSubscription.unsubscribe();
         resumeVideoView();
     }
+
 
     private void pauseVideoView() {
         // oh, my egg
@@ -302,6 +364,7 @@ public class GankFragment extends Fragment {
         }
     }
 
+
     private void resumeVideoView() {
         // egg pain
         if (mVideoView != null) {
@@ -309,6 +372,7 @@ public class GankFragment extends Fragment {
             mVideoView.onResume();
         }
     }
+
 
     private void clearVideoView() {
         if (mVideoView != null) {

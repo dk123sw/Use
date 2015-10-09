@@ -34,6 +34,7 @@ public class DateUtils {
         return dateFormat.format(date);
     }
 
+
     public static String toDate(Date date, int add) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -41,12 +42,14 @@ public class DateUtils {
         return toDate(calendar.getTime());
     }
 
+
     public static Date getLastdayDate(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(Calendar.DATE, -1);
         return calendar.getTime();
     }
+
 
     public static Date getNextdayDate(Date date) {
         Calendar calendar = Calendar.getInstance();
