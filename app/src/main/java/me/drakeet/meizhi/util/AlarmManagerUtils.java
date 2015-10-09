@@ -37,7 +37,7 @@ public class AlarmManagerUtils {
     public static void register(Context context) {
 
         Calendar today = Calendar.getInstance();
-        today.setTime(new Date());
+        today.setTime(new Date()); // TODO: 15/10/9 remove
 
         today.set(Calendar.HOUR_OF_DAY, 12);
         today.set(Calendar.MINUTE, 38);
@@ -50,5 +50,7 @@ public class AlarmManagerUtils {
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         am.set(AlarmManager.RTC_WAKEUP, today.getTimeInMillis(), pi);
+        am.set(AlarmManager.RTC_WAKEUP, today.getTimeInMillis(), pi); // TODO: 15/10/9 test set
+        // two alarm
     }
 }
