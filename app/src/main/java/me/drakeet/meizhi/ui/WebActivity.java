@@ -47,8 +47,8 @@ import me.drakeet.meizhi.util.ToastUtils;
 
 public class WebActivity extends ToolbarActivity {
 
-    public static final String EXTRA_URL = "extra_url";
-    public static final String EXTRA_TITLE = "extra_title";
+    private static final String EXTRA_URL = "extra_url";
+    private static final String EXTRA_TITLE = "extra_title";
 
     @Bind(R.id.progressbar) NumberProgressBar mProgressbar;
     @Bind(R.id.webView) WebView mWebView;
@@ -65,6 +65,21 @@ public class WebActivity extends ToolbarActivity {
 
     @Override public boolean canBack() {
         return true;
+    }
+
+    /**
+     * Using newIntent trick, return WebActivity Intent, to avoid `public static` constant
+     * variable everywhere
+     * @param context
+     * @param extraURL
+     * @param extraTitle
+     * @return Intent to start WebActivity
+     */
+    public static Intent newIntent(Context context, String extraURL, String extraTitle) {
+        Intent intent = new Intent(context, WebActivity.class);
+        intent.putExtra(EXTRA_URL, extraURL);
+        intent.putExtra(EXTRA_TITLE, extraTitle);
+        return intent;
     }
 
 

@@ -27,11 +27,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import java.util.List;
-
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.model.Gank;
 import me.drakeet.meizhi.ui.WebActivity;
@@ -108,9 +108,7 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
 
         @OnClick(R.id.ll_gank_parent) void onGank(View v) {
             Gank gank = mGankList.get(getLayoutPosition());
-            Intent intent = new Intent(v.getContext(), WebActivity.class);
-            intent.putExtra(WebActivity.EXTRA_TITLE, gank.desc);
-            intent.putExtra(WebActivity.EXTRA_URL, gank.url);
+            Intent intent = WebActivity.newIntent(v.getContext(), gank.url, gank.desc);
             v.getContext().startActivity(intent);
         }
     }
