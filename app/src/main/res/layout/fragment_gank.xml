@@ -30,6 +30,14 @@
         android:layout_height="match_parent"
         android:background="@color/bg_gank">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_gank"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/gank_header_height"
+            android:paddingBottom="@dimen/gank_footer_padding"
+            android:clipToPadding="false"/>
+
         <me.henrytao.smoothappbarlayout.SmoothAppBarLayout
             android:id="@+id/header_appbar"
             android:layout_width="match_parent"
@@ -66,14 +74,6 @@
             </android.support.design.widget.CollapsingToolbarLayout>
 
         </me.henrytao.smoothappbarlayout.SmoothAppBarLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_gank"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="@dimen/gank_header_height"
-            android:paddingBottom="@dimen/gank_footer_padding"
-            android:clipToPadding="false"/>
 
     </android.support.design.widget.CoordinatorLayout>
 
