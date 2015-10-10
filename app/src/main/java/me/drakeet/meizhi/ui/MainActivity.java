@@ -128,10 +128,10 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                 .flatMap(Observable::from)
                 .toSortedList(
                         (meizhi1, meizhi2) -> meizhi2.publishedAt.compareTo(meizhi1.publishedAt))
+                .doOnNext(meizhis -> saveMeizhis(meizhis))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(meizhis -> {
                     if (clean) mMeizhiList.clear();
-                    saveMeizhis(meizhis);
                     mMeizhiList.addAll(meizhis);
                     mMeizhiListAdapter.notifyDataSetChanged();
                     setRefreshing(false);
