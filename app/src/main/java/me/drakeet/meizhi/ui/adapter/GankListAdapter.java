@@ -63,12 +63,14 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
             showCategory(holder);
         }
         else {
-            boolean doesLastAndThis =
+            boolean theCategoryOfLastEqualsToThis =
                     mGankList.get(position - 1).type.equals(mGankList.get(position).type);
-            if (!doesLastAndThis) {
+            if (!theCategoryOfLastEqualsToThis) {
                 showCategory(holder);
             }
-            else if (holder.category.isShown()) holder.category.setVisibility(View.GONE);
+            else {
+                hideCategory(holder);
+            }
         }
         holder.category.setText(gank.type);
         if (holder.gank.getTag() == null) {
@@ -90,7 +92,20 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
 
 
     private void showCategory(ViewHolder holder) {
-        if (!holder.category.isShown()) holder.category.setVisibility(View.VISIBLE);
+        if (!isVisibleOf(holder.category)) holder.category.setVisibility(View.VISIBLE);
+    }
+
+
+    private void hideCategory(ViewHolder holder) {
+        if (isVisibleOf(holder.category)) holder.category.setVisibility(View.GONE);
+    }
+
+
+    /**
+     * view.isShown() is a kidding...
+     */
+    private boolean isVisibleOf(View view) {
+        return view.getVisibility() == View.VISIBLE;
     }
 
 
