@@ -26,6 +26,7 @@ def releaseTime() {
 def keyStore = file('meizhi.keystore')
 
 android {
+
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
 

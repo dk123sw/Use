@@ -30,18 +30,21 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import com.litesuits.orm.db.assit.QueryBuilder;
 import com.litesuits.orm.db.model.ConflictAlgorithm;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import me.drakeet.meizhi.App;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.data.MeizhiData;
@@ -259,9 +262,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     private void openGitHubTrending() {
         String url = getString(R.string.url_github_trending);
         String title = getString(R.string.action_github_trending);
-        Intent intent = new Intent(this, WebActivity.class);
-        intent.putExtra(WebActivity.EXTRA_URL, url);
-        intent.putExtra(WebActivity.EXTRA_TITLE, title);
+        Intent intent = WebActivity.newIntent(this, url, title);
         startActivity(intent);
     }
 

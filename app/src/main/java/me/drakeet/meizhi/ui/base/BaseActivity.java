@@ -79,9 +79,7 @@ public class BaseActivity extends AppCompatActivity {
             ToastUtils.showLongLong(getString(R.string.tip_login_github));
         });
         String url = getString(R.string.url_login_github);
-        Intent intent = new Intent(this, WebActivity.class);
-        intent.putExtra(WebActivity.EXTRA_URL, url);
-        intent.putExtra(WebActivity.EXTRA_TITLE, getString(R.string.action_github_login));
+        Intent intent = WebActivity.newIntent(this, url, getString(R.string.action_github_login));
         startActivity(intent);
     }
 

@@ -32,9 +32,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.squareup.okhttp.Callback;
@@ -42,9 +40,14 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.squareup.otto.Subscribe;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import me.drakeet.meizhi.ApiKey;
 import me.drakeet.meizhi.LoveBus;
 import me.drakeet.meizhi.R;
@@ -321,9 +324,7 @@ public class GankFragment extends Fragment {
     private void openTodaySubject() {
         String url =
                 getString(R.string.url_gank_io) + String.format("%s/%s/%s", mYear, mMonth, mDay);
-        Intent intent = new Intent(getActivity(), WebActivity.class);
-        intent.putExtra(WebActivity.EXTRA_URL, url);
-        intent.putExtra(WebActivity.EXTRA_TITLE, getString(R.string.action_subject));
+        Intent intent = WebActivity.newIntent(getActivity(), url, getString(R.string.action_subject));
         startActivity(intent);
     }
 
