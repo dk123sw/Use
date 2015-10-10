@@ -97,7 +97,6 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
 
     private void setUpUmeng() {
-        MobclickAgent.updateOnlineConfig(this);
         // MobclickAgent.setDebugMode(true);
         UmengUpdateAgent.update(this);
         UmengUpdateAgent.setDeltaUpdate(false);

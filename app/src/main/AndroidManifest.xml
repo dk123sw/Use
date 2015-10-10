@@ -81,6 +81,12 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name=".service.KeepAlarmLiveReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT"/>
+            </intent-filter>
+        </receiver>
+
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="5592386367e58e593d00234c"/>
