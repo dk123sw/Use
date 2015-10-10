@@ -137,7 +137,7 @@ public class GankFragment extends Fragment {
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (mGankList.size() == 0) getData();
+        if (mGankList.size() == 0) loadData();
         if (mVideoPreviewUrl != null) {
             Glide.with(this).load(mVideoPreviewUrl).into(mVideoImageView);
         }
@@ -151,7 +151,7 @@ public class GankFragment extends Fragment {
     }
 
 
-    private void getData() {
+    private void loadData() {
         getAndSetVideoPreview();
         mSubscription = BaseActivity.sDrakeet.getGankData(mYear, mMonth, mDay)
                 .map(data -> data.results)

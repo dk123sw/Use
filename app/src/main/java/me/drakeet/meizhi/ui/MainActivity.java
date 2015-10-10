@@ -92,7 +92,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     @Override protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         new Handler().postDelayed(() -> setRefreshing(true), 358);
-        getData(true);
+        loadData(true);
     }
 
 
@@ -121,7 +121,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     }
 
 
-    private void getData(boolean clean) {
+    private void loadData(boolean clean) {
         Subscription s = Observable.zip(sDrakeet.getMeizhiData(mPage), sDrakeet.get休息视频Data(mPage),
                 this::createMeizhiDataWith休息视频Desc)
                 .map(meizhiData -> meizhiData.results)
@@ -163,8 +163,8 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     }
 
 
-    private void getData() {
-        getData(/* clean */false);
+    private void loadData() {
+        loadData(/* clean */false);
     }
 
 
@@ -179,7 +179,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                     if (!mIsFirstTimeTouchBottom) {
                         mSwipeRefreshLayout.setRefreshing(true);
                         mPage += 1;
-                        getData();
+                        loadData();
                     }
                     else {
                         mIsFirstTimeTouchBottom = false;
