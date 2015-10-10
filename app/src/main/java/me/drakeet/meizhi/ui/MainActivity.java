@@ -100,7 +100,6 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
 
     private void setUpUmeng() {
-        // MobclickAgent.setDebugMode(true);
         UmengUpdateAgent.update(this);
         UmengUpdateAgent.setDeltaUpdate(false);
         UmengUpdateAgent.setUpdateOnlyWifi(false);
@@ -131,7 +130,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                 .flatMap(Observable::from)
                 .toSortedList(
                         (meizhi1, meizhi2) -> meizhi2.publishedAt.compareTo(meizhi1.publishedAt))
-                .doOnNext(meizhis -> saveMeizhis(meizhis))
+                .doOnNext(this::saveMeizhis)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(meizhis -> {
                     if (clean) mMeizhiList.clear();
@@ -252,9 +251,9 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     @Override public void requestDataRefresh() {
         super.requestDataRefresh();
-        //mMeizhiList.clear();
-        //mPage = 1;
-        //getData(/* add from db */ false);
+        mMeizhiList.clear();
+        mPage = 1;
+        loadData(/* add from db */ false);
         setRefreshing(false);
     }
 
