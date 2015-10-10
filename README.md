@@ -65,6 +65,12 @@ v2.1(1.82MB 极力追求精减安装包大小)
 
 [SharerMax](https://github.com/SharerMax)
 
+[XieQingShan](https://github.com/XieQingShan)
+
+[tankcong](https://github.com/tankcong)
+
+[zeng1990](https://github.com/zeng1990)
+
 ###特别鸣谢
 
 [XiNGRZ](https://github.com/xingrz)
