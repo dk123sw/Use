@@ -152,7 +152,7 @@ public class GankFragment extends Fragment {
 
 
     private void loadData() {
-        getAndSetVideoPreview();
+        loadVideoPreview();
         mSubscription = BaseActivity.sDrakeet.getGankData(mYear, mMonth, mDay)
                 .map(data -> data.results)
                 .map(this::addAllResults)
@@ -164,7 +164,7 @@ public class GankFragment extends Fragment {
     }
 
 
-    private void getAndSetVideoPreview() {
+    private void loadVideoPreview() {
         OkHttpClient client = new OkHttpClient();
         String url =
                 "https://leancloud.cn:443/1.1/classes/Gank?where=%7B%22tag%22%3A%22" + mYear + "-"
