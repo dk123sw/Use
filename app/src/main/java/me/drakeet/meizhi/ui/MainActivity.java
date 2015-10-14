@@ -30,21 +30,18 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.litesuits.orm.db.assit.QueryBuilder;
 import com.litesuits.orm.db.model.ConflictAlgorithm;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import me.drakeet.meizhi.App;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.data.MeizhiData;
@@ -55,6 +52,8 @@ import me.drakeet.meizhi.ui.adapter.MeizhiListAdapter;
 import me.drakeet.meizhi.ui.base.SwipeRefreshBaseActivity;
 import me.drakeet.meizhi.util.AlarmManagerUtils;
 import me.drakeet.meizhi.util.Once;
+import me.drakeet.meizhi.util.PreferencesLoader;
+import me.drakeet.meizhi.util.ToastUtils;
 import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -268,7 +267,15 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem item = menu.findItem(R.id.action_notifiable);
+        initNotifiableItemState(item);
         return true;
+    }
+
+
+    private void initNotifiableItemState(MenuItem item) {
+        PreferencesLoader loader = new PreferencesLoader(this);
+        item.setChecked(loader.getBoolean(R.string.action_notifiable, true));
     }
 
 
@@ -277,6 +284,13 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         switch (id) {
             case R.id.action_trending:
                 openGitHubTrending();
+                return true;
+            case R.id.action_notifiable:
+                boolean isChecked = !item.isChecked();
+                item.setChecked(isChecked);
+                PreferencesLoader loader = new PreferencesLoader(this);
+                loader.saveBoolean(R.string.action_notifiable, isChecked);
+                ToastUtils.showShort(isChecked ? R.string.notifiable_on : R.string.notifiable_off);
                 return true;
         }
         return super.onOptionsItemSelected(item);

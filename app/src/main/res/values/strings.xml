@@ -78,5 +78,8 @@
     <string name="snap_load_fail">加载失败，请重试</string>
     <string name="retry">重试</string>
     <string name="i_know">知道了</string>
+    <string name="action_notifiable">每天中午提醒</string>
+    <string name="notifiable_on">已经开启提醒</string>
+    <string name="notifiable_off">已经关闭提醒</string>
 
 </resources>
