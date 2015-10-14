@@ -24,8 +24,8 @@ ext {
                applicationId    : "me.drakeet.meizhi",
                minSdkVersion    : 14,
                targetSdkVersion : 22,
-               versionCode      : 301,
-               versionName      : "2.3.1"]
+               versionCode      : 303,
+               versionName      : "2.3.3"]
 
     dependencies = ["appcompat-v7"        : "com.android.support:appcompat-v7:22.2.1",
                     "design"              : "com.android.support:design:22.2.1",

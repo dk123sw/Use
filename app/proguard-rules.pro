@@ -50,7 +50,6 @@
 		public static final int *;
 }
 
--keep public class com.umeng.fb.ui.ThreadView {}
 
 -keep class me.drakeet.meizhi.BuildConfig { *; }
 -keep public class * extends android.os.Binder
@@ -93,12 +92,6 @@
 }
 
 -keep class android.support.v8.renderscript.** { *; }
-
-# ActiveAndroid
--keep class com.activeandroid.** { *; }
--keep class com.activeandroid.**.** { *; }
--keep class * extends com.activeandroid.Model
--keep class * extends com.activeandroid.serializer.TypeSerializer
 
 
 # Remove logging calls
@@ -152,3 +145,17 @@
 }
 
 -keep class me.henrytao.smoothappbarlayout.** { *; }
+
+# umeng
+-keepclassmembers class * {
+   public <init>(org.json.JSONObject);
+}
+
+-keep public class me.drakeet.meizhi.R$*{
+    public static final int *;
+}
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
