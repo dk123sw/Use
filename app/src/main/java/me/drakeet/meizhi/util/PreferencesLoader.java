@@ -61,8 +61,21 @@ public class PreferencesLoader {
         return mSharedPreferences.getBoolean(key, def);
     }
 
+
     public Boolean getBoolean(int keyResId, boolean def) {
         String key = mContext.getString(keyResId);
         return mSharedPreferences.getBoolean(key, def);
+    }
+
+
+    public int getInt(String key) {
+        return mSharedPreferences.getInt(key, 0);
+    }
+
+
+    public void saveInt(String key, int value) {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putInt(key, value);
+        editor.apply();
     }
 }
