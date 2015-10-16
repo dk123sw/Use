@@ -19,9 +19,7 @@
 
 package me.drakeet.meizhi.util;
 
-import android.content.Context;
 import android.widget.Toast;
-
 import me.drakeet.meizhi.App;
 
 /**
@@ -29,20 +27,7 @@ import me.drakeet.meizhi.App;
  */
 public class ToastUtils {
 
-    Context mContext;
-
-
     private ToastUtils() {
-    }
-
-
-    private static void show(Context context, int resId, int duration) {
-        Toast.makeText(context, resId, duration).show();
-    }
-
-
-    private static void show(Context context, String message, int duration) {
-        Toast.makeText(context, message, duration).show();
     }
 
 
@@ -66,28 +51,28 @@ public class ToastUtils {
     }
 
 
-    public static void showLongLong(String message) {
+    public static void showLongX2(String message) {
         showLong(message);
         showLong(message);
     }
 
 
-    public static void showLongLong(int resId) {
+    public static void showLongX2(int resId) {
         showLong(resId);
         showLong(resId);
     }
 
 
-    public static void showLongLongLong(int resId) {
+    public static void showLongX3(int resId) {
         showLong(resId);
         showLong(resId);
-        showShort(resId);
+        showLong(resId);
     }
 
 
-    public static void showLongLongLong(String message) {
+    public static void showLongX3(String message) {
         showLong(message);
         showLong(message);
-        showShort(message);
+        showLong(message);
     }
 }

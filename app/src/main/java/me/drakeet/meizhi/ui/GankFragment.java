@@ -242,7 +242,7 @@ public class GankFragment extends Fragment {
         resumeVideoView();
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         if (mGankList.size() > 0 && mGankList.get(0).type.equals("休息视频")) {
-            ToastUtils.showLongLong(R.string.loading);
+            ToastUtils.showLongX2(R.string.loading);
         }
         else {
             closePlayer();
