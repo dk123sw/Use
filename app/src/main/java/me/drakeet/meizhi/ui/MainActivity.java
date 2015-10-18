@@ -93,7 +93,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     @Override protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        new Handler().postDelayed(() -> setRefreshing(true), 358);
+        new Handler().postDelayed(() -> setRequestDataRefresh(true), 358);
         loadData(true);
     }
 
@@ -119,6 +119,8 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
         mRecyclerView.addOnScrollListener(getScrollToBottomListener(layoutManager));
         mMeizhiListAdapter.setOnMeizhiTouchListener(getOnMeizhiTouchListener());
+        // fix: Scrolling RecyclerView when refreshing makes crash.
+        mRecyclerView.setOnTouchListener((v, event) -> isRequestDataRefresh());
     }
 
 
@@ -135,7 +137,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                     if (clean) mMeizhiList.clear();
                     mMeizhiList.addAll(meizhis);
                     mMeizhiListAdapter.notifyDataSetChanged();
-                    setRefreshing(false);
+                    setRequestDataRefresh(false);
                 }, throwable -> loadError(throwable));
         addSubscription(s);
     }
@@ -143,7 +145,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     private void loadError(Throwable throwable) {
         throwable.printStackTrace();
-        setRefreshing(false);
+        setRequestDataRefresh(false);
         Snackbar.make(mRecyclerView, R.string.snap_load_fail, Snackbar.LENGTH_LONG)
                 .setAction(R.string.retry, v -> {requestDataRefresh();})
                 .show();
@@ -253,7 +255,6 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         mMeizhiList.clear();
         mPage = 1;
         loadData(/* add from db */ false);
-        setRefreshing(false);
     }
 
 
