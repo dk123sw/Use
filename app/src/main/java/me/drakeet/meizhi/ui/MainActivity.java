@@ -85,8 +85,8 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         query.limit(1, 10);
         mMeizhiList.addAll(App.sDb.query(query));
 
-        setUpRecyclerView();
-        setUpUmeng();
+        setupRecyclerView();
+        setupUmeng();
         AlarmManagerUtils.register(this);
     }
 
@@ -98,14 +98,14 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     }
 
 
-    private void setUpUmeng() {
+    private void setupUmeng() {
         UmengUpdateAgent.update(this);
         UmengUpdateAgent.setDeltaUpdate(false);
         UmengUpdateAgent.setUpdateOnlyWifi(false);
     }
 
 
-    private void setUpRecyclerView() {
+    private void setupRecyclerView() {
         final StaggeredGridLayoutManager layoutManager =
                 new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -119,11 +119,13 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
         mRecyclerView.addOnScrollListener(getScrollToBottomListener(layoutManager));
         mMeizhiListAdapter.setOnMeizhiTouchListener(getOnMeizhiTouchListener());
-        // fix: Scrolling RecyclerView when refreshing makes crash.
-        mRecyclerView.setOnTouchListener((v, event) -> isRequestDataRefresh());
     }
 
 
+    /**
+     * 获取服务数据
+     * @param clean 清除来自数据库缓存或者已有数据。
+     */
     private void loadData(boolean clean) {
         Subscription s = Observable.zip(sDrakeet.getMeizhiData(mPage), sDrakeet.get休息视频Data(mPage),
                 this::createMeizhiDataWith休息视频Desc)
@@ -252,9 +254,8 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     @Override public void requestDataRefresh() {
         super.requestDataRefresh();
-        mMeizhiList.clear();
         mPage = 1;
-        loadData(/* add from db */ false);
+        loadData(true);
     }
 
 
