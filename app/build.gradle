@@ -18,6 +18,7 @@
  */
 
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
 
 def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
@@ -140,8 +141,6 @@ dependencies {
     compile rootProject.ext.dependencies["otto"]
     compile rootProject.ext.dependencies["glide"]
 }
-
-apply plugin: 'me.tatarka.retrolambda'
 
 
 
