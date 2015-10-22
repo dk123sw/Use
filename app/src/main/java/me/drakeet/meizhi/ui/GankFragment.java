@@ -231,6 +231,7 @@ public class GankFragment extends Fragment {
     private List<Gank> addAllResults(GankData.Result results) {
         if (results.androidList != null) mGankList.addAll(results.androidList);
         if (results.iOSList != null) mGankList.addAll(results.iOSList);
+        if (results.appList != null) mGankList.addAll(results.appList);
         if (results.拓展资源List != null) mGankList.addAll(results.拓展资源List);
         if (results.瞎推荐List != null) mGankList.addAll(results.瞎推荐List);
         if (results.休息视频List != null) mGankList.addAll(0, results.休息视频List);
