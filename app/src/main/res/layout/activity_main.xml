@@ -48,9 +48,10 @@
         android:layout_gravity="right|bottom"
         android:clickable="true"
         android:src="@mipmap/ic_github"
+        android:elevation="4dp"
+        app:elevation="4dp"
         app:layout_anchor="@id/swipe_refresh_layout"
         app:borderWidth="0dp"
-        app:elevation="5dp"
         app:layout_anchorGravity="right|bottom"
         app:layout_behavior="me.drakeet.meizhi.widget.ScrollAwareFABBehavior"/>
 
