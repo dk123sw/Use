@@ -118,6 +118,7 @@
 -keepattributes Signature
 -keepattributes *Annotation*
 -keep class com.squareup.okhttp.** { *; }
+-dontwarn okio.**
 -keep interface com.squareup.okhttp.** { *; }
 -dontwarn com.squareup.okhttp.**
 
@@ -159,3 +160,6 @@
     public static **[] values();
     public static ** valueOf(java.lang.String);
 }
+
+-keep class com.umeng.** { *; }
+-keep public class * extends com.umeng.**
