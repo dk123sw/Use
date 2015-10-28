@@ -47,10 +47,12 @@ import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.data.MeizhiData;
 import me.drakeet.meizhi.data.休息视频Data;
 import me.drakeet.meizhi.event.OnMeizhiTouchListener;
+import me.drakeet.meizhi.model.Gank;
 import me.drakeet.meizhi.model.Meizhi;
 import me.drakeet.meizhi.ui.adapter.MeizhiListAdapter;
 import me.drakeet.meizhi.ui.base.SwipeRefreshBaseActivity;
 import me.drakeet.meizhi.util.AlarmManagerUtils;
+import me.drakeet.meizhi.util.DateUtils;
 import me.drakeet.meizhi.util.Once;
 import me.drakeet.meizhi.util.PreferencesLoader;
 import me.drakeet.meizhi.util.ToastUtils;
@@ -124,9 +126,11 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     /**
      * 获取服务数据
+     *
      * @param clean 清除来自数据库缓存或者已有数据。
      */
     private void loadData(boolean clean) {
+        mLastVideoIndex = 0;
         Subscription s = Observable.zip(sDrakeet.getMeizhiData(mPage), sDrakeet.get休息视频Data(mPage),
                 this::createMeizhiDataWith休息视频Desc)
                 .map(meizhiData -> meizhiData.results)
@@ -155,16 +159,31 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
 
     private void saveMeizhis(List<Meizhi> meizhis) {
-        App.sDb.insert(meizhis, ConflictAlgorithm.Ignore);
+        App.sDb.insert(meizhis, ConflictAlgorithm.Replace);
     }
 
 
     private MeizhiData createMeizhiDataWith休息视频Desc(MeizhiData mzData, 休息视频Data love) {
         for (int i = 0; i < mzData.results.size(); i++) {
             Meizhi m = mzData.results.get(i);
-            m.desc = m.desc + " " + love.results.get(i).desc;
+            m.desc = m.desc + " " + getFirstVideoDescOfTheDayOf(m.publishedAt, love.results);
         }
         return mzData;
+    }
+
+
+    private int mLastVideoIndex = 0;
+    private String getFirstVideoDescOfTheDayOf(Date publishedAt, List<Gank> results) {
+        String videoDesc = "";
+        for (int i = mLastVideoIndex; i < results.size(); i++) {
+            Gank video = results.get(i);
+            if (DateUtils.isTheSameDay(publishedAt, video.publishedAt)) {
+                videoDesc = video.desc;
+                mLastVideoIndex = i;
+                break;
+            }
+        }
+        return videoDesc;
     }
 
 
