@@ -31,6 +31,6 @@ import java.io.Serializable;
  */
 public class Soul implements Serializable {
 
-    @PrimaryKey(PrimaryKey.AssignType.AUTO_INCREMENT) @Column("_id") protected long id;
+    @PrimaryKey(PrimaryKey.AssignType.AUTO_INCREMENT) @Column("_id") public long id;
     @NotNull @Unique @Column("objectId") public String objectId;
 }
