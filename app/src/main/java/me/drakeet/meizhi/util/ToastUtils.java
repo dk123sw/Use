@@ -19,35 +19,56 @@
 
 package me.drakeet.meizhi.util;
 
+import android.content.Context;
 import android.widget.Toast;
-import me.drakeet.meizhi.App;
 
 /**
  * Created by drakeet on 9/27/14.
  */
 public class ToastUtils {
 
+    public static Context sContext;
+
+
     private ToastUtils() {
     }
 
 
+    public static void register(Context context) {
+        sContext = context;
+    }
+
+
+    private static void check() {
+        if (sContext == null) {
+            throw new NullPointerException(
+                    "Must initial call ToastUtils.register(Context context) in your " + "<? "
+                            + "extends Application class>");
+        }
+    }
+
+
     public static void showShort(int resId) {
-        Toast.makeText(App.sContext, resId, Toast.LENGTH_SHORT).show();
+        check();
+        Toast.makeText(sContext, resId, Toast.LENGTH_SHORT).show();
     }
 
 
     public static void showShort(String message) {
-        Toast.makeText(App.sContext, message, Toast.LENGTH_SHORT).show();
+        check();
+        Toast.makeText(sContext, message, Toast.LENGTH_SHORT).show();
     }
 
 
     public static void showLong(int resId) {
-        Toast.makeText(App.sContext, resId, Toast.LENGTH_LONG).show();
+        check();
+        Toast.makeText(sContext, resId, Toast.LENGTH_LONG).show();
     }
 
 
     public static void showLong(String message) {
-        Toast.makeText(App.sContext, message, Toast.LENGTH_LONG).show();
+        check();
+        Toast.makeText(sContext, message, Toast.LENGTH_LONG).show();
     }
 
 

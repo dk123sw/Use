@@ -22,6 +22,7 @@ package me.drakeet.meizhi;
 import android.app.Application;
 import android.content.Context;
 import com.litesuits.orm.LiteOrm;
+import me.drakeet.meizhi.util.ToastUtils;
 
 /**
  * Created by drakeet on 6/21/15.
@@ -36,6 +37,7 @@ public class App extends Application {
     @Override public void onCreate() {
         super.onCreate();
         sContext = this;
+        ToastUtils.register(this);
         sDb = LiteOrm.newSingleInstance(this, DB_NAME);
         if (BuildConfig.DEBUG) {
             sDb.setDebugged(true);
