@@ -39,7 +39,8 @@ import me.drakeet.meizhi.event.OnKeyBackClickEvent;
 import me.drakeet.meizhi.ui.base.ToolbarActivity;
 import me.drakeet.meizhi.util.DateUtils;
 
-public class GankActivity extends ToolbarActivity implements ViewPager.OnPageChangeListener {
+public class GankActivity extends ToolbarActivity
+        implements ViewPager.OnPageChangeListener {
 
     public static final String EXTRA_GANK_DATE = "gank_date";
 
@@ -65,7 +66,6 @@ public class GankActivity extends ToolbarActivity implements ViewPager.OnPageCha
         ButterKnife.bind(this);
         mGankDate = (Date) getIntent().getSerializableExtra(EXTRA_GANK_DATE);
         setTitle(DateUtils.toDate(mGankDate));
-
         initViewPager();
         initTabLayout();
     }
@@ -89,8 +89,12 @@ public class GankActivity extends ToolbarActivity implements ViewPager.OnPageCha
 
     @Override public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) { hideOrShowToolbar(); }
-        else { hideOrShowToolbar(); }
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            hideOrShowToolbar();
+        }
+        else {
+            hideOrShowToolbar();
+        }
     }
 
 
@@ -115,9 +119,9 @@ public class GankActivity extends ToolbarActivity implements ViewPager.OnPageCha
     @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
-                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    LoveBus.getLovelySeat()
-                           .post(new OnKeyBackClickEvent());
+                if (getResources().getConfiguration().orientation ==
+                        Configuration.ORIENTATION_LANDSCAPE) {
+                    LoveBus.getLovelySeat().post(new OnKeyBackClickEvent());
                     return true;
                 }
         }
@@ -139,16 +143,14 @@ public class GankActivity extends ToolbarActivity implements ViewPager.OnPageCha
     @Override public void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
-        LoveBus.getLovelySeat()
-               .register(this);
+        LoveBus.getLovelySeat().register(this);
     }
 
 
     @Override public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
-        LoveBus.getLovelySeat()
-               .unregister(this);
+        LoveBus.getLovelySeat().unregister(this);
     }
 
 
@@ -159,7 +161,8 @@ public class GankActivity extends ToolbarActivity implements ViewPager.OnPageCha
     }
 
 
-    @Override public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
     }
 

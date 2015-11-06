@@ -47,9 +47,7 @@ public class AboutActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         ButterKnife.bind(this);
-
         setUpVersionName();
-
         mCollapsingToolbarLayout.setTitle(getString(R.string.app_name));
 
         setSupportActionBar(mToolbar);

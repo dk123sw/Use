@@ -66,11 +66,10 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     @Bind(R.id.rv_meizhi) RecyclerView mRecyclerView;
 
-    MeizhiListAdapter mMeizhiListAdapter;
-    List<Meizhi> mMeizhiList;
-    boolean mIsFirstTimeTouchBottom = true;
-    int mPage = 1;
-
+    private MeizhiListAdapter mMeizhiListAdapter;
+    private List<Meizhi> mMeizhiList;
+    private boolean mIsFirstTimeTouchBottom = true;
+    private int mPage = 1;
     private boolean mMeizhiBeTouched;
 
 
@@ -109,17 +108,14 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     private void setupRecyclerView() {
         final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,
-                                                                                        StaggeredGridLayoutManager.VERTICAL);
+                StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
         mMeizhiListAdapter = new MeizhiListAdapter(this, mMeizhiList);
         mRecyclerView.setAdapter(mMeizhiListAdapter);
         new Once(this).show("tip_guide_6", () -> {
-            Snackbar.make(mRecyclerView,
-                          getString(R.string.tip_guide),
-                          Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.i_know, v -> {
-                    })
-                    .show();
+            Snackbar.make(mRecyclerView, getString(R.string.tip_guide),
+                    Snackbar.LENGTH_INDEFINITE).setAction(R.string.i_know, v -> {
+            }).show();
         });
 
         mRecyclerView.addOnScrollListener(getScrollToBottomListener(layoutManager));
@@ -136,7 +132,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         mLastVideoIndex = 0;
         // @formatter:off
         Subscription s = Observable
-                .zip(sGankIO.getMeizhiData(mPage),
+               .zip(sGankIO.getMeizhiData(mPage),
                      sGankIO.get休息视频Data(mPage),
                      this::createMeizhiDataWith休息视频Desc)
                .map(meizhiData -> meizhiData.results)
@@ -212,9 +208,9 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     RecyclerView.OnScrollListener getScrollToBottomListener(StaggeredGridLayoutManager layoutManager) {
         return new RecyclerView.OnScrollListener() {
             @Override public void onScrolled(RecyclerView rv, int dx, int dy) {
-                boolean isBottom =
-                        layoutManager.findLastCompletelyVisibleItemPositions(new int[2])[1] >=
-                                mMeizhiListAdapter.getItemCount() - PRELOAD_SIZE;
+                boolean isBottom = layoutManager.findLastCompletelyVisibleItemPositions(
+                        new int[2])[1] >=
+                        mMeizhiListAdapter.getItemCount() - PRELOAD_SIZE;
                 if (!mSwipeRefreshLayout.isRefreshing() && isBottom) {
                     if (!mIsFirstTimeTouchBottom) {
                         mSwipeRefreshLayout.setRefreshing(true);
@@ -235,18 +231,16 @@ public class MainActivity extends SwipeRefreshBaseActivity {
             if (meizhi == null) return;
             if (v == meizhiView && !mMeizhiBeTouched) {
                 mMeizhiBeTouched = true;
-                Picasso.with(this)
-                       .load(meizhi.url)
-                       .fetch(new Callback() {
+                Picasso.with(this).load(meizhi.url).fetch(new Callback() {
 
-                           @Override public void onSuccess() {
-                               mMeizhiBeTouched = false;
-                               startPictureActivity(meizhi, meizhiView);
-                           }
+                    @Override public void onSuccess() {
+                        mMeizhiBeTouched = false;
+                        startPictureActivity(meizhi, meizhiView);
+                    }
 
 
-                           @Override public void onError() {mMeizhiBeTouched = false;}
-                       });
+                    @Override public void onError() {mMeizhiBeTouched = false;}
+                });
             }
             else if (v == card) {
                 startGankActivity(meizhi.publishedAt);
@@ -268,8 +262,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         i.putExtra(PictureActivity.EXTRA_IMAGE_TITLE, meizhi.desc);
         ActivityOptionsCompat optionsCompat
                 = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this,
-                                                                     transitView,
-                                                                     PictureActivity.TRANSIT_PIC);
+                transitView, PictureActivity.TRANSIT_PIC);
         try {
             ActivityCompat.startActivity(MainActivity.this, i, optionsCompat.toBundle());
         } catch (IllegalArgumentException e) {
@@ -329,9 +322,8 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                 item.setChecked(isChecked);
                 PreferencesLoader loader = new PreferencesLoader(this);
                 loader.saveBoolean(R.string.action_notifiable, isChecked);
-                ToastUtils.showShort(isChecked
-                                     ? R.string.notifiable_on
-                                     : R.string.notifiable_off);
+                ToastUtils.showShort(
+                        isChecked ? R.string.notifiable_on : R.string.notifiable_off);
                 return true;
         }
         return super.onOptionsItemSelected(item);
