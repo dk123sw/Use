@@ -67,12 +67,11 @@ public class WebActivity extends ToolbarActivity {
         return true;
     }
 
+
     /**
      * Using newIntent trick, return WebActivity Intent, to avoid `public static` constant
      * variable everywhere
-     * @param context
-     * @param extraURL
-     * @param extraTitle
+     *
      * @return Intent to start WebActivity
      */
     public static Intent newIntent(Context context, String extraURL, String extraTitle) {

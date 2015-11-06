@@ -51,8 +51,8 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
 
 
     @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v =
-                LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gank, parent, false);
+        View v = LayoutInflater.from(parent.getContext())
+                               .inflate(R.layout.item_gank, parent, false);
         return new ViewHolder(v);
     }
 
@@ -63,8 +63,8 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
             showCategory(holder);
         }
         else {
-            boolean theCategoryOfLastEqualsToThis =
-                    mGankList.get(position - 1).type.equals(mGankList.get(position).type);
+            boolean theCategoryOfLastEqualsToThis = mGankList.get(position - 1).type.equals(mGankList.get(
+                    position).type);
             if (!theCategoryOfLastEqualsToThis) {
                 showCategory(holder);
             }
@@ -73,9 +73,12 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
             }
         }
         holder.category.setText(gank.type);
-        SpannableStringBuilder builder = new SpannableStringBuilder(gank.desc).append(
-                StringStyleUtils.format(holder.gank.getContext(), " (via. " + gank.who + ")",
-                        R.style.ViaTextAppearance));
+        SpannableStringBuilder builder = new SpannableStringBuilder(gank.desc).append(StringStyleUtils.format(
+                                                                                              holder.gank.getContext(),
+                                                                                              " (via. " +
+                                                                                                      gank.who +
+                                                                                                      ")",
+                                                                                              R.style.ViaTextAppearance));
         CharSequence gankText = builder.subSequence(0, builder.length());
 
         holder.gank.setText(gankText);
@@ -121,7 +124,8 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
         @OnClick(R.id.ll_gank_parent) void onGank(View v) {
             Gank gank = mGankList.get(getLayoutPosition());
             Intent intent = WebActivity.newIntent(v.getContext(), gank.url, gank.desc);
-            v.getContext().startActivity(intent);
+            v.getContext()
+             .startActivity(intent);
         }
     }
 }

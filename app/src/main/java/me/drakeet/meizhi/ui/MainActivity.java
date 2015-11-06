@@ -108,8 +108,8 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
 
     private void setupRecyclerView() {
-        final StaggeredGridLayoutManager layoutManager =
-                new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,
+                                                                                        StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
         mMeizhiListAdapter = new MeizhiListAdapter(this, mMeizhiList);
         mRecyclerView.setAdapter(mMeizhiListAdapter);
@@ -131,12 +131,12 @@ public class MainActivity extends SwipeRefreshBaseActivity {
      */
     private void loadData(boolean clean) {
         mLastVideoIndex = 0;
-        Subscription s = Observable.zip(sDrakeet.getMeizhiData(mPage), sDrakeet.get休息视频Data(mPage),
+        Subscription s = Observable.zip(sDrakeet.getMeizhiData(mPage),
+                                        sDrakeet.get休息视频Data(mPage),
                                         this::createMeizhiDataWith休息视频Desc)
                                    .map(meizhiData -> meizhiData.results)
                                    .flatMap(Observable::from)
-                                   .toSortedList((meizhi1, meizhi2) -> meizhi2.publishedAt.compareTo(
-                                           meizhi1.publishedAt))
+                                   .toSortedList((meizhi1, meizhi2) -> meizhi2.publishedAt.compareTo(meizhi1.publishedAt))
                                    .doOnNext(this::saveMeizhis)
                                    .observeOn(AndroidSchedulers.mainThread())
                                    .subscribe(meizhis -> {
@@ -202,8 +202,8 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     RecyclerView.OnScrollListener getScrollToBottomListener(StaggeredGridLayoutManager layoutManager) {
         return new RecyclerView.OnScrollListener() {
             @Override public void onScrolled(RecyclerView rv, int dx, int dy) {
-                boolean isBottom = layoutManager.findLastCompletelyVisibleItemPositions(new int[2])[1]
-                        >= mMeizhiListAdapter.getItemCount() - PRELOAD_SIZE;
+                boolean isBottom = layoutManager.findLastCompletelyVisibleItemPositions(new int[2])[1] >=
+                        mMeizhiListAdapter.getItemCount() - PRELOAD_SIZE;
                 if (!mSwipeRefreshLayout.isRefreshing() && isBottom) {
                     if (!mIsFirstTimeTouchBottom) {
                         mSwipeRefreshLayout.setRefreshing(true);
@@ -224,16 +224,18 @@ public class MainActivity extends SwipeRefreshBaseActivity {
             if (meizhi == null) return;
             if (v == meizhiView && !mMeizhiBeTouched) {
                 mMeizhiBeTouched = true;
-                Picasso.with(this).load(meizhi.url).fetch(new Callback() {
+                Picasso.with(this)
+                       .load(meizhi.url)
+                       .fetch(new Callback() {
 
-                    @Override public void onSuccess() {
-                        mMeizhiBeTouched = false;
-                        startPictureActivity(meizhi, meizhiView);
-                    }
+                           @Override public void onSuccess() {
+                               mMeizhiBeTouched = false;
+                               startPictureActivity(meizhi, meizhiView);
+                           }
 
 
-                    @Override public void onError() {mMeizhiBeTouched = false;}
-                });
+                           @Override public void onError() {mMeizhiBeTouched = false;}
+                       });
             }
             else if (v == card) {
                 startGankActivity(meizhi.publishedAt);
@@ -253,10 +255,10 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         Intent i = new Intent(MainActivity.this, PictureActivity.class);
         i.putExtra(PictureActivity.EXTRA_IMAGE_URL, meizhi.url);
         i.putExtra(PictureActivity.EXTRA_IMAGE_TITLE, meizhi.desc);
-
-        ActivityOptionsCompat optionsCompat =
-                ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, transitView,
-                                                                   PictureActivity.TRANSIT_PIC);
+        ActivityOptionsCompat optionsCompat
+                = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this,
+                                                                     transitView,
+                                                                     PictureActivity.TRANSIT_PIC);
         try {
             ActivityCompat.startActivity(MainActivity.this, i, optionsCompat.toBundle());
         } catch (IllegalArgumentException e) {

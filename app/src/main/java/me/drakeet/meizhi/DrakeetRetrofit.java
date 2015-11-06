@@ -36,8 +36,8 @@ public class DrakeetRetrofit {
     final Drakeet service;
 
     final static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-            .serializeNulls()
-            .create();
+                                              .serializeNulls()
+                                              .create();
 
 
     DrakeetRetrofit() {
@@ -45,9 +45,9 @@ public class DrakeetRetrofit {
         client.setReadTimeout(12, TimeUnit.SECONDS);
 
         RestAdapter restAdapter = new RestAdapter.Builder().setClient(new OkClient(client))
-                .setEndpoint("http://gank.avosapps.com/api")
-                .setConverter(new GsonConverter(gson))
-                .build();
+                                                           .setEndpoint("http://gank.avosapps.com/api")
+                                                           .setConverter(new GsonConverter(gson))
+                                                           .build();
         service = restAdapter.create(Drakeet.class);
     }
 

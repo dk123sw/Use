@@ -44,8 +44,7 @@ public class MultiSwipeRefreshLayout extends SwipeRefreshLayout {
 
     public MultiSwipeRefreshLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        final TypedArray a =
-                context.obtainStyledAttributes(attrs, R.styleable.MultiSwipeRefreshLayout, 0, 0);
+        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MultiSwipeRefreshLayout, 0, 0);
 
         mForegroundDrawable = a.getDrawable(R.styleable.MultiSwipeRefreshLayout_foreground);
         if (mForegroundDrawable != null) {

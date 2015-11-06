@@ -30,8 +30,7 @@ import me.drakeet.meizhi.R;
 /**
  * 参考了 fython/ExpressHelper @{https://github.com/PaperAirplane-Dev-Team/ExpressHelper/blob/master/app%2Fsrc%2Fmain%2Fjava%2Finfo%2Fpapdt%2Fexpress%2Fhelper%2Fui%2Fcommon%2FMyRecyclerViewAdapter.java}
  */
-public class AnimRecyclerViewAdapter<T extends RecyclerView.ViewHolder>
-        extends RecyclerView.Adapter<T> {
+public class AnimRecyclerViewAdapter<T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<T> {
 
     private static final int DELAY = 138;
     private int mLastPosition = -1;

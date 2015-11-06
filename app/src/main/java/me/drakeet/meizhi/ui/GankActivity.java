@@ -97,9 +97,9 @@ public class GankActivity extends ToolbarActivity implements ViewPager.OnPageCha
     @Override protected void hideOrShowToolbar() {
         View toolbar = findViewById(R.id.toolbar_with_indicator);
         toolbar.animate()
-                .translationY(mIsHidden ? 0 : -mToolbar.getHeight())
-                .setInterpolator(new DecelerateInterpolator(2))
-                .start();
+               .translationY(mIsHidden ? 0 : -mToolbar.getHeight())
+               .setInterpolator(new DecelerateInterpolator(2))
+               .start();
         mIsHidden = !mIsHidden;
         if (mIsHidden) {
             mViewPager.setTag(mViewPager.getPaddingTop());
@@ -115,9 +115,9 @@ public class GankActivity extends ToolbarActivity implements ViewPager.OnPageCha
     @Override public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
-                if (getResources().getConfiguration().orientation
-                        == Configuration.ORIENTATION_LANDSCAPE) {
-                    LoveBus.getLovelySeat().post(new OnKeyBackClickEvent());
+                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    LoveBus.getLovelySeat()
+                           .post(new OnKeyBackClickEvent());
                     return true;
                 }
         }
@@ -139,14 +139,16 @@ public class GankActivity extends ToolbarActivity implements ViewPager.OnPageCha
     @Override public void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
-        LoveBus.getLovelySeat().register(this);
+        LoveBus.getLovelySeat()
+               .register(this);
     }
 
 
     @Override public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
-        LoveBus.getLovelySeat().unregister(this);
+        LoveBus.getLovelySeat()
+               .unregister(this);
     }
 
 
@@ -157,8 +159,7 @@ public class GankActivity extends ToolbarActivity implements ViewPager.OnPageCha
     }
 
 
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    @Override public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
     }
 

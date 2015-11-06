@@ -41,11 +41,11 @@ public class SwipeRefreshFragment extends Fragment {
 
 
     void trySetupSwipeRefresh(View root) {
-        mSwipeRefreshLayout =
-                (MultiSwipeRefreshLayout) root.findViewById(R.id.swipe_refresh_layout);
+        mSwipeRefreshLayout = (MultiSwipeRefreshLayout) root.findViewById(R.id.swipe_refresh_layout);
         if (mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_3,
-                    R.color.refresh_progress_2, R.color.refresh_progress_1);
+                                                        R.color.refresh_progress_2,
+                                                        R.color.refresh_progress_1);
             mSwipeRefreshLayout.setOnRefreshListener(() -> requestDataRefresh());
         }
     }
@@ -74,8 +74,7 @@ public class SwipeRefreshFragment extends Fragment {
     }
 
 
-    public void setSwipeableChildren(
-            MultiSwipeRefreshLayout.CanChildScrollUpCallback canChildScrollUpCallback) {
+    public void setSwipeableChildren(MultiSwipeRefreshLayout.CanChildScrollUpCallback canChildScrollUpCallback) {
         mSwipeRefreshLayout.setCanChildScrollUpCallback(canChildScrollUpCallback);
     }
 }

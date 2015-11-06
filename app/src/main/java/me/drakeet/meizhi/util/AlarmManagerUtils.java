@@ -47,8 +47,10 @@ public class AlarmManagerUtils {
         Intent intent = new Intent("me.drakeet.meizhi.alarm");
         intent.setClass(context, AlarmReceiver.class);
 
-        PendingIntent pi =
-                PendingIntent.getBroadcast(context, 520, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pi = PendingIntent.getBroadcast(context,
+                                                      520,
+                                                      intent,
+                                                      PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         am.set(AlarmManager.RTC_WAKEUP, today.getTimeInMillis(), pi);

@@ -107,19 +107,20 @@ public class LoveVideoView extends WebView {
     // Append stylesheet to document head
     private void injectCSS(String filename) {
         try {
-            InputStream inputStream = mContext.getAssets().open(filename);
+            InputStream inputStream = mContext.getAssets()
+                                              .open(filename);
             byte[] buffer = new byte[inputStream.available()];
             inputStream.read(buffer);
             inputStream.close();
             String encoded = Base64.encodeToString(buffer, Base64.NO_WRAP);
             loadUrl("javascript:(function() {" +
-                    "var parent = document.getElementsByTagName('head').item(0);" +
-                    "var style = document.createElement('style');" +
-                    "style.type = 'text/css';" +
-                    // Tell the browser to BASE64-decode the string into your script !!!
-                    "style.innerHTML = window.atob('" + encoded + "');" +
-                    "parent.appendChild(style)" +
-                    "})()");
+                            "var parent = document.getElementsByTagName('head').item(0);" +
+                            "var style = document.createElement('style');" +
+                            "style.type = 'text/css';" +
+                            // Tell the browser to BASE64-decode the string into your script !!!
+                            "style.innerHTML = window.atob('" + encoded + "');" +
+                            "parent.appendChild(style)" +
+                            "})()");
         } catch (Exception e) {
             e.printStackTrace();
         }

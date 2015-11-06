@@ -52,7 +52,8 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
     void trySetupSwipeRefresh() {
         if (mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_3,
-                    R.color.refresh_progress_2, R.color.refresh_progress_1);
+                                                        R.color.refresh_progress_2,
+                                                        R.color.refresh_progress_1);
             // do not use lambda!!
             mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override public void onRefresh() {
@@ -94,8 +95,7 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
     }
 
 
-    public void setSwipeableChildren(
-            MultiSwipeRefreshLayout.CanChildScrollUpCallback canChildScrollUpCallback) {
+    public void setSwipeableChildren(MultiSwipeRefreshLayout.CanChildScrollUpCallback canChildScrollUpCallback) {
         mSwipeRefreshLayout.setCanChildScrollUpCallback(canChildScrollUpCallback);
     }
 
