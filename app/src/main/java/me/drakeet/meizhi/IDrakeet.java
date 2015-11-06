@@ -19,26 +19,24 @@
 
 package me.drakeet.meizhi;
 
-import me.drakeet.meizhi.data.GankData;
-import me.drakeet.meizhi.data.MeizhiData;
-import me.drakeet.meizhi.data.休息视频Data;
+import me.drakeet.meizhi.data.DGankData;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.Path;
 import rx.Observable;
+
+// @formatter:off
 
 /**
  * Created by drakeet on 8/9/15.
  */
-public interface Drakeet {
+public interface IDrakeet {
 
-    @GET("/data/福利/" + DrakeetFactory.meizhiSize + "/{page}") Observable<MeizhiData> getMeizhiData(
-            @Path("page") int page);
-
-    @GET("/day/{year}/{month}/{day}") Observable<GankData> getGankData(
+    @Headers({ "X-LC-Id: 0azfScvBLCC9tAGRAwIhcC40",
+               "X-LC-Key: gAuE93qAusvP8gk1VW8DtOUb",
+               "Content-Type: application/json" })
+    @GET("/Gank?where=%7B%22tag%22%3A%22{year}-{month}-{day}%22%7D") Observable<DGankData> getDGankData(
             @Path("year") int year,
             @Path("month") int month,
             @Path("day") int day);
-
-    @GET("/data/休息视频/" + DrakeetFactory.meizhiSize + "/{page}") Observable<休息视频Data> get休息视频Data(
-            @Path("page") int page);
 }

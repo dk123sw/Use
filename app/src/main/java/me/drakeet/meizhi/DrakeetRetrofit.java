@@ -33,26 +33,39 @@ import retrofit.converter.GsonConverter;
  */
 public class DrakeetRetrofit {
 
-    final Drakeet service;
+    final IGank gankService;
+    final IDrakeet drakeetService;
 
-    final static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-                                              .serializeNulls()
-                                              .create();
+    // @formatter:off
+    final static Gson gson = new GsonBuilder()
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            .serializeNulls()
+            .create();
+    // @formatter:on
 
 
     DrakeetRetrofit() {
         OkHttpClient client = new OkHttpClient();
         client.setReadTimeout(12, TimeUnit.SECONDS);
 
-        RestAdapter restAdapter = new RestAdapter.Builder().setClient(new OkClient(client))
-                                                           .setEndpoint("http://gank.avosapps.com/api")
-                                                           .setConverter(new GsonConverter(gson))
-                                                           .build();
-        service = restAdapter.create(Drakeet.class);
+        RestAdapter.Builder builder = new RestAdapter.Builder();
+        builder.setClient(new OkClient(client))
+               .setEndpoint("http://gank.avosapps.com/api")
+               .setConverter(new GsonConverter(gson));
+        RestAdapter gankRestAdapter = builder.build();
+        builder.setEndpoint("https://leancloud.cn:443/1.1/classes");
+        RestAdapter drakeetRestAdapter = builder.build();
+        gankService = gankRestAdapter.create(IGank.class);
+        drakeetService = drakeetRestAdapter.create(IDrakeet.class);
     }
 
 
-    public Drakeet getService() {
-        return service;
+    public IGank getGankService() {
+        return gankService;
+    }
+
+
+    public IDrakeet getDrakeetService() {
+        return drakeetService;
     }
 }

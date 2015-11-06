@@ -25,17 +25,28 @@ package me.drakeet.meizhi;
 public class DrakeetFactory {
 
     protected static final Object monitor = new Object();
-    static Drakeet sSingleton = null;
+    static IGank sGankIOSingleton = null;
+    static IDrakeet sDrakeetSingleton = null;
     public static final int meizhiSize = 10;
     public static final int gankSize = 5;
 
 
-    public static Drakeet getSingleton() {
+    public static IGank getGankIOSingleton() {
         synchronized (monitor) {
-            if (sSingleton == null) {
-                sSingleton = new DrakeetRetrofit().getService();
+            if (sGankIOSingleton == null) {
+                sGankIOSingleton = new DrakeetRetrofit().getGankService();
             }
-            return sSingleton;
+            return sGankIOSingleton;
+        }
+    }
+
+
+    public static IDrakeet getDrakeetSingleton() {
+        synchronized (monitor) {
+            if (sDrakeetSingleton == null) {
+                sDrakeetSingleton = new DrakeetRetrofit().getDrakeetService();
+            }
+            return sDrakeetSingleton;
         }
     }
 }
