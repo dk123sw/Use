@@ -172,7 +172,7 @@ public class GankFragment extends Fragment {
                       .map(dGanks -> dGanks.get(0))
                       .observeOn(AndroidSchedulers.mainThread())
                       .subscribe(dGank -> startPreview(dGank.preview),
-                                 throwable -> getOldVideoPreview(new OkHttpClient()));
+                              throwable -> getOldVideoPreview(new OkHttpClient()));
     }
 
 
@@ -313,7 +313,7 @@ public class GankFragment extends Fragment {
         String url = getString(R.string.url_gank_io) +
                 String.format("%s/%s/%s", mYear, mMonth, mDay);
         Intent intent = WebActivity.newIntent(getActivity(), url,
-                                              getString(R.string.action_subject));
+                getString(R.string.action_subject));
         startActivity(intent);
     }
 

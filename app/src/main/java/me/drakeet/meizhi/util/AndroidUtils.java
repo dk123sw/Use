@@ -32,9 +32,9 @@ public class AndroidUtils {
 
     public static void copyToClipBoard(Context context, String text, String success) {
         ClipData clipData = ClipData.newPlainText("meizhi_copy", text);
-        ClipboardManager manager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipboardManager manager = (ClipboardManager) context.getSystemService(
+                Context.CLIPBOARD_SERVICE);
         manager.setPrimaryClip(clipData);
-        Toast.makeText(context, success, Toast.LENGTH_SHORT)
-             .show();
+        Toast.makeText(context, success, Toast.LENGTH_SHORT).show();
     }
 }

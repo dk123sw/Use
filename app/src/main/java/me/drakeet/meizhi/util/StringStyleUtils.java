@@ -30,7 +30,8 @@ public class StringStyleUtils {
 
     public static SpannableString format(Context context, String text, int style) {
         SpannableString spannableString = new SpannableString(text);
-        spannableString.setSpan(new TextAppearanceSpan(context, style), 0, text.length(), 0);
+        spannableString.setSpan(new TextAppearanceSpan(context, style), 0, text.length(),
+                0);
         return spannableString;
     }
 }

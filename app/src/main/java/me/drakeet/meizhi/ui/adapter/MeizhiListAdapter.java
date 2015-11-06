@@ -41,7 +41,8 @@ import rx.Observable;
 /**
  * Created by drakeet on 6/20/15.
  */
-public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.ViewHolder> {
+public class MeizhiListAdapter
+        extends RecyclerView.Adapter<MeizhiListAdapter.ViewHolder> {
 
     public static final String TAG = "MeizhiListAdapter";
 
@@ -63,10 +64,12 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
     }
 
 
-    @Override public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
+    @Override
+    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         Meizhi meizhi = mList.get(position);
         int limit = 48;
-        String text = meizhi.desc.length() > limit ? meizhi.desc.substring(0, limit) + "..." : meizhi.desc;
+        String text = meizhi.desc.length() > limit ? meizhi.desc.substring(0, limit) +
+                "..." : meizhi.desc;
         viewHolder.meizhi = meizhi;
         viewHolder.titleView.setText(text);
         viewHolder.card.setTag(meizhi.desc);
@@ -76,7 +79,9 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
              .centerCrop()
              .into(viewHolder.meizhiView)
              .getSize((width, height) -> {
-                 if (!viewHolder.card.isShown()) viewHolder.card.setVisibility(View.VISIBLE);
+                 if (!viewHolder.card.isShown()) {
+                     viewHolder.card.setVisibility(View.VISIBLE);
+                 }
              });
     }
 
@@ -123,9 +128,7 @@ public class MeizhiListAdapter extends RecyclerView.Adapter<MeizhiListAdapter.Vi
     Observable<Bitmap> getBitmapObservable(String url) {
         return Observable.defer(() -> {
             try {
-                return Observable.just(Picasso.with(mContext)
-                                              .load(url)
-                                              .get());
+                return Observable.just(Picasso.with(mContext).load(url).get());
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;

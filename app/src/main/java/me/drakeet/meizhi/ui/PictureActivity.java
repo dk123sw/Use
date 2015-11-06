@@ -72,17 +72,12 @@ public class PictureActivity extends ToolbarActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         parseIntent();
-
         // init image view
         ViewCompat.setTransitionName(mImageView, TRANSIT_PIC);
-        Picasso.with(this)
-               .load(mImageUrl)
-               .into(mImageView);
-
+        Picasso.with(this).load(mImageUrl).into(mImageView);
         // set up app bar
         setAppBarAlpha(0.7f);
         setTitle(mImageTitle);
-
         setupPhotoAttacher();
     }
 
@@ -90,33 +85,35 @@ public class PictureActivity extends ToolbarActivity {
     private void setupPhotoAttacher() {
         mPhotoViewAttacher = new PhotoViewAttacher(mImageView);
         mPhotoViewAttacher.setOnViewTapListener((view, v, v1) -> hideOrShowToolbar());
+        // @formatter:off
         mPhotoViewAttacher.setOnLongClickListener(v -> {
-            new AlertDialog.Builder(PictureActivity.this).setMessage(getString(R.string.ask_saving_picture))
-                                                         .setNegativeButton(android.R.string.cancel,
-                                                                            (dialog, which) -> {
-                                                                                dialog.dismiss();
-                                                                            })
-                                                         .setPositiveButton(android.R.string.ok,
-                                                                            (dialog, which) -> {
-                                                                                saveImageToGallery();
-                                                                                dialog.dismiss();
-                                                                            })
-                                                         .show();
+            new AlertDialog.Builder(PictureActivity.this)
+                    .setMessage(getString(R.string.ask_saving_picture))
+                    .setNegativeButton(android.R.string.cancel,
+                            (dialog, which) -> dialog.dismiss())
+                    .setPositiveButton(android.R.string.ok,
+                            (dialog, which) -> {
+                                saveImageToGallery();
+                                dialog.dismiss();
+                            })
+                    .show();
+            // @formatter:on
             return true;
         });
     }
 
 
     private void saveImageToGallery() {
+        // @formatter:off
         Subscription s = RxMeizhi.saveImageAndGetPathObservable(this, mImageUrl, mImageTitle)
-                                 .observeOn(AndroidSchedulers.mainThread())
-                                 .subscribe(uri -> {
-                                     File appDir = new File(Environment.getExternalStorageDirectory(),
-                                                            "Meizhi");
-                                     String msg = String.format(getString(R.string.picture_has_save_to),
-                                                                appDir.getAbsolutePath());
-                                     ToastUtils.showShort(msg);
-                                 }, error -> ToastUtils.showLong(error.getMessage() + "\n再试试..."));
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(uri -> {
+                File appDir = new File(Environment.getExternalStorageDirectory(), "Meizhi");
+                String msg = String.format(getString(R.string.picture_has_save_to),
+                        appDir.getAbsolutePath());
+                ToastUtils.showShort(msg);
+            }, error -> ToastUtils.showLong(error.getMessage() + "\n再试试..."));
+        // @formatter:on
         addSubscription(s);
     }
 
@@ -135,7 +132,7 @@ public class PictureActivity extends ToolbarActivity {
                 RxMeizhi.saveImageAndGetPathObservable(this, mImageUrl, mImageTitle)
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(uri -> ShareUtils.shareImage(this, uri, "分享妹纸到..."),
-                                   error -> ToastUtils.showLong(error.getMessage()));
+                                error -> ToastUtils.showLong(error.getMessage()));
                 return true;
             case R.id.action_save:
                 saveImageToGallery();

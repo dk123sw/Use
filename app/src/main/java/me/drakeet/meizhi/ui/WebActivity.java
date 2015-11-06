@@ -54,8 +54,7 @@ public class WebActivity extends ToolbarActivity {
     @Bind(R.id.webView) WebView mWebView;
     @Bind(R.id.tv_title) TextSwitcher mTextSwitcher;
 
-    Context mContext;
-    String mUrl, mTitle;
+    private String mUrl, mTitle;
 
 
     @Override protected int provideContentViewId() {
@@ -69,7 +68,8 @@ public class WebActivity extends ToolbarActivity {
 
 
     /**
-     * Using newIntent trick, return WebActivity Intent, to avoid `public static` constant
+     * Using newIntent trick, return WebActivity Intent, to avoid `public static`
+     * constant
      * variable everywhere
      *
      * @return Intent to start WebActivity
@@ -85,7 +85,6 @@ public class WebActivity extends ToolbarActivity {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        mContext = this;
         mUrl = getIntent().getStringExtra(EXTRA_URL);
         mTitle = getIntent().getStringExtra(EXTRA_TITLE);
 
@@ -201,8 +200,12 @@ public class WebActivity extends ToolbarActivity {
         @Override public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
             mProgressbar.setProgress(newProgress);
-            if (newProgress == 100) { mProgressbar.setVisibility(View.GONE); }
-            else { mProgressbar.setVisibility(View.VISIBLE); }
+            if (newProgress == 100) {
+                mProgressbar.setVisibility(View.GONE);
+            }
+            else {
+                mProgressbar.setVisibility(View.VISIBLE);
+            }
         }
 
 

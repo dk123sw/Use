@@ -34,7 +34,7 @@ public class HttpUtils {
 
     public String download(String urlStr) {
         StringBuffer sb = new StringBuffer();
-        String line = null;
+        String line;
         BufferedReader buffer = null;
         try {
             url = new URL(urlStr);

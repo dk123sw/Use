@@ -79,7 +79,8 @@ public class BaseActivity extends AppCompatActivity {
             ToastUtils.showLongX2(getString(R.string.tip_login_github));
         });
         String url = getString(R.string.url_login_github);
-        Intent intent = WebActivity.newIntent(this, url, getString(R.string.action_github_login));
+        Intent intent = WebActivity.newIntent(this, url,
+                getString(R.string.action_github_login));
         startActivity(intent);
     }
 

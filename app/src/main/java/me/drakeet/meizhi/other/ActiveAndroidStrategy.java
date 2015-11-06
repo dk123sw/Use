@@ -39,12 +39,12 @@ public class ActiveAndroidStrategy implements ExclusionStrategy {
 
 
     @Override public boolean shouldSkipField(FieldAttributes attributes) {
-        return attributes.getDeclaringClass()
-                         .equals(excludedThisClassFields);
+        return attributes.getDeclaringClass().equals(excludedThisClassFields);
     }
 
 
     @Override public boolean shouldSkipClass(Class<?> clazz) {
-        return clazz != null && (clazz.equals(excludedThisClass) || shouldSkipClass(clazz.getSuperclass()));
+        return clazz != null && (clazz.equals(excludedThisClass) ||
+                shouldSkipClass(clazz.getSuperclass()));
     }
 }

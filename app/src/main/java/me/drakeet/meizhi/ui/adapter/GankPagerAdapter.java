@@ -46,8 +46,7 @@ public class GankPagerAdapter extends FragmentPagerAdapter {
         calendar.setTime(mDate);
         calendar.add(Calendar.DATE, -position);
         return GankFragment.newInstance(calendar.get(Calendar.YEAR),
-                                        calendar.get(Calendar.MONTH) + 1,
-                                        calendar.get(Calendar.DAY_OF_MONTH));
+                calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH));
     }
 
 
