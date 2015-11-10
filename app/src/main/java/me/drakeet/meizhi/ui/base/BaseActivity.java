@@ -22,7 +22,7 @@ package me.drakeet.meizhi.ui.base;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import me.drakeet.meizhi.IGank;
+import me.drakeet.meizhi.GankApi;
 import me.drakeet.meizhi.DrakeetFactory;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.ui.AboutActivity;
@@ -37,7 +37,7 @@ import rx.subscriptions.CompositeSubscription;
  */
 public class BaseActivity extends AppCompatActivity {
 
-    public static final IGank sGankIO = DrakeetFactory.getGankIOSingleton();
+    public static final GankApi sGankIO = DrakeetFactory.getGankIOSingleton();
 
     private CompositeSubscription mCompositeSubscription;
 

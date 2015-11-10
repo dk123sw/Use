@@ -33,8 +33,8 @@ import retrofit.converter.GsonConverter;
  */
 public class DrakeetRetrofit {
 
-    final IGank gankService;
-    final IDrakeet drakeetService;
+    final GankApi gankService;
+    final DrakeetApi drakeetService;
 
     // @formatter:off
     final static Gson gson = new GsonBuilder()
@@ -55,17 +55,17 @@ public class DrakeetRetrofit {
         RestAdapter gankRestAdapter = builder.build();
         builder.setEndpoint("https://leancloud.cn:443/1.1/classes");
         RestAdapter drakeetRestAdapter = builder.build();
-        gankService = gankRestAdapter.create(IGank.class);
-        drakeetService = drakeetRestAdapter.create(IDrakeet.class);
+        gankService = gankRestAdapter.create(GankApi.class);
+        drakeetService = drakeetRestAdapter.create(DrakeetApi.class);
     }
 
 
-    public IGank getGankService() {
+    public GankApi getGankService() {
         return gankService;
     }
 
 
-    public IDrakeet getDrakeetService() {
+    public DrakeetApi getDrakeetService() {
         return drakeetService;
     }
 }
