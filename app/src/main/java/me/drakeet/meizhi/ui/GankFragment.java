@@ -165,8 +165,9 @@ public class GankFragment extends Fragment {
 
 
     private void loadVideoPreview() {
+        String where = String.format("{\"tag\":\"%d-%d-%d\"}", mYear, mMonth, mDay);
         DrakeetFactory.getDrakeetSingleton()
-                      .getDGankData(mYear, mMonth, mDay)
+                      .getDGankData(where)
                       .map(dGankData -> dGankData.results)
                       .single(dGanks -> dGanks.size() > 0)
                       .map(dGanks -> dGanks.get(0))

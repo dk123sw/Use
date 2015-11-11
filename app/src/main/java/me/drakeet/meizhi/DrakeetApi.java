@@ -22,7 +22,7 @@ package me.drakeet.meizhi;
 import me.drakeet.meizhi.data.DGankData;
 import retrofit.http.GET;
 import retrofit.http.Headers;
-import retrofit.http.Path;
+import retrofit.http.Query;
 import rx.Observable;
 
 // @formatter:off
@@ -35,8 +35,6 @@ public interface DrakeetApi {
     @Headers({ "X-LC-Id: 0azfScvBLCC9tAGRAwIhcC40",
                "X-LC-Key: gAuE93qAusvP8gk1VW8DtOUb",
                "Content-Type: application/json" })
-    @GET("/Gank?where=%7B%22tag%22%3A%22{year}-{month}-{day}%22%7D") Observable<DGankData> getDGankData(
-            @Path("year") int year,
-            @Path("month") int month,
-            @Path("day") int day);
+    @GET("/Gank?limit=1") Observable<DGankData> getDGankData(
+            @Query("where") String where);// format {"tag":"2015-11-10"}
 }
