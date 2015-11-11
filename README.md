@@ -1,4 +1,4 @@
-#源代码在 GPL v3 协议下发布, 使用前, 请确保你了解这个协议!
+###源代码在 GPL v3 协议下发布, 使用前, 请确保你了解这个协议!
 
 [LICENSE](/LICENSE)
 
@@ -10,38 +10,50 @@
 
 **每天自动更新一张精选妹纸图、一个小视频、一系列精选程序猿干货（周末不更新）。数据来自代码家的干货网站：http://gank.io**
 
-8月9号开始重构，开发2.0，18号完成，至今可谓完成了个完整的干货客户端，不仅仅是看妹纸了，开源又好用，绝对是程序猿必备良心项目… 做得匆忙，但代码自认为还是写得很不错的，用了很多注解和 
-lambda 表达式，用了 RxJava & Retrofit。UI 交互上，细节和动画效果也不少... 如果喜欢，请帮忙给个 Google Play 好评或者分享给朋友们~谢谢~~
+Material Design, Functional programming, RxJava & Retrofit...
 
 相关文章：http://drakeet.me/2015-08-20
+
+<a href="https://play.google.com/store/apps/details?id=me.drakeet.meizhi" target="_blank">
+<img class="alignnone size-full wp-image-1175" src="http://drakeet.me/wp-content/uploads/2015/10/gp.png" alt="gp" width="129" height="45">
+</a>
 
 Google Play: https://play.google.com/store/apps/details?id=me.drakeet.meizhi
 
 直接下载：https://fir.im/mengmeizhi (请尽量 Google Play 下载，如果喜欢，去给个五星好评，非常感谢！)
 
-v2.2.8
+v2.5.6（2.06MB）
+* 修复 缓存机制问题；
+* 一些代码上的优化;
 
+v2.4.8
+* 改变 "午餐"提醒时间为12:11:38；
+
+v2.3.9
+* 新增 App 干货频道/分类；
+* 新增 主页菜单中对于中午通知提醒的开关；
+
+v2.3.1
+* 大幅 提升干货页面上下滑动的顺滑体验；
+* 更新 每日提醒功能，做到更稳健和极低耗电；
+
+v2.2.8（1.9.2MB）
 * 新增 妹纸图页面直接分享图片功能；
 * 新增 妹纸图页面直接保存图片菜单按钮；
 * 更改 主页浮动按钮的图标为 GitHub 小猫；
 * 新增 主页浮动按钮打开最新的干货页面；
 
-v2.1(1.82MB 极力追求精减安装包大小)
-
-* 修复 视频播放切换问题；
+v2.1 (1.91MB)  
+* 新增 浏览器页面右上角的刷新页面、复制链接菜单；
+* 
 * 优化 视频播放体验；
-* 新增 可爱的初次使用指引；
-* 新增 自动收缩浮动刷新按钮；
-* 新增 点击主页卡片的文字打开干货页面；
-* 新增 干货视频自动横屏播放；
-* 新增 打开 Android 等干货条目页面；
+* 新增 点击主页卡片的文字打开干货页面；  
+* 新增 干货视频自动横屏播放； 
+* 新增 打开 Android 等干货条目页面；  
 * 新增 web 页面标题跑马灯、渐变切换动画效果；
 * 新增 登录和缓存 GitHub 帐号功能；
-* 特别 照顾魅族用户没有返回键退出视频播放的尴尬状况；
 
-* 大幅优化 主页流畅度和稳定性；
-* 大量重构 开源代码，更加优雅和规整；
-* 未来：增加 收藏、搜索功能；
+大量重构 开源代码，更加优雅和规整；
 
 <img src="/screenshots/s0.png" alt="screenshot" title="screenshot" width="270" height="486" />   <img src="/screenshots/s6.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
