@@ -123,8 +123,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                     .show();
         });
 
-        mRecyclerView.addOnScrollListener(
-                getScrollToBottomListener(layoutManager));
+        mRecyclerView.addOnScrollListener(getOnBottomListener(layoutManager));
         mMeizhiListAdapter.setOnMeizhiTouchListener(getOnMeizhiTouchListener());
     }
 
@@ -203,7 +202,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     }
 
 
-    RecyclerView.OnScrollListener getScrollToBottomListener(StaggeredGridLayoutManager layoutManager) {
+    RecyclerView.OnScrollListener getOnBottomListener(StaggeredGridLayoutManager layoutManager) {
         return new RecyclerView.OnScrollListener() {
             @Override public void onScrolled(RecyclerView rv, int dx, int dy) {
                 boolean isBottom =
