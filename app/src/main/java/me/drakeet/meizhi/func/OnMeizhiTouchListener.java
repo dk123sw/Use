@@ -17,7 +17,7 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.drakeet.meizhi.event;
+package me.drakeet.meizhi.func;
 
 import android.view.View;
 

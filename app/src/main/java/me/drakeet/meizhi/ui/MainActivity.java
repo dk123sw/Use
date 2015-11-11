@@ -46,7 +46,7 @@ import me.drakeet.meizhi.App;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.data.MeizhiData;
 import me.drakeet.meizhi.data.休息视频Data;
-import me.drakeet.meizhi.event.OnMeizhiTouchListener;
+import me.drakeet.meizhi.func.OnMeizhiTouchListener;
 import me.drakeet.meizhi.model.Gank;
 import me.drakeet.meizhi.model.Meizhi;
 import me.drakeet.meizhi.ui.adapter.MeizhiListAdapter;
@@ -202,29 +202,6 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     }
 
 
-    RecyclerView.OnScrollListener getOnBottomListener(StaggeredGridLayoutManager layoutManager) {
-        return new RecyclerView.OnScrollListener() {
-            @Override public void onScrolled(RecyclerView rv, int dx, int dy) {
-                boolean isBottom =
-                        layoutManager.findLastCompletelyVisibleItemPositions(
-                                new int[2])[1] >=
-                                mMeizhiListAdapter.getItemCount() -
-                                        PRELOAD_SIZE;
-                if (!mSwipeRefreshLayout.isRefreshing() && isBottom) {
-                    if (!mIsFirstTimeTouchBottom) {
-                        mSwipeRefreshLayout.setRefreshing(true);
-                        mPage += 1;
-                        loadData();
-                    }
-                    else {
-                        mIsFirstTimeTouchBottom = false;
-                    }
-                }
-            }
-        };
-    }
-
-
     private OnMeizhiTouchListener getOnMeizhiTouchListener() {
         return (v, meizhiView, card, meizhi) -> {
             if (meizhi == null) return;
@@ -328,6 +305,29 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    RecyclerView.OnScrollListener getOnBottomListener(StaggeredGridLayoutManager layoutManager) {
+        return new RecyclerView.OnScrollListener() {
+            @Override public void onScrolled(RecyclerView rv, int dx, int dy) {
+                boolean isBottom =
+                        layoutManager.findLastCompletelyVisibleItemPositions(
+                                new int[2])[1] >=
+                                mMeizhiListAdapter.getItemCount() -
+                                        PRELOAD_SIZE;
+                if (!mSwipeRefreshLayout.isRefreshing() && isBottom) {
+                    if (!mIsFirstTimeTouchBottom) {
+                        mSwipeRefreshLayout.setRefreshing(true);
+                        mPage += 1;
+                        loadData();
+                    }
+                    else {
+                        mIsFirstTimeTouchBottom = false;
+                    }
+                }
+            }
+        };
     }
 
 
