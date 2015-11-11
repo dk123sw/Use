@@ -45,15 +45,12 @@ v2.2.8（1.9.2MB）
 
 v2.1 (1.91MB)  
 * 新增 浏览器页面右上角的刷新页面、复制链接菜单；
-* 
 * 优化 视频播放体验；
 * 新增 点击主页卡片的文字打开干货页面；  
 * 新增 干货视频自动横屏播放； 
 * 新增 打开 Android 等干货条目页面；  
 * 新增 web 页面标题跑马灯、渐变切换动画效果；
 * 新增 登录和缓存 GitHub 帐号功能；
-
-大量重构 开源代码，更加优雅和规整；
 
 <img src="/screenshots/s0.png" alt="screenshot" title="screenshot" width="270" height="486" />   <img src="/screenshots/s6.png" alt="screenshot" title="screenshot" width="270" height="486" />
 
