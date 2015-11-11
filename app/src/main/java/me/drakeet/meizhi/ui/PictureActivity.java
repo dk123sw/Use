@@ -19,6 +19,8 @@
 
 package me.drakeet.meizhi.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.view.ViewCompat;
@@ -59,6 +61,13 @@ public class PictureActivity extends ToolbarActivity {
 
     @Override public boolean canBack() {
         return true;
+    }
+
+    public static Intent newIntent(Context context, String url, String desc) {
+        Intent intent = new Intent(context, PictureActivity.class);
+        intent.putExtra(PictureActivity.EXTRA_IMAGE_URL, url);
+        intent.putExtra(PictureActivity.EXTRA_IMAGE_TITLE, desc);
+        return intent;
     }
 
 

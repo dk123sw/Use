@@ -256,18 +256,17 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
 
     private void startPictureActivity(Meizhi meizhi, View transitView) {
-        Intent i = new Intent(MainActivity.this, PictureActivity.class);
-        i.putExtra(PictureActivity.EXTRA_IMAGE_URL, meizhi.url);
-        i.putExtra(PictureActivity.EXTRA_IMAGE_TITLE, meizhi.desc);
+        Intent intent = PictureActivity.newIntent(MainActivity.this, meizhi.url,
+                meizhi.desc);
         ActivityOptionsCompat optionsCompat
                 = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 MainActivity.this, transitView, PictureActivity.TRANSIT_PIC);
         try {
-            ActivityCompat.startActivity(MainActivity.this, i,
+            ActivityCompat.startActivity(MainActivity.this, intent,
                     optionsCompat.toBundle());
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
-            startActivity(i);
+            startActivity(intent);
         }
     }
 
