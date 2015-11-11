@@ -85,7 +85,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         mMeizhiList = new ArrayList<>();
         QueryBuilder query = new QueryBuilder(Meizhi.class);
         query.appendOrderDescBy("publishedAt");
-        query.limit(1, 10);
+        query.limit(0, 10);
         mMeizhiList.addAll(App.sDb.query(query));
 
         setupRecyclerView();
@@ -168,7 +168,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
 
     private void saveMeizhis(List<Meizhi> meizhis) {
-        App.sDb.insert(meizhis, ConflictAlgorithm.Ignore);
+        App.sDb.insert(meizhis, ConflictAlgorithm.Replace);
     }
 
 
