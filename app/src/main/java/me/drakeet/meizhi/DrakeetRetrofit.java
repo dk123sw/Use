@@ -55,6 +55,7 @@ public class DrakeetRetrofit {
         RestAdapter gankRestAdapter = builder.build();
         builder.setEndpoint("https://leancloud.cn:443/1.1/classes");
         RestAdapter drakeetRestAdapter = builder.build();
+        drakeetRestAdapter.setLogLevel(RestAdapter.LogLevel.FULL);
         gankService = gankRestAdapter.create(GankApi.class);
         drakeetService = drakeetRestAdapter.create(DrakeetApi.class);
     }

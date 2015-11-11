@@ -83,6 +83,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         ButterKnife.bind(this);
         mMeizhiList = new ArrayList<>();
         QueryBuilder query = new QueryBuilder(Meizhi.class);
+        query.appendOrderDescBy("publishedAt");
         query.limit(1, 10);
         mMeizhiList.addAll(App.sDb.query(query));
 
@@ -164,12 +165,11 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
 
     private void saveMeizhis(List<Meizhi> meizhis) {
-        for (Meizhi meizhi : meizhis) {
-            Meizhi findM = App.sDb.queryById(meizhi.id, Meizhi.class);
-            if (findM == null) {
-                App.sDb.insert(meizhi, ConflictAlgorithm.Replace);
-            }
-        }
+        App.sDb.insert(meizhis, ConflictAlgorithm.Ignore);
+
+        //Observable.from(meizhis)
+        //          .filter(meizhi -> App.sDb.queryById(meizhi.id, Meizhi.class) == null)
+        //          .forEach(meizhi -> App.sDb.insert(meizhi, ConflictAlgorithm.Replace));
     }
 
 

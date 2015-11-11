@@ -181,7 +181,7 @@ public class GankFragment extends Fragment {
         Request request = new Request.Builder().url(url).build();
         client.newCall(request).enqueue(new Callback() {
             @Override public void onFailure(Request request, IOException e) {
-                ToastUtils.showShort(e.getMessage());
+                e.printStackTrace();
             }
 
 
