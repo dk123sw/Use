@@ -20,7 +20,7 @@
 package me.drakeet.meizhi.data;
 
 import java.util.List;
-import me.drakeet.meizhi.model.Gank;
+import me.drakeet.meizhi.data.entity.Gank;
 
 /**
  * Created by drakeet on 8/15/15.

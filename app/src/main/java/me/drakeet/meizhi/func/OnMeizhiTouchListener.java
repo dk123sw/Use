@@ -21,7 +21,7 @@ package me.drakeet.meizhi.func;
 
 import android.view.View;
 
-import me.drakeet.meizhi.model.Meizhi;
+import me.drakeet.meizhi.data.entity.Meizhi;
 
 /**
  * 邪恶的 class 名。。。。

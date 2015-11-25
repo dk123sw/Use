@@ -22,7 +22,7 @@ package me.drakeet.meizhi.data;
 import com.google.gson.annotations.Expose;
 import java.util.ArrayList;
 import java.util.List;
-import me.drakeet.meizhi.model.DGank;
+import me.drakeet.meizhi.data.entity.DGank;
 
 /**
  * Created by drakeet(http://drakeet.me)

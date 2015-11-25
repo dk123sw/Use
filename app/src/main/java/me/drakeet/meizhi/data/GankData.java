@@ -23,7 +23,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import me.drakeet.meizhi.model.Gank;
+import me.drakeet.meizhi.data.entity.Gank;
 
 /**
  * Created by drakeet on 8/11/15.

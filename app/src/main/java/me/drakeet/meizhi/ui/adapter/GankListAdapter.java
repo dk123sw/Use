@@ -33,7 +33,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.drakeet.meizhi.R;
-import me.drakeet.meizhi.model.Gank;
+import me.drakeet.meizhi.data.entity.Gank;
 import me.drakeet.meizhi.ui.WebActivity;
 import me.drakeet.meizhi.util.StringStyleUtils;
 

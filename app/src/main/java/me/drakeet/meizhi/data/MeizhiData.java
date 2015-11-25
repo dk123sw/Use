@@ -21,7 +21,7 @@ package me.drakeet.meizhi.data;
 
 import java.util.List;
 
-import me.drakeet.meizhi.model.Meizhi;
+import me.drakeet.meizhi.data.entity.Meizhi;
 
 /**
  * Created by drakeet on 8/9/15.
