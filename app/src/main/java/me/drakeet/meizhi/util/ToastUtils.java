@@ -35,7 +35,7 @@ public class ToastUtils {
 
 
     public static void register(Context context) {
-        sContext = context;
+        sContext = context.getApplicationContext();
     }
 
 

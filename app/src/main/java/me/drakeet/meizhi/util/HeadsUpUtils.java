@@ -25,10 +25,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Build;
-
 import com.mingle.headsUp.HeadsUp;
 import com.mingle.headsUp.HeadsUpManager;
-
+// @formatter:off
 /**
  * Created by drakeet on 7/1/15.
  */
