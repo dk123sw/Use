@@ -36,7 +36,7 @@ public class AlarmManagerUtils {
         Calendar now = Calendar.getInstance();
 
         today.set(Calendar.HOUR_OF_DAY, 12);
-        today.set(Calendar.MINUTE, 11);
+        today.set(Calendar.MINUTE, 24);
         today.set(Calendar.SECOND, 38);
 
         if (now.after(today)) {

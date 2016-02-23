@@ -37,11 +37,12 @@
         android:layout_marginTop="16dp"
         android:paddingBottom="32dp"
         android:layout_centerInParent="true"
-        android:text="@string/tip_daimajia_has_gone"/>
+        android:autoLink="web"
+        android:text="@string/tip_empty_gank"/>
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="96dp"
+        android:layout_height="72dp"
         android:scaleType="fitXY"
         android:src="@mipmap/heheh"
         android:layout_alignParentBottom="true"/>

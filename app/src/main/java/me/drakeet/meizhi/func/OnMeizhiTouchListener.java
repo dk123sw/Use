@@ -24,7 +24,6 @@ import android.view.View;
 import me.drakeet.meizhi.data.entity.Meizhi;
 
 /**
- * 邪恶的 class 名。。。。
  * Created by drakeet on 7/1/15.
  */
 public interface OnMeizhiTouchListener {

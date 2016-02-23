@@ -33,4 +33,4 @@
 
     <include layout="@layout/view_toolbar"/>
 
-</RelativeLayout><!--我真机智，233-->
+</RelativeLayout>
