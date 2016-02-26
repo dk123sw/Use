@@ -50,12 +50,12 @@ public class DrakeetRetrofit {
 
         RestAdapter.Builder builder = new RestAdapter.Builder();
         builder.setClient(new OkClient(client))
-               .setEndpoint("http://gank.avosapps.com/api")
+               .setLogLevel(RestAdapter.LogLevel.FULL)
+               .setEndpoint("http://gank.io/api")
                .setConverter(new GsonConverter(gson));
         RestAdapter gankRestAdapter = builder.build();
         builder.setEndpoint("https://leancloud.cn:443/1.1/classes");
         RestAdapter drakeetRestAdapter = builder.build();
-        drakeetRestAdapter.setLogLevel(RestAdapter.LogLevel.FULL);
         gankService = gankRestAdapter.create(GankApi.class);
         drakeetService = drakeetRestAdapter.create(DrakeetApi.class);
     }

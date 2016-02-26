@@ -45,17 +45,16 @@ import java.util.List;
 import me.drakeet.meizhi.App;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.data.MeizhiData;
-import me.drakeet.meizhi.data.休息视频Data;
-import me.drakeet.meizhi.func.OnMeizhiTouchListener;
 import me.drakeet.meizhi.data.entity.Gank;
 import me.drakeet.meizhi.data.entity.Meizhi;
+import me.drakeet.meizhi.data.休息视频Data;
+import me.drakeet.meizhi.func.OnMeizhiTouchListener;
 import me.drakeet.meizhi.ui.adapter.MeizhiListAdapter;
 import me.drakeet.meizhi.ui.base.SwipeRefreshBaseActivity;
 import me.drakeet.meizhi.util.AlarmManagerUtils;
 import me.drakeet.meizhi.util.DateUtils;
 import me.drakeet.meizhi.util.Once;
 import me.drakeet.meizhi.util.PreferencesLoader;
-import me.drakeet.meizhi.util.Stream;
 import me.drakeet.meizhi.util.ToastUtils;
 import rx.Observable;
 import rx.Subscription;
@@ -146,12 +145,13 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                      meizhi2.publishedAt.compareTo(meizhi1.publishedAt))
                .doOnNext(this::saveMeizhis)
                .observeOn(AndroidSchedulers.mainThread())
+               .finallyDo(() -> setRequestDataRefresh(false))
                .subscribe(meizhis -> {
                    if (clean) mMeizhiList.clear();
                    mMeizhiList.addAll(meizhis);
                    mMeizhiListAdapter.notifyDataSetChanged();
                    setRequestDataRefresh(false);
-               }, throwable -> loadError(throwable));
+               });
         // @formatter:on
         addSubscription(s);
     }
@@ -159,7 +159,6 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
     private void loadError(Throwable throwable) {
         throwable.printStackTrace();
-        setRequestDataRefresh(false);
         Snackbar.make(mRecyclerView, R.string.snap_load_fail,
                 Snackbar.LENGTH_LONG).setAction(R.string.retry, v -> {
             requestDataRefresh();
@@ -173,9 +172,10 @@ public class MainActivity extends SwipeRefreshBaseActivity {
 
 
     private MeizhiData createMeizhiDataWith休息视频Desc(MeizhiData data, 休息视频Data love) {
-        Stream.from(data.results)
-              .forEach(meizhi -> meizhi.desc = meizhi.desc + " " +
-                      getFirstVideoDesc(meizhi.publishedAt, love.results));
+        for (Meizhi meizhi : data.results) {
+            meizhi.desc = meizhi.desc + " " +
+                    getFirstVideoDesc(meizhi.publishedAt, love.results);
+        }
         return data;
     }
 
@@ -187,6 +187,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         String videoDesc = "";
         for (int i = mLastVideoIndex; i < results.size(); i++) {
             Gank video = results.get(i);
+            if (video.publishedAt == null) video.publishedAt = video.createdAt;
             if (DateUtils.isTheSameDay(publishedAt, video.publishedAt)) {
                 videoDesc = video.desc;
                 mLastVideoIndex = i;
