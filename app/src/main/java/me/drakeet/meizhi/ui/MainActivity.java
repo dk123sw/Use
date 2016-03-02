@@ -151,7 +151,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
                    mMeizhiList.addAll(meizhis);
                    mMeizhiListAdapter.notifyDataSetChanged();
                    setRequestDataRefresh(false);
-               });
+               }, throwable -> loadError(throwable));
         // @formatter:on
         addSubscription(s);
     }

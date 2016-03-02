@@ -72,11 +72,11 @@ android {
     buildTypes {
         release {
             // 不显示Log
-//            buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "boolean", "LOG_DEBUG", "false"
 
-            debuggable true
-            minifyEnabled false
-            shrinkResources false
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             if (keyStore.exists()) {
                 println "Meizhi: using drakeet's key"
