@@ -28,7 +28,7 @@ import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.ui.AboutActivity;
 import me.drakeet.meizhi.ui.WebActivity;
 import me.drakeet.meizhi.util.Once;
-import me.drakeet.meizhi.util.ToastUtils;
+import me.drakeet.meizhi.util.Toasts;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
@@ -76,7 +76,7 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void loginGitHub() {
         new Once(this).show(R.string.action_github_login, () -> {
-            ToastUtils.showLongX2(getString(R.string.tip_login_github));
+            Toasts.showLongX2(getString(R.string.tip_login_github));
         });
         String url = getString(R.string.url_login_github);
         Intent intent = WebActivity.newIntent(this, url,

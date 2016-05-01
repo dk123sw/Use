@@ -31,7 +31,7 @@ import com.mingle.headsUp.HeadsUpManager;
 /**
  * Created by drakeet on 7/1/15.
  */
-public class HeadsUpUtils {
+public class HeadsUps {
 
     public static void show(Context context, Class<?> targetActivity, String title, String content, int largeIcon, int smallIcon, int code) {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 11,

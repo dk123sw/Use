@@ -31,14 +31,14 @@ import me.drakeet.meizhi.widget.MultiSwipeRefreshLayout;
 /**
  * Created by drakeet on 1/3/15.
  */
-public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
+public abstract class SwipeRefreshBaseActivity extends ToolbarActivity
+        implements SwipeRefreshLayer {
 
     @Bind(R.id.swipe_refresh_layout) public MultiSwipeRefreshLayout mSwipeRefreshLayout;
     private boolean mIsRequestDataRefresh = false;
 
 
-    @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+    @Override public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         ButterKnife.bind(this);
     }
@@ -54,23 +54,22 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
         if (mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout.setColorSchemeResources(R.color.refresh_progress_3,
                     R.color.refresh_progress_2, R.color.refresh_progress_1);
-            // do not use lambda!!
-            mSwipeRefreshLayout.setOnRefreshListener(
-                    new SwipeRefreshLayout.OnRefreshListener() {
-                        @Override public void onRefresh() {
-                            requestDataRefresh();
-                        }
-                    });
+            // Do not use lambda here!
+            mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override public void onRefresh() {
+                    requestDataRefresh();
+                }
+            });
         }
     }
 
 
-    public void requestDataRefresh() {
+    @Override public void requestDataRefresh() {
         mIsRequestDataRefresh = true;
     }
 
 
-    public void setRequestDataRefresh(boolean requestDataRefresh) {
+    public void setRefresh(boolean requestDataRefresh) {
         if (mSwipeRefreshLayout == null) {
             return;
         }
@@ -84,19 +83,19 @@ public abstract class SwipeRefreshBaseActivity extends ToolbarActivity {
                     }
                 }
             }, 1000);
-        }
-        else {
+        } else {
             mSwipeRefreshLayout.setRefreshing(true);
         }
     }
 
 
-    public void setProgressViewOffset(boolean scale, int start, int end) {
+    @Override public void setProgressViewOffset(boolean scale, int start, int end) {
         mSwipeRefreshLayout.setProgressViewOffset(scale, start, end);
     }
 
 
-    public void setSwipeableChildren(MultiSwipeRefreshLayout.CanChildScrollUpCallback canChildScrollUpCallback) {
+    @Override
+    public void setCanChildScrollUpCallback(MultiSwipeRefreshLayout.CanChildScrollUpCallback canChildScrollUpCallback) {
         mSwipeRefreshLayout.setCanChildScrollUpCallback(canChildScrollUpCallback);
     }
 

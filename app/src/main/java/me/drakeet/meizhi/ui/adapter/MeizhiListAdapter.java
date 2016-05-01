@@ -20,7 +20,6 @@
 package me.drakeet.meizhi.ui.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,14 +28,11 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
-import com.squareup.picasso.Picasso;
-import java.io.IOException;
 import java.util.List;
 import me.drakeet.meizhi.R;
-import me.drakeet.meizhi.func.OnMeizhiTouchListener;
 import me.drakeet.meizhi.data.entity.Meizhi;
+import me.drakeet.meizhi.func.OnMeizhiTouchListener;
 import me.drakeet.meizhi.widget.RatioImageView;
-import rx.Observable;
 
 /**
  * Created by drakeet on 6/20/15.
@@ -122,17 +118,5 @@ public class MeizhiListAdapter
         @Override public void onClick(View v) {
             mOnMeizhiTouchListener.onTouch(v, meizhiView, card, meizhi);
         }
-    }
-
-
-    Observable<Bitmap> getBitmapObservable(String url) {
-        return Observable.defer(() -> {
-            try {
-                return Observable.just(Picasso.with(mContext).load(url).get());
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
-        });
     }
 }

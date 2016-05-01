@@ -36,8 +36,8 @@ import java.io.File;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.ui.base.ToolbarActivity;
 import me.drakeet.meizhi.util.RxMeizhi;
-import me.drakeet.meizhi.util.ShareUtils;
-import me.drakeet.meizhi.util.ToastUtils;
+import me.drakeet.meizhi.util.Shares;
+import me.drakeet.meizhi.util.Toasts;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import uk.co.senab.photoview.PhotoViewAttacher;
@@ -63,6 +63,7 @@ public class PictureActivity extends ToolbarActivity {
         return true;
     }
 
+
     public static Intent newIntent(Context context, String url, String desc) {
         Intent intent = new Intent(context, PictureActivity.class);
         intent.putExtra(PictureActivity.EXTRA_IMAGE_URL, url);
@@ -81,10 +82,8 @@ public class PictureActivity extends ToolbarActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         parseIntent();
-        // init image view
         ViewCompat.setTransitionName(mImageView, TRANSIT_PIC);
         Picasso.with(this).load(mImageUrl).into(mImageView);
-        // set up app bar
         setAppBarAlpha(0.7f);
         setTitle(mImageTitle);
         setupPhotoAttacher();
@@ -120,8 +119,8 @@ public class PictureActivity extends ToolbarActivity {
                 File appDir = new File(Environment.getExternalStorageDirectory(), "Meizhi");
                 String msg = String.format(getString(R.string.picture_has_save_to),
                         appDir.getAbsolutePath());
-                ToastUtils.showShort(msg);
-            }, error -> ToastUtils.showLong(error.getMessage() + "\n再试试..."));
+                Toasts.showShort(msg);
+            }, error -> Toasts.showLong(error.getMessage() + "\n再试试..."));
         // @formatter:on
         addSubscription(s);
     }
@@ -140,8 +139,9 @@ public class PictureActivity extends ToolbarActivity {
             case R.id.action_share:
                 RxMeizhi.saveImageAndGetPathObservable(this, mImageUrl, mImageTitle)
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(uri -> ShareUtils.shareImage(this, uri, "分享妹纸到..."),
-                                error -> ToastUtils.showLong(error.getMessage()));
+                        .subscribe(uri -> Shares.shareImage(this, uri,
+                                getString(R.string.share_meizhi_to)),
+                                error -> Toasts.showLong(error.getMessage()));
                 return true;
             case R.id.action_save:
                 saveImageToGallery();

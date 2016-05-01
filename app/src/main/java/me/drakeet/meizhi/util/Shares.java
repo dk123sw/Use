@@ -27,10 +27,10 @@ import me.drakeet.meizhi.R;
 /**
  * Created by drakeet on 8/17/15.
  */
-public class ShareUtils {
+public class Shares {
 
-    public static void share(Context context) {
-        share(context, context.getString(R.string.share_text));
+    public static void share(Context context, int stringRes) {
+        share(context, context.getString(stringRes));
     }
 
 

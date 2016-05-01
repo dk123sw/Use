@@ -52,10 +52,10 @@ import me.drakeet.meizhi.event.OnKeyBackClickEvent;
 import me.drakeet.meizhi.data.entity.Gank;
 import me.drakeet.meizhi.ui.adapter.GankListAdapter;
 import me.drakeet.meizhi.ui.base.BaseActivity;
-import me.drakeet.meizhi.util.LoveStringUtils;
+import me.drakeet.meizhi.util.LoveStrings;
 import me.drakeet.meizhi.util.Once;
-import me.drakeet.meizhi.util.ShareUtils;
-import me.drakeet.meizhi.util.ToastUtils;
+import me.drakeet.meizhi.util.Shares;
+import me.drakeet.meizhi.util.Toasts;
 import me.drakeet.meizhi.widget.LoveVideoView;
 import me.drakeet.meizhi.widget.VideoImageView;
 import rx.Subscription;
@@ -188,7 +188,7 @@ public class GankFragment extends Fragment {
 
             @Override public void onResponse(Response response) throws IOException {
                 String body = response.body().string();
-                mVideoPreviewUrl = LoveStringUtils.getVideoPreviewImageUrl(body);
+                mVideoPreviewUrl = LoveStrings.getVideoPreviewImageUrl(body);
                 startPreview(mVideoPreviewUrl);
             }
         });
@@ -226,9 +226,8 @@ public class GankFragment extends Fragment {
         resumeVideoView();
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         if (mGankList.size() > 0 && mGankList.get(0).type.equals("休息视频")) {
-            ToastUtils.showLongX2(R.string.loading);
-        }
-        else {
+            Toasts.showLongX2(R.string.loading);
+        } else {
             closePlayer();
         }
     }
@@ -239,8 +238,7 @@ public class GankFragment extends Fragment {
             case Configuration.ORIENTATION_LANDSCAPE: {
                 if (mIsVideoViewInflated) {
                     mVideoViewStub.setVisibility(View.VISIBLE);
-                }
-                else {
+                } else {
                     mVideoView = (LoveVideoView) mVideoViewStub.inflate();
                     mIsVideoViewInflated = true;
                     String tip = getString(R.string.tip_video_play);
@@ -268,7 +266,7 @@ public class GankFragment extends Fragment {
 
     void closePlayer() {
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        ToastUtils.showShort(getString(R.string.tip_for_no_gank));
+        Toasts.showShort(getString(R.string.tip_for_no_gank));
     }
 
 
@@ -279,10 +277,8 @@ public class GankFragment extends Fragment {
 
 
     @Subscribe public void onKeyBackClick(OnKeyBackClickEvent event) {
-        if (getResources().getConfiguration().orientation ==
-                Configuration.ORIENTATION_LANDSCAPE) {
-            getActivity().setRequestedOrientation(
-                    ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
         clearVideoView();
     }
@@ -296,10 +292,9 @@ public class GankFragment extends Fragment {
                     Gank gank = mGankList.get(0);
                     String shareText = gank.desc + gank.url +
                             getString(R.string.share_from);
-                    ShareUtils.share(getActivity(), shareText);
-                }
-                else {
-                    ShareUtils.share(getActivity());
+                    Shares.share(getActivity(), shareText);
+                } else {
+                    Shares.share(getContext(), R.string.share_text);
                 }
                 return true;
             case R.id.action_subject:
@@ -348,7 +343,6 @@ public class GankFragment extends Fragment {
 
 
     private void pauseVideoView() {
-        // oh, my egg
         if (mVideoView != null) {
             mVideoView.onPause();
             mVideoView.pauseTimers();
@@ -357,7 +351,6 @@ public class GankFragment extends Fragment {
 
 
     private void resumeVideoView() {
-        // egg pain
         if (mVideoView != null) {
             mVideoView.resumeTimers();
             mVideoView.onResume();

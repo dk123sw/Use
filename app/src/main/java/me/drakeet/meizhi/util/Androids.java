@@ -17,38 +17,24 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.drakeet.meizhi.widget;
+package me.drakeet.meizhi.util;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
-import android.support.design.widget.AppBarLayout;
-import android.util.AttributeSet;
+import android.widget.Toast;
 
 /**
- * A good boy! AppBarLayout is bad boy!
- * Created by drakeet on 8/11/15.
+ * Created by drakeet(http://drakeet.me)
+ * Date: 8/23/15 18:01
  */
-public class GoodAppBarLayout extends AppBarLayout {
+public class Androids {
 
-    public int offset;
-    OnOffsetChangedListener mOnOffsetChangedListener;
-
-
-    public GoodAppBarLayout(Context context) {
-        this(context, null);
-    }
-
-
-    public GoodAppBarLayout(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-
-    public void notifyRemoveOffsetListener() {
-        this.removeOnOffsetChangedListener(mOnOffsetChangedListener);
-    }
-
-
-    public void notifyAddOffsetListener() {
-        this.addOnOffsetChangedListener(mOnOffsetChangedListener);
+    public static void copyToClipBoard(Context context, String text, String success) {
+        ClipData clipData = ClipData.newPlainText("meizhi_copy", text);
+        ClipboardManager manager = (ClipboardManager) context.getSystemService(
+                Context.CLIPBOARD_SERVICE);
+        manager.setPrimaryClip(clipData);
+        Toast.makeText(context, success, Toast.LENGTH_SHORT).show();
     }
 }

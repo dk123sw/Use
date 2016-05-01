@@ -92,11 +92,9 @@ public class LoveVideoView extends WebView {
             // 这些视频需要hack CSS才能达到全屏播放的效果
             if (url.contains("www.vmovier.com")) {
                 injectCSS("vmovier.css");
-            }
-            else if (url.contains("video.weibo.com")) {
+            } else if (url.contains("video.weibo.com")) {
                 injectCSS("weibo.css");
-            }
-            else if (url.contains("m.miaopai.com")) {
+            } else if (url.contains("m.miaopai.com")) {
                 injectCSS("miaopai.css");
             }
         }
@@ -126,15 +124,13 @@ public class LoveVideoView extends WebView {
     }
 
 
-    private class Chrome extends WebChromeClient
-            implements MediaPlayer.OnCompletionListener {
+    private class Chrome extends WebChromeClient implements MediaPlayer.OnCompletionListener {
 
         @Override public void onCompletion(MediaPlayer player) {
             if (player != null) {
                 if (player.isPlaying()) player.stop();
                 player.reset();
                 player.release();
-                player = null;
             }
         }
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Drakeet <drakeet.me@gmail.com>
+ * Copyright (C) 2016 Drakeet <drakeet.me@gmail.com>
  *
  * This file is part of Meizhi
  *
@@ -17,21 +17,20 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.drakeet.meizhi.util;
+package me.drakeet.meizhi.ui.base;
 
-import android.content.Context;
-import android.text.SpannableString;
-import android.text.style.TextAppearanceSpan;
+import me.drakeet.meizhi.widget.MultiSwipeRefreshLayout;
 
 /**
- * Created by drakeet on 8/11/15.
+ * Created by drakeet on 16/5/1.
  */
-public class StringStyleUtils {
+public interface SwipeRefreshLayer {
 
-    public static SpannableString format(Context context, String text, int style) {
-        SpannableString spannableString = new SpannableString(text);
-        spannableString.setSpan(new TextAppearanceSpan(context, style), 0, text.length(),
-                0);
-        return spannableString;
-    }
+    void requestDataRefresh();
+
+    void setRefresh(boolean refresh);
+
+    void setProgressViewOffset(boolean scale, int start, int end);
+
+    void setCanChildScrollUpCallback(MultiSwipeRefreshLayout.CanChildScrollUpCallback callback);
 }

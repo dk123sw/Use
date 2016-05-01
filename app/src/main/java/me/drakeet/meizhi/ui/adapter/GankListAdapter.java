@@ -35,7 +35,7 @@ import butterknife.OnClick;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.data.entity.Gank;
 import me.drakeet.meizhi.ui.WebActivity;
-import me.drakeet.meizhi.util.StringStyleUtils;
+import me.drakeet.meizhi.util.StringStyles;
 
 /**
  * Created by drakeet on 8/11/15.
@@ -74,7 +74,7 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
         }
         holder.category.setText(gank.type);
         SpannableStringBuilder builder = new SpannableStringBuilder(gank.desc).append(
-                StringStyleUtils.format(holder.gank.getContext(), " (via. " +
+                StringStyles.format(holder.gank.getContext(), " (via. " +
                         gank.who +
                         ")", R.style.ViaTextAppearance));
         CharSequence gankText = builder.subSequence(0, builder.length());

@@ -56,15 +56,13 @@ public class RatioImageView extends ImageView {
 
             int width = MeasureSpec.getSize(widthMeasureSpec);
             int height = MeasureSpec.getSize(heightMeasureSpec);
-
             // TODO: 现在只支持固定宽度
             if (width > 0) {
                 height = (int) ((float) width / ratio);
             }
 
             setMeasuredDimension(width, height);
-        }
-        else {
+        } else {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         }
     }

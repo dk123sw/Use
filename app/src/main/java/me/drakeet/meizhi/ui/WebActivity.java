@@ -42,8 +42,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.ui.base.ToolbarActivity;
-import me.drakeet.meizhi.util.AndroidUtils;
-import me.drakeet.meizhi.util.ToastUtils;
+import me.drakeet.meizhi.util.Androids;
+import me.drakeet.meizhi.util.Toasts;
 
 public class WebActivity extends ToolbarActivity {
 
@@ -130,8 +130,7 @@ public class WebActivity extends ToolbarActivity {
                 case KeyEvent.KEYCODE_BACK:
                     if (mWebView.canGoBack()) {
                         mWebView.goBack();
-                    }
-                    else {
+                    } else {
                         finish();
                     }
                     return true;
@@ -155,7 +154,7 @@ public class WebActivity extends ToolbarActivity {
                 return true;
             case R.id.action_copy_url:
                 String copyDone = getString(R.string.tip_copy_done);
-                AndroidUtils.copyToClipBoard(this, mWebView.getUrl(), copyDone);
+                Androids.copyToClipBoard(this, mWebView.getUrl(), copyDone);
                 return true;
             case R.id.action_open_url:
                 Intent intent = new Intent();
@@ -164,9 +163,8 @@ public class WebActivity extends ToolbarActivity {
                 intent.setData(uri);
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
-                }
-                else {
-                    ToastUtils.showLong(R.string.tip_open_fail);
+                } else {
+                    Toasts.showLong(R.string.tip_open_fail);
                 }
                 return true;
         }
@@ -202,8 +200,7 @@ public class WebActivity extends ToolbarActivity {
             mProgressbar.setProgress(newProgress);
             if (newProgress == 100) {
                 mProgressbar.setVisibility(View.GONE);
-            }
-            else {
+            } else {
                 mProgressbar.setVisibility(View.VISIBLE);
             }
         }

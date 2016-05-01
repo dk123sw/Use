@@ -82,5 +82,6 @@
     <string name="action_notifiable">每天中午提醒</string>
     <string name="notifiable_on">已经开启提醒</string>
     <string name="notifiable_off">已经关闭提醒</string>
+    <string name="share_meizhi_to">分享妹纸到...</string>
 
 </resources>

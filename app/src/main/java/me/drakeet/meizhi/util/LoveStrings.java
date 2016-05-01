@@ -22,7 +22,7 @@ package me.drakeet.meizhi.util;
 /**
  * Created by drakeet on 8/14/15.
  */
-public class LoveStringUtils {
+public class LoveStrings {
 
     public static String getVideoPreviewImageUrl(String resp) {
         int s0 = resp.indexOf("<h1>休息视频</h1>");

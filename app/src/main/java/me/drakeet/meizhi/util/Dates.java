@@ -27,7 +27,7 @@ import java.util.Date;
 /**
  * Created by drakeet on 6/20/15.
  */
-public class DateUtils {
+public class Dates {
 
     public static String toDate(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");

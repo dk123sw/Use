@@ -26,6 +26,7 @@ import com.google.gson.annotations.Expose;
  * Date: 9/9/15 11:00
  */
 public class DGank {
+
     @Expose public String preview;
     @Expose public String tag;
     @Expose public String createdAt;

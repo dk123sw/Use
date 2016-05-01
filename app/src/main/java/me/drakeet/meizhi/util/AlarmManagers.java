@@ -29,7 +29,7 @@ import me.drakeet.meizhi.service.AlarmReceiver;
 /**
  * Created by drakeet on 7/1/15.
  */
-public class AlarmManagerUtils {
+public class AlarmManagers {
 
     public static void register(Context context) {
         Calendar today = Calendar.getInstance();
@@ -45,11 +45,9 @@ public class AlarmManagerUtils {
 
         Intent intent = new Intent("me.drakeet.meizhi.alarm");
         intent.setClass(context, AlarmReceiver.class);
-
         PendingIntent broadcast = PendingIntent.getBroadcast(context, 520, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-
         manager.set(AlarmManager.RTC_WAKEUP, today.getTimeInMillis(), broadcast);
     }
 }

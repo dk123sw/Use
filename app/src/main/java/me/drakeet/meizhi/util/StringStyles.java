@@ -19,25 +19,19 @@
 
 package me.drakeet.meizhi.util;
 
-import rx.Observable;
+import android.content.Context;
+import android.text.SpannableString;
+import android.text.style.TextAppearanceSpan;
 
 /**
- * Created by drakeet(http://drakeet.me)
- * Date: 15/11/11 12:00
+ * Created by drakeet on 8/11/15.
  */
-public class Stream<T> extends Observable<T> {
-    /**
-     * Creates an Observable with a Function to execute when it is subscribed to.
-     * <p>
-     * <em>Note:</em> Use {@link #create(OnSubscribe)} to create an Observable, instead
-     * of
-     * this constructor,
-     * unless you specifically have a need for inheritance.
-     *
-     * @param f {@link OnSubscribe} to be executed when {@link #subscribe(Subscriber)} is
-     * called
-     */
-    protected Stream(OnSubscribe<T> f) {
-        super(f);
+public class StringStyles {
+
+    public static SpannableString format(Context context, String text, int style) {
+        SpannableString spannableString = new SpannableString(text);
+        spannableString.setSpan(new TextAppearanceSpan(context, style), 0, text.length(),
+                0);
+        return spannableString;
     }
 }

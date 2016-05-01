@@ -37,10 +37,9 @@ import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.ui.adapter.GankPagerAdapter;
 import me.drakeet.meizhi.event.OnKeyBackClickEvent;
 import me.drakeet.meizhi.ui.base.ToolbarActivity;
-import me.drakeet.meizhi.util.DateUtils;
+import me.drakeet.meizhi.util.Dates;
 
-public class GankActivity extends ToolbarActivity
-        implements ViewPager.OnPageChangeListener {
+public class GankActivity extends ToolbarActivity implements ViewPager.OnPageChangeListener {
 
     public static final String EXTRA_GANK_DATE = "gank_date";
 
@@ -65,7 +64,7 @@ public class GankActivity extends ToolbarActivity
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         mGankDate = (Date) getIntent().getSerializableExtra(EXTRA_GANK_DATE);
-        setTitle(DateUtils.toDate(mGankDate));
+        setTitle(Dates.toDate(mGankDate));
         initViewPager();
         initTabLayout();
     }
@@ -91,8 +90,7 @@ public class GankActivity extends ToolbarActivity
         super.onConfigurationChanged(newConfig);
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             hideOrShowToolbar();
-        }
-        else {
+        } else {
             hideOrShowToolbar();
         }
     }
@@ -100,6 +98,7 @@ public class GankActivity extends ToolbarActivity
 
     @Override protected void hideOrShowToolbar() {
         View toolbar = findViewById(R.id.toolbar_with_indicator);
+        assert toolbar != null;
         toolbar.animate()
                .translationY(mIsHidden ? 0 : -mToolbar.getHeight())
                .setInterpolator(new DecelerateInterpolator(2))
@@ -108,8 +107,7 @@ public class GankActivity extends ToolbarActivity
         if (mIsHidden) {
             mViewPager.setTag(mViewPager.getPaddingTop());
             mViewPager.setPadding(0, 0, 0, 0);
-        }
-        else {
+        } else {
             mViewPager.setPadding(0, (int) mViewPager.getTag(), 0, 0);
             mViewPager.setTag(null);
         }
@@ -168,7 +166,7 @@ public class GankActivity extends ToolbarActivity
 
 
     @Override public void onPageSelected(int position) {
-        setTitle(DateUtils.toDate(mGankDate, -position));
+        setTitle(Dates.toDate(mGankDate, -position));
     }
 
 

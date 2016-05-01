@@ -27,5 +27,6 @@ import me.drakeet.meizhi.data.entity.Gank;
  * Created by drakeet on 8/15/15.
  */
 public class 休息视频Data extends BaseData {
+
     public List<Gank> results;
 }

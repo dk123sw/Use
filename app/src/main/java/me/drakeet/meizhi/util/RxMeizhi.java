@@ -61,11 +61,11 @@ public class RxMeizhi {
             String fileName = title.replace('/', '-') + ".jpg";
             File file = new File(appDir, fileName);
             try {
-                FileOutputStream fos = new FileOutputStream(file);
+                FileOutputStream outputStream = new FileOutputStream(file);
                 assert bitmap != null;
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                fos.flush();
-                fos.close();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+                outputStream.flush();
+                outputStream.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
