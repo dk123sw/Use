@@ -140,6 +140,7 @@ dependencies {
     compile rootProject.ext.dependencies["butterknife"]
     compile rootProject.ext.dependencies["otto"]
     compile rootProject.ext.dependencies["glide"]
+    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.3.0'
 }
 
 

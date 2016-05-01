@@ -19,17 +19,17 @@
 
 ext {
 
-    android = [compileSdkVersion: 22,
-               buildToolsVersion: "22.0.1",
+    android = [compileSdkVersion: 23,
+               buildToolsVersion: "23.0.1",
                applicationId    : "me.drakeet.meizhi",
                minSdkVersion    : 14,
                targetSdkVersion : 22,
-               versionCode      : 359,
-               versionName      : "2.5.9"]
+               versionCode      : 360,
+               versionName      : "2.6.0"]
 
-    dependencies = ["appcompat-v7"        : "com.android.support:appcompat-v7:22.2.1",
-                    "design"              : "com.android.support:design:22.2.1",
-                    "recyclerview-v7"     : "com.android.support:recyclerview-v7:22.2.1",
+    dependencies = ["appcompat-v7"        : "com.android.support:appcompat-v7:23.3.0",
+                    "design"              : "com.android.support:design:23.3.0",
+                    "recyclerview-v7"     : "com.android.support:recyclerview-v7:23.3.0",
                     "nineoldandroids"     : "com.nineoldandroids:library:2.4.0",
                     "picasso"             : "com.squareup.picasso:picasso:2.5.2",
                     "photoview"           : "com.github.chrisbanes.photoview:library:1.2.3",
