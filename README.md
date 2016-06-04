@@ -2,7 +2,7 @@
 
 **每天自动更新一张精选妹纸图、一个小视频、一系列精选程序猿干货（周末不更新）。数据来自代码家的干货网站：http://gank.io**
 
-Material Design, Functional programming, RxJava & Retrofit...
+Material Design,  RxJava & Retrofit...
 
 相关文章：http://drakeet.me/2015-08-20
 
@@ -72,8 +72,6 @@ If you like my open source projects, you can follow me: https://github.com/drake
 如有特殊协议方面的请求, 可以与我沟通: drakeet.me@gmail.com
 
 =======
-
-    GNU GPL [LICENSE](/LICENSE)
 
     GNU General Public Licence (GPL) GPL 保证了所有开发者的权利，
     同时为使用者提供了足够的复制，分发，修改的权利：
