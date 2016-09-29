@@ -26,12 +26,13 @@ http://blog.csdn.net/lmj623565791/article/details/47911083
 ##### RxAndroid的使用方法  RecycleView,retrofit,rx的混合使用
 http://blog.csdn.net/caroline_wendy/article/details/50444461
 ##### 	picasso
-   picasso是Square公司开源的一个Android图形缓存库，地址http://square.github.io/picasso/，可以实现图片下载和缓存功能。
+   picasso是Square公司开源的一个Android图形缓存库，地址http://square.github.io/picasso/
+   可以实现图片下载和缓存功能。
 仅仅只需要一行代码就能完全实现图片的异步加载：
 Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(imageView);
 http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2014/0731/1639.html
-http://www.jianshu.com/p/6b746c904a49singToolbarLayout 可折叠的ToolBar
-http://www.open-
+http://www.jianshu.com/p/6b746c904a49singToolbarLayout 
+
 ##### 采用nineoldandroids，可以在3.0以前的系统上使用属性动画
 ##### photoview实现图片的双指缩放和双击放大缩小
 http://www.cnblogs.com/tianzhijiexian/p/3888664.html
