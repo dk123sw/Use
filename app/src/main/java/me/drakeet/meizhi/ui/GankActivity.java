@@ -19,6 +19,10 @@
 
 package me.drakeet.meizhi.ui;
 
+/**
+ * 内容显示界面
+ */
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -28,14 +32,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
+
+import com.umeng.analytics.MobclickAgent;
+
+import java.util.Date;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import com.umeng.analytics.MobclickAgent;
-import java.util.Date;
 import me.drakeet.meizhi.LoveBus;
 import me.drakeet.meizhi.R;
-import me.drakeet.meizhi.ui.adapter.GankPagerAdapter;
 import me.drakeet.meizhi.event.OnKeyBackClickEvent;
+import me.drakeet.meizhi.ui.adapter.GankPagerAdapter;
 import me.drakeet.meizhi.ui.base.ToolbarActivity;
 import me.drakeet.meizhi.util.Dates;
 
@@ -98,6 +105,7 @@ public class GankActivity extends ToolbarActivity implements ViewPager.OnPageCha
 
     @Override protected void hideOrShowToolbar() {
         View toolbar = findViewById(R.id.toolbar_with_indicator);
+//        使用断言(assert)检查类的不变状态，确保任何情况下，某个变量的状态必须满足
         assert toolbar != null;
         toolbar.animate()
                .translationY(mIsHidden ? 0 : -mToolbar.getHeight())
@@ -155,6 +163,7 @@ public class GankActivity extends ToolbarActivity implements ViewPager.OnPageCha
     @Override protected void onDestroy() {
         mViewPager.removeOnPageChangeListener(this);
         super.onDestroy();
+//        设置View为null
         ButterKnife.unbind(this);
     }
 

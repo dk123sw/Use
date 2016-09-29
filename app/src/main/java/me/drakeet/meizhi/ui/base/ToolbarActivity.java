@@ -68,7 +68,7 @@ public abstract class ToolbarActivity extends BaseActivity {
         return false;
     }
 
-
+//菜单选项栏
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
@@ -78,7 +78,7 @@ public abstract class ToolbarActivity extends BaseActivity {
         }
     }
 
-
+//设置透明度的选项
     protected void setAppBarAlpha(float alpha) {
         mAppBar.setAlpha(alpha);
     }

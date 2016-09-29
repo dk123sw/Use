@@ -28,12 +28,15 @@ import me.drakeet.meizhi.data.entity.Gank;
 /**
  * Created by drakeet on 8/11/15.
  */
-public class GankData extends BaseData {
+//public class GankData extends BaseData
+public class GankData{
 
     public Result results;
     public List<String> category;
 
     public class Result {
+
+//      @SerializedName注解的作用：定义属性序列化后的名称
         @SerializedName("Android") public List<Gank> androidList;
         @SerializedName("休息视频") public List<Gank> 休息视频List;
         @SerializedName("iOS") public List<Gank> iOSList;

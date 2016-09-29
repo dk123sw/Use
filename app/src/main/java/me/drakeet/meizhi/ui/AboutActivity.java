@@ -25,16 +25,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.umeng.analytics.MobclickAgent;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import com.umeng.analytics.MobclickAgent;
 import me.drakeet.meizhi.BuildConfig;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.ui.base.BaseActivity;
 import me.drakeet.meizhi.util.Shares;
 
 /**
- * Created by drakeet on 15/8/15.
+ * 【关于】界面
  */
 public class AboutActivity extends BaseActivity {
 

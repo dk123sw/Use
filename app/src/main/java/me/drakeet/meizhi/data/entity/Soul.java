@@ -26,11 +26,16 @@ import com.litesuits.orm.db.annotation.Unique;
 import java.io.Serializable;
 
 /**
- * Created by drakeet(http://drakeet.me)
- * Date: 8/18/15 13:55
+ * 序列化：
+ *  1.永久性保存对象，保存对象的字节序列到本地文件中；
+ *  2.对象在网络中传递
+ *  Meizhi、Gank的父类
  */
 public class Soul implements Serializable {
 
+//     @PrimaryKey(PrimaryKey.AssignType.AUTO_INCREMENT)主键自增长
+//     @Column 指定列名
+//     @NotNull @Unique 非空约束 唯一约束
     @PrimaryKey(PrimaryKey.AssignType.AUTO_INCREMENT) @Column("_id") public long id;
     @NotNull @Unique @Column("objectId") public String objectId;
 }

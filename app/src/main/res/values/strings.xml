@@ -18,7 +18,7 @@
   -->
 
 <resources>
-    <string name="app_name">妹纸&amp;gank.io</string>
+    <string name="app_name">use</string>
 
     <string name="title_activity_picture">PictureActivity</string>
     <string name="title_activity_gank">GankActivity</string>

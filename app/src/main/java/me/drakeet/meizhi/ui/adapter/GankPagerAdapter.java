@@ -28,7 +28,7 @@ import me.drakeet.meizhi.DrakeetFactory;
 import me.drakeet.meizhi.ui.GankFragment;
 
 /**
- * Created by drakeet on 8/11/15.
+ * 内容页监控
  */
 public class GankPagerAdapter extends FragmentPagerAdapter {
 

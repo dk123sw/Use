@@ -30,5 +30,7 @@ import me.drakeet.meizhi.data.entity.DGank;
  */
 public class DGankData {
 
+//  @Expose注解的作用：区分实体中不想被序列化的属性
+//  没有@Expose注释的属性将不会被序列化
     @Expose public List<DGank> results = new ArrayList<DGank>();
 }

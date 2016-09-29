@@ -28,6 +28,7 @@ import android.view.animation.AnimationUtils;
 import me.drakeet.meizhi.R;
 
 /**
+ * @内容框架文字的出场动画效果
  * 参考了 fython/ExpressHelper @{https://github.com/PaperAirplane-Dev-Team/ExpressHelper/blob/master/app%2Fsrc%2Fmain%2Fjava%2Finfo%2Fpapdt%2Fexpress%2Fhelper%2Fui%2Fcommon%2FMyRecyclerViewAdapter.java}
  */
 public class AnimRecyclerViewAdapter<T extends RecyclerView.ViewHolder>

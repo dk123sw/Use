@@ -32,24 +32,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import com.bumptech.glide.Glide;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.squareup.otto.Subscribe;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import me.drakeet.meizhi.DrakeetFactory;
 import me.drakeet.meizhi.LoveBus;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.data.GankData;
-import me.drakeet.meizhi.event.OnKeyBackClickEvent;
 import me.drakeet.meizhi.data.entity.Gank;
+import me.drakeet.meizhi.event.OnKeyBackClickEvent;
 import me.drakeet.meizhi.ui.adapter.GankListAdapter;
 import me.drakeet.meizhi.ui.base.BaseActivity;
 import me.drakeet.meizhi.util.LoveStrings;
@@ -62,7 +65,7 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 
 /**
- * Created by drakeet on 8/11/15.
+ * 内容的具体实现框架
  */
 public class GankFragment extends Fragment {
 
@@ -86,8 +89,7 @@ public class GankFragment extends Fragment {
 
 
     /**
-     * Returns a new instance of this fragment for the given section
-     * number.
+     * 返回该片段对于给定部分数的新实例。
      */
     public static GankFragment newInstance(int year, int month, int day) {
         GankFragment fragment = new GankFragment();

@@ -28,11 +28,14 @@ import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import butterknife.Bind;
-import butterknife.ButterKnife;
+
 import com.squareup.picasso.Picasso;
 import com.umeng.analytics.MobclickAgent;
+
 import java.io.File;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.ui.base.ToolbarActivity;
 import me.drakeet.meizhi.util.RxMeizhi;

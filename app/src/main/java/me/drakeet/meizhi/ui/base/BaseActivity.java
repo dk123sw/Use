@@ -20,10 +20,13 @@
 package me.drakeet.meizhi.ui.base;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
-import me.drakeet.meizhi.GankApi;
+
 import me.drakeet.meizhi.DrakeetFactory;
+import me.drakeet.meizhi.GankApi;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.ui.AboutActivity;
 import me.drakeet.meizhi.ui.WebActivity;
@@ -32,9 +35,7 @@ import me.drakeet.meizhi.util.Toasts;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
-/**
- * Created by drakeet on 8/9/15.
- */
+
 public class BaseActivity extends AppCompatActivity {
 
     public static final GankApi sGankIO = DrakeetFactory.getGankIOSingleton();
@@ -50,6 +51,12 @@ public class BaseActivity extends AppCompatActivity {
         return this.mCompositeSubscription;
     }
 
+
+    @Override
+    protected void onCreate( Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.e("BaseActivity" , getClass().getSimpleName());
+    }
 
     public void addSubscription(Subscription s) {
         if (this.mCompositeSubscription == null) {

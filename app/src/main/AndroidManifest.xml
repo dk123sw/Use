@@ -30,35 +30,37 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_meizhi_150602"
+        android:icon="@mipmap/cl"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/AppTheme">
+        <!--largeHeap ->提供内存空间-->
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
+            <!--screenOrientation(portrait) 纵向显示（高度比宽度要大）-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
+<!--这是介绍与帮助界面-->
         <activity
             android:name=".ui.AboutActivity"
             android:launchMode="singleTask"/>
-
+<!--点击图片出现的界面-->
         <activity
             android:name=".ui.PictureActivity"
             android:label="@string/title_activity_picture"
             android:launchMode="singleTask"/>
-
+<!--菜单里跳转github和一系列网络连接的显示界面-->
         <activity
             android:name=".ui.WebActivity"
             android:launchMode="singleTask"/>
-
+<!--点击文字出现的界面-->
         <activity
             android:name=".ui.GankActivity"
             android:label="@string/title_activity_gank"

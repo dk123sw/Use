@@ -24,6 +24,7 @@ import android.content.SharedPreferences;
 
 /**
  * Created by drakeet on 8/16/15.
+ * 数据存储
  */
 public class Once {
 

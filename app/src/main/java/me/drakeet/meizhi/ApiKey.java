@@ -17,14 +17,14 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package me.drakeet.meizhi;
-
-/**
- * Created by drakeet(http://drakeet.me)
- * Date: 15/9/29 10:56
- */
-public class ApiKey {
-
-    public static final String X_LC_Id = "0azfScvBLCC9tAGRAwIhcC40";
-    public static final String X_LC_Key = "gAuE93qAusvP8gk1VW8DtOUb";
-}
+//package me.drakeet.meizhi;
+//
+///**
+// * Created by drakeet(http://drakeet.me)
+// * Date: 15/9/29 10:56
+// */
+//public class ApiKey {
+//
+//    public static final String X_LC_Id = "0azfScvBLCC9tAGRAwIhcC40";
+//    public static final String X_LC_Key = "gAuE93qAusvP8gk1VW8DtOUb";
+//}

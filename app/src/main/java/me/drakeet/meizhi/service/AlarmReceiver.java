@@ -28,7 +28,7 @@ import me.drakeet.meizhi.util.HeadsUps;
 import me.drakeet.meizhi.util.PreferencesLoader;
 
 /**
- * Created by drakeet on 7/1/15.
+ * @闹钟
  */
 public class AlarmReceiver extends BroadcastReceiver {
 

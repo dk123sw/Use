@@ -30,18 +30,21 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import com.litesuits.orm.db.assit.QueryBuilder;
 import com.litesuits.orm.db.model.ConflictAlgorithm;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import me.drakeet.meizhi.App;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.data.MeizhiData;
@@ -92,7 +95,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         AlarmManagers.register(this);
     }
 
-
+//在这个方法中写了打开程序会刷新主界面并加载资源
     @Override protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         new Handler().postDelayed(() -> setRefresh(true), 358);

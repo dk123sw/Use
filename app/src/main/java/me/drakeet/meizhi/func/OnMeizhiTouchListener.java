@@ -24,7 +24,8 @@ import android.view.View;
 import me.drakeet.meizhi.data.entity.Meizhi;
 
 /**
- * Created by drakeet on 7/1/15.
+ * @接口类
+ * @void onTouch(View v, View meizhiView, View card, Meizhi meizhi)
  */
 public interface OnMeizhiTouchListener {
     void onTouch(View v, View meizhiView, View card, Meizhi meizhi);

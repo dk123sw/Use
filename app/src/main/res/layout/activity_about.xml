@@ -17,6 +17,7 @@
   ~ along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
+<!--Coordinator Layout 使你增加你的主要视图的布局，而且它使得屏幕里面的视图可以互相交互-->
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -30,6 +31,7 @@
         android:layout_height="@dimen/about_header_height"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
+<!--CollapsingToolbarLayout作用是提供了一个可以折叠的Toolbar-->
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
@@ -81,6 +83,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
+<!--嵌套滑动视图-->
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

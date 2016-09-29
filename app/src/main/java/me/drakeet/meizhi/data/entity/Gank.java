@@ -24,10 +24,11 @@ import com.litesuits.orm.db.annotation.Table;
 import java.util.Date;
 
 /**
- * Created by drakeet on 8/11/15.
+ *  @Table 表名 "ganks"
  */
 @Table("ganks") public class Gank extends Soul {
 
+//  @Column 指定列名
     @Column("url") public String url;
     @Column("type") public String type;
     @Column("desc") public String desc;

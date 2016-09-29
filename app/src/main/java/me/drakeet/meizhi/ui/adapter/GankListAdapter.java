@@ -39,6 +39,7 @@ import me.drakeet.meizhi.util.StringStyles;
 
 /**
  * Created by drakeet on 8/11/15.
+ * 内容列表监控
  */
 public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.ViewHolder> {
 

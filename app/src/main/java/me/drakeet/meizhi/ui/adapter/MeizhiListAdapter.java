@@ -25,17 +25,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import com.bumptech.glide.Glide;
-import java.util.List;
 import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.data.entity.Meizhi;
 import me.drakeet.meizhi.func.OnMeizhiTouchListener;
 import me.drakeet.meizhi.widget.RatioImageView;
 
 /**
- * Created by drakeet on 6/20/15.
+ * 瀑布流的具体实现
  */
 public class MeizhiListAdapter
         extends RecyclerView.Adapter<MeizhiListAdapter.ViewHolder> {

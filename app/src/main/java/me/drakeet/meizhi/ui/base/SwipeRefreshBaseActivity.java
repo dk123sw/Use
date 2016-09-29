@@ -29,11 +29,11 @@ import me.drakeet.meizhi.R;
 import me.drakeet.meizhi.widget.MultiSwipeRefreshLayout;
 
 /**
- * Created by drakeet on 1/3/15.
+ * 下拉刷新基本布局
  */
 public abstract class SwipeRefreshBaseActivity extends ToolbarActivity
         implements SwipeRefreshLayer {
-
+//    此为主界面上拉时出现的等待图标
     @Bind(R.id.swipe_refresh_layout) public MultiSwipeRefreshLayout mSwipeRefreshLayout;
     private boolean mIsRequestDataRefresh = false;
 

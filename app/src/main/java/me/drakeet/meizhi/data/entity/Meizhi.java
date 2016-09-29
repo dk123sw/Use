@@ -24,7 +24,8 @@ import com.litesuits.orm.db.annotation.Table;
 import java.util.Date;
 
 /**
- * Created by drakeet on 6/20/15.
+ * 使用LiteOrm数据库框架
+ * 表名 @Table("meizhis")
  */
 @Table("meizhis") public class Meizhi extends Soul {
 
