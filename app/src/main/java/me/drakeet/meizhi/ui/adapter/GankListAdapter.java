@@ -38,8 +38,7 @@ import me.drakeet.meizhi.ui.WebActivity;
 import me.drakeet.meizhi.util.StringStyles;
 
 /**
- * Created by drakeet on 8/11/15.
- * 内容列表监控
+ * 内容列表内容显示所用的Adapter
  */
 public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.ViewHolder> {
 
@@ -74,6 +73,7 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
             }
         }
         holder.category.setText(gank.type);
+//      同一个TextView下产生不同的字体
         SpannableStringBuilder builder = new SpannableStringBuilder(gank.desc).append(
                 StringStyles.format(holder.gank.getContext(), " (via. " +
                         gank.who +
@@ -102,6 +102,7 @@ public class GankListAdapter extends AnimRecyclerViewAdapter<GankListAdapter.Vie
 
     /**
      * view.isShown() is a kidding...
+     * 只有当view本身以及它的所有祖先们都是visible时，isShown（）才返回TRUE
      */
     private boolean isVisibleOf(View view) {
         return view.getVisibility() == View.VISIBLE;

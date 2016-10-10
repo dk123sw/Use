@@ -34,6 +34,7 @@ import me.drakeet.meizhi.BuildConfig;
 /**
  * It's a lovely adult video view.
  * Created by drakeet on 8/14/15.
+ * @内容页视频播放框架播放器
  */
 public class LoveVideoView extends WebView {
 

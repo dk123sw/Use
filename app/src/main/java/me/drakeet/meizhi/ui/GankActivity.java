@@ -46,6 +46,8 @@ import me.drakeet.meizhi.ui.adapter.GankPagerAdapter;
 import me.drakeet.meizhi.ui.base.ToolbarActivity;
 import me.drakeet.meizhi.util.Dates;
 
+
+//OnPageChangeListener 选择页状态改变的回调接口
 public class GankActivity extends ToolbarActivity implements ViewPager.OnPageChangeListener {
 
     public static final String EXTRA_GANK_DATE = "gank_date";

@@ -25,6 +25,7 @@ import android.text.style.TextAppearanceSpan;
 
 /**
  * Created by drakeet on 8/11/15.
+ * 字体风格类
  */
 public class StringStyles {
 

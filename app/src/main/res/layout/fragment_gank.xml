@@ -17,6 +17,7 @@
   ~ along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
+<!--内容页除ToolBar的整体布局-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"

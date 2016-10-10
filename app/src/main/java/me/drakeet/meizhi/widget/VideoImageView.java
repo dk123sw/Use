@@ -28,7 +28,7 @@ import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.animation.ObjectAnimator;
 
 /**
- * 让图片看起来像是动的视频一样
+ * 让图片看起来像是会动的视频一样
  * Created by drakeet on 8/11/15.
  */
 public class VideoImageView extends ImageView implements Animator.AnimatorListener {

@@ -26,6 +26,7 @@ import me.drakeet.meizhi.data.entity.Meizhi;
 /**
  * @接口类
  * @void onTouch(View v, View meizhiView, View card, Meizhi meizhi)
+ * MainActivity的RecyclerView的Listener
  */
 public interface OnMeizhiTouchListener {
     void onTouch(View v, View meizhiView, View card, Meizhi meizhi);

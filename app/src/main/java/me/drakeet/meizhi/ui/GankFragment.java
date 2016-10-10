@@ -65,7 +65,7 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 
 /**
- * 内容的具体实现框架
+ * 内容页的具体实现框架
  */
 public class GankFragment extends Fragment {
 
@@ -75,6 +75,7 @@ public class GankFragment extends Fragment {
     private static final String ARG_DAY = "day";
 
     @Bind(R.id.rv_gank) RecyclerView mRecyclerView;
+//    ViewStub 让用户自定义布局是否显示时可以使用
     @Bind(R.id.stub_empty_view) ViewStub mEmptyViewStub;
     @Bind(R.id.stub_video_view) ViewStub mVideoViewStub;
     @Bind(R.id.iv_video) VideoImageView mVideoImageView;
@@ -89,6 +90,7 @@ public class GankFragment extends Fragment {
 
 
     /**
+     * 静态工厂函数，保留参数
      * 返回该片段对于给定部分数的新实例。
      */
     public static GankFragment newInstance(int year, int month, int day) {
@@ -111,11 +113,13 @@ public class GankFragment extends Fragment {
         mGankList = new ArrayList<>();
         mAdapter = new GankListAdapter(mGankList);
         parseArguments();
+//        只有在Fragment被重新创建时调用onCreate方法(GankActivity.java)
         setRetainInstance(true);
+//        让这个Fragment使用(GankActivity.java)的菜单
         setHasOptionsMenu(true);
     }
 
-
+//从String一个值映射到不同的Parcelable类型
     private void parseArguments() {
         Bundle bundle = getArguments();
         mYear = bundle.getInt(ARG_YEAR);
@@ -137,6 +141,7 @@ public class GankFragment extends Fragment {
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (mGankList.size() == 0) loadData();
+//        目前看来这句话没有起到效果
         if (mVideoPreviewUrl != null) {
             Glide.with(this).load(mVideoPreviewUrl).into(mVideoImageView);
         }
@@ -224,8 +229,10 @@ public class GankFragment extends Fragment {
     }
 
 
+//    内容页视频框的点击
     @OnClick(R.id.header_appbar) void onPlayVideo() {
         resumeVideoView();
+//     在有视频时使屏幕横向
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         if (mGankList.size() > 0 && mGankList.get(0).type.equals("休息视频")) {
             Toasts.showLongX2(R.string.loading);
