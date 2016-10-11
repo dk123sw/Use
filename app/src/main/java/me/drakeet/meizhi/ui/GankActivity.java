@@ -129,6 +129,7 @@ public class GankActivity extends ToolbarActivity implements ViewPager.OnPageCha
             case KeyEvent.KEYCODE_BACK:
                 if (getResources().getConfiguration().orientation ==
                         Configuration.ORIENTATION_LANDSCAPE) {
+//               otto:  发布事件，调用post方法就可以，post方法可以接受任何类型
                     LoveBus.getLovelySeat().post(new OnKeyBackClickEvent());
                     return true;
                 }

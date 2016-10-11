@@ -28,8 +28,8 @@ import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
 
 /**
- * 2015-08-07T03:57:47.229Z
  * Created by drakeet on 8/9/15.
+ * 
  */
 public class DrakeetRetrofit {
 

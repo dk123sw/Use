@@ -22,4 +22,6 @@ package me.drakeet.meizhi.event;
 /**
  * @空
  */
-public class OnKeyBackClickEvent {}
+public class OnKeyBackClickEvent  {
+
+}

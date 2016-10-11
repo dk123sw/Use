@@ -20,7 +20,7 @@
 package me.drakeet.meizhi;
 
 /**
- * Created by drakeet on 8/9/15.
+ * Factory 工厂模式：对实现了同一接口的一些类进行实例的创建
  */
 public class DrakeetFactory {
 
@@ -32,6 +32,7 @@ public class DrakeetFactory {
 
 
     public static GankApi getGankIOSingleton() {
+//        当它用来修饰一个方法或者一个代码块的时候，能够保证在同一时刻最多只有一个线程执行该段代码
         synchronized (monitor) {
             if (sGankIOSingleton == null) {
                 sGankIOSingleton = new DrakeetRetrofit().getGankService();

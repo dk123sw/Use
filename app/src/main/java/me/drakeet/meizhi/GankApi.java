@@ -29,7 +29,7 @@ import rx.Observable;
 // @formatter:off
 
 /**
- * Created by drakeet on 8/9/15.
+ * Retrofit 用于从网络上获取URL
  */
 public interface GankApi {
 

@@ -24,6 +24,7 @@ import com.squareup.otto.Bus;
 /**
  * 爱之车~，爱之座位~~
  * Created by drakeet on 8/13/15.
+ * 这个otto在这里的用途是在内容页横屏时点击回退返回GankActivity
  */
 public class LoveBus {
 
