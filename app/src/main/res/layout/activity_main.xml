@@ -17,6 +17,7 @@
   ~ along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
+<!--MainActivity的布局-->
 <android.support.design.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"

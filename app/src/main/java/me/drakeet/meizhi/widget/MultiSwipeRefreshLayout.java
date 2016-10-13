@@ -29,7 +29,7 @@ import me.drakeet.meizhi.R;
 
 /**
  * Pick from Google io 2014
- * 加载布局
+ * 加载布局(转圈圈)
  */
 public class MultiSwipeRefreshLayout extends SwipeRefreshLayout {
 

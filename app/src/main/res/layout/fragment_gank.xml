@@ -44,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/gank_header_height">
 
+            <!--提供了一个可以折叠的Toolbar-->
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
@@ -57,18 +58,18 @@
                     android:layout_height="match_parent"
                     app:layout_collapseMode="parallax">
 
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/ic_play"/>
+
                     <me.drakeet.meizhi.widget.VideoImageView
                         android:id="@+id/iv_video"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/theme_primary_darker"
                         android:scaleType="centerCrop"/>
-
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_gravity="center"
-                        android:src="@mipmap/ic_play"/>
 
                 </FrameLayout>
 

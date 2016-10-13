@@ -21,6 +21,7 @@ package me.drakeet.meizhi.ui;
 
 /**
  * 内容显示界面
+ * @内容页的切换
  */
 
 import android.content.res.Configuration;

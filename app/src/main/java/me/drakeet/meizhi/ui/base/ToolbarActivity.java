@@ -56,6 +56,7 @@ public abstract class ToolbarActivity extends BaseActivity {
 
         if (canBack()) {
             ActionBar actionBar = getSupportActionBar();
+//            回到主菜单的图标
             if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
         }
         if (Build.VERSION.SDK_INT >= 21) {
@@ -83,7 +84,7 @@ public abstract class ToolbarActivity extends BaseActivity {
         mAppBar.setAlpha(alpha);
     }
 
-
+// 隐藏ToolBar
     protected void hideOrShowToolbar() {
         mAppBar.animate()
                .translationY(mIsHidden ? 0 : -mAppBar.getHeight())

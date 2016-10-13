@@ -77,6 +77,7 @@ public class GankFragment extends Fragment {
     @Bind(R.id.rv_gank) RecyclerView mRecyclerView;
 //    ViewStub 让用户自定义布局是否显示时可以使用
     @Bind(R.id.stub_empty_view) ViewStub mEmptyViewStub;
+//    横屏时显示的界面
     @Bind(R.id.stub_video_view) ViewStub mVideoViewStub;
     @Bind(R.id.iv_video) VideoImageView mVideoImageView;
     LoveVideoView mVideoView;
@@ -141,7 +142,6 @@ public class GankFragment extends Fragment {
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (mGankList.size() == 0) loadData();
-//        目前看来这句话没有起到效果
         if (mVideoPreviewUrl != null) {
             Glide.with(this).load(mVideoPreviewUrl).into(mVideoImageView);
         }

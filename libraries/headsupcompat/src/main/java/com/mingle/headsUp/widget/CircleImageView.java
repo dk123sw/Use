@@ -23,7 +23,7 @@ import android.widget.ImageView;
 
 import com.mingle.headsUp.R;
 
-
+//自定义圆形头像
 public class CircleImageView extends ImageView {
 
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;

@@ -38,6 +38,7 @@ import rx.subscriptions.CompositeSubscription;
 
 public class BaseActivity extends AppCompatActivity {
 
+//网络解析
     public static final GankApi sGankIO = DrakeetFactory.getGankIOSingleton();
 //持有观察着
     private CompositeSubscription mCompositeSubscription;

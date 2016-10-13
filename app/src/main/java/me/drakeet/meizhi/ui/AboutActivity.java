@@ -37,6 +37,7 @@ import me.drakeet.meizhi.util.Shares;
 
 /**
  * 【关于】界面
+ * @注意并没有继承ToolBar
  */
 public class AboutActivity extends BaseActivity {
 

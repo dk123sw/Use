@@ -65,6 +65,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
+//        数据库操作
         mMeizhiList = new ArrayList<>();
         QueryBuilder query = new QueryBuilder(Meizhi.class);
         query.appendOrderDescBy("publishedAt");
@@ -97,6 +98,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         mRecyclerView.setLayoutManager(layoutManager);
         mMeizhiListAdapter = new MeizhiListAdapter(this, mMeizhiList);
         mRecyclerView.setAdapter(mMeizhiListAdapter);
+//        文字跳转 GankFragment有它对应方法
         new Once(this).show("tip_guide_6", () -> {
             Snackbar.make(mRecyclerView, getString(R.string.tip_guide), Snackbar.LENGTH_INDEFINITE)
                     .setAction(R.string.i_know, v -> {
@@ -185,8 +187,11 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     private void loadData() {
         loadData(/* clean */false);
     }
+/**
+ * 下面三个类是MainActivity跳转的程序
+ */
 
-
+//  跳转到PictureActivity和GankActivity的Listener
     private OnMeizhiTouchListener getOnMeizhiTouchListener() {
         return (v, meizhiView, card, meizhi) -> {
             if (meizhi == null) return;
@@ -228,7 +233,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         }
     }
 
-
+//  点击ToolBar会回到顶部
     @Override public void onToolbarClick() {mRecyclerView.smoothScrollToPosition(0);}
 
 
@@ -286,6 +291,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
     }
 
 
+//   下拉布局出现加载圈时此监控生效加载布局,6个...
     RecyclerView.OnScrollListener getOnBottomListener(StaggeredGridLayoutManager layoutManager) {
         return new RecyclerView.OnScrollListener() {
             @Override public void onScrolled(RecyclerView rv, int dx, int dy) {
