@@ -1,5 +1,7 @@
->一个较完整的apk,比起Transition代码量翻了好几倍，而且用了好多开源库
-吐槽一下不知道多久才能看明白这个程序 :sleepy: 不定期更新....
+>copy https://github.com/drakeet/Meizhi
+###### 单纯的为了学习各种新的开源库，特别是网络解析部分。自己加了很多注解方便理解
+------------
+
 
 #### 3种android架构的解释
 [http://http://www.tianmaying.com/tutorial/AndroidMVC](http://http://www.tianmaying.com/tutorial/AndroidMVC)
@@ -18,6 +20,9 @@ RxAndroid是RxJava的一个针对Android平台的扩展。它包含了一些能�
 
 ##### otto ( http://blog.csdn.net/lzyzsd/article/details/42016681)
 ##### retrofit	
+   *Retrofit和Okhttp师出同门，也是Square的开源库，它是一个类型安全的网络请求库，Retrofit简化了网络请求流程，基于Okhtttp做了封装，解耦的更彻底:比方说通过注解来配置请求参数，通过工厂来生成Calladapter，Converter，你可以使用不同的请求适配器(Calladapter),比方说Rxjava，Java8, Guava。你可以使用不同的反序列化工具(Converter)，比方说Json, Protobuff, Xml, Moshi等等*
+`  工厂方法模式是有一个抽象的父类定义公共接口，子类负责生成具体的对象，这样做的目的是将类的实例化操作延迟到子类中完成。`
+http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0915/3460.html
 https://realm.io/cn/news/droidcon-jake-wharton-simple-http-retrofit-2/
 ##### 关于Material design新控件的描述
 https://realm.io/cn/news/kau-michael-wolfson-material-design-everywhere/
@@ -44,11 +49,18 @@ Otto 是square公司出的一个事件库（pub/sub模式），用来简化应�
 ##### Butter Knife，专门为Android View设计的绑定注解
 http://www.jianshu.com/p/9ad21e548b69
 ##### RecycleView
+`RecyclerView详细情况看RecyclerViewDemo`
 http://www.jianshu.com/p/16712681731e
 ##### ViewPager与TabLayout
 http://www.bubuko.com/infodetail-977938.html
 ##### LiteOrm：Android高性能数据库框架
 开源代码 -> https://github.com/litesuits/android-lite-orm
 详细解析 http://blog.csdn.net/u014099894/article/details/51586500
-android序列化 什么是序列化
+##### android序列化 什么是序列化
 http://blog.csdn.net/qq_23547831/article/details/51779528
+##### SpannableString与SpannableStringBuilder 用于改变字体大小等
+http://blog.csdn.net/u011494050/article/details/38460537
+##### ViewStub 让用户自定义布局是否显示时可以使用
+http://www.cnblogs.com/menlsh/archive/2013/03/17/2965217.html
+#####  Java关键字 synchronized
+当它用来修饰一个方法或者一个代码块的时候，能够保证在同一时刻最多只有一个线程执行该段代码
