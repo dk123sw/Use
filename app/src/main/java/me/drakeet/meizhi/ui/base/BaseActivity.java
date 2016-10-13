@@ -39,7 +39,7 @@ import rx.subscriptions.CompositeSubscription;
 public class BaseActivity extends AppCompatActivity {
 
     public static final GankApi sGankIO = DrakeetFactory.getGankIOSingleton();
-
+//持有观察着
     private CompositeSubscription mCompositeSubscription;
 
 
@@ -91,7 +91,7 @@ public class BaseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+//取消订阅
     @Override protected void onDestroy() {
         super.onDestroy();
         if (this.mCompositeSubscription != null) {

@@ -49,7 +49,7 @@ public class WebActivity extends ToolbarActivity {
 
     private static final String EXTRA_URL = "extra_url";
     private static final String EXTRA_TITLE = "extra_title";
-
+//  进入网页上边的加载条
     @Bind(R.id.progressbar) NumberProgressBar mProgressbar;
     @Bind(R.id.webView) WebView mWebView;
     @Bind(R.id.tv_title) TextSwitcher mTextSwitcher;

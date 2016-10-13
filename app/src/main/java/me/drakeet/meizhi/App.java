@@ -26,6 +26,7 @@ import me.drakeet.meizhi.util.Toasts;
 
 /**
  * Created by drakeet on 6/21/15.
+ * 数据库操作
  */
 public class App extends Application {
 

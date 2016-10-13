@@ -143,6 +143,7 @@ public class MainActivity extends SwipeRefreshBaseActivity {
         throwable.printStackTrace();
         Snackbar.make(mRecyclerView, R.string.snap_load_fail, Snackbar.LENGTH_LONG)
                 .setAction(R.string.retry, v -> {
+//                    没内容
                     requestDataRefresh();
                 })
                 .show();

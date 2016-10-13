@@ -175,10 +175,13 @@ public class GankFragment extends Fragment {
         String where = String.format("{\"tag\":\"%d-%d-%d\"}", mYear, mMonth, mDay);
         DrakeetFactory.getDrakeetSingleton()
                       .getDGankData(where)
+//                利用Gson解析
+//                @Expose public List<DGank> results = new ArrayList <DGank>();
                       .map(dGankData -> dGankData.results)
                       .single(dGanks -> dGanks.size() > 0)
                       .map(dGanks -> dGanks.get(0))
                       .observeOn(AndroidSchedulers.mainThread())
+//                dGank.preview为允许Gson及解析的数据
                       .subscribe(dGank -> startPreview(dGank.preview),
                               throwable -> getOldVideoPreview(new OkHttpClient()));
     }
@@ -217,7 +220,7 @@ public class GankFragment extends Fragment {
 
     private void showEmptyView() {mEmptyViewStub.inflate();}
 
-
+//  GankData.Result results ：定义序列化后的名称
     private List<Gank> addAllResults(GankData.Result results) {
         if (results.androidList != null) mGankList.addAll(results.androidList);
         if (results.iOSList != null) mGankList.addAll(results.iOSList);

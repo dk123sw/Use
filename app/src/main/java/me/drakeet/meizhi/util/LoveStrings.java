@@ -21,6 +21,7 @@ package me.drakeet.meizhi.util;
 
 /**
  * Created by drakeet on 8/14/15.
+ * 图片预加载
  */
 public class LoveStrings {
 
