@@ -21,6 +21,7 @@ package me.drakeet.meizhi;
 
 /**
  * Factory 工厂模式：对实现了同一接口的一些类进行实例的创建
+ * @单例模式
  */
 public class DrakeetFactory {
 
